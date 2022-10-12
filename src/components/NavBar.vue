@@ -2,11 +2,11 @@
   <div class="topnav">
     <a><router-link to="/">HOME</router-link></a>
 
-    <a>MY TRIPS</a>
-    <a>MY ACCOUNT</a>
+    <a><router-link to="/ships">MY SHIPS</router-link></a>
+    <a><router-link to="/account">MY ACCOUNT</router-link></a>
     <div class="rightnav">
-      <a href="/sign-up">SIGN UP</a>
-      <a href="/sign-in">LOG IN</a>
+      <a><router-link to="/sign-up">SIGN UP</router-link></a>
+      <a><router-link to="/login">LOG IN</router-link></a>
     </div>
   </div>
 </template>
