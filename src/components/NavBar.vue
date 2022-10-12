@@ -1,42 +1,49 @@
 <template>
-  <div class="topnav">
-    <a><router-link to="/">HOME</router-link></a>
+  <div class="sidenav">
+    <a><router-link to="/"><img width="250" src="../assets/img/SmartShipLogo.jpeg" /></router-link></a>
+    <a><router-link to="/ships">Power Usage</router-link></a>
+    <a><router-link to="/ships">Ship information</router-link></a>
+    <a><router-link to="/ships">Rating</router-link></a>
 
-    <a><router-link to="/ships">MY SHIPS</router-link></a>
-    <a><router-link to="/account">MY ACCOUNT</router-link></a>
-    <div class="rightnav">
-      <a><router-link to="/sign-up">SIGN UP</router-link></a>
-      <a><router-link to="/login">LOG IN</router-link></a>
+    <div class="bottomnav">
+      <a>Sign out</a>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "NavBar"
 }
 </script>
 
-
 <style scoped>
-.topnav {
-  background-color: #333;
-  overflow: hidden;
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+.sidenav a {
+  padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 17px;
-}
-.rightnav{
-  float: right;
+  font-size: 25px;
+  color: #818181;
+  display: block;
 }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.bottomnav {
+  position: absolute;
+  bottom: 50px;
+  text-align: center;
 }
 </style>
