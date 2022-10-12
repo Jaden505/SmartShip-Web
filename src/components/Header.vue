@@ -1,7 +1,6 @@
 <template>
   <div class="topnav">
     <p class="greeting">Goodmorning <span class="user-name">User</span></p>
-
     <div class="rightnav">
       <a><router-link to="/ships">User info</router-link></a>
     </div>
