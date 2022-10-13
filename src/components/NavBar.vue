@@ -1,14 +1,21 @@
 <template>
-  <div class="sidenav">
-    <a><router-link to="/"><img width="250" src="../assets/img/SmartShipLogo.jpeg" /></router-link></a>
-    <a><router-link to="/ships">Power Usage</router-link></a>
-    <a><router-link to="/ships">Ship information</router-link></a>
-    <a><router-link to="/ships">Rating</router-link></a>
-
-    <div class="bottomnav">
-      <a>Sign out</a>
+  <header class="navbar">
+    <div class="navbar-wrapper">
+      <div class="header-container">
+        <div class="logo-container">
+          LOGO
+        </div>
+        <div class="content">
+          <nav class="navbar-menu menu">
+            Menu
+          </nav>
+          <div class="language-toggler">
+            Toggler
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -18,32 +25,44 @@ export default {
 </script>
 
 <style scoped>
-.sidenav {
-  height: 100%;
-  width: 300px;
-  position: fixed;
-  z-index: 1;
+.navbar {
   top: 0;
   left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
+  position: relative;
+  color: #dddddd;
 }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
+.navbar-wrapper .header-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
+.navbar-wrapper {
+  position: relative;
+  padding: 0 24px 0 24px;
+  top: 0;
 }
-.bottomnav {
-  position: absolute;
-  bottom: 50px;
-  text-align: center;
+
+.logo-container{
+  display: flex;
+  align-items: center;
+  height: 10vh;
 }
+
+.navbar-menu{
+  display: flex;
+}
+
+.language-toggler{
+  padding: 0 0 0 30px;
+}
+
+.navbar-wrapper .header-container .content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 1;
+}
+
 </style>
