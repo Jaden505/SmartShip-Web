@@ -3,11 +3,11 @@
     <el-row class="row">
       <el-col :span="12" class="column">
         <div class="grid-content ep-bg-purple">
-          <div id="titles_container">
-            <h1 class="titles">
+          <div class="title-container" align="left">
+            <h1 class="title">
               {{title}}
             </h1>
-            <h3 class="titles">
+            <h3 class="subtitle">
               {{subtitle}}
             </h3>
           </div>
@@ -15,18 +15,22 @@
       </el-col>
       <el-col :span="12" class="column">
         <div class="grid-content ep-bg-purple">
-          <div id="login">
-            <div id="inputfields-container">
-                <el-input class="inputfields" placeholder="Enter your email address" v-model="email"></el-input>
-                <el-input class="inputfields" placeholder="Password" v-model="password" show-password></el-input>
+          <el-form
+              label-width="120px"
+          >
+            <el-form-item label="Email">
+              <el-input v-model="email" type="email" autocomplete="off" placeholder="Email"/>
+            </el-form-item>
+            <el-form-item label="Password">
+              <el-input v-model="password" type="password" autocomplete="off" placeholder="Password"/>
+            </el-form-item>
+            <div>
+              <a class="forgotPassword">Forgot Password?</a>
+              <el-form-item>
+                <el-button type="primary">Submit</el-button>
+              </el-form-item>
             </div>
-            <div id="forgot-password">
-              <a href="">{{forgot_password }}</a>
-            </div>
-            <div id="sign-in">
-              <button id="sign_in_button">{{sign_in}}</button>
-            </div>
-          </div>
+          </el-form>
         </div>
       </el-col>
     </el-row>
@@ -64,49 +68,21 @@ export default {
   text-align: center;
 }
 
-.grid-content {
-  /*color: #dddddd;*/
-}
-.inputfields{
-  font-size: 160%;
-  height: 100px;
-  width: 60%;
-  padding-top: 3vh;
-  margin-bottom: 2%;
-}
-.titles{
-  margin-bottom: 5%;
-}
-#inputfields-container{
-  padding-top: 14vh;
+.forgotPassword {
+  color: #E0E1DD;
 }
 
-
-#forgot-password{
-  text-align: left;
-  margin-left: 20%;
-}
-#titles_container{
-  margin-left: 1%;
-  padding-top: 15vh;
-  text-align: left;
-}
-#sign_in_button{
-  margin-top:1%;
-  font-size: 200%;
-  border-radius: 10px;
-  width: 30%;
-  background-color: #2baedaff;
-}
-a{
-  color: #2baedaff;
-  text-decoration: none;
-}
 h1 {
-  font-size: 485%;
+  font-size: 5rem;
+  background-color: #0061FF;
+  background-image: linear-gradient(45deg, #0061FF, #60EFFF);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-h3{
-  text-decoration: none;
-  font-size: 180%;
+h3 {
+  font-size: 1.7rem;
+  color: #E0E1DD;
+
 }
 </style>
