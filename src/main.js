@@ -4,6 +4,7 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 import {MotionPlugin} from "@vueuse/motion";
 import {router} from "@/router";
+import './main.css'
 
 const app = createApp(App)
 

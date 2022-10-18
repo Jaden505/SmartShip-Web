@@ -3,14 +3,14 @@
     <div class="navbar-wrapper">
       <div class="header-container">
         <div class="logo-container">
-          LOGO
+          <img v-bind:src="logo" width="200" height="100">
         </div>
         <div class="content">
           <nav class="navbar-menu menu">
-            Menu
+            <button id="sign_in" class="buttons">{{sign_in}}</button>
           </nav>
           <div class="language-toggler">
-            Toggler
+            <button id="register" class="buttons">{{register}}</button>
           </div>
         </div>
       </div>
@@ -20,7 +20,14 @@
 
 <script>
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  data () {
+    return {
+      logo: require('../assets/img/SmartShipLogo.jpeg'),
+      register: 'Register',
+      sign_in: 'Sign In'
+    }
+  }
 }
 </script>
 
@@ -48,10 +55,30 @@ export default {
   display: flex;
   align-items: center;
   height: 10vh;
+  padding-top: 1vh;
 }
 
 .navbar-menu{
   display: flex;
+}
+.buttons{
+  color: #dddddd;
+  font-size: 180%;
+  width: 110%;
+  border-radius: 10px;
+}
+#register{
+  background-color: #363e44;
+  border-color: #2baedaff;
+}
+#register:hover {
+  background-color: #2baedaff;
+}
+#sign_in{
+  text-decoration-line: underline;
+  color:#2baedaff;
+  background-color: #363e44;
+  border: none;
 }
 
 .language-toggler{
