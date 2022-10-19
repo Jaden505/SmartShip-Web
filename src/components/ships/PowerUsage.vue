@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "PowerUsage",
+  name: "PowerUsage"
 }
 </script>
 

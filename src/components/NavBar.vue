@@ -1,9 +1,9 @@
 <template>
   <div class="sidenav">
     <a><router-link to="/"><img width="250" src="../assets/img/SmartShipLogo.jpeg" /></router-link></a>
-    <a><router-link to="/ships">Power Usage</router-link></a>
-    <a><router-link to="/ships">Ship information</router-link></a>
-    <a><router-link to="/ships">Rating</router-link></a>
+    <a><router-link to="/ships/power-usage">Power Usage</router-link></a>
+    <a><router-link to="/ships/information">Ship information</router-link></a>
+    <a><router-link to="/ships/rating">Rating</router-link></a>
 
     <div class="bottomnav">
       <a>Sign out</a>
