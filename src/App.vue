@@ -12,7 +12,7 @@ export default {
   name: 'App',
   components: {
     NavBar,
-    HeaderComp,
+    HeaderComp
   },
 }
 </script>
