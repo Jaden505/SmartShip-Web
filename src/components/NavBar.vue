@@ -4,6 +4,7 @@
     <a><router-link to="/ships">Power Usage</router-link></a>
     <a><router-link to="/ships">Ship information</router-link></a>
     <a><router-link to="/ships">Rating</router-link></a>
+    <a><router-link to="/list">Ships</router-link></a>
 
     <div class="bottomnav">
       <a>Sign out</a>
