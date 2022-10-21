@@ -36,6 +36,7 @@ export default {
   .content {
     background-color: #163b7a;
     color:white;
+    width: 700px;
   }
 
   .section {

@@ -3,7 +3,7 @@
     <h1>Trip statistics</h1>
 
     <p>There is currently no trip going on</p>
-    <p>The curent trip is from Paris to Amsterdam</p>
+    <p>The current trip is from Paris to Amsterdam</p>
 
 
   </div>

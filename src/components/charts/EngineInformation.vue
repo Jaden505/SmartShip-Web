@@ -83,7 +83,6 @@ export default {
 
 <style scoped>
 .content {
-  position: relative;
   background-color: #163b7a;
   color: white;
 }
@@ -91,16 +90,16 @@ export default {
 .chart-container {
   display: flex;
   margin-bottom: 30px;
-  margin-left: 42%;
-  height: 200px;
-  width: 200px;
+  margin-left: 25%;
+  height: 150px;
+  width: 190px;
 }
 
 .chart-container-bottom {
   display: flex;
-  margin-left: 42%;
-  height: 200px;
-  width: 200px;
+  margin-left: 25%;
+  height: 150px;
+  width: 190px;
 }
 
 .section {
@@ -109,12 +108,13 @@ export default {
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
-  width: 250px;
+  width: 220px;
+  height: 75px;
 }
 
 .container{
   padding: 20px;
-  margin-left: 35%;
+  margin-left: 20%;
   display:flex;
 }
 

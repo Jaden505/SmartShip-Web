@@ -3,6 +3,8 @@
     <h1>Water Supply</h1>
     <div class="chart-container">
       <canvas id="waterSupplyChart"></canvas>
+    </div>
+    <div class="flex-container">
       <div class="section">
         <p>Current Consumption</p>
         <h2 class="waterAmount">3T</h2>
@@ -12,6 +14,7 @@
         <h2 class="waterAmount">25T</h2>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -58,15 +61,14 @@ export default {
 
 <style scoped>
 .content {
-  position: relative;
   background-color: #163b7a;
   color:white;
 }
 .chart-container{
-  display: flex;
-  margin-left: 42%;
+  /*display: flex;*/
+  /*margin-left: 42%;*/
   height:300px;
-  width: 400px;
+  width: 500px;
 }
 
 .section {
@@ -75,8 +77,12 @@ export default {
   /*border-radius: 10px;*/
   padding: 20px;
   margin-left: 10px;
-  height: 120px;
+  height: 70px;
+  width: 200px;
+}
 
+.flex-container{
+  display: flex;
 }
 .waterAmount{
   color: deepskyblue;
