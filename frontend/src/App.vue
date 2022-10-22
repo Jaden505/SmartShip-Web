@@ -5,14 +5,14 @@
 </template>
 <script>
 
-import NavBar from "@/components/NavBar";
-import HeaderComp from "@/components/Header";
+import NavBar from "./components/NavBar";
+import HeaderComp from "./components/Header";
 
 export default {
   name: 'App',
   components: {
     NavBar,
-    HeaderComp,
+    HeaderComp
   },
 }
 </script>
