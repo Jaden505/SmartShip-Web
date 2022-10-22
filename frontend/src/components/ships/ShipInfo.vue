@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import SeaConditions from "@/components/charts/SeaConditions";
-import TripStatistics from "@/components/charts/TripStatistics";
-import EngineInformation from "@/components/charts/WaterSupply";
-import WaterSupply from "@/components/charts/EngineInformation";
-import ShipEvents from "@/components/charts/ShipEvents";
+import SeaConditions from "../charts/SeaConditions";
+import TripStatistics from "../charts/TripStatistics";
+import EngineInformation from "../charts/WaterSupply";
+import WaterSupply from "../charts/EngineInformation";
+import ShipEvents from "../charts/ShipEvents";
 
 export default {
   name: "ShipInfo",
