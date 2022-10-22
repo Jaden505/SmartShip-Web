@@ -1,12 +1,9 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import Home from "../components/Home";
-import PowerUsage from "../components/ships/PowerUsage";
-import ShipInfo from "../components/ships/ShipInfo";
+import Login from "@/components/Login";
 
 const routes = [
-    {path : "/", component: Home},
-    {path : "/ships/power-usage", component: PowerUsage},
-    {path : "/ships/information", component: ShipInfo},
+    {path: "/",
+        component: Login}
 ];
 
 export const router = createRouter({
