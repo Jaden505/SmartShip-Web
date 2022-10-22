@@ -1,7 +1,7 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import Home from "../../frontend/src/components/Home";
-import PowerUsage from "../../frontend/src/components/ships/PowerUsage";
-import ShipInfo from "../../frontend/src/components/ships/ShipInfo";
+import Home from "../components/Home";
+import PowerUsage from "../components/ships/PowerUsage";
+import ShipInfo from "../components/ships/ShipInfo";
 
 const routes = [
     {path : "/", component: Home},

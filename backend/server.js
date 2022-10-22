@@ -18,8 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+    res.json({ message: "This is the server for retrieving and sending backend data." });
 });
+
+require("./routes/ship.route")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
