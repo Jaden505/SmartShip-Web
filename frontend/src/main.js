@@ -5,7 +5,7 @@ import { MotionPlugin } from '@vueuse/motion'
 import {router} from "@/router";
 import App from './App.vue'
 
-import './main.css'
+import './assets/css/main.css'
 
 const app = createApp(App)
 
