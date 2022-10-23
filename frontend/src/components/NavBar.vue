@@ -23,7 +23,7 @@
         </div>
         <div class="content">
           <nav class="navbar-menu menu">
-            <button class="btn">Sign In</button>
+            <el-button class="btn">Sign In</el-button>
           </nav>
           <!--          <div class="language-toggler">-->
           <!--            <button id="language-toggler"></button>-->
