@@ -1,12 +1,12 @@
 <template>
-  <div class="card" v-for="(ship, index) in ships" :key="index">
+  <div class="card">
     <div class="row">
       <div class="img-box">
         <p>Ship</p>
       </div>
       <div class="infoBox">
-       <p class="shipTitle">Ship name: {{ ship.shipName }}</p>
-        <p class="shipTitle">Ship description: {{ ship.shipDesc }}</p>
+       <p class="shipTitle">Ship name: </p>
+        <p class="shipTitle">Ship description: </p>
       </div>
     </div>
     <div class="clock-in">
@@ -21,20 +21,7 @@ export default {
 
   data(){
     return {
-      ships: [
-        {
-          shipName: 'Titanic',
-          shipDesc: 'This is a safe ship'
-        },
-        {
-          shipName: 'The Mayflower',
-          shipDesc: 'Beautiful ship'
-        },
-        {
-          shipName: 'Cruise Ship 1997',
-          shipDesc: 'A luxurious ship'
-        }
-      ]
+      
     }
   }
 }
@@ -46,7 +33,6 @@ export default {
     width: 83%;
     margin-left: 17%;
     background-color: #0066ff;
-    margin-bottom: 1%;
   }
 
   .row{
