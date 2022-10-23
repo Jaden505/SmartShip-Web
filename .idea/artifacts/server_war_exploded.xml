@@ -74,6 +74,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.23" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.7.4" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-crypto:5.7.4" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
