@@ -2,6 +2,8 @@
   <header class="navbar">
     <div class="navbar-wrapper">
       <div class="header-container">
+
+        <a><router-link to="/">
         <div class="logo-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="202.72" height="35.097" viewBox="0 0 202.72 35.097">
             <g id="Group_1" data-name="Group 1" transform="translate(-100 -69.951)">
@@ -19,8 +21,9 @@
               <path id="Path_12" data-name="Path 12" d="M1268.069,546.149a25.772,25.772,0,0,1,2.68-.957c5.885-1.422,11.757-2.908,17.68-4.153a7.682,7.682,0,0,1,8.1,3.273,1.356,1.356,0,0,1,.274.437c.142.579.25,1.167.37,1.751a6.372,6.372,0,0,1-1.742.181c-2.553-.445-5.073-1.132-7.639-1.439-4.532-.542-9.054.085-13.567.5-2.024.187-4.036.5-6.053.756Z" transform="translate(-1003.011 -445.237)" fill="#e0e1dd"/>
             </g>
           </svg>
-
         </div>
+        </router-link></a>
+
         <div class="content">
           <nav class="navbar-menu menu">
             <el-button class="btn">Sign In</el-button>
