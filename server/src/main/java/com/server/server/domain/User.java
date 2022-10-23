@@ -4,12 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.persistence.*;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class User {
@@ -18,6 +13,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Collection<Role> roles = new ArrayList<>();
-
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private Role role = new Role();
 }
