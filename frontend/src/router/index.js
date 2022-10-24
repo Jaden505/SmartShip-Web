@@ -1,11 +1,13 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 import Login from "@/components/Login";
-import Ships from "@/components/Ships";
+import Clockin from "@/components/Clockin";
 
 const routes = [
     {path: "/",
-        component: Login},
-    { path: "/ships", component: Ships}
+        component: Login,
+    },{path: "/Clockin",
+        component: Clockin,
+    }
 ];
 
 export const router = createRouter({
