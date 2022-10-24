@@ -39,7 +39,6 @@ export default {
   name: "NavBar",
   data () {
     return {
-      sign_in: 'Sign In'
     }
   }
 }

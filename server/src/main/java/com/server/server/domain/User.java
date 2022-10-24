@@ -8,25 +8,23 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String email;
     private String password;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role")
-    private Role role = new Role();
+
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 
     public User () {
 
     }
-    public User(Integer id, String name, String email, String password, Role role) {
+    public User(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     public Integer getId() {
@@ -67,14 +65,6 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
 

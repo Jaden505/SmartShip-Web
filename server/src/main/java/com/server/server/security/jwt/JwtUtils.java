@@ -1,15 +1,14 @@
 package com.server.server.security.jwt;
 
-import java.security.SignatureException;
 import java.util.Date;
 
+import com.server.server.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.server.server.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 
 @Component
@@ -42,8 +41,6 @@ public class JwtUtils {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
-        } catch (SignatureException e) {
-            logger.error("Invalid JWT signature: {}", e.getMessage());
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {

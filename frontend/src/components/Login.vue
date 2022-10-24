@@ -15,9 +15,9 @@
       </el-col>
       <el-col :span="12" class="column-2">
         <div class="grid-content ep-bg-purple" align="center">
-          <el-form class="form">
-            <input class="input-field" v-model="email" type="email" autocomplete="off" placeholder="Enter your email"/>
-            <input class="input-field" v-model="password" type="password" autocomplete="off" placeholder="Enter your password"/>
+          <el-form class="form" @submit.prevent="handleLogin">
+            <input class="form-control" v-model="user.email" type="email" autocomplete="off" placeholder="Enter your email"/>
+            <input class="form-control" v-model="user.password" type="password" autocomplete="off" placeholder="Enter your password"/>
             <div>
               <el-form-item>
                 <el-link :underline="false" class="forgotPassword">Forgot Password?</el-link>
@@ -35,16 +35,51 @@
 </template>
 
 <script>
+import User from '../models/user'
+
 export default {
   name: "Login-Screen",
   data () {
     return {
-      email: '',
-      password: '',
+      user: new User('', ''),
       title: 'Welcome to SmartShip Dashboard',
       subtitle: 'Your journey starts here! Just sign-in and enjoy your trip!',
-      forgot_password: 'Forgot Password ?',
-      sign_in: 'SIGN-IN'
+    }
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push('/profile');
+    }
+  },
+  methods: {
+    handleLogin() {
+      this.loading = true;
+      this.$validator.validateAll().then(isValid => {
+        if (!isValid) {
+          this.loading = false;
+          return;
+        }
+
+        if (this.user.name && this.user.password) {
+          this.$store.dispatch('auth/login', this.user).then(
+              () => {
+                this.$router.push('/profile');
+              },
+              error => {
+                this.loading = false;
+                this.message =
+                    (error.response && error.response.data) ||
+                    error.message ||
+                    error.toString();
+              }
+          );
+        }
+      });
     }
   }
 }

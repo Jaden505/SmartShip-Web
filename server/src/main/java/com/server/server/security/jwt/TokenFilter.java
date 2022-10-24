@@ -19,7 +19,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 
-public class TokenFilter  extends OncePerRequestFilter{
+public class TokenFilter extends OncePerRequestFilter{
     @Autowired
     private JwtUtils jwtUtils;
 
@@ -34,9 +34,9 @@ public class TokenFilter  extends OncePerRequestFilter{
         try {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-                String username = jwtUtils.getUserNameFromJwtToken(jwt);
+                String email = jwtUtils.getUserNameFromJwtToken(jwt);
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByEmail(email);
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
