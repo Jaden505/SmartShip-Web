@@ -15,8 +15,9 @@
         </ul>
       </dropdown>
 
-      <button class="bubbly-button">Clock-in</button>
+
     </div>
+    <button class="bubbly-button">Clock-in</button>
   </div>
 </template>
 
@@ -64,8 +65,7 @@ body {
   display: inline-block;
   font-size: 1em;
   padding: 1em 2em;
-  margin-top: 100px;
-  margin-bottom: 60px;
+  margin-top: 280px;
   -webkit-appearance: none;
   appearance: none;
   background-color: #ff0081;
@@ -76,6 +76,8 @@ body {
   position: relative;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+  float: right;
+  margin-right: 20px;
 }
 .bubbly-button:focus {
   outline: 0;
@@ -259,10 +261,9 @@ dropdown ul li:nth-child(3):hover .fa {
 }
 /* Internet Explorer */
 
-@media only screen and (max-width: 600px) {
-  .welcome{
 
-  }
+.center{
+  width: 80%;
 }
 
 
