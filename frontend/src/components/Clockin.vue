@@ -3,7 +3,7 @@
     <div class="center">
       <br>
       <br>
-      <h2>Hey *user* Click op de Clock-in button om in te loggen</h2>
+      <h2 class="welcome">Hey *user* Click op de Clock-in button om in te loggen</h2>
 
       <dropdown>
         <input id="toggle2" type="checkbox">
@@ -40,8 +40,7 @@ export default {
   border-radius: 25px;
   width: 70%;
   /*hide everything beyond dic*/
-  overflow: hidden;
-  white-space: nowrap;
+  
 }
 
 .center {
@@ -259,6 +258,12 @@ dropdown ul li:nth-child(3):hover .fa {
   /* Firefox */
 }
 /* Internet Explorer */
+
+@media only screen and (max-width: 600px) {
+  .welcome{
+
+  }
+}
 
 
 </style>
