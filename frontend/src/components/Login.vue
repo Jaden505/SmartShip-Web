@@ -1,7 +1,7 @@
 <template>
   <el-main class="main">
-    <el-row class="row">
-      <el-col :span="12" class="column">
+    <el-row class="row" gutter="10">
+      <el-col :span="12" class="column-1" justify="center">
         <div class="grid-content ep-bg-purple">
           <div class="title-container" align="left">
             <h1 class="title">
@@ -13,21 +13,18 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="12" class="column">
-        <div class="grid-content ep-bg-purple">
-          <el-form
-              label-width="120px"
-          >
-            <el-form-item label="Email">
-              <el-input v-model="email" type="email" autocomplete="off" placeholder="Email"/>
-            </el-form-item>
-            <el-form-item label="Password">
-              <el-input v-model="password" type="password" autocomplete="off" placeholder="Password"/>
-            </el-form-item>
+      <el-col :span="12" class="column-2">
+        <div class="grid-content ep-bg-purple" align="center">
+          <el-form class="form">
+            <input class="input-field" v-model="email" type="email" autocomplete="off" placeholder="Enter your email"/>
+            <input class="input-field" v-model="password" type="password" autocomplete="off" placeholder="Enter your password"/>
             <div>
-              <a class="forgotPassword">Forgot Password?</a>
               <el-form-item>
-                <el-button type="primary">Submit</el-button>
+                <el-link :underline="false" class="forgotPassword">Forgot Password?</el-link>
+              </el-form-item>
+              <el-form-item>
+                <el-button  class="submit-button">Submit</el-button>
+                <div class="btn2"></div>
               </el-form-item>
             </div>
           </el-form>
@@ -59,20 +56,59 @@ export default {
   padding-bottom: 12vh;
 }
 
+.submit-button, .btn2 {
+  width: 100px;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #00111C;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #60EFFF, #0061FF);
+  background-size: 600%;
+  -webkit-animation: anime 16s linear infinite;
+  animation: anime 16s linear infinite;
+  border: solid 0 black;
+  transition: all .2s ease-in-out;
+}
+.btn2 {
+  position: absolute;
+  transition: all .2s ease-in-out;
+  z-index: -1;
+  filter: blur(30px);
+  opacity: 0.3;
+}
+
+.submit-button:hover, .btn2:hover {
+  transform: translateY(-0.25em)
+}
+
 .row {
   height: 100%;
 }
 
-.column {
-  height: 100%;
-  text-align: center;
+input {
+  border: 0 solid red;
+  border-radius: 4px;
+  width: 100%;
+  padding: 20px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color : #363636;
+}
+
+input::placeholder {
+  font-size: 20px;
 }
 
 .forgotPassword {
   color: #E0E1DD;
 }
 
-h1 {
+.form {
+  width: 50%;
+}
+
+.title {
   font-size: 5rem;
   background-color: #0061FF;
   background-image: linear-gradient(45deg, #0061FF, #60EFFF);
@@ -80,7 +116,13 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-h3 {
+
+.column-1, .column-2 {
+  margin-top: 8%;
+}
+
+.subtitle {
+  margin-top: 10px;
   font-size: 1.7rem;
   color: #E0E1DD;
 

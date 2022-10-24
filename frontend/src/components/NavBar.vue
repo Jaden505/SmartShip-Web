@@ -25,9 +25,6 @@
         </router-link></a>
 
         <div class="content">
-          <nav class="navbar-menu menu">
-            <el-button class="btn">Sign In</el-button>
-          </nav>
           <!--          <div class="language-toggler">-->
           <!--            <button id="language-toggler"></button>-->
           <!--          </div>-->
