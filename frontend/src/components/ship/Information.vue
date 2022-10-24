@@ -1,13 +1,27 @@
 <template>
   <div class="main-container">
     <div class="container-up">
-      <WaterSupply />
-      <EngineInformation />
-      <TripStatistics />
+      <div class="row">
+        <div class="col">
+          <WaterSupply/>
+        </div>
+        <div class="col">
+          <EngineInformation/>
+        </div>
+        <div class="col">
+          <TripStatistics/>
+        </div>
+      </div>
     </div>
     <div class="container-bottom">
-      <ShipEvents />
-      <SeaConditions />
+      <div class="row">
+        <div class="col">
+          <ShipEvents/>
+        </div>
+        <div class="col">
+          <SeaConditions/>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -33,21 +47,22 @@ export default {
 </script>
 
 <style scoped>
-.main-container{
+.main-container {
   background-color: #00111C;
 }
-.container-up{
-  display: flex;
-  margin-left: 15%;
-  justify-content: space-between;
-}
 
-.container-bottom{
-  display:flex;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 15%;
-  justify-content: space-evenly;
-}
+/*.container-up {*/
+/*  display: flex;*/
+/*  margin-left: 15%;*/
+/*  justify-content: space-between;*/
+/*}*/
+
+/*.container-bottom {*/
+/*  display: flex;*/
+/*  margin-top: 20px;*/
+/*  margin-bottom: 20px;*/
+/*  margin-left: 15%;*/
+/*  justify-content: space-evenly;*/
+/*}*/
 
 </style>
