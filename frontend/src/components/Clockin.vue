@@ -1,18 +1,20 @@
 <template>
   <div class="container">
-    <h2>Hey *user* Click op de Clock-in button om in te loggen</h2>
-
-    <dropdown>
-      <input id="toggle2" type="checkbox">
-      <label for="toggle2" class="animate">Editor<i class="fa fa-list float-right"></i></label>
-      <ul class="animate">
-        <li class="animate">Source<i class="fa fa-code float-right"></i></li>
-        <li class="animate">Fullpage<i class="fa fa-arrows-alt float-right"></i></li>
-        <li class="animate">Debug<i class="fa fa-cog float-right"></i></li>
-      </ul>
-    </dropdown>
-
     <div class="center">
+      <br>
+      <br>
+      <h2>Hey *user* Click op de Clock-in button om in te loggen</h2>
+
+      <dropdown>
+        <input id="toggle2" type="checkbox">
+        <label for="toggle2" class="animate">Editor<i class="fa fa-list float-right"></i></label>
+        <ul class="animate">
+          <li class="animate">Source<i class="fa fa-code float-right"></i></li>
+          <li class="animate">Fullpage<i class="fa fa-arrows-alt float-right"></i></li>
+          <li class="animate">Debug<i class="fa fa-cog float-right"></i></li>
+        </ul>
+      </dropdown>
+
       <button class="bubbly-button">Clock-in</button>
     </div>
   </div>
@@ -30,9 +32,13 @@ export default {
 /*centered button in div*/
 
 .container {
+  margin: auto;
+  margin-top: 100px;
   background-color: white;
-  height: 200px;
+  height: 50%;
   position: relative;
+  border-radius: 25px;
+  width: 70%;
 }
 
 .center {
