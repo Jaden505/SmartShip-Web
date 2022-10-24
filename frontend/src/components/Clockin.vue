@@ -39,6 +39,9 @@ export default {
   position: relative;
   border-radius: 25px;
   width: 70%;
+  /*hide everything beyond dic*/
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .center {
