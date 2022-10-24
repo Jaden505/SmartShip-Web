@@ -10,14 +10,9 @@ const routes = [
     {path : "/ships/", component: ListShips},
     {path : "/ships/power-usage", component: PowerUsage},
     {path : "/ships/info", component: ShipInfo},
-
-const routes = [
-    {path: "/",
-        component: Login,
-    },{path: "/Clockin",
-        component: Clockin,
-    }
-];
+    {path: "/", component: Login},
+    {path: "/Clockin", component: Clockin}
+]
 
 export const router = createRouter({
     history : createWebHashHistory(),
