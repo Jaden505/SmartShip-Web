@@ -17,7 +17,7 @@
 
 
     </div>
-    <button class="bubbly-button">Clock-in</button>
+    <router-link :to="{ path: 'Raihan doe hier de path voor de clock-out' }"><button class="bubbly-button">Clock-in</button></router-link>
   </div>
 </template>
 
