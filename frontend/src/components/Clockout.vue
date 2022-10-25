@@ -3,7 +3,7 @@
     <div class="center">
 
       <h1 class="welcome">Hey *user*</h1>
-      <h2>You are currently clockin in at ship: {{ ship }}</h2>
+      <h2>You are currently clocked in at ship: {{ ship }}</h2>
 
     </div>
     <router-link to="/Clockin"><button class="bubbly-button">Clock-out</button></router-link>
