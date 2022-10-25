@@ -1,30 +1,62 @@
 <template>
   <div class="container">
     <div class="center">
-      <br>
-      <br>
-      <h2 class="welcome">Hey *user* Click on the button to Clock-in!</h2>
 
-      <dropdown>
+      <dropdown v-if="active">
+        <h2 class="welcome">Hey *user*, Select a ship to clock in</h2>
         <input id="toggle2" type="checkbox">
         <label for="toggle2" class="animate">Ships<i class="fa fa-list float-right"></i></label>
-        <ul class="animate">
-          <li class="animate">Grote Bherta<i class="fa fa-code float-right"></i></li>
-          <li class="animate">Immaculata<i class="fa fa-arrows-alt float-right"></i></li>
-          <li class="animate">Teerstroom<i class="fa fa-cog float-right"></i></li>
+        <ul class="animate" v-for="(ship, index) in ships" :key="index">
+          <li class="animate" @click="setCurrentShip(ship.name)">{{ ship.name }}</li>
         </ul>
       </dropdown>
 
+      <div v-else>
+        <p class="back" @click="goBack">{{ back }}</p>
+        <h2 class="welcome">You selected the ship: {{ currentShip }}</h2>
+      </div>
 
     </div>
-    <router-link :to="{ path: 'Clockout' }"><button class="bubbly-button">Clock-in</button></router-link>
+    <button v-if="!active" class="bubbly-button" @click="clockIn">Clock-in</button>
   </div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Clockin"
+  name: "Clockin",
+  data(){
+    return {
+      ships: [
+        {
+          name: "Grote Bherta"
+        },
+        {
+          name: "Immaculata"
+        },
+        {
+          name: "Teerstroom"
+        }
+      ],
+      currentShip: null,
+      active: true,
+      back: "<<< Go back"
+    }
+  },
+  methods: {
+    setCurrentShip(ship){
+      this.active = false
+      this.currentShip = ship
+    },
+
+    clockIn(){
+      this.$router.push({ name: "Clockout", params: { ship: this.currentShip } })
+    },
+
+    goBack(){
+      this.active = true
+    }
+  }
 }
 </script>
 
@@ -46,6 +78,11 @@ export default {
 
 #toggle2{
   z-index: -7;
+}
+
+.back{
+  color: cornflowerblue;
+  cursor: pointer;
 }
 
 .center {

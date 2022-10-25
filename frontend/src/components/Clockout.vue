@@ -1,30 +1,33 @@
 <template>
   <div class="container">
     <div class="center">
-      <br>
-      <br>
-      <h2 class="welcome">Hey *user* Click on the button to Clock-out!</h2>
 
-      <dropdown>
-        <input id="toggle2" type="checkbox">
-        <label for="toggle2" class="animate">Ships<i class="fa fa-list float-right"></i></label>
-        <ul class="animate">
-          <li class="animate">Grote Bherta<i class="fa fa-code float-right"></i></li>
-          <li class="animate">Immaculata<i class="fa fa-arrows-alt float-right"></i></li>
-          <li class="animate">Teerstroom<i class="fa fa-cog float-right"></i></li>
-        </ul>
-      </dropdown>
-
+      <h1 class="welcome">Hey *user*</h1>
+      <h2>You are currently clockin in at ship: {{ ship }}</h2>
 
     </div>
-    <router-link :to="{ path: 'Clockin' }"><button class="bubbly-button">Clock-out</button></router-link>
+    <router-link to="/Clockin"><button class="bubbly-button">Clock-out</button></router-link>
   </div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Clockout"
+  name: "Clockout",
+
+  data(){
+    return {
+      ship: null
+    }
+  },
+  methods: {
+    clockOut(){
+      this.$router.push({ path: "Clockin" })
+    }
+  },
+  created() {
+    this.ship = this.$route.params.ship
+  }
 }
 </script>
 

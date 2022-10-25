@@ -4,12 +4,20 @@ import Clockin from "@/components/Clockin";
 import Clockout from "@/components/Clockout";
 
 const routes = [
-    {path: "/",
+    {
+        path: "/",
         component: Login,
-    },{path: "/Clockin",
+    },
+    {
+        name: "Clockin",
+        path: "/Clockin",
         component: Clockin,
-    },{path: "/Clockout",
+    },
+    {
+        name: "Clockout",
+        path: "/Clockout/:ship",
         component: Clockout,
+        props: true
     }
 ];
 
