@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="card">
     <h1>Sea conditions</h1>
 
     <div class="section">
@@ -33,10 +33,13 @@ export default {
 </script>
 
 <style scoped>
-.content {
+.card {
   background-color: #163b7a;
   color:white;
   width: 700px;
+}
+h1{
+  color:deepskyblue;
 }
 
 .section {
