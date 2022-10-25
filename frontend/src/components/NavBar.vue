@@ -30,6 +30,10 @@
           <!--          </div>-->
         </div>
       </div>
+
+      <h1><router-link class="link" to="/ships/power-usage">Power Usage</router-link></h1>
+      <h1><router-link class="link" to="/ships/info">Ship Information</router-link></h1>
+      <h1><router-link class="link" to="/ships/ship-overview">Ship Table</router-link></h1>
     </div>
   </header>
 </template>
@@ -82,4 +86,14 @@ export default {
   flex-grow: 1;
 }
 
+.link {
+  text-decoration: none;
+  color: lightgrey;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.link:hover {
+  color: #0061FF;
+}
 </style>
