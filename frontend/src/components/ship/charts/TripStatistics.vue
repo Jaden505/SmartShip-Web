@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="card">
     <h1>Trip statistics</h1>
 
     <p>There is currently no trip going on</p>
@@ -16,8 +16,11 @@ export default {
 </script>
 
 <style scoped>
-.content {
+.card {
   background-color: #163b7a;
   color:white;
+}
+h1{
+  color:deepskyblue;
 }
 </style>

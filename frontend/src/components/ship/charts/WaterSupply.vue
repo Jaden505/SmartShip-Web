@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="card">
     <h1>Water Supply</h1>
     <div class="chart-container">
       <canvas id="waterSupplyChart"></canvas>
@@ -20,6 +20,7 @@
 
 <script>
 import Chart from 'chart.js/auto';
+
 export default {
   name: "WaterSupply",
   mounted() {
@@ -42,7 +43,7 @@ export default {
             'rgba(75, 192, 192, 1)',
             'rgba(75, 192, 192, 1)'
           ],
-          borderWidth:1,
+          borderWidth: 1,
         }]
       },
       options: {
@@ -60,15 +61,20 @@ export default {
 </script>
 
 <style scoped>
-.content {
+.card {
   background-color: #163b7a;
-  color:white;
+  color: white;
 }
-.chart-container{
+
+h1 {
+  color: deepskyblue;
+}
+
+.chart-container {
   /*display: flex;*/
   /*margin-left: 42%;*/
-  height:300px;
-  width: 500px;
+  /*height:300px;*/
+  /*width: 500px;*/
 }
 
 .section {
@@ -77,14 +83,13 @@ export default {
   /*border-radius: 10px;*/
   padding: 20px;
   margin-left: 10px;
-  height: 70px;
-  width: 200px;
 }
 
-.flex-container{
+.flex-container {
   display: flex;
 }
-.waterAmount{
+
+.waterAmount {
   color: deepskyblue;
 }
 </style>

@@ -1,12 +1,13 @@
 <template>
-  <div class="content">
+  <div class="card">
+    <div class="content m-lg-2">
     <h1>Engine Information</h1>
-    <p>RPM:</p>
+    <p class="rpm-kw">RPM:</p>
     <div class="chart-container">
       <canvas id="engineInformationChart"></canvas>
       <canvas id="engineInformationChart2"></canvas>
     </div>
-    <p>kW:</p>
+    <p class="rpm-kw">kW:</p>
     <div class="chart-container-bottom">
       <canvas id="engineInformationChart3"></canvas>
       <canvas id="engineInformationChart4"></canvas>
@@ -20,6 +21,7 @@
         <p>Engine 2 Temperature</p>
         <h2 class="celcius">62.1°</h2>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -57,6 +59,28 @@ export default {
         ]
       }]
     };
+    const data2 = {
+      labels: [
+        'good',
+        'warning',
+        'critical'
+      ],
+      datasets: [{
+        label: '',
+        data: [100, 60, 40],
+        backgroundColor: [
+          'rgb(57,96,162)',
+          'rgb(255, 205, 86)',
+          'rgb(235,54,54)',
+        ],
+        hoverOffset: 4,
+        hoverBackgroundColor: [
+          'rgb(76,120,190)',
+          'rgb(232,191,115)',
+          'rgb(232,88,88)',
+        ]
+      }]
+    };
     const myChart = new Chart(ctx, {
       type: 'doughnut',
       data: data,
@@ -67,11 +91,11 @@ export default {
     });
     const myChart3 = new Chart(ctx3, {
       type: 'doughnut',
-      data: data,
+      data: data2,
     });
     const myChart4 = new Chart(ctx4, {
       type: 'doughnut',
-      data: data,
+      data: data2,
     });
     myChart;
     myChart2;
@@ -82,22 +106,27 @@ export default {
 </script>
 
 <style scoped>
-.content {
+.card {
   background-color: #163b7a;
   color: white;
+}
+h1{
+  color: deepskyblue;
+}
+
+.rpm-kw{
+  color:deepskyblue;
 }
 
 .chart-container {
   display: flex;
   margin-bottom: 30px;
-  margin-left: 25%;
   height: 150px;
   width: 190px;
 }
 
 .chart-container-bottom {
   display: flex;
-  margin-left: 25%;
   height: 150px;
   width: 190px;
 }
@@ -106,15 +135,12 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   margin: 10px;
-  width: 220px;
-  height: 75px;
 }
 
 .container{
   padding: 20px;
-  margin-left: 20%;
   display:flex;
 }
 

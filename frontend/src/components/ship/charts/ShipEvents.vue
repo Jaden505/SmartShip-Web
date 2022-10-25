@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="card">
     <h1>Ship Events</h1>
     <div class="container">
       <ul>
@@ -30,10 +30,13 @@ export default {
 </script>
 
 <style scoped>
-.content {
+.card {
   background-color: #163b7a;
   color: white;
   width: 700px;
+}
+h1{
+  color: deepskyblue;
 }
 .container{
   display: flex;
