@@ -75,7 +75,7 @@ export default {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #33ccff;
+  background-color: #163b7a;
   margin-bottom: 1%;
   border-radius: 20px;
 }
