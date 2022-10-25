@@ -3,7 +3,7 @@
     <div class="center">
       <br>
       <br>
-      <h2 class="welcome">Hey *user* Click on the button to Clock-in!</h2>
+      <h2 class="welcome">Hey *user* Click on the button to Clock-out!</h2>
 
       <dropdown>
         <input id="toggle2" type="checkbox">
@@ -17,14 +17,14 @@
 
 
     </div>
-    <router-link :to="{ path: 'Clockout' }"><button class="bubbly-button">Clock-in</button></router-link>
+    <router-link :to="{ path: 'Clockin' }"><button class="bubbly-button">Clock-out</button></router-link>
   </div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Clockin"
+  name: "Clockout"
 }
 </script>
 
