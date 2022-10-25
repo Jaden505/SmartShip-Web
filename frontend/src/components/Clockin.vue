@@ -3,7 +3,7 @@
     <div class="center">
       <br>
       <br>
-      <h2 class="welcome">Hey *user* Click op de Clock-in button om in te loggen</h2>
+      <h2 class="welcome">Hey *user* Click on the button to Clock-in!</h2>
 
       <dropdown>
         <input id="toggle2" type="checkbox">
@@ -40,8 +40,12 @@ export default {
   position: relative;
   border-radius: 25px;
   width: 70%;
-  /*hide everything beyond dic*/
-  
+
+  z-index: 5;
+}
+
+#toggle2{
+  z-index: -7;
 }
 
 .center {
@@ -78,6 +82,7 @@ body {
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
   float: right;
   margin-right: 20px;
+  z-index: -1;
 }
 .bubbly-button:focus {
   outline: 0;
@@ -89,7 +94,6 @@ body {
   width: 140%;
   height: 100%;
   left: -20%;
-  z-index: -1000;
   transition: all ease-in-out 0.5s;
   background-repeat: no-repeat;
 }
