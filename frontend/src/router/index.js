@@ -2,7 +2,7 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import Login from "@/components/Login";
 import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
-import Ships from "@/components/Ships";
+import Ships from "@/components/ShipList";
 
 const routes = [
     {path: "/", component: Login},
