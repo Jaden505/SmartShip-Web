@@ -2,60 +2,31 @@
   <div class="container">
     <div class="center">
 
-      <dropdown v-if="active">
-        <h2 class="welcome">Hey *user*, Select a ship to clock in</h2>
-        <input id="toggle2" type="checkbox">
-        <label for="toggle2" class="animate">Ships<i class="fa fa-list float-right"></i></label>
-        <ul class="animate" v-for="(ship, index) in ships" :key="index">
-          <li class="animate" @click="setCurrentShip(ship.name)">{{ ship.name }}</li>
-        </ul>
-      </dropdown>
-
-      <div v-else>
-        <p class="back" @click="goBack">{{ back }}</p>
-        <h2 class="welcome">You selected the ship: {{ currentShip }}</h2>
-      </div>
+      <h1 class="welcome">Hey *user*</h1>
+      <h2>You are currently clocked in at ship: {{ ship }}</h2>
 
     </div>
-    <button v-if="!active" class="bubbly-button" @click="clockIn">Clock-in</button>
+    <router-link to="/Clockin"><button class="bubbly-button">Clock-out</button></router-link>
   </div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Clockin",
+  name: "Clockout",
+
   data(){
     return {
-      ships: [
-        {
-          name: "Grote Bherta"
-        },
-        {
-          name: "Immaculata"
-        },
-        {
-          name: "Teerstroom"
-        }
-      ],
-      currentShip: null,
-      active: true,
-      back: "<<< Go back"
+      ship: null
     }
   },
   methods: {
-    setCurrentShip(ship){
-      this.active = false
-      this.currentShip = ship
-    },
-
-    clockIn(){
-      this.$router.push({ name: "Clockout", params: { ship: this.currentShip } })
-    },
-
-    goBack(){
-      this.active = true
+    clockOut(){
+      this.$router.push({ path: "Clockin" })
     }
+  },
+  created() {
+    this.ship = this.$route.params.ship
   }
 }
 </script>
@@ -78,11 +49,6 @@ export default {
 
 #toggle2{
   z-index: -7;
-}
-
-.back{
-  color: cornflowerblue;
-  cursor: pointer;
 }
 
 .center {
