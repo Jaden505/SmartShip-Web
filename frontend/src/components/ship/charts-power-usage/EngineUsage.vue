@@ -3,7 +3,7 @@
     <div class="content m-lg-2">
       <h1>Starboard Engine Usage</h1>
 
-      <canvas class="chart-container"></canvas>
+      <canvas class="chart-container" ref="chart-container"></canvas>
     </div>
 
   </div>
@@ -16,35 +16,28 @@ export default {
   name: "EngineUsage",
 
   mounted() {
-    let line_chart = document.getElementById("chart-container");
+    let chart_container = this.$refs["chart-container"];
 
-    var chart = new Chart(line_chart, {
-      animationEnabled: true,
-      theme: "light2",
-      title: {
-        text: "Simple Line Chart"
-      },
-      data: [{
-        type: "line",
-        indexLabelFontSize: 16,
-        dataPoints: [
-          {y: 450},
-          {y: 414},
-          {y: 520, indexLabel: "\u2191 highest", markerColor: "red", markerType: "triangle"},
-          {y: 460},
-          {y: 450},
-          {y: 500},
-          {y: 480},
-          {y: 480},
-          {y: 410, indexLabel: "\u2193 lowest", markerColor: "DarkSlateGrey", markerType: "cross"},
-          {y: 500},
-          {y: 480},
-          {y: 510}
-        ]
+    const labels = ["09:00", "10:00", "11:00", "12:00", "13:00"];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: "Kilowatt an hour",
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
       }]
-    });
+    };
 
-    chart.render();
+    const config = {
+      type: 'line',
+      data: data,
+    }
+
+    let chart = new Chart(chart_container, config);
+
+    chart;
   }
 }
 </script>
