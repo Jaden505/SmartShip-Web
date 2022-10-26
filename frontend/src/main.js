@@ -8,8 +8,6 @@ import {router} from "@/router";
 import App from './App.vue'
 import store from './store';
 // import VeeValidate from 'vee-validate';
-
-
 import './assets/css/main.css'
 
 const app = createApp(App)

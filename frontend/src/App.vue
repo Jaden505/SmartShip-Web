@@ -23,8 +23,8 @@ body {
   min-height: 100%;
 }
 
-#app {
-  height: 100vh;
+router-view {
+  overflow: scroll;
 }
 </style>
 
