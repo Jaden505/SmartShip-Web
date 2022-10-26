@@ -1,39 +1,43 @@
 <template>
-  <div v-if="active">
-    <label>OperatorId:</label><br/>
-    <select v-model="operatorId">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-
-    <div class="card" v-for="(ship, index) in ships" :key="index">
-      <div class="row">
-        <div class="img-box">
-          <p>{{ ship.shipName }}</p>
-        </div>
-        <div class="infoBox">
-          <p class="shipTitle">Ship id: {{ ship.shipId }}</p>
-          <p class="shipTitle">Ship name: {{ ship.shipName }}</p>
-          <p class="shipTitle">Ship description: {{ ship.shipDesc }}</p>
-        </div>
-      </div>
-      <div class="clock-in">
-       <p @click="clockIn(ship.shipId)">Clock In</p>
-      </div>
-    </div>
-  </div>
-  <div v-else>
-    <h1>{{ message }}</h1>
-  </div>
+  <HeaDer/>
+  <el-main class="main">
+  <el-row>
+    <el-col :span="8">
+      <label>Operator:</label><br/>
+      <select v-model="operatorId">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </el-col>
+    <el-col :span="16">
+        <el-card class="el-card" v-for="(ship, index) in ships" :key="index">
+          <div class="row">
+            <div class="img-box">
+              <p>{{ ship.shipName }}</p>
+            </div>
+            <div class="infoBox">
+              <p class="shipTitle">Ship id: {{ ship.shipId }}</p>
+              <p class="shipTitle">Ship name: {{ ship.shipName }}</p>
+              <p class="shipTitle">Ship description: {{ ship.shipDesc }}</p>
+            </div>
+          </div>
+          <div class="clock-in">
+            <button class="clockin-button"><router-link class="link" to="/dashboard">Clock In</router-link></button>
+          </div>
+        </el-card>
+    </el-col>
+  </el-row>
+  </el-main>
 </template>
 
 <script>
+import HeaDer from "@/components/Header";
 export default {
   name: "ShipsComponent",
-
+  components: {HeaDer},
   data(){
     return {
       ships: [
@@ -59,38 +63,31 @@ export default {
     }
   },
   methods: {
-    clockIn(shipId){
-      this.active = false
-      this.message = 'Operator: ' + this.operatorId + ' clocked in at ShipId: ' + shipId
-    }
   }
 
 }
 </script>
 
 <style scoped>
-
-.card{
-  border: 2px solid black;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #163b7a;
-  margin-bottom: 1%;
+.el-card {
+  background: #002C48;
+  border: none;
+  color: #E0E1DD;
+  text-align: center;
   border-radius: 20px;
+  margin-bottom: 10px;
 }
 
-.row{
-  display: flex;
+.link{
+  text-decoration: none;
+  color: #00111C;
 }
 
 .img-box{
   flex: 1;
   font-size: 40px;
   text-align: center;
-  border: 2px solid black;
   margin: 1%;
-  background-color: white;
 }
 
 .infoBox{
@@ -98,8 +95,6 @@ export default {
   flex: 3;
   margin: 1%;
   padding: 1%;
-  border: 2px solid black;
-  background-color: white;
 }
 
 .shipTitle{
@@ -119,9 +114,25 @@ export default {
   cursor: pointer;
 }
 
-.clock-in p:hover{
-  background-color: #80bfff;
+.clockin-button {
+  width: 100px;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #00111C;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #60EFFF, #0061FF);
+  background-size: 600%;
+  -webkit-animation: anime 16s linear infinite;
+  animation: anime 16s linear infinite;
+  border: solid 0 black;
+  transition: all .2s ease-in-out;
 }
+
+.clockin-button:hover {
+  transform: translateY(-0.25em)
+}
+
 
 label{
   color: white;

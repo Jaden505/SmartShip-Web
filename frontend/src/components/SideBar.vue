@@ -6,15 +6,12 @@
           background-color="none"
       >
         <el-menu-item index="1">
-          <el-icon><icon-menu /></el-icon>
           <span class="link"><router-link class="link" to="/info">Ship Information</router-link></span>
         </el-menu-item>
         <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
           <span class="link"><router-link class="link" to="/ship-overview">Ship Table</router-link></span>
         </el-menu-item>
         <el-menu-item index="3">
-          <el-icon><icon-menu /></el-icon>
           <span class="link"><router-link class="link" to="/power-usage">Power Usage</router-link></span>
         </el-menu-item>
       </el-menu>
@@ -37,5 +34,6 @@ export default {
 .link {
   font-size: 1.5rem;
   text-decoration: none;
+  color: #dddddd;
 }
 </style>

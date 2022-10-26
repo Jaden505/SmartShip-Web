@@ -24,7 +24,9 @@
                 <el-link :underline="false" class="forgotPassword">Forgot Password?</el-link>
               </el-form-item>
               <el-form-item>
-                <el-button  class="submit-button">Submit</el-button>
+                <router-link class="link" to="/ships">
+                <el-button  class="submit-button">Sign In</el-button>
+                </router-link>
                 <div class="btn2"></div>
               </el-form-item>
             </div>
@@ -94,6 +96,10 @@ export default {
 .main {
   height: 100%;
   padding-bottom: 12vh;
+}
+
+.link{
+  text-decoration: none;
 }
 
 .submit-button, .btn2 {
