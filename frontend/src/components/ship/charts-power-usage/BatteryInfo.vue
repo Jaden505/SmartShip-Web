@@ -3,25 +3,27 @@
     <h1>Sea conditions</h1>
 
     <div class="section">
-      <p>Sea state</p>
-      <h1 class="condition-value">3</h1>
+      <p>Battery pack 1 level</p>
+      <h1 class="condition-value">88%</h1>
+    </div>
+
+
+
+    <div class="section">
+      <p>Battery pack 2 level</p>
+      <h1 class="condition-value">67%</h1>
+    </div>
+
+    <br><br>
+
+    <div class="section">
+      <p>Battery pack 1 temperature</p>
+      <h1 class="condition-value">45°C</h1>
     </div>
 
     <div class="section">
-      <p>Wind direction</p>
-      <h1 class="condition-value">North</h1>
-    </div>
-
-    <br>
-
-    <div class="section">
-      <p>Sea temprature</p>
-      <h1 class="condition-value">6.2</h1>
-    </div>
-
-    <div class="section">
-      <p>Surface current</p>
-      <h1 class="condition-value">West</h1>
+      <p>Battery pack 2 temperature</p>
+      <h1 class="condition-value">60°C</h1>
     </div>
   </div>
 </template>
@@ -37,6 +39,8 @@ export default {
   background-color: #163b7a;
   color:white;
   width: 700px;
+  display: inline-block;
+  padding: 30px;
 }
 h1{
   color:deepskyblue;

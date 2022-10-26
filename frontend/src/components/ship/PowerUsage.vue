@@ -5,16 +5,11 @@
         <div class="col">
           <EngineUsage/>
         </div>
-      </div>
-    </div>
-    <div class="container-bottom">
-      <div class="row">
         <div class="col">
           <BatteryInfo/>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
