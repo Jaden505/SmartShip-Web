@@ -10,6 +10,7 @@
     <div class="container-bottom">
       <div class="row">
         <div class="col">
+          <BatteryInfo/>
         </div>
       </div>
     </div>
@@ -19,11 +20,13 @@
 
 <script>
 import EngineUsage from "./charts-power-usage/EngineUsage";
+import BatteryInfo from "./charts-power-usage/BatteryInfo";
 
 export default {
   name: "PowerUsage",
   components: {
-    EngineUsage
+    EngineUsage,
+    BatteryInfo
   }
 }
 </script>

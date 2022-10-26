@@ -50,5 +50,4 @@ export default {
 .main-container {
   background-color: #00111C;
 }
-
 </style>
