@@ -1,18 +1,8 @@
 <template>
   <HeaDer/>
   <el-main class="main">
-    <el-row>
-      <el-col :span="8">
-        <label>Operator:</label><br/>
-        <select v-model="operatorId">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </el-col>
-      <el-col :span="16">
+    <el-row align="middle">
+      <el-col :span="22" align="center">
         <el-card class="el-card" v-for="(ship, index) in ships" :key="index">
           <div class="row">
             <div class="img-box">
