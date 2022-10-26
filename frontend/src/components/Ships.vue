@@ -1,18 +1,18 @@
 <template>
   <HeaDer/>
   <el-main class="main">
-  <el-row>
-    <el-col :span="8">
-      <label>Operator:</label><br/>
-      <select v-model="operatorId">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </el-col>
-    <el-col :span="16">
+    <el-row>
+      <el-col :span="8">
+        <label>Operator:</label><br/>
+        <select v-model="operatorId">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </el-col>
+      <el-col :span="16">
         <el-card class="el-card" v-for="(ship, index) in ships" :key="index">
           <div class="row">
             <div class="img-box">
@@ -28,8 +28,8 @@
             <button class="clockin-button"><router-link class="link" to="/dashboard">Clock In</router-link></button>
           </div>
         </el-card>
-    </el-col>
-  </el-row>
+      </el-col>
+    </el-row>
   </el-main>
 </template>
 
