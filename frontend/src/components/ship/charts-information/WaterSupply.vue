@@ -1,21 +1,27 @@
 <template>
-  <div class="card">
+  <el-card shadow="always" class="el-card">
     <h1>Water Supply</h1>
-    <div class="chart-container">
-      <canvas id="waterSupplyChart"></canvas>
-    </div>
-    <div class="flex-container">
-      <div class="section">
-        <p>Current Consumption</p>
-        <h2 class="waterAmount">3T</h2>
-      </div>
-      <div class="section">
-        <p>Consumption Last 24h</p>
-        <h2 class="waterAmount">25T</h2>
-      </div>
-    </div>
 
-  </div>
+    <div class="content">
+      <el-row class="container">
+        <div class="chart-container">
+          <canvas id="waterSupplyChart"></canvas>
+        </div>
+      </el-row>
+      <el-row class="container-2">
+        <div class="sections">
+          <el-card class="section" shadow="always">
+            <h2 class="waterAmount-title">Current Consumption</h2>
+            <p class="waterAmount">3T</p>
+          </el-card>
+          <el-card class="section" shadow="always">
+            <h2 class="waterAmount-title">Consumption Last 24h</h2>
+            <p class="waterAmount">25T</p>
+          </el-card>
+        </div>
+      </el-row>
+    </div>
+  </el-card>
 </template>
 
 <script>
@@ -61,35 +67,35 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  background-color: #163b7a;
-  color: white;
+.sections {
+  line-height: 12px;
+  display: flex;
+  align-items: center;
 }
 
-h1 {
-  color: deepskyblue;
-}
-
-.chart-container {
-  /*display: flex;*/
-  /*margin-left: 42%;*/
-  /*height:300px;*/
-  /*width: 500px;*/
+.el-card {
+  background: #002C48;
+  border: none;
+  color: #E0E1DD;
+  text-align: center;
+  border-radius: 20px;
 }
 
 .section {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-  /*border-radius: 10px;*/
-  padding: 20px;
-  margin-left: 10px;
+  margin: 10px;
+  box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
 }
 
-.flex-container {
-  display: flex;
+.waterAmount-title {
+  font-size: 1.5rem;
 }
 
 .waterAmount {
-  color: deepskyblue;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-top: 10px;
+  color: #1CD0FF;
 }
 </style>

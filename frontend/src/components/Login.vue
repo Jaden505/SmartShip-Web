@@ -1,4 +1,5 @@
 <template>
+  <NavBar/>
   <el-main class="main">
     <el-row class="row" gutter="10">
       <el-col :span="12" class="column-1" justify="center">
@@ -36,9 +37,13 @@
 
 <script>
 import User from '../models/user'
+import NavBar from "@/components/NavBar";
 
 export default {
   name: "Login-Screen",
+  components: {
+    NavBar
+  },
   data () {
     return {
       user: new User('', ''),

@@ -1,38 +1,70 @@
 <template>
-  <div class="content m-3">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">Company(id)</th>
-      <th scope="col">Ships(id)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>[sh1, sh2]</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>[sh3]</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>[sh4, sh5, sh6]</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="content">
+    <el-row>
+      <el-col class="column">
+        <el-card>Hey</el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col class="column">
+        <el-card>Hey</el-card>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col class="column">
+        <el-card>Hey</el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-    name: "ShipsTable"
+    name: "ShipsTable",
+    data() {
+    return {
+      tableData: [
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+        {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        },
+      ]
+    }
+  }
 }
 </script>
 
 <style scoped>
-table{
-  background: linear-gradient(45deg, #0061FF, #60EFFF);
+.column {
+  width: 100%;
+}
+
+.el-row {
+  margin-bottom: 30px;
+  height: 200px;
+}
+
+.el-card {
+  background: #002C48;
+  border: none;
+  color: #E0E1DD;
+  border-radius: 20px;
+  height: 100%;
 }
 </style>

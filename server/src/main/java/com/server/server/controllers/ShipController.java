@@ -1,4 +1,4 @@
-package com.server.server.controller;
+package com.server.server.controllers;
 
 import com.server.server.entity.Ship;
 import com.server.server.repository.ShipRepo;
