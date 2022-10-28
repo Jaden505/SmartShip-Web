@@ -1,5 +1,8 @@
 <template>
   <NavBar/>
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
   <el-main class="main">
     <el-row class="row" gutter="10">
       <el-col :span="12" class="column-1" justify="center">
