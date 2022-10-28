@@ -1,26 +1,14 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
 import Login from "@/components/Login";
-import Clockin from "@/components/Clockin";
-import Clockout from "@/components/Clockout";
 import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
-import Ships from "@/components/Ships";
 import ShipsTable from "@/components/ship/ShipsTable";
-import ShipsList from "@/components/ShipList";
 import Dashboard from "@/components/Dashboard";
 
 const routes = [
     {path : "/",
         component: Login},
-    {path : "/ships/",
-        component: Ships},
-    {path : "/ships/ship-list",
-        component: ShipsList},
-    {path: "/Clockout/:ship",
-        component: Clockout},
-    {path: "/Clockin/",
-        component: Clockin},
     {path: "/Dashboard",
         component: Dashboard,
         children: [
@@ -46,7 +34,6 @@ const routes = [
 export const router = createRouter({
     history : createWebHashHistory(),
     routes,
-    linkActiveClass: 'vue-active-link'
 })
 
 // router.beforeEach((to, from, next) => {
