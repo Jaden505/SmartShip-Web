@@ -5,9 +5,9 @@
         <p>{{ ship.shipName }}</p>
       </div>
       <div class="infoBox">
-        <p class="shipTitle">Ship id: {{ ship.shipId }}</p>
-        <p class="shipTitle">Ship name: {{ ship.shipName }}</p>
-        <p class="shipTitle">Ship description: {{ ship.shipDesc }}</p>
+        <p class="shipTitle">Ship id: {{ ship.id }}</p>
+        <p class="shipTitle">Ship name: {{ ship.status }}</p>
+        <p class="shipTitle">Ship description: {{ ship.location}}</p>
       </div>
     </div>
   </div>

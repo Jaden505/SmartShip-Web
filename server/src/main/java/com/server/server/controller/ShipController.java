@@ -29,9 +29,7 @@ public class ShipController {
     @GetMapping("/ships")
     public ResponseEntity<List<Ship>> getShips() {
         try {
-            List<Ship> ships = new ArrayList<Ship>();
-
-            ships.add(new Ship("idle", "asd", "sd", "kldsa"));
+            List<Ship> ships = new ArrayList<>(shipRepo.findAll());
 
             if (ships.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -21,20 +21,15 @@ public class Ship {
     @Column(name = "destination")
     private String destination;
 
-    public Ship(String status, String location, String origin, String destination) {
-        this.status = status;
-        this.location = location;
-        this.origin = origin;
-        this.destination = destination;
+    public Ship() {
+
     }
 
     public long getId() {
         return id;
     }
 
-    public String getStatus() {
-        return status;
-    }
+    public String getStatus() {return status;}
 
     public void setStatus(String status) {
         this.status = status;
@@ -46,6 +41,22 @@ public class Ship {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     @Override
