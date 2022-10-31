@@ -8,6 +8,8 @@
         <p class="shipTitle">Ship id: {{ ship.id }}</p>
         <p class="shipTitle">Ship name: {{ ship.status }}</p>
         <p class="shipTitle">Ship description: {{ ship.location}}</p>
+        <p class="shipTitle">Ship origin: {{ ship.origin}}</p>
+        <p class="shipTitle">Ship destination: {{ ship.destination}}</p>
       </div>
     </div>
   </div>
