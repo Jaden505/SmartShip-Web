@@ -22,7 +22,7 @@
       <ul class="flex flex-1 flex-col gap-y-10 px-8 pt-14">
         <li v-for="item in items" :key="item.name">
           <a class="flex items-center gap-x-4 text-white-text">
-            <Component :is="item.icon" class="h-6 w-6 stroke-current"/>
+            <Component :is="item.icon" class="w-6 h-6"/>
             <span>{{item.name}}</span>
           </a>
         </li>
@@ -52,14 +52,10 @@
         </div>
         <div class="flex w-2/5 align-items-center justify-content-between">
           <button class="position-relative flex h-11 w-11 align-items-center text-white-text">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            </svg>
+            <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6"/>
           </button>
           <button class="position-relative flex h-11 w-11 align-items-center text-white-text">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
+            <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6"/>
             <div class="position-absolute top-3 right-3 flex">
 <!--              <span class="position-absolute d-inline-flex h-full w-full animate-ping rounded bg-indigo-400 opacity-75"/>-->
               <span class="d-inline-flex h-2 w-2 rounded-full bg-indigo-400"/>
@@ -81,23 +77,20 @@
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faShip, faBolt, faStar, faMoon, faBell } from '@fortawesome/free-solid-svg-icons'
+library.add(faShip, faBolt, faStar, faMoon, faBell)
+
 export default {
   name: "DashBoard",
   data() {
     return {
       items: [
-        {name: 'Power Usage', to: '/power-usag', icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-          </svg>
-
+        {name: 'Power Usage', to: '/power-usag', icon: <font-awesome-icon icon="fa-solid fa-bolt" />
         },
-        {name: 'Ship Information', to: '/ship-overview', icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-          </svg>
+        {name: 'Ship Information', to: '/ship-overview', icon: <font-awesome-icon icon="fa-solid fa-ship" />
         },
-        {name: 'Rating', to: '/info', icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-          </svg>
+        {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
         }
       ]
     }
