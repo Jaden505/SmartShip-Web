@@ -1,4 +1,4 @@
-package com.server.server.domain;
+package com.server.server.entity;
 
 public enum ERole {
         ROLE_OPERATOR,

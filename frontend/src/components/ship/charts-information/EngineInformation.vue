@@ -1,29 +1,32 @@
 <template>
-  <div class="card">
-    <div class="content m-lg-2">
+  <el-card shadow="always" class="el-card">
     <h1>Engine Information</h1>
-    <p class="rpm-kw">RPM:</p>
-    <div class="chart-container">
-      <canvas id="engineInformationChart"></canvas>
-      <canvas id="engineInformationChart2"></canvas>
+
+    <div class="content">
+      <el-row class="container">
+        <div class="chart-container">
+          <canvas id="engineInformationChart"></canvas>
+          <canvas id="engineInformationChart2"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="engineInformationChart3"></canvas>
+          <canvas id="engineInformationChart4"></canvas>
+        </div>
+      </el-row>
+      <el-row class="container-2">
+        <div class="sections">
+          <el-card class="section" shadow="always">
+            <h2 class="temperature_title">Engine 1 Temperature</h2>
+            <p class="temperature">60.4°</p>
+          </el-card>
+          <el-card class="section" shadow="always">
+            <h2 class="temperature_title">Engine 2 Temperature</h2>
+            <p class="temperature">62.1°</p>
+          </el-card>
+        </div>
+      </el-row>
     </div>
-    <p class="rpm-kw">kW:</p>
-    <div class="chart-container-bottom">
-      <canvas id="engineInformationChart3"></canvas>
-      <canvas id="engineInformationChart4"></canvas>
-    </div>
-    <div class="container">
-      <div class="section">
-        <p>Engine 1 Temperature</p>
-        <h2 class="celcius">60.4°</h2>
-      </div>
-      <div class="section">
-        <p>Engine 2 Temperature</p>
-        <h2 class="celcius">62.1°</h2>
-      </div>
-    </div>
-    </div>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -106,17 +109,7 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  background-color: #163b7a;
-  color: white;
-}
-h1{
-  color: deepskyblue;
-}
 
-.rpm-kw{
-  color:deepskyblue;
-}
 
 .chart-container {
   display: flex;
@@ -125,26 +118,36 @@ h1{
   width: 190px;
 }
 
-.chart-container-bottom {
+.sections {
+  line-height: 12px;
   display: flex;
-  height: 150px;
-  width: 190px;
+  align-items: center;
+}
+
+.el-card {
+  background: #002C48;
+  border: none;
+  color: #E0E1DD;
+  text-align: center;
+  border-radius: 20px;
 }
 
 .section {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
   margin: 10px;
+  box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
 }
 
-.container{
-  padding: 20px;
-  display:flex;
+.temperature_title {
+  font-size: 1.5rem;
 }
 
-.celcius{
-  color: deepskyblue;
+.temperature {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1CD0FF;
+  padding-top: 10px;
 }
+
 </style>

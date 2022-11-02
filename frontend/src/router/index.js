@@ -1,28 +1,39 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
 import Login from "@/components/Login";
-import Clockin from "@/components/Clockin";
-import Clockout from "@/components/Clockout";
 import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
-import Ships from "@/components/Ships";
 import ShipsTable from "@/components/ship/ShipsTable";
-import ShipsList from "@/components/ShipList";
+import Dashboard from "@/components/Dashboard";
 
 const routes = [
-    {path : "/", component: Login},
-    {path : "/ships/", component: Ships},
-    {path : "/ships/power-usage", component: PowerUsage},
-    {path : "/ships/info", component: ShipInfo},
-    {path : "/ships/ship-overview", component: ShipsTable},
-    {path : "/ships/ship-list", component: ShipsList},
-    {path: "/Clockout/:ship", component: Clockout},
-    {path: "/Clockin/", component: Clockin},
+    {path : "/",
+        component: Login},
+    {path: "/Dashboard",
+        component: Dashboard,
+        children: [
+            {
+                path: "/ship-overview",
+                component: ShipsTable,
+                props: true
+            },
+            {
+                path: "/power-usage",
+                component: PowerUsage,
+                props: true
+            },
+            {
+                path: "/info",
+                component: ShipInfo,
+                props: true
+            }
+        ]
+    },
 ]
 
 export const router = createRouter({
     history : createWebHashHistory(),
-    routes
+    routes,
 })
 
 // router.beforeEach((to, from, next) => {

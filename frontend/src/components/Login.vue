@@ -1,44 +1,54 @@
 <template>
-  <el-main class="main">
-    <el-row class="row" gutter="10">
-      <el-col :span="12" class="column-1" justify="center">
-        <div class="grid-content ep-bg-purple">
-          <div class="title-container" align="left">
-            <h1 class="title">
-              {{title}}
-            </h1>
-            <h3 class="subtitle">
-              {{subtitle}}
-            </h3>
+  <NavBar/>
+  <div class="px-6 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <div class="flex flex-col lg:flex-row">
+      <div class="mb-3 lg:max-w-lg lg:pr-5 lg:mb-0">
+        <div class="max-w-xl mb-6">
+          <h2 class="title text-transparent text-center bg-clip-text bg-gradient-to-r from-regular-blue to-light-blue max-w-lg mb-6 text-5xl font-sans font-bold tracking-tight sm:text-4xl md:text-6xl lg:text-7xl sm:leading-none lg:text-start sm:text-start md:text-start">
+            {{title}}
+          </h2>
+          <p class="subtitle text-light-text text-center font-sans text-2xl sm:text-2xl md:text-3xl lg:text-3xl md:text-lg lg:text-start sm:text-start md:text-start">
+            {{subtitle}}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+        <div class="flex-1">
+            <form>
+              <div>
+                <input type="email" name="email" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+              </div>
+
+              <div class="mt-6">
+                <input type="password" name="password" id="password" placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+              </div>
+
+              <div class="flex justify-between mt-2">
+                <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
+              </div>
+
+              <div class="mt-4">
+                <button class="w-full font-bold px-4 py-2 tracking-wide text-dark-blue rounded-md bg-gradient-to-r from-regular-blue to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80">
+                  Sign in
+                </button>
+              </div>
+
+            </form>
           </div>
         </div>
-      </el-col>
-      <el-col :span="12" class="column-2">
-        <div class="grid-content ep-bg-purple" align="center">
-          <el-form class="form" @submit.prevent="handleLogin">
-            <input class="form-control" v-model="user.email" type="email" autocomplete="off" placeholder="Enter your email"/>
-            <input class="form-control" v-model="user.password" type="password" autocomplete="off" placeholder="Enter your password"/>
-            <div>
-              <el-form-item>
-                <el-link :underline="false" class="forgotPassword">Forgot Password?</el-link>
-              </el-form-item>
-              <el-form-item>
-                <el-button  class="submit-button">Submit</el-button>
-                <div class="btn2"></div>
-              </el-form-item>
-            </div>
-          </el-form>
-        </div>
-      </el-col>
-    </el-row>
-  </el-main>
+      </div>
+    </div>
 </template>
 
 <script>
 import User from '../models/user'
+import NavBar from "@/components/NavBar";
 
 export default {
   name: "Login-Screen",
+  components: {
+    NavBar
+  },
   data () {
     return {
       user: new User('', ''),
@@ -86,80 +96,4 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  height: 100%;
-  padding-bottom: 12vh;
-}
-
-.submit-button, .btn2 {
-  width: 100px;
-  height: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #00111C;
-  border-radius: 10px;
-  background: linear-gradient(-45deg, #60EFFF, #0061FF);
-  background-size: 600%;
-  -webkit-animation: anime 16s linear infinite;
-  animation: anime 16s linear infinite;
-  border: solid 0 black;
-  transition: all .2s ease-in-out;
-}
-.btn2 {
-  position: absolute;
-  transition: all .2s ease-in-out;
-  z-index: -1;
-  filter: blur(30px);
-  opacity: 0.3;
-}
-
-.submit-button:hover, .btn2:hover {
-  transform: translateY(-0.25em)
-}
-
-.row {
-  height: 100%;
-}
-
-input {
-  border: 0 solid red;
-  border-radius: 4px;
-  width: 100%;
-  padding: 20px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  background-color : #363636;
-}
-
-input::placeholder {
-  font-size: 20px;
-}
-
-.forgotPassword {
-  color: #E0E1DD;
-}
-
-.form {
-  width: 50%;
-}
-
-.title {
-  font-size: 5rem;
-  background-color: #0061FF;
-  background-image: linear-gradient(45deg, #0061FF, #60EFFF);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.column-1, .column-2 {
-  margin-top: 8%;
-}
-
-.subtitle {
-  margin-top: 10px;
-  font-size: 1.7rem;
-  color: #E0E1DD;
-
-}
 </style>
