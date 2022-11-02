@@ -1,99 +1,22 @@
 <template>
-  <div class = "flex-container">
+  <div class="flex-container">
 
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
-
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
+    <div v-for="(alarm, index) in alarms" :key="index" class="flex-box">
+      <div class="Parameters">{{ parameter }}</div>
+      <div class="Parameters">{{ category }}</div>
+      <div class="Parameters">{{ realTimeValue }}</div>
+      <div class="Parameters">{{ settedUpValue }}</div>
 
       <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
+        <button class="flex-child" id="slide_start_button">
+          {{ star }}
+        </button>
 
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
-
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
-
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
-
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
-
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
-      </div>
-    </div>
-
-    <div class="flex-box">
-      <div class="Parameters">Parameter:</div>
-      <div class="Parameters">Category:</div>
-      <div class="Parameters">Real time value: </div>
-      <div class="Parameters">setted up value:</div>
-
-      <div class="flex">
-        <input type="button" class="flex-child" id="slide_start_button">
-        <input type="button" class="flex-child" id="slide_stop_button">
+        <button class="flex-child" id="slide_stop_button">
+          {{ remove }}
+        </button>
+        <!--        <input type="button" class="flex-child" id="slide_start_button">-->
+        <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
 
@@ -102,17 +25,29 @@
 
 <script>
 export default {
-  name: "NotificationsOverview"
+  name: "NotificationsOverview",
+  data() {
+    return {
+      alarms: ["alarm1", "alarm2", "alarm3", "alarm4", "alarm5", "alarm6", "alarm7", "alarm8"],
+      parameter: "Parameter:",
+      category: "Category:",
+      realTimeValue: "Real time value:",
+      settedUpValue: "Setted up value",
+      star: "⭐",
+      remove: "X"
+    }
+  }
 }
 </script>
 
 <style scoped>
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.flex-container{
+
+.flex-container {
   width: 100%;
   height: auto;
   display: flex;
@@ -121,7 +56,8 @@ export default {
   background-color: #002C48;
   justify-content: center;
 }
-.flex-box{
+
+.flex-box {
   width: 320px;
   height: 170px;
   background-color: #002C60;
@@ -135,11 +71,10 @@ export default {
   padding-top: 10px;
 }
 
-.Parameters{
+.Parameters {
   margin-left: 15px;
   font-weight: 900;
 }
-
 
 
 /*new*/
@@ -157,7 +92,7 @@ export default {
   margin-left: 48%;
 }
 
-.flex-child{
+.flex-child {
   border: none;
   padding: 4px;
   text-decoration: none;
