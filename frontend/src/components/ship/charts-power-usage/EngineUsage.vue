@@ -1,8 +1,12 @@
 <template>
-  <el-card shadow="always" class="el-card">
+  <div class="card">
+    <div class="content m-lg-2">
       <h1>Starboard Engine Usage</h1>
+
       <canvas class="chart-container" ref="chart-container"></canvas>
-  </el-card>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -39,12 +43,12 @@ export default {
 </script>
 
 <style scoped>
-.el-card {
-  background: #002C48;
-  border: none;
-  color: #E0E1DD;
-  text-align: center;
-  border-radius: 20px;
+.card {
+  background-color: #163b7a;
+  color: white;
+}
+h1{
+  color: deepskyblue;
 }
 
 .chart-container {

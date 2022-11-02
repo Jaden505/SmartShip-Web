@@ -1,9 +1,15 @@
 <template>
-  <div class="conatainer-mine">
-    <el-row :gutter="20">
-      <el-col :span="12"><EngineUsage/></el-col>
-      <el-col :span="12"><BatteryInfo/></el-col>
-    </el-row>
+  <div class="main-container">
+    <div class="container-up">
+      <div class="row">
+        <div class="col">
+          <EngineUsage/>
+        </div>
+        <div class="col">
+          <BatteryInfo/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,4 +27,7 @@ export default {
 </script>
 
 <style scoped>
+.main-container {
+  background-color: #00111C;
+}
 </style>

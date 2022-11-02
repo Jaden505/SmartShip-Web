@@ -1,22 +1,37 @@
 <template>
-  <div class="container-mine">
-    <el-row :gutter="20">
-      <el-col :span="8"><EngineInformation/></el-col>
-      <el-col :span="8"><WaterSupply/></el-col>
-      <el-col :span="8"><TripStatistics/></el-col>
-    </el-row>
-    <el-row :gutter="20">
-      <el-col :span="14"><SeaConditions/></el-col>
-      <el-col :span="10"><ShipEvents/></el-col>
-    </el-row>
+  <div class="main-container">
+    <div class="container-up">
+      <div class="row">
+        <div class="col">
+          <WaterSupply/>
+        </div>
+        <div class="col">
+          <EngineInformation/>
+        </div>
+        <div class="col">
+          <TripStatistics/>
+        </div>
+      </div>
+    </div>
+    <div class="container-bottom">
+      <div class="row">
+        <div class="col">
+          <ShipEvents/>
+        </div>
+        <div class="col">
+          <SeaConditions/>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import SeaConditions from "./charts-information/SeaConditions";
 import TripStatistics from "./charts-information/TripStatistics";
-import WaterSupply from "./charts-information/WaterSupply";
-import EngineInformation from "./charts-information/EngineInformation";
+import EngineInformation from "./charts-information/WaterSupply";
+import WaterSupply from "./charts-information/EngineInformation";
 import ShipEvents from "./charts-information/ShipEvents";
 
 export default {
@@ -32,4 +47,7 @@ export default {
 </script>
 
 <style scoped>
+.main-container {
+  background-color: #00111C;
+}
 </style>
