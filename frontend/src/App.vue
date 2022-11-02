@@ -1,5 +1,5 @@
 <template>
-  <NavBar></NavBar>
+  <NavBar v-if="!['/manager'].includes($route.path)"></NavBar>
   <router-view></router-view>
 </template>
 
