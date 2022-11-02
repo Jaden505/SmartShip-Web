@@ -1,8 +1,8 @@
-package com.server.server.controller;
+package com.server.server.controllers;
 
 import com.server.server.model.Ship;
-import com.server.server.repository.ShipRepo;
 
+import com.server.server.repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -16,15 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 @Controller
 @RequestMapping("/api")
 public class ShipController {
     @Autowired
-    private ShipRepo shipRepo;
+    private ShipRepository shipRepo;
 
     @GetMapping("/ships")
     public ResponseEntity<List<Ship>> getShips() {
