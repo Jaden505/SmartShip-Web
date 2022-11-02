@@ -1,7 +1,7 @@
 package com.server.server.repository;
 
-import com.server.server.domain.Role;
-import com.server.server.domain.User;
+import com.server.server.model.Role;
+import com.server.server.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
