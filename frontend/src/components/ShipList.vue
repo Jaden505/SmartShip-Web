@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ShipService from "../services/ShipService";
+import ShipService from "../../services/ShipService";
 
 export default {
   name: "ShipsComponent",
