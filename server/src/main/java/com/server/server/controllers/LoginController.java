@@ -6,9 +6,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.server.server.entity.ERole;
-import com.server.server.entity.Role;
-import com.server.server.entity.User;
+import com.server.server.model.Role;
+import com.server.server.model.User;
+import com.server.server.model.ERole;
 import com.server.server.payload.request.RegisterRequest;
 import com.server.server.payload.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
