@@ -1,6 +1,6 @@
 package com.server.server.api;
 
-import com.server.server.domain.Ship;
+import com.server.server.entity.Ship;
 import com.server.server.service.ShipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

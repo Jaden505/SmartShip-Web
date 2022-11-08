@@ -1,6 +1,6 @@
 package com.server.server.service;
 
-import com.server.server.domain.Ship;
+import com.server.server.entity.Ship;
 import com.server.server.repository.ShipRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
