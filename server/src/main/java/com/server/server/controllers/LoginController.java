@@ -5,11 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.server.server.model.ERole;
-import com.server.server.model.Role;
-import com.server.server.model.User;
-import com.server.server.payload.request.RegisterRequest;
-import com.server.server.payload.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +12,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.server.server.model.ERole;
+import com.server.server.model.Role;
+import com.server.server.model.User;
+import com.server.server.payload.request.RegisterRequest;
+import com.server.server.payload.response.MessageResponse;
 import com.server.server.payload.request.LoginRequest;
 import com.server.server.payload.response.JwtResponse;
 import com.server.server.repository.RoleRepository;
@@ -25,10 +30,12 @@ import com.server.server.repository.UserRepository;
 import com.server.server.security.services.UserDetailsImpl;
 import com.server.server.security.jwt.JwtUtils;
 
+import javax.validation.Valid;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/auth")
 public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -45,11 +52,15 @@ public class LoginController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    @PostMapping("/signin")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
+        System.out.println(authentication);
+
+
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
