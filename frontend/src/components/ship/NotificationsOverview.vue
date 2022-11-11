@@ -32,7 +32,7 @@ export default {
       parameter: "Parameter:",
       category: "Category:",
       realTimeValue: "Real time value:",
-      settedUpValue: "Setted up value",
+      settedUpValue: "Setted up value:",
       star: "⭐",
       remove: "X"
     }
