@@ -112,7 +112,7 @@ public class LoginController {
                         roles.add(adminRole);
 
                         break;
-                    case "mod":
+                    case "manager":
                         Role modRole = roleRepository.findByName(ERole.ROLE_MANAGER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
