@@ -2,13 +2,12 @@ package com.server.server.controllers;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.server.server.model.ERole;
 import com.server.server.model.Role;
 import com.server.server.model.User;
-import com.server.server.model.ERole;
 import com.server.server.payload.request.RegisterRequest;
 import com.server.server.payload.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import com.server.server.security.jwt.JwtUtils;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("")
 public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -46,7 +45,7 @@ public class LoginController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
+    @PostMapping("/")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
