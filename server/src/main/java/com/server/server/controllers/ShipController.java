@@ -1,7 +1,7 @@
 package com.server.server.controllers;
 
-import com.server.server.entity.Ship;
-import com.server.server.repository.ShipRepo;
+import com.server.server.model.Ship;
+import com.server.server.repository.ShipRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +16,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ShipController {
     @Autowired
-    private ShipRepo shipRepo;
+    private ShipRepository shipRepo;
 
     @GetMapping("/ships")
     public List<Ship> getShips(){

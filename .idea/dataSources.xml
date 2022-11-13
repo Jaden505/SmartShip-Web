@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="smartship_1@localhost" uuid="f5fec314-4d29-4f1c-8c5a-31ce65bf48fa">
+    <data-source source="LOCAL" name="smartship_personal@localhost" uuid="48456aed-37b4-4bcc-97a4-ab280e034fdf">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/smartship_1</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/smartship_personal</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
