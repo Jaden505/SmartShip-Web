@@ -31,7 +31,7 @@
     <main class="flex min-h-screen flex-1 flex-col p-8">
       <nav class="flex align-items-center gap-x-6">
         <div class="flex w-3/5 items-center justify-between">
-          <h1 class="text-[15px] font-bold text-white-text">Good Morning <span class="text-blue-regular">Bart Tynior</span></h1>
+          <h1 class="text-[15px] font-bold text-white-text">Good Morning <span class="text-blue-regular">User</span></h1>
           <div class="flex items-center gap-x-2">
             <div class="relative">
               <span
@@ -70,7 +70,7 @@
         </button>
       </nav>
       <div>
-
+        <NotificationsOverview />
       </div>
     </main>
   </div>
@@ -79,6 +79,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faShip, faBolt, faStar, faMoon, faBell } from '@fortawesome/free-solid-svg-icons'
+import NotificationsOverview from "@/components/ship/NotificationsOverview";
 library.add(faShip, faBolt, faStar, faMoon, faBell)
 
 export default {
@@ -96,6 +97,7 @@ export default {
     }
   },
   components: {
+    NotificationsOverview
   }
 }
 </script>

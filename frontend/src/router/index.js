@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
-// import Login from "@/components/Login";
+import Login from "@/components/Login";
 import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
@@ -9,7 +9,7 @@ import NotificationsOverview from "@/components/ship/NotificationsOverview";
 
 const routes = [
     {path : "/",
-        component: NotificationsOverview},
+        component: Login},
     {path: "/Dashboard",
         component: Dashboard,
         children: [
