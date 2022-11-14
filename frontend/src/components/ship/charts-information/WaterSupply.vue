@@ -20,26 +20,35 @@
           </el-card>
         </div>
       </el-row>
+<!--      <p class="waterAmount" v-for="(char, index) in chart" :key="index">{{char.amountInLiters}}</p>-->
     </div>
   </el-card>
 </template>
 
 <script>
 import Chart from 'chart.js/auto';
+import ChartService from '@/services/ChartService';
 
 export default {
   name: "WaterSupply",
-  mounted() {
+  data(){
+    return{
+      chart:[]
+    }
+  },
+  async mounted() {
     console.log('Component mounted')
+    // this.getChart();
     const ctx = document.getElementById('waterSupplyChart');
 
+    // Chart
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Tank 1', 'Tank 2'],
         datasets: [{
           label: 'Water',
-          data: [7, 10],
+          data: [],
           barThickness: 40,
           backgroundColor: [
             'rgba(75, 192, 192, 1)',
@@ -60,8 +69,32 @@ export default {
         }
       }
     });
+
+    // Uit de database halen
+    ChartService.getAll().then(response => {
+      this.chart = response.data;
+      // console.log(this.chart.amountInLiters)
+      console.log(response.data[0].amountInLiters)
+
+    myChart.data.datasets[0].data[0] = response.data[0].amountInLiters
+    myChart.data.datasets[0].data[1] = response.data[1].amountInLiters
+    myChart.update()
     myChart;
-  }
+    })
+
+  },
+  // methods: {
+  //   getChart() {
+  //     ChartService.getAll()
+  //         .then(response => {
+  //           this.chart = response.data;
+  //           console.log(response.data);
+  //         })
+  //         .catch(e => {
+  //           console.log(e);
+  //         });
+  //   }
+  // }
 }
 
 </script>

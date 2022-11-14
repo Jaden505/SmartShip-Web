@@ -5,6 +5,7 @@ import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
+import WaterSupply from "@/components/ship/charts-information/WaterSupply";
 
 const routes = [
     {path : "/",
@@ -25,6 +26,10 @@ const routes = [
             {
                 path: "/info",
                 component: ShipInfo,
+                props: true
+            }, {
+                path: "/water-supply",
+                component: WaterSupply,
                 props: true
             }
         ]
