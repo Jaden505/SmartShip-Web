@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "notification")
-public class Notification {
+public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -34,7 +34,7 @@ public class Notification {
 //        this.settedUpValue = settedUpValue;
 //        this.ship_id = ship_id;
 //    }
-    public Notification() {
+    public Alarm() {
 
     }
 

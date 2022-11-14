@@ -5,7 +5,7 @@ import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
-import NotificationsOverview from "@/components/ship/NotificationsOverview";
+import Alarms from "@/components/ship/Alarms";
 
 const routes = [
     {path : "/",
@@ -29,8 +29,8 @@ const routes = [
                 props: true
             },
             {
-                path: "/NotificationsOverview",
-                component: NotificationsOverview,
+                path: "/Alarms",
+                component: Alarms,
                 props: true
             }
         ]

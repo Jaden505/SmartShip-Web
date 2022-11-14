@@ -70,7 +70,7 @@
         </button>
       </nav>
       <div>
-        <NotificationsOverview />
+        <Alarms />
       </div>
     </main>
   </div>
@@ -79,7 +79,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faShip, faBolt, faStar, faMoon, faBell } from '@fortawesome/free-solid-svg-icons'
-import NotificationsOverview from "@/components/ship/NotificationsOverview";
+import Alarms from "@/components/ship/Alarms";
 library.add(faShip, faBolt, faStar, faMoon, faBell)
 
 export default {
@@ -97,7 +97,7 @@ export default {
     }
   },
   components: {
-    NotificationsOverview
+    Alarms
   }
 }
 </script>
