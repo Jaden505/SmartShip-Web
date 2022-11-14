@@ -1,15 +1,15 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
-import Login from "@/components/Login";
+// import Login from "@/components/Login";
 import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
-import NotiOverview from "@/components/ship/NotificationsOverview";
 import Dashboard from "@/components/Dashboard";
+import NotificationsOverview from "@/components/ship/NotificationsOverview";
 
 const routes = [
     {path : "/",
-        component: Login},
+        component: NotificationsOverview},
     {path: "/Dashboard",
         component: Dashboard,
         children: [
@@ -30,7 +30,7 @@ const routes = [
             },
             {
                 path: "/NotificationsOverview",
-                component: NotiOverview,
+                component: NotificationsOverview,
                 props: true
             }
         ]

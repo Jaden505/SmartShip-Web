@@ -1,12 +1,11 @@
 <template>
   <div class="flex-container">
 
-    <div v-for="(alarm, index) in alarms" :key="index" class="flex-box">
-      <div class="Parameters">{{ parameter }}</div>
-      <div class="Parameters">{{ category }}</div>
-      <div class="Parameters">{{ realTimeValue }}</div>
-      <div class="Parameters">{{ settedUpValue }}</div>
-
+    <div v-for="(noti, index) in notification" :key="index" class="flex-box">
+      <div class="Parameters">{{ parametertext + noti.parameter }}</div>
+      <div class="Parameters">{{ categorytext + noti.category }}</div>
+      <div class="Parameters">{{ realTimeValuetext + noti.valueSinceLastUpdate }}</div>
+      <div class="Parameters">{{ settedUpValuetext+ noti.settedUpValue }}</div>
       <div class="flex">
         <button class="flex-child" id="slide_start_button">
           {{ star }}
@@ -24,17 +23,35 @@
 </template>
 
 <script>
+import NotificationService from "@/services/NotificationService";
+
 export default {
   name: "NotificationsOverview",
+  mounted() {
+    this.getNotification();
+  },
   data() {
     return {
-      alarms: ["alarm1", "alarm2", "alarm3", "alarm4", "alarm5", "alarm6", "alarm7", "alarm8"],
-      parameter: "Parameter:",
-      category: "Category:",
-      realTimeValue: "Real time value:",
-      settedUpValue: "Setted up value:",
+      parametertext: "Parameter: ",
+      categorytext: "Category: ",
+      realTimeValuetext: "Real time value: ",
+      settedUpValuetext: "Setted up value: ",
       star: "⭐",
-      remove: "X"
+      remove: "X",
+      notification: []
+    }
+  },
+  methods: {
+    // Creating function
+    getNotification() {
+      NotificationService.getAll()
+          .then(response => {
+            this.notification = response.data
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
   }
 }
