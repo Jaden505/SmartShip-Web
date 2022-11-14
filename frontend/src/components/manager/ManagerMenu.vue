@@ -1,21 +1,20 @@
 <template>
 
-  <router-link to="">
+  <router-link to="/operators">
     <div class="side-item">
-      <h2>All operators</h2>
+      <h2>Operators</h2>
     </div>
   </router-link>
-  <router-link to="">
+  <router-link to="/ships">
     <div class="side-item">
-      <h2>All operators without ship</h2>
+      <h2>Ships</h2>
     </div>
   </router-link>
-  <router-link to="">
+  <router-link to="/operators-without-ship">
     <div class="side-item">
-      <h2>All ships</h2>
+      <h2>Operators without ship</h2>
     </div>
   </router-link>
-
 </template>
 
 <script>
@@ -26,8 +25,7 @@ export default {
 
 <style scoped>
   .side-item{
-    background: rgb(138,243,254);
-    background: radial-gradient(circle, rgba(138,243,254,1) 28%, rgba(135,230,255,1) 54%, rgba(107,231,254,1) 92%);
+    background-color: #163b7a;
     text-align: center;
     width: 90%;
     margin: 0 auto 10% auto;
@@ -36,7 +34,7 @@ export default {
 
   a{
     text-decoration: none;
-    color: black;
+    color: white;
   }
 
 </style>

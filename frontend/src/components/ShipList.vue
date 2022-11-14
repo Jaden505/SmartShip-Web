@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ShipService from "../../services/ShipService";
+import ShipDataService from "../services/ShipService";
 
 export default {
   name: "ShipsComponent",
@@ -33,7 +33,7 @@ export default {
 
   methods: {
     getShips() {
-      ShipService.getAll()
+      ShipDataService.getAll()
           .then(response => {
             this.ships = response.data;
             console.log(response.data);

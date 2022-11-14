@@ -1,4 +1,5 @@
 <template>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <table>
     <thead>
@@ -6,8 +7,7 @@
         <th>Operator Id</th>
         <th>Operator Name</th>
         <th>Ship Name</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -15,29 +15,22 @@
         <td>123</td>
         <td>Hans</td>
         <td>Titanic</td>
-        <td>U</td>
-        <td>X</td>
+        <td class="material-icons">edit</td>
+        <td class="material-icons">delete</td>
       </tr>
       <tr>
         <td>123</td>
         <td>Hans</td>
         <td>Titanic</td>
-        <td>U</td>
-        <td>X</td>
+        <td class="material-icons">edit</td>
+        <td class="material-icons">delete</td>
       </tr>
       <tr>
         <td>123</td>
         <td>Hans</td>
         <td>Titanic</td>
-        <td>U</td>
-        <td>X</td>
-      </tr>
-      <tr>
-        <td>123</td>
-        <td>Hans</td>
-        <td>Titanic</td>
-        <td>U</td>
-        <td>X</td>
+        <td class="material-icons">edit</td>
+        <td class="material-icons">delete</td>
       </tr>
     </tbody>
   </table>
@@ -59,15 +52,14 @@ table{
 }
 
 thead{
-  background: rgb(187,249,255);
-  background: radial-gradient(circle, rgba(187,249,255,1) 28%, rgba(168,237,255,1) 54%, rgba(153,239,255,1) 92%);
+  background-color: #163b7a;
   border-bottom: 2px solid black;
 }
 
 thead th{
   padding: 1%;
   font-size: 22px;
-  color: black;
+  color: deepskyblue;
 }
 
 tbody td{
@@ -85,8 +77,15 @@ tbody tr:hover{
 }
 
 tbody tr:nth-child(even){
-  background: rgb(133,244,255);
-  background: radial-gradient(circle, rgba(133,244,255,1) 28%, rgba(107,224,255,1) 54%, rgba(85,228,255,1) 92%);
+  background-color: deepskyblue;
 }
 
+.material-icons:hover {
+  cursor: pointer;
+}
+
+.material-icons {
+  font-size: 28px;
+  padding-top: 8px;
+}
 </style>

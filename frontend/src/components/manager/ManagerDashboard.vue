@@ -14,14 +14,6 @@
     <div class="main-content">
         <manager-table></manager-table>
     </div>
-
-    <div class="side-content">
-      <p style="color: white; text-align: center">PLACEHOLDER</p>
-      <div v-motion-slide-left>
-        <manager-menu></manager-menu>
-      </div>
-    </div>
-
   </div>
 
 
@@ -59,8 +51,5 @@ export default {
 
   .main-content{
     flex: 3;
-    background: rgb(51,236,255);
-    background: radial-gradient(circle, rgba(51,236,255,1) 28%, rgba(40,210,255,1) 54%, rgba(29,216,251,1) 92%);
-    border-radius: 20px;
   }
 </style>

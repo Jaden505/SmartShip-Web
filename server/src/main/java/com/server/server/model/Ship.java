@@ -3,11 +3,11 @@ package com.server.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ships")
+@Table(name = "ship")
 public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name = "status")
     private String status;
@@ -25,7 +25,7 @@ public class Ship {
 
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

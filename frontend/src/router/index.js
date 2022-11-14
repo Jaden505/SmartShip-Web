@@ -2,8 +2,7 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import Login from "@/components/Login";
 import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
-import ShipsTable from "@/components/ship/ShipsTable";
-import ShipsList from "@/components/ship/ShipList";
+import ShipsList from "@/components/ShipList";
 import ManagerDashboard from "@/components/manager/ManagerDashboard";
 
 const routes = [
@@ -11,7 +10,7 @@ const routes = [
     {path : "/ships/", component: ShipsList},
     {path : "/ships/power-usage", component: PowerUsage},
     {path : "/ships/info", component: ShipInfo},
-    {path : "/ships/ship-overview", component: ShipsTable},
+    {path : "/ships/ship-overview", component: ShipsList},
     {path: "/manager", component: ManagerDashboard}
 ]
 
