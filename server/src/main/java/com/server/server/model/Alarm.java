@@ -3,7 +3,7 @@ package com.server.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "notification")
+@Table(name = "alarm")
 public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
