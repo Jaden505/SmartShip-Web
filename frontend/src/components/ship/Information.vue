@@ -1,33 +1,19 @@
 <template>
-  <div class="container-mine">
-    <el-row :gutter="20">
-      <el-col :span="8"><EngineInformation/></el-col>
-      <el-col :span="8"><WaterSupply/></el-col>
-      <el-col :span="8"><TripStatistics/></el-col>
-    </el-row>
-    <el-row :gutter="20">
-      <el-col :span="14"><SeaConditions/></el-col>
-      <el-col :span="10"><ShipEvents/></el-col>
-    </el-row>
+  <div>
+    <div class="grid grid-flow-row gap-4 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="bg-blue-light-card rounded p-2 shadow-lg duration-300 hover:-translate-y-1">
+        <h1 class="text-white-text font-bold text-lg">Info</h1>
+
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import SeaConditions from "./charts-information/SeaConditions";
-import TripStatistics from "./charts-information/TripStatistics";
-import WaterSupply from "./charts-information/WaterSupply";
-import EngineInformation from "./charts-information/EngineInformation";
-import ShipEvents from "./charts-information/ShipEvents";
 
 export default {
-  name: "ShipInformation",
-  components: {
-    ShipEvents,
-    WaterSupply,
-    EngineInformation,
-    SeaConditions,
-    TripStatistics
-  }
+  name: "ShipInformation"
 }
 </script>
 

@@ -1,48 +1,20 @@
 <template>
-  <div class="content">
-    <el-row>
-      <el-col class="column">
-        <el-card></el-card>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col class="column">
-        <el-card></el-card>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col class="column">
-        <el-card></el-card>
-      </el-col>
-    </el-row>
+  <div>
+    <div class="grid grid-flow-row gap-4 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="bg-blue-light-card rounded p-2 shadow-lg duration-300 hover:-translate-y-1">
+        <h1 class="text-white-text font-bold text-lg">Engine Usage</h1>
+
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-    name: "ShipsTable",
-    data() {
-    return {
-    }
-  }
+    name: "ShipsTable"
 }
 </script>
 
 <style scoped>
-.column {
-  width: 100%;
-}
-
-.el-row {
-  margin-bottom: 30px;
-  height: 200px;
-}
-
-.el-card {
-  background: #002C48;
-  border: none;
-  color: #E0E1DD;
-  border-radius: 20px;
-  height: 100%;
-}
 </style>

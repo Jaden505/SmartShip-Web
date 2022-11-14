@@ -28,13 +28,14 @@
     <div class="px-5 pt-4">
       <hr class="border-blue-regular">
     </div>
-    <div class="px-5 pt-4">
+    <div class="px-5 pt-10">
       <ul class="flex flex-col space-y-2">
-        <li v-for="item in items" :key="item.name" class="position-relative">
-          <div class="position-absolute inset-y-0 left-0 flex items-center pl-2">
-              <Component :is="item.icon" class="w-5 h-5"/>
+        <li v-for="item in items" :key="item.name" class="relative text-white-text">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+            <Component :is="item.icon" class="w-6 h-6"/>
           </div>
-          <a href="" class="d-inline-block w-full py-2 pl-8 pr-4 text-xs rounded">{{ item.name }}</a>
+          <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded hover:bg-gray-800 focus:outline-none
+          focus:ring-1 focus:ring-gray-500 focus:bg-gray-800" :to="item.to">{{item.name}}</router-link>
         </li>
       </ul>
     </div>
@@ -51,7 +52,7 @@ export default {
   data() {
     return {
       items: [
-        {name: 'Power Usage', to: '/power-usag', icon: <font-awesome-icon icon="fa-solid fa-bolt" />
+        {name: 'Power Usage', to: '/power-usage', icon: <font-awesome-icon icon="fa-solid fa-bolt" />
         },
         {name: 'Ship Information', to: '/ship-overview', icon: <font-awesome-icon icon="fa-solid fa-ship" />
         },
