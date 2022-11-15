@@ -2,6 +2,7 @@
   <div class="flex-container">
 
     <div v-for="(alarm, index) in alarms" :key="index" class="flex-box">
+      <button id="edit" @click="updateAlarmModal(index)">Edit</button>
       <div class="Parameters">{{ parametertext + alarm.parameter }}</div>
       <div class="Parameters">{{ categorytext + alarm.category }}</div>
       <div class="Parameters">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</div>
@@ -11,21 +12,28 @@
           {{ star }}
         </button>
 
-        <button class="flex-child" id="slide_stop_button">
+        <button class="flex-child" id="slide_stop_button" @click="deleteAlarm(alarm.id)">
           {{ remove }}
         </button>
         <!--        <input type="button" class="flex-child" id="slide_start_button">-->
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
-
-  </div>
+    <button class="flex-box" id="slide_start_button">
+      <h1>+</h1>
+    </button>
+        <!--        <input type="button" class="flex-child" id="slide_start_button">-->
+        <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
+    </div>
+  <AddAlarms v-if="this.add" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarm()"></AddAlarms>
 </template>
 
 <script>
+import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/AlarmService";
 
 export default {
+  components: {AddAlarms},
   mounted() {
     this.getAlarms();
   },
@@ -37,15 +45,44 @@ export default {
       settedUpValuetext: "Setted up value: ",
       star: "⭐",
       remove: "X",
-      alarms: []
+      alarms: [],
+      add: false,
+      selectedalarm:"",
     }
   },
   methods: {
     // Creating function
+    cancelModal(){
+      this.add = false;
+    },
+    updateAlarms(index) {
+      AlarmService.put(index)
+          .then(response => {
+            // window.location.reload(true)
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+    },
     getAlarms() {
       AlarmService.getAll()
           .then(response => {
             this.alarms = response.data
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+    },
+    updateAlarmModal(index){
+      this.selectedalarm = this.alarms[index]
+      this.add = true;
+    },
+    deleteAlarm(index){
+      AlarmService.delete(index)
+          .then(response => {
+            // window.location.reload(true)
             console.log(response.data)
           })
           .catch(e => {
@@ -69,7 +106,6 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: #002C48;
   justify-content: center;
 }
 

@@ -8,7 +8,7 @@ public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     @Column(name = "parameter")
     private String parameter;
@@ -39,11 +39,11 @@ public class Alarm {
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
