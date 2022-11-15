@@ -34,6 +34,15 @@
       <h1><router-link class="link" to="/ships/power-usage">Power Usage</router-link></h1>
       <h1><router-link class="link" to="/ships/info">Ship Information</router-link></h1>
       <h1><router-link class="link" to="/ships/ship-overview">Ship Table</router-link></h1>
+      
+      <div class="dropdown">
+        <button class="dropbtn"><h1>Manage</h1></button>
+        <div class="dropdown-content">
+          <h3><router-link class="link-dropdown" to="/manager/operators">Operators</router-link></h3>
+          <h3><router-link class="link-dropdown" to="/manager/ships">Ships</router-link></h3>
+        </div>
+      </div>
+
     </div>
   </header>
 </template>
@@ -94,7 +103,49 @@ export default {
   margin-bottom: 50px;
 }
 
+.link-dropdown {
+  text-decoration: none;
+  color: lightgrey;
+  display: flex;
+}
+
+
 .link:hover {
   color: #0061FF;
 }
+
+.link-dropdown:hover {
+  color: #0061FF;
+}
+
+.dropbtn {
+  background: transparent;
+  color: lightgrey;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #163b7a;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  display: block;
+  text-align: center;
+  padding: 15px;
+}
+
+
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {color: #0061FF;}
 </style>

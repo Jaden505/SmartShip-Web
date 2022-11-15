@@ -6,7 +6,7 @@
       <tr>
         <th>Operator Id</th>
         <th>Operator Name</th>
-        <th>Ship Name</th>
+        <th>Assigned ship</th>
         <th></th>
       </tr>
     </thead>
@@ -59,7 +59,7 @@ thead{
 thead th{
   padding: 1%;
   font-size: 22px;
-  color: deepskyblue;
+  color: lightgrey;
 }
 
 tbody td{
