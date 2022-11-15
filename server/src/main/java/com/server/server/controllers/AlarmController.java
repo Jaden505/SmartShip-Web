@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,6 +29,17 @@ public class AlarmController {
         return ResponseEntity.noContent().build();
     }
 
+//    @PutMapping("/Alarms/{index}")
+//    public Optional<Alarm> updateAlarm(@RequestBody Alarm alarm){
+//        alarmRepo.save(alarm);
+//        return alarmRepo.findById(alarm.getId());
+//    }
+//
+//    @PostMapping("/Alarms/{alarm}")
+//    public Optional<Alarm> addAlarm(@PathVariable Alarm alarm){
+//        alarmRepo.save(alarm);
+//        return alarmRepo.findById(alarm.getId());
+//    }
 
 
 

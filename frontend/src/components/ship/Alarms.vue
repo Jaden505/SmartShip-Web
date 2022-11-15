@@ -19,13 +19,13 @@
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
-    <button class="flex-box" id="slide_start_button">
+    <button class="flex-box" id="slide_start_button" @click="updateAlarmModal()">
       <h1>+</h1>
     </button>
         <!--        <input type="button" class="flex-child" id="slide_start_button">-->
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
     </div>
-  <AddAlarms v-if="this.add" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarm()"></AddAlarms>
+<!--  <AddAlarms v-if="this.add" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarms(alarm)"></AddAlarms>-->
 </template>
 
 <script>
@@ -52,13 +52,18 @@ export default {
   },
   methods: {
     // Creating function
+    updateAlarmModal(index){
+      console.log(this.selectedalarm)
+      this.add = true;
+    },
     cancelModal(){
       this.add = false;
     },
+
     updateAlarms(index) {
       AlarmService.put(index)
           .then(response => {
-            // window.location.reload(true)
+            window.location.reload(true)
             console.log(response.data)
           })
           .catch(e => {
@@ -75,14 +80,10 @@ export default {
             console.log(e)
           })
     },
-    updateAlarmModal(index){
-      this.selectedalarm = this.alarms[index]
-      this.add = true;
-    },
     deleteAlarm(index){
       AlarmService.delete(index)
           .then(response => {
-            // window.location.reload(true)
+            window.location.reload(true)
             console.log(response.data)
           })
           .catch(e => {
