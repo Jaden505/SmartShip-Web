@@ -3,7 +3,7 @@ package com.server.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ships")
+@Table(name = "ship")
 public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,23 @@ public class Ship {
     @Column(name = "destination")
     private String destination;
 
-    public Ship(String status, String location, String origin, String destination) {
+    @Column(name = "water_tank1")
+    private int waterTank1;
+
+    @Column(name = "water_tank2")
+    private int waterTank2;
+
+    public Ship(String status, String location, String origin, String destination, int waterTank1, int waterTank2) {
         this.status = status;
         this.location = location;
         this.origin = origin;
         this.destination = destination;
+        this.waterTank1 = waterTank1;
+        this.waterTank2 = waterTank2;
+    }
+
+    public Ship() {
+
     }
 
     public long getId() {
