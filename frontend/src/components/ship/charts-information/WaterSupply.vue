@@ -20,23 +20,24 @@
           </el-card>
         </div>
       </el-row>
-<!--      <p class="waterAmount" v-for="(char, index) in chart" :key="index">{{char.amountInLiters}}</p>-->
+      <!--      <p class="waterAmount" v-for="(char, index) in chart" :key="index">{{char.amountInLiters}}</p>-->
     </div>
   </el-card>
 </template>
 
 <script>
 import Chart from 'chart.js/auto';
-import ChartService from '@/services/ChartService';
+// import ChartService from '@/services/ChartService';
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "WaterSupply",
-  data(){
-    return{
-      chart:[]
+  data() {
+    return {
+      chart: []
     }
   },
-  async mounted() {
+  mounted() {
     console.log('Component mounted')
     // this.getChart();
     const ctx = document.getElementById('waterSupplyChart');
@@ -70,17 +71,24 @@ export default {
       }
     });
 
-    // Uit de database halen
-    ChartService.getAll().then(response => {
+    ShipService.getAllChart().then(response => {
       this.chart = response.data;
-      // console.log(this.chart.amountInLiters)
-      console.log(response.data[0].amountInLiters)
-
-    myChart.data.datasets[0].data[0] = response.data[0].amountInLiters
-    myChart.data.datasets[0].data[1] = response.data[1].amountInLiters
-    myChart.update()
-    myChart;
+      myChart.data.datasets[0].data[0] = response.data[0].waterTank1
+      myChart.data.datasets[0].data[1] = response.data[0].waterTank2
+      myChart.update()
+      myChart;
     })
+
+    // ChartService.getAll().then(response => {
+    //   this.chart = response.data;
+    //   // console.log(this.chart.amountInLiters)
+    //   console.log(response.data[0].amountInLiters)
+    //
+    // myChart.data.datasets[0].data[0] = response.data[0].amountInLiters
+    // myChart.data.datasets[0].data[1] = response.data[1].amountInLiters
+    // myChart.update()
+    // myChart;
+    // })
 
   },
   // methods: {
@@ -116,9 +124,9 @@ export default {
 
 .section {
   margin: 10px;
-  box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
 }
 
 .waterAmount-title {

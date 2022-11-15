@@ -71,6 +71,7 @@
       </nav>
       <div>
         <WaterSupply />
+        <EngineInformation />
       </div>
     </main>
   </div>
@@ -80,6 +81,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faShip, faBolt, faStar, faMoon, faBell } from '@fortawesome/free-solid-svg-icons'
 import WaterSupply from "@/components/ship/charts-information/WaterSupply";
+import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 library.add(faShip, faBolt, faStar, faMoon, faBell)
 
 export default {
@@ -97,7 +99,8 @@ export default {
     }
   },
   components: {
-    WaterSupply
+    WaterSupply,
+    EngineInformation
   }
 }
 </script>

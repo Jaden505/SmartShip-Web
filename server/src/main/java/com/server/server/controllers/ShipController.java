@@ -18,6 +18,12 @@ public class ShipController {
     @Autowired
     private ShipRepository shipRepo;
 
+    //Dit heb ik (Vincent) gebruikt, omdat ik met de endpoint 'test' alleen maar dingen kan
+    // ophalen de rest heb ik geen autenthication voor
+    @GetMapping("/test/chart")
+    public List<Ship> getWaterTank(){
+        return shipRepo.findAll();
+    }
     @GetMapping("/ships")
     public List<Ship> getShips(){
         return shipRepo.findAll();

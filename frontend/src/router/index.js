@@ -6,6 +6,7 @@ import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
 import WaterSupply from "@/components/ship/charts-information/WaterSupply";
+import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 
 const routes = [
     {path : "/",
@@ -30,6 +31,11 @@ const routes = [
             }, {
                 path: "/water-supply",
                 component: WaterSupply,
+                props: true
+            },
+            {
+                path: "/engine-info",
+                component: EngineInformation,
                 props: true
             }
         ]

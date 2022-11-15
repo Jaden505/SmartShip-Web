@@ -17,7 +17,8 @@
         <div class="sections">
           <el-card class="section" shadow="always">
             <h2 class="temperature_title">Engine 1 Temperature</h2>
-            <p class="temperature">60.4°</p>
+<!--            <p class="temperature" v-for="(engine, index) in engineInfo" :key="index">{{engine.engineTemperature1}}°</p>-->
+            <p class="temperature">{{test1.engineTemperature1}}°</p>
           </el-card>
           <el-card class="section" shadow="always">
             <h2 class="temperature_title">Engine 2 Temperature</h2>
@@ -31,10 +32,17 @@
 
 <script>
 import Chart from "chart.js/auto";
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "EngineInformation",
+  data() {
+    return{
+      engineInfo:[]
+    }
+  },
   mounted() {
+    this.getEngineInfo()
     console.log('Component mounted')
     const ctx = document.getElementById('engineInformationChart');
     const ctx2 = document.getElementById('engineInformationChart2');
@@ -104,7 +112,22 @@ export default {
     myChart2;
     myChart3;
     myChart4;
-  }
+  },
+  methods: {
+      getEngineInfo() {
+        ShipService.getAllChart()
+            .then(response => {
+              this.engineInfo = response.data;
+              console.log(response.data);
+            })
+            .catch(e => {
+              console.log(e);
+            });
+      },
+    test1(){
+        return JSON.parse(this.engineInfo)
+    }
+    }
 }
 </script>
 

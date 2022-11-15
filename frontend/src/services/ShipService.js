@@ -4,6 +4,11 @@ class ShipDataService {
     getAll() {
         return http.get("/ships");
     }
+    // Om data op te halen. Dit wordt uiteindelijk de regeliere /ships, maar die kan ik (vincent)
+    // dus nog niet gebruiken
+    getAllChart() {
+        return http.get("test/chart");
+    }
 
     get(id) {
         return http.get(`/ships/${id}`);
