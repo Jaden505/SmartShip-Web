@@ -9,7 +9,7 @@ import Dashboard from "@/components/Dashboard";
 const routes = [
     {path : "/",
         component: Login},
-    {path: "/Dashboard",
+    {path: "/dashboard",
         component: Dashboard,
         children: [
             {

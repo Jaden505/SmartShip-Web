@@ -11,7 +11,7 @@ module.exports = {
       },
       colors: {
         blue: {
-          'regular': '#0061FF',
+          'regular': '#29acda',
           'light': "#60EFFF",
           'dark': "#00111C",
           'card-blue': '#002C48',
@@ -25,7 +25,9 @@ module.exports = {
           'regular': '#FF0707',
           'pink': '#FF00D5'
         },
-
+        gray: {
+          'unselected': '#898A86'
+        }
       }
     },
   },
