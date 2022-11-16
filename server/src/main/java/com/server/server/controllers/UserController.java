@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -48,11 +50,36 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User newUser){
         try{
-            User user = userRepo.save(new User(newUser.getEmail(), newUser.getPassword(), newUser.getUsername(), newUser.getRole_id()));
+            User user = userRepo.save(newUser);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateScooter(@PathVariable long id, @RequestBody User user){
+        try{
+            Optional<User> findUser = userRepo.findById(id);
+
+            if (findUser.isPresent()){
+                User foundUser = findUser.get();
+
+                foundUser.setEmail(user.getEmail());
+                foundUser.setPassword(user.getPassword());
+                foundUser.setRole_id(user.getRole_id());
+                foundUser.setUsername(user.getUsername());
+
+                return new ResponseEntity<>(userRepo.save(foundUser), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

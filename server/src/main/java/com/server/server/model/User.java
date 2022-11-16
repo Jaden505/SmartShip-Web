@@ -51,6 +51,22 @@ public class User {
       return role_id;
    }
 
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
+   public void setUsername(String username) {
+      this.username = username;
+   }
+
+   public void setRole_id(int role_id) {
+      this.role_id = role_id;
+   }
+
    //   @ManyToOne
 //   private Role role = new Role();
 }
