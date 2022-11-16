@@ -70,7 +70,9 @@
         </button>
       </nav>
       <div>
-        <Alarms />
+        <router-view>
+
+        </router-view>
       </div>
     </main>
   </div>
@@ -79,7 +81,6 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faShip, faBolt, faStar, faMoon, faBell } from '@fortawesome/free-solid-svg-icons'
-import Alarms from "@/components/ship/Alarms";
 library.add(faShip, faBolt, faStar, faMoon, faBell)
 
 export default {
@@ -97,7 +98,6 @@ export default {
     }
   },
   components: {
-    Alarms
   }
 }
 </script>
