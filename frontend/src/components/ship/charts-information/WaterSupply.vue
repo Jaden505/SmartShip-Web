@@ -20,14 +20,12 @@
           </el-card>
         </div>
       </el-row>
-      <!--      <p class="waterAmount" v-for="(char, index) in chart" :key="index">{{char.amountInLiters}}</p>-->
     </div>
   </el-card>
 </template>
 
 <script>
 import Chart from 'chart.js/auto';
-// import ChartService from '@/services/ChartService';
 import ShipService from "@/services/ShipService";
 
 export default {
@@ -71,7 +69,8 @@ export default {
       }
     });
 
-    ShipService.getAllChart().then(response => {
+    // display data
+    ShipService.getWater().then(response => {
       this.chart = response.data;
       myChart.data.datasets[0].data[0] = response.data[0].waterTank1
       myChart.data.datasets[0].data[1] = response.data[0].waterTank2
@@ -79,30 +78,7 @@ export default {
       myChart;
     })
 
-    // ChartService.getAll().then(response => {
-    //   this.chart = response.data;
-    //   // console.log(this.chart.amountInLiters)
-    //   console.log(response.data[0].amountInLiters)
-    //
-    // myChart.data.datasets[0].data[0] = response.data[0].amountInLiters
-    // myChart.data.datasets[0].data[1] = response.data[1].amountInLiters
-    // myChart.update()
-    // myChart;
-    // })
-
   },
-  // methods: {
-  //   getChart() {
-  //     ChartService.getAll()
-  //         .then(response => {
-  //           this.chart = response.data;
-  //           console.log(response.data);
-  //         })
-  //         .catch(e => {
-  //           console.log(e);
-  //         });
-  //   }
-  // }
 }
 
 </script>

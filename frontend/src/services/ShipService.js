@@ -4,9 +4,8 @@ class ShipDataService {
     getAll() {
         return http.get("/ships");
     }
-    // Om data op te halen. Dit wordt uiteindelijk de regeliere /ships, maar die kan ik (vincent)
-    // dus nog niet gebruiken
-    getAllChart() {
+    // todo the right endpoint
+    getWater() {
         return http.get("test/chart");
     }
 
