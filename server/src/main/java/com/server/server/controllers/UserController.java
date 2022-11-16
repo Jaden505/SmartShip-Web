@@ -25,13 +25,23 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(){
         try{
-            List<User> users = new ArrayList<>(userRepo.findAll());
+            List<User> allUsers = new ArrayList<>(userRepo.findAll());
+            List<User> operators = new ArrayList<>();
 
-            if (users.isEmpty()) {
+            if (allUsers.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            for (User user : allUsers) {
+                int userId = 1;
+
+                if (user.getRole_id() == userId) {
+                    operators.add(user);
+                }
+
+            }
+
+            return new ResponseEntity<>(operators, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

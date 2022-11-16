@@ -16,9 +16,6 @@ public class User {
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
 
-   @Column(name = "name")
-   private String name;
-
    @Column(name = "email")
    private String email;
 
@@ -31,6 +28,10 @@ public class User {
    @Column(name = "role_id")
    private int role_id;
 
-//   @ManyToOne
+   public int getRole_id() {
+      return role_id;
+   }
+
+   //   @ManyToOne
 //   private Role role = new Role();
 }
