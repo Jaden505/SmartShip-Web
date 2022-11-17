@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen">
+  <div v-motion-fade class="flex h-screen">
     <!--  SIDEBAR LEFT  -->
     <SideBar/>
     <!--  CONTENT RIGHT  -->
