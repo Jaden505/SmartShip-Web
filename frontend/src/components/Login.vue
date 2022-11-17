@@ -1,5 +1,5 @@
 <template>
-  <nav class="m-0">
+  <nav>
     <div class="px-5 pt-6">
       <div>
         <svg xmlns="http://www.w3.org/2000/svg" width="150"  viewBox="0 0 202.72 35.097">
@@ -25,48 +25,54 @@
     <div class="flex flex-col lg:flex-row">
       <div class="mb-3 lg:max-w-lg lg:pr-5 lg:mb-0">
         <div class="max-w-xl mb-6">
-          <h2 class="title text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-regular to-blue-light max-w-lg mb-6 text-5xl font-sans font-bold tracking-tight sm:text-4xl md:text-6xl lg:text-7xl sm:leading-none lg:text-start sm:text-start md:text-start">
-            Welcome
+          <h2 class="title text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-regular to-blue-light max-w-lg mb-6 text-5xl font-sans font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl lg:text-7xl sm:leading-none lg:text-start sm:text-start md:text-start">
+            Welcome to SmartShip Dashboard
           </h2>
-          <p class="subtitle text-white-text text-center font-sans text-2xl sm:text-2xl md:text-3xl lg:text-3xl md:text-lg lg:text-start sm:text-start md:text-start">
-            Yes Yes
+          <p class="subtitle text-white-text text-center font-sans leading-tight tracking-tight text-2xl sm:text-2xl md:text-3xl lg:text-3xl md:text-lg lg:text-start sm:text-start md:text-start">
+            Your Journey Begins With Just One Click!
           </p>
         </div>
       </div>
-      <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
-        <div class="flex-1">
-          <Form @submit="handleLogin" :validation-schema="schema">
-            <div class="form-group">
-              <label for="username">Username</label>
-              <Field name="username" type="text" class="form-control" />
-              <ErrorMessage name="username" class="error-feedback" />
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <Field name="password" type="password" class="form-control" />
-              <ErrorMessage name="password" class="error-feedback" />
-            </div>
-
-            <div class="form-group">
-              <button class="btn btn-primary btn-block" :disabled="loading">
-            <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-            ></span>
-                <span>Login</span>
-              </button>
-            </div>
-
-            <div class="form-group">
-              <div v-if="message" class="alert alert-danger" role="alert">
-                {{ message }}
+      <div class="flex items-center w-full px-6 mx-auto lg:w-3/6">
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-white-text font-bold leading-tight tracking-tight md:text-3xl">
+              Sign in to your account
+            </h1>
+            <Form class="space-y-4 md:space-y-6" @submit="handleLogin" :validation-schema="schema">
+              <div class="form-group">
+                <label for="username" class="block mb-2 text-sm font-medium text-white-text">Your username</label>
+                <Field name="username" type="text" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Username"/>
+                <ErrorMessage name="username" class="error-feedback" />
               </div>
-            </div>
-          </Form>
+              <div class="form-group">
+                <label for="password" class="block mb-2 text-sm font-medium text-white-text">Password</label>
+                <Field name="password" type="password" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Password"/>
+                <ErrorMessage name="password" class="error-feedback" />
+              </div>
+<!--              <div class="flex items-center justify-between">-->
+<!--                <a href="#" class="text-sm font-medium text-white-text">Forgot password?</a>-->
+<!--              </div>-->
+              <div class="form-group">
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
+                  <span
+                  v-show="loading"
+                  class="spinner-border spinner-border-sm"
+                  ></span>
+                    <span>Sign In</span>
+                </button>
+              </div>
+              <div class="form-group">
+                <div v-if="message" class="alert alert-danger" role="alert">
+                  {{ message }}
+                </div>
+              </div>
+            </Form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
