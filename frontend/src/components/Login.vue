@@ -1,8 +1,8 @@
 <template>
   <nav class="m-0">
-    <div class="p-5 ptcontainer">
+    <div class="px-5 pt-6">
       <div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="202.72" height="35.097" viewBox="0 0 202.72 35.097">
+        <svg xmlns="http://www.w3.org/2000/svg" width="150"  viewBox="0 0 202.72 35.097">
           <g id="Group_1" data-name="Group 1" transform="translate(-100 -69.951)">
             <path id="Path_1" data-name="Path 1" d="M608.4,432.734c-.774,2.789-1.614,5.562-2.292,8.375a1.593,1.593,0,0,1-1.962,1.467c-2.037-.111-4.085-.07-6.127-.01-.821.024-1.126-.271-1.327-1.043-.724-2.779-1.527-5.537-2.3-8.3a1.022,1.022,0,0,0-.4-.623v9.879h-6.765V417.441c.342-.024.675-.068,1.008-.069,2.355-.005,4.71.031,7.064-.019.82-.018,1.114.278,1.316,1.056,1.4,5.392,2.865,10.768,4.309,16.149a2.49,2.49,0,0,0,.507,1.051q.985-3.784,1.968-7.568,1.263-4.875,2.52-9.751c.12-.462.175-.928.879-.92,2.8.032,5.6.013,8.49.013V443.53c-2.072-.289-4.119-.549-6.149-.9-.212-.037-.468-.608-.473-.934-.04-2.666-.026-5.332-.028-8q0-.461,0-.922Z" transform="translate(-463.647 -347.401)" fill="#e0e1dd"/>
             <path id="Path_2" data-name="Path 2" d="M752.834,434.435h-8.523v11.718c-2.118-.171-4.17.548-5.965-.79a1.549,1.549,0,0,1-.61-1.034c-.033-7.374-.057-14.749,0-22.123.022-3.05,1.659-4.679,4.728-4.738q6.073-.116,12.151-.014c3.2.056,4.8,1.661,4.821,4.858.055,7.236.018,14.472.037,21.708,0,.574-.16.907-.745,1.037-1.578.351-3.146.75-4.728,1.087-.876.187-1.2-.178-1.184-1.118.057-3.115.021-6.232.021-9.348Zm-.008-6.222a16.272,16.272,0,0,0-.046-2.676,1.393,1.393,0,0,0-.958-.92c-2.176-.084-4.358-.074-6.535-.008a1.222,1.222,0,0,0-.912.74,23.094,23.094,0,0,0-.044,2.864Z" transform="translate(-582.855 -347.442)" fill="#e0e1dd"/>
@@ -26,35 +26,43 @@
       <div class="mb-3 lg:max-w-lg lg:pr-5 lg:mb-0">
         <div class="max-w-xl mb-6">
           <h2 class="title text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-regular to-blue-light max-w-lg mb-6 text-5xl font-sans font-bold tracking-tight sm:text-4xl md:text-6xl lg:text-7xl sm:leading-none lg:text-start sm:text-start md:text-start">
-            {{title}}
+            Welcome
           </h2>
           <p class="subtitle text-white-text text-center font-sans text-2xl sm:text-2xl md:text-3xl lg:text-3xl md:text-lg lg:text-start sm:text-start md:text-start">
-            {{subtitle}}
+            Yes Yes
           </p>
         </div>
       </div>
       <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
         <div class="flex-1">
-            <form>
-              <div>
-                <input type="email" name="email" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-              </div>
+          <Form @submit="handleLogin" :validation-schema="schema">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <Field name="username" type="text" class="form-control" />
+              <ErrorMessage name="username" class="error-feedback" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <Field name="password" type="password" class="form-control" />
+              <ErrorMessage name="password" class="error-feedback" />
+            </div>
 
-              <div class="mt-6">
-                <input type="password" name="password" id="password" placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-              </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block" :disabled="loading">
+            <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+            ></span>
+                <span>Login</span>
+              </button>
+            </div>
 
-              <div class="flex justify-between mt-2">
-                <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
+            <div class="form-group">
+              <div v-if="message" class="alert alert-danger" role="alert">
+                {{ message }}
               </div>
-
-              <div class="mt-4">
-                <button class="w-full font-bold px-4 py-2 tracking-wide text-blue-dark rounded-md bg-gradient-to-r from-blue-regular to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80">
-                  Sign in
-                </button>
-              </div>
-
-            </form>
+            </div>
+          </Form>
           </div>
         </div>
       </div>
@@ -62,54 +70,59 @@
 </template>
 
 <script>
-import User from '../models/user'
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
 
 export default {
   name: "Login-Screen",
-  data () {
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
+  data() {
+    const schema = yup.object().shape({
+      username: yup.string().required("Username is required!"),
+      password: yup.string().required("Password is required!"),
+    });
+
     return {
-      user: new User('', ''),
-      title: 'Welcome to SmartShip Dashboard',
-      subtitle: 'Your journey starts here! Just sign-in and enjoy your trip!',
-    }
+      loading: false,
+      message: "",
+      schema,
+    };
   },
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
-    }
+    },
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push('/profile');
+      this.$router.push('/dashboard');
     }
   },
   methods: {
-    handleLogin() {
+    handleLogin(user) {
       this.loading = true;
-      this.$validator.validateAll().then(isValid => {
-        if (!isValid) {
-          this.loading = false;
-          return;
-        }
 
-        if (this.user.name && this.user.password) {
-          this.$store.dispatch('/signin', this.user).then(
-              () => {
-                this.$router.push('/profile');
-              },
-              error => {
-                this.loading = false;
-                this.message =
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString();
-              }
-          );
-        }
-      });
-    }
-  }
-}
+      this.$store.dispatch("auth/login", user).then(
+          () => {
+            this.$router.push("/dashboard");
+          },
+          (error) => {
+            this.loading = false;
+            this.message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+          }
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>

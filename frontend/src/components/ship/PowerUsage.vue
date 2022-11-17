@@ -1,5 +1,9 @@
 <template>
-  <div class="grid grid-cols-1 px-4 md:pr-5 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+  <div v-motion
+       :initial="{ opacity: 0, y: 100 }"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :variants="{ custom: { scale: 2 } }"
+       :delay="100" class="grid grid-cols-1 px-4 md:pr-5 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
     <!-- CARD -->
     <div class="col-span-2 bg-blue-card-blue rounded-md">
       <!-- CARD HEADER -->

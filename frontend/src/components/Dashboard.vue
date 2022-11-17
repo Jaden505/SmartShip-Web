@@ -62,10 +62,10 @@
       </header>
       <main>
         <div class="mt-2">
-          <router-view>
+            <router-view>
 
-          </router-view>
-        </div>
+            </router-view>
+          </div>
       </main>
     </div>
   </div>
@@ -98,5 +98,10 @@ export default {
 </script>
 
 <style scoped>
-
+.circle {
+  width: 450px;
+  height: 450px;
+  background: linear-gradient(to bottom, #fa39ad, #fe6c4c);
+  filter: blur(120px);
+}
 </style>
