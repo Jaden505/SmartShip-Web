@@ -2,7 +2,7 @@
   <div class="flex-container">
 
     <div v-for="(alarm, index) in alarms" :key="index" class="flex-box">
-      <button id="edit" @click="updateAlarmModal(index)">Edit</button>
+      <button id="edit" @click="showModal(alarm)">Edit</button>
       <div class="Parameters">{{ parametertext + alarm.parameter }}</div>
       <div class="Parameters">{{ categorytext + alarm.category }}</div>
       <div class="Parameters">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</div>
@@ -19,15 +19,14 @@
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
-    <button class="flex-box" id="slide_start_button" @click="updateAlarmModal()">
+    <button class="flex-box" id="slide_start_button">
       <h1>+</h1>
     </button>
         <!--        <input type="button" class="flex-child" id="slide_start_button">-->
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
     </div>
-<!--  <AddAlarms v-if="this.add" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarms(alarm)"></AddAlarms>-->
+  <AddAlarms v-if="this.add" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarms(this.selectedalarm.id)"></AddAlarms>
 </template>
-
 <script>
 import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/AlarmService";
@@ -52,16 +51,16 @@ export default {
   },
   methods: {
     // Creating function
-    updateAlarmModal(index){
-      console.log(this.selectedalarm)
+    showModal(alarm){
+      this.selectedalarm = alarm;
       this.add = true;
     },
     cancelModal(){
       this.add = false;
     },
 
-    updateAlarms(index) {
-      AlarmService.put(index)
+    updateAlarms(id) {
+      AlarmService.put(id)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)

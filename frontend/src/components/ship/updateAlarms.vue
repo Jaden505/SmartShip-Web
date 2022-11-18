@@ -17,6 +17,10 @@
         {{ settedUpValuetext }}
         <input type="number" v-model="this.alarm.settedUpValue"/>
       </div>
+      <div class="Parameters">
+        {{ ship_idtext }}
+        <input type="text" v-model="this.alarm.ship_id"/>
+      </div>
       <button class="button" id="cancel" @click="cancelModal()">
         {{ cancel }}
       </button>
@@ -38,6 +42,7 @@ export default {
       categorytext: "Category: ",
       realTimeValuetext: "Real time value: ",
       settedUpValuetext: "Setted up value: ",
+      ship_idtext: "Ship-id: ",
       update: "Update",
       cancel: "Cancel",
       parameter: "",
@@ -60,14 +65,14 @@ export default {
 
 <style scoped>
 #container {
-  position: fixed;
+  position: absolute;
   top: 10%;
   left: 30%;
   z-index: 99;
   align-items: center;
   justify-content: center;
-  width: 50%;
-  height: 50%;
+  width: auto;
+  height: auto;
   background-color: #002C60;
   border-radius: 20px;
   margin: 20px;

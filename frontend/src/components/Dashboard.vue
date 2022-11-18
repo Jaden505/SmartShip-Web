@@ -70,7 +70,7 @@
         </button>
       </nav>
       <div>
-        <Alarms />
+        <router-view></router-view>
       </div>
     </main>
   </div>

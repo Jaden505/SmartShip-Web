@@ -9,10 +9,10 @@ class Alarms {
         // return http.delete("/test/Alarms/{index}")
         return http.delete("/test/Alarms/"+index)
     }
-    // put(index){
-    //     // return http.delete("/test/Alarms/{index}")
-    //     return http.put("/test/Alarms/"+index)
-    // }
+    put(id){
+        // return http.delete("/test/Alarms/{index}")
+        return http.put("/test/Alarms/"+id)
+    }
     // add(alarm){
     //     // return http.delete("/test/Alarms/{index}")
     //     return http.put("/test/Alarms/"+alarm)
