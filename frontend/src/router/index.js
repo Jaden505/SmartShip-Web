@@ -6,6 +6,7 @@ import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
 import Alarms from "@/components/ship/Alarms";
+import NotiOverview from "@/components/ship/NotificationOverview";
 
 const routes = [
     {path : "/",
@@ -31,6 +32,11 @@ const routes = [
             {
                 path: "/Alarms",
                 component: Alarms,
+                props: true
+            },
+            {
+                path: "/notification-overview",
+                component: NotiOverview,
                 props: true
             }
         ]

@@ -32,7 +32,7 @@ import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/AlarmService";
 
 export default {
-  components: {AddAlarms},
+  // components: {AddAlarms},
   mounted() {
     this.getAlarms();
   },
