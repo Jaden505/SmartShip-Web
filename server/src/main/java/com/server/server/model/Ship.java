@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name = "status")
     private String status;
@@ -28,7 +28,7 @@ public class Ship {
         this.destination = destination;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

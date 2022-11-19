@@ -11,7 +11,7 @@ import NotiOverview from "@/components/ship/NotificationOverview";
 const routes = [
     {path : "/",
         component: Login},
-    {path: "/Dashboard",
+    {path: "/dashboard",
         component: Dashboard,
         children: [
             {

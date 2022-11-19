@@ -18,28 +18,6 @@ USE `smartship`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `hibernate_sequence`
---
-
-DROP TABLE IF EXISTS `hibernate_sequence`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hibernate_sequence`
---
-
-LOCK TABLES `hibernate_sequence` WRITE;
-/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (1);
-/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `notification`
 --
 
@@ -103,14 +81,16 @@ CREATE TABLE `ship` (
   `id` int NOT NULL AUTO_INCREMENT,
   `oprator_id` int DEFAULT NULL,
   `location` varchar(45) NOT NULL,
-  `status` varchar(45) NOT NULL,
+  `status` int NOT NULL,
   `origin` varchar(45) DEFAULT NULL,
   `destination` varchar(45) DEFAULT NULL,
+  `water_tank1` int DEFAULT NULL,
+  `water_tank2` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_operator_user_idx` (`oprator_id`),
   KEY `fk_status_idx` (`status`),
   CONSTRAINT `fk_operator_user` FOREIGN KEY (`oprator_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`status`)
+  CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,7 +100,7 @@ CREATE TABLE `ship` (
 
 LOCK TABLES `ship` WRITE;
 /*!40000 ALTER TABLE `ship` DISABLE KEYS */;
-INSERT INTO `ship` VALUES (1,1,'Pakistan','ACTIVE',NULL,NULL),(2,2,'Parijs','ACTIVE','Amsterdam','Paris');
+INSERT INTO `ship` VALUES (1,1,'Pakistan',1,NULL,NULL,NULL,NULL),(2,2,'Parijs',2,'Amsterdam','Paris',NULL,NULL);
 /*!40000 ALTER TABLE `ship` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,9 +112,10 @@ DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `status` varchar(45) NOT NULL,
-  PRIMARY KEY (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`,`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +124,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES ('ACTIVE'),('IDLE'),('MAINTENANCE');
+INSERT INTO `status` VALUES (1,'ACTIVE'),(2,'IDLE'),(3,'MAINTENANCE');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,12 +137,17 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `role_ID` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`),
+  UNIQUE KEY `UKob8kqyqqgmefl0aco34akdtpe` (`email`),
+  KEY `fk_role_idx` (`role_ID`),
+  CONSTRAINT `role_fk` FOREIGN KEY (`role_ID`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -171,7 +157,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'pietjan@gmail.com','$2a$2a$10$VcdzH8Q.o4KEo6df.XesdOmXdXQwT5ugNQvu1Pl0390rmfOeA1bhS',NULL),(2,'btynior@gmail.com','$2a$10$Hxv16Y5DtCRXcdbc3U5/zODRnN/o9boyOevGwRxsxsLigRvQ3ebb.',NULL),(3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John'),(4,'peter@gmail.com','$2a$10$sQiuq6I0s1yVDv1yGsMEHeup/ZRgxh2SFh4HlyhK463M3j6QJnmrm','Peter');
+INSERT INTO `user` VALUES (1,'pietjan@gmail.com','$2a$2a$10$VcdzH8Q.o4KEo6df.XesdOmXdXQwT5ugNQvu1Pl0390rmfOeA1bhS','Jaden',1),(2,'btynior@gmail.com','$2a$10$Hxv16Y5DtCRXcdbc3U5/zODRnN/o9boyOevGwRxsxsLigRvQ3ebb.','Vincent',2),(3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',2),(4,'peter@gmail.com','$2a$10$sQiuq6I0s1yVDv1yGsMEHeup/ZRgxh2SFh4HlyhK463M3j6QJnmrm','Peter',3);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +172,7 @@ CREATE TABLE `user_role` (
   `user_id` int NOT NULL,
   `role_id` int NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
-  KEY `fk_role` (`role_id`),
+  KEY `fk_role_idx` (`role_id`),
   CONSTRAINT `fk_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
   CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -198,8 +184,34 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,2),(3,2),(4,2),(2,3);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `watertank`
+--
+
+DROP TABLE IF EXISTS `watertank`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `watertank` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `amount_in_liters` int NOT NULL,
+  `ship_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_watertank` (`ship_id`),
+  CONSTRAINT `fk_watertank` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `watertank`
+--
+
+LOCK TABLES `watertank` WRITE;
+/*!40000 ALTER TABLE `watertank` DISABLE KEYS */;
+INSERT INTO `watertank` VALUES (1,38,1),(2,44,1);
+/*!40000 ALTER TABLE `watertank` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -219,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-12 21:44:07
+-- Dump completed on 2022-11-14 23:32:52
