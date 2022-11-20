@@ -9,6 +9,9 @@ public class Ship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "status")
     private String status;
 
@@ -59,6 +62,13 @@ public class Ship {
         this.destination = destination;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     @Override
     public String toString() {
         return "Ship [id=" + id + "]";
