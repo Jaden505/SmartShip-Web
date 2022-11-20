@@ -25,14 +25,14 @@ public class User {
    @Column(name = "username")
    private String username;
 
-   @Column(name = "role_id")
-   private int role_id;
+   @Column(name = "roleID")
+   private int roleID;
 
-   public User(String email, String password, String username, int role_id) {
+   public User(String email, String password, String username, int roleID) {
       this.email = email;
       this.password = password;
       this.username = username;
-      this.role_id = role_id;
+      this.roleID = roleID;
    }
 
    public String getEmail() {
@@ -47,8 +47,8 @@ public class User {
       return username;
    }
 
-   public int getRole_id() {
-      return role_id;
+   public int getRoleID() {
+      return roleID;
    }
 
    public void setEmail(String email) {
@@ -63,8 +63,8 @@ public class User {
       this.username = username;
    }
 
-   public void setRole_id(int role_id) {
-      this.role_id = role_id;
+   public void setRoleID(int roleID) {
+      this.roleID = roleID;
    }
 
    //   @ManyToOne

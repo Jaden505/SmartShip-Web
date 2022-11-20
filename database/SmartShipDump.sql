@@ -140,14 +140,14 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `role_ID` int NOT NULL,
+  `roleID` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`),
   UNIQUE KEY `UKob8kqyqqgmefl0aco34akdtpe` (`email`),
-  KEY `fk_role_idx` (`role_ID`),
-  CONSTRAINT `role_fk` FOREIGN KEY (`role_ID`) REFERENCES `role` (`id`)
+  KEY `fk_roleIDx` (`roleID`),
+  CONSTRAINT `role_fk` FOREIGN KEY (`roleID`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,10 +170,10 @@ DROP TABLE IF EXISTS `user_role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_role` (
   `user_id` int NOT NULL,
-  `role_id` int NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `fk_role_idx` (`role_id`),
-  CONSTRAINT `fk_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  `roleID` int NOT NULL,
+  PRIMARY KEY (`user_id`,`roleID`),
+  KEY `fk_roleIDx` (`roleID`),
+  CONSTRAINT `fk_role` FOREIGN KEY (`roleID`) REFERENCES `role` (`id`),
   CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

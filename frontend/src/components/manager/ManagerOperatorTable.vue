@@ -11,35 +11,46 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>123</td>
-        <td>Hans</td>
-        <td>Titanic</td>
-        <td class="material-icons">edit</td>
-        <td class="material-icons">delete</td>
-      </tr>
-      <tr>
-        <td>123</td>
-        <td>Hans</td>
-        <td>Titanic</td>
-        <td class="material-icons">edit</td>
-        <td class="material-icons">delete</td>
-      </tr>
-      <tr>
-        <td>123</td>
-        <td>Hans</td>
-        <td>Titanic</td>
-        <td class="material-icons">edit</td>
-        <td class="material-icons">delete</td>
-      </tr>
+      <tr v-for="(operator, index) in users" :key="index">
+            <td>{{ operator.id }}</td>
+            <td>{{ operator.username }}</td>
+            <td>{{ operator.ship }}</td>
+            <td class="material-icons">edit</td>
+            <td class="material-icons">delete</td>
+        </tr>
     </tbody>
   </table>
 
 </template>
 
 <script>
+import UserService from "../../services/user.service";
+
 export default {
-  name: "ManagerTable"
+  name: "ManagerTable",
+
+  mounted() {
+        this.getUsers();
+    },
+
+    data() {
+        return {
+            users: [],
+        }
+    },
+
+    methods: {
+        getUsers() {
+          UserService.getUsersByRole(1) // Role operator
+            .then(response => {
+                this.users = response.data;
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+        });
+        }
+    }
 }
 </script>
 
