@@ -19,7 +19,7 @@
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
-    <button class="flex-box" id="slide_start_button">
+    <button class="flex-box" id="slide_start_button" @click="test()">
       <h1>+</h1>
     </button>
         <!--        <input type="button" class="flex-child" id="slide_start_button">-->
@@ -32,7 +32,7 @@ import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/AlarmService";
 
 export default {
-  // components: {AddAlarms},
+  components: {AddAlarms},
   mounted() {
     this.getAlarms();
   },
@@ -57,6 +57,9 @@ export default {
     },
     cancelModal(){
       this.add = false;
+    },
+    test(){
+      this.add = true;
     },
 
     updateAlarms(id) {
