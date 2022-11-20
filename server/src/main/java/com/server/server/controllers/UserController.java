@@ -38,10 +38,7 @@ public class UserController {
     @PostMapping("/users/role={roleID}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable Integer roleID){
         try{
-            System.out.println(roleID);
             List<User> users = userRepo.findByRoleID(roleID);
-
-            System.out.println(users);
 
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -66,7 +63,7 @@ public class UserController {
     }
 
     @PutMapping("/users/id={id}")
-    public ResponseEntity<User> updateScooter(@PathVariable long id, @RequestBody User user){
+    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user){
         try{
             Optional<User> findUser = userRepo.findById(id);
 
@@ -77,6 +74,7 @@ public class UserController {
                 foundUser.setPassword(user.getPassword());
                 foundUser.setRoleID(user.getRoleID());
                 foundUser.setUsername(user.getUsername());
+                foundUser.setShipID(foundUser.getShipID());
 
                 return new ResponseEntity<>(userRepo.save(foundUser), HttpStatus.OK);
             } else {

@@ -28,12 +28,8 @@ public class User {
    @Column(name = "roleID")
    private int roleID;
 
-   public User(String email, String password, String username, int roleID) {
-      this.email = email;
-      this.password = password;
-      this.username = username;
-      this.roleID = roleID;
-   }
+   @Column(name = "shipID")
+   private int shipID;
 
    public String getEmail() {
       return email;
@@ -67,6 +63,11 @@ public class User {
       this.roleID = roleID;
    }
 
-   //   @ManyToOne
-//   private Role role = new Role();
+   public int getShipID() {
+      return shipID;
+   }
+
+   public void setShipID(int shipID) {
+      this.shipID = shipID;
+   }
 }

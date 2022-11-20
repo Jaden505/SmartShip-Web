@@ -6,7 +6,7 @@
       <tr>
         <th>Operator Id</th>
         <th>Operator Name</th>
-        <th>Assigned ship</th>
+        <th>Assigned Ship Id</th>
         <th></th>
       </tr>
     </thead>
@@ -14,7 +14,7 @@
       <tr v-for="(operator, index) in users" :key="index">
             <td>{{ operator.id }}</td>
             <td>{{ operator.username }}</td>
-            <td>{{ operator.ship }}</td>
+            <td>{{ operator.shipID }}</td>
             <td class="material-icons">edit</td>
             <td class="material-icons">delete</td>
         </tr>
