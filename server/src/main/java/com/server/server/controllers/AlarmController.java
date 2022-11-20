@@ -31,7 +31,7 @@ public class AlarmController {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/Alarms/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/Alarms/{id}")
     public ResponseEntity<Alarm> updateAlarm( @PathVariable int id, @RequestBody Alarm alarm){
         Optional<Alarm> alarmData = alarmRepo.findById(id);
 
