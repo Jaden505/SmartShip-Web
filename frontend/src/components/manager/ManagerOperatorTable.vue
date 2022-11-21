@@ -1,6 +1,8 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+  <el-button type="primary" @click="TogglePopup('buttonTrigger')">Add user</el-button>
+
   <table>
     <thead>
     <tr>
@@ -34,7 +36,7 @@
 
 <script>
 import UserService from "../../services/user.service";
-import editForm from "@/components/manager/editForm";
+import editForm from "@/components/manager/editUserForm";
 import { ref } from 'vue';
 
 export default {
@@ -132,5 +134,10 @@ tbody tr:nth-child(even) {
 .material-icons {
   font-size: 28px;
   padding-top: 8px;
+}
+
+.add-user {
+  float: right;
+  display: flex;
 }
 </style>
