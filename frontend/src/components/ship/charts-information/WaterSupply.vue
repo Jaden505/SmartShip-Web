@@ -1,27 +1,5 @@
 <template>
-  <el-card shadow="always" class="el-card">
-    <h1>Water Supply</h1>
-
-    <div class="content">
-      <el-row class="container">
-        <div class="chart-container">
-          <canvas id="waterSupplyChart"></canvas>
-        </div>
-      </el-row>
-      <el-row class="container-2">
-        <div class="sections">
-          <el-card class="section" shadow="always">
-            <h2 class="waterAmount-title">Current Consumption</h2>
-            <p class="waterAmount">3T</p>
-          </el-card>
-          <el-card class="section" shadow="always">
-            <h2 class="waterAmount-title">Consumption Last 24h</h2>
-            <p class="waterAmount">25T</p>
-          </el-card>
-        </div>
-      </el-row>
-    </div>
-  </el-card>
+    <canvas id="waterSupplyChart"></canvas>
 </template>
 
 <script>
@@ -61,9 +39,36 @@ export default {
         }]
       },
       options: {
+        maintainAspectRatio: false,
+        responsive: true,
         scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 17,
+                weight: "bold"
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
           y: {
-            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 13,
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            font: {
+              size: 30
+            }
           }
         }
       }
@@ -84,35 +89,4 @@ export default {
 </script>
 
 <style scoped>
-.sections {
-  line-height: 12px;
-  display: flex;
-  align-items: center;
-}
-
-.el-card {
-  background: #002C48;
-  border: none;
-  color: #E0E1DD;
-  text-align: center;
-  border-radius: 20px;
-}
-
-.section {
-  margin: 10px;
-  box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
-}
-
-.waterAmount-title {
-  font-size: 1.5rem;
-}
-
-.waterAmount {
-  font-size: 2rem;
-  font-weight: 600;
-  padding-top: 10px;
-  color: #1CD0FF;
-}
 </style>

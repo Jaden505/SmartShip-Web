@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const API_URL = 'http://localhost:8085/api/';
 
 class ShipDataService {
@@ -6,7 +8,7 @@ class ShipDataService {
     }
     // todo the right endpoint
     getWater() {
-        return API_URL.get("test/chart");
+        return axios.get(API_URL + 'test/chart');
     }
 
     get(id) {
