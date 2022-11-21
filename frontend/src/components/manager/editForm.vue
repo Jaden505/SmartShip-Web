@@ -6,9 +6,11 @@
         <label>Operator Name</label><br>
         <input type="text" v-model="current.username"><br>
         <label>Email</label><br>
-        <input type="text" v-model="current.email"><br/>
+        <input type="email" v-model="current.email"><br/>
+        <label>Password</label><br>
+        <input type="password" v-model="current.password"><br/>
       </form>
-      <button class="popup-close" @click="TogglePopup()">
+      <button class="popup-close" @click="TogglePopup(); update(current.id, current)">
         Update
       </button>
     </div>
@@ -16,6 +18,8 @@
 </template>
 
 <script>
+import UserService from "../../services/user.service";
+
 export default {
   name: "editForm",
   props: ['TogglePopup', 'operator'],
@@ -23,6 +27,12 @@ export default {
   data(){
     return {
       current: this.operator
+    }
+  },
+
+  methods: {
+    update(user_id, current) {
+      UserService.updateUser(user_id, current)
     }
   }
 }
