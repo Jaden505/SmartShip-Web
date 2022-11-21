@@ -20,7 +20,7 @@
       <td>{{ operator.email }}</td>
       <td>{{ operator.shipID }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTrigger'); this.operator = operator">edit</td>
-      <td class="material-icons">delete</td>
+      <td class="material-icons" @click="deleteUser(operator.id)">delete</td>
     </tr>
     </tbody>
   </table>
@@ -85,6 +85,15 @@ export default {
 
     toggle(operator){
       this.operator = operator
+    },
+
+    deleteUser(user_id){
+      if (confirm("Are you sure you want to delete this operator?")) {
+        UserService.deleteUser(user_id).catch(e => {
+          console.log(e)
+        })
+        location.reload()
+      }
     }
   }
 }

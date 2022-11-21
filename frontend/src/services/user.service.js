@@ -21,6 +21,10 @@ class UserService {
             email: user.email
         });
     }
+
+    deleteUser(user_id){
+        return axios.delete(API_URL + 'users/id=' + user_id);
+    }
 }
 
 export default new UserService();
