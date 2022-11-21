@@ -42,7 +42,7 @@ import { ref } from 'vue';
 export default {
   name: "ManagerTable",
   components: {
-    editForm
+    editForm,
   },
 
   mounted() {
@@ -134,10 +134,5 @@ tbody tr:nth-child(even) {
 .material-icons {
   font-size: 28px;
   padding-top: 8px;
-}
-
-.add-user {
-  float: right;
-  display: flex;
 }
 </style>

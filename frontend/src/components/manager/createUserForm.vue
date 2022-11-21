@@ -9,38 +9,48 @@
       <form>
         <div class="user-edit-field">
           <label>Name</label><br>
-          <input type="text" v-model="current.username"><br/>
+          <input type="text" v-model="newUser.name"><br/>
         </div>
         <div class="user-edit-field">
           <label>Email</label><br>
-          <input type="text" v-model="current.email"><br/>
+          <input type="email" v-model="newUser.email"><br/>
         </div>
         <div class="user-edit-field">
           <label>Password</label><br>
-          <input type="text" v-model="current.password"><br/>
+          <input type="password" v-model="newUser.password"><br/>
         </div>
       </form>
-      <el-button class="primary update-btn" @click="TogglePopup()">Create</el-button>
+      <el-button class="primary update-btn" @click="TogglePopup(); create()">Create</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import UserService from "@/services/user.service";
+import User from "@/models/user"
 
 export default {
   name: "createUserForm",
-  props: ['TogglePopup', 'operator'],
+  props: ['TogglePopup'],
 
   data(){
     return {
-      current: this.operator
+      newUser: new User("", "", "")
     }
   },
 
   methods: {
-    update(user_id, current) {
-      UserService.updateUser(user_id, current)
+    checkFields() {
+      return (this.newUser.name !== "" && this.newUser.email !== "" && this.newUser.password !== "");
+    },
+
+    create() {
+      if (this.checkFields()) {
+        UserService.createUser()
+      }
+      else {
+        alert("Please fill all fields to create a user.")
+      }
     }
   }
 }

@@ -15,7 +15,15 @@ class UserService {
     }
 
     updateUser(user_id, user){
-        return axios.put(API_URL + 'users/id=' + user_id,  {
+        return axios.put('users/id=' + user_id,  {
+            username: user.username,
+            password: user.password,
+            email: user.email
+        });
+    }
+
+    createUser(user){
+        return axios.put(API_URL + 'users/create',  {
             username: user.username,
             password: user.password,
             email: user.email

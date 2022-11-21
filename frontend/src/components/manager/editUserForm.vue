@@ -13,7 +13,11 @@
         </div>
         <div class="user-edit-field">
           <label>Email</label><br>
-          <input type="text" v-model="current.email"><br/>
+          <input type="email" v-model="current.email"><br/>
+        </div>
+        <div class="user-edit-field">
+          <label>Password</label><br>
+          <input type="password" v-model="current.password"><br/>
         </div>
       </form>
       <el-button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</el-button>
