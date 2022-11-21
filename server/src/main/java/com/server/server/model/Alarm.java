@@ -38,6 +38,10 @@ public class Alarm {
 
     }
 
+    public Alarm() {
+
+    }
+
 
     public int getId() {
         return id;
