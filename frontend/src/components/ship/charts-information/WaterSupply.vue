@@ -26,20 +26,28 @@
 
 <script>
 import Chart from 'chart.js/auto';
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "WaterSupply",
+  data() {
+    return {
+      chart: []
+    }
+  },
   mounted() {
     console.log('Component mounted')
+    // this.getChart();
     const ctx = document.getElementById('waterSupplyChart');
 
+    // Chart
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Tank 1', 'Tank 2'],
         datasets: [{
           label: 'Water',
-          data: [7, 10],
+          data: [],
           barThickness: 40,
           backgroundColor: [
             'rgba(75, 192, 192, 1)',
@@ -60,8 +68,17 @@ export default {
         }
       }
     });
-    myChart;
-  }
+
+    // display data
+    ShipService.getWater().then(response => {
+      this.chart = response.data;
+      myChart.data.datasets[0].data[0] = response.data[0].waterTank1
+      myChart.data.datasets[0].data[1] = response.data[0].waterTank2
+      myChart.update()
+      myChart;
+    })
+
+  },
 }
 
 </script>
@@ -83,9 +100,9 @@ export default {
 
 .section {
   margin: 10px;
-  box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
 }
 
 .waterAmount-title {
