@@ -13,6 +13,9 @@ class Alarms {
         // return http.delete("/test/Alarms/{index}")
         return http.put("/test/Alarms/"+id)
     }
+    post(id){
+        return http.post("/test/Alarms/"+id)
+    }
     // add(alarm){
     //     // return http.delete("/test/Alarms/{index}")
     //     return http.put("/test/Alarms/"+alarm)

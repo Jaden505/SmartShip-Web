@@ -2,6 +2,7 @@ package com.server.server.controllers;
 
 import com.server.server.model.Alarm;
 import com.server.server.repository.AlarmRepository;
+import org.apache.el.parser.AstLambdaExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,12 +51,14 @@ public class AlarmController {
         }
     }
 //
-    @PostMapping("/Alarms/{alarm}")
-    public List<Alarm> addAlarms(@PathVariable Alarm alarm){
-        alarmRepo.save(alarm);
-        return alarmRepo.findAll();
+    @PostMapping("/Alarms/{id}")
+    public ResponseEntity<Alarm>  addAlarms(@RequestBody Alarm alarm){
+        if(alarm==null){
+            Alarm data = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getValueSinceLastUpdate(), alarm.getSettedUpValue(), alarm.getShip_id());
+            return new ResponseEntity<>(alarmRepo.save(alarm), HttpStatus.OK);
+        }
+        else     return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
-
 
 }
 

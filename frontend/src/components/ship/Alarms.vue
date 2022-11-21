@@ -19,13 +19,14 @@
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
-    <button class="flex-box" id="slide_start_button" @click="test()">
+    <button class="flex-box" id="slide_start_button" @click="openPop()">
       <h1>+</h1>
     </button>
         <!--        <input type="button" class="flex-child" id="slide_start_button">-->
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
     </div>
-  <AddAlarms v-if="this.add" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarms(this.selectedalarm.id)"></AddAlarms>
+  <AddAlarms v-if="this.select" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarms(this.selectedalarm.id)"></AddAlarms>
+  <AddAlarms v-if="this.add" :alarm="this.addedalarm" @cancel="cancelModal()" @add="addAlarm()"></AddAlarms>
 </template>
 <script>
 import AddAlarms from "@/components/ship/updateAlarms";
@@ -45,21 +46,35 @@ export default {
       star: "⭐",
       remove: "X",
       alarms: [],
+      select: false,
       add: false,
       selectedalarm:"",
+      addedalarm: "",
     }
   },
   methods: {
     // Creating function
     showModal(alarm){
       this.selectedalarm = alarm;
-      this.add = true;
+      this.select = true;
     },
     cancelModal(){
       this.add = false;
+      this.select = false;
+      AlarmService;
     },
-    test(){
+    openPop(){
       this.add = true;
+    },
+    addAlarm(id){
+      AlarmService.post(id)
+          .then(response => {
+            window.location.reload(true)
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     },
 
     updateAlarms(id) {

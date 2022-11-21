@@ -34,7 +34,7 @@ public class Alarm {
 //        this.settedUpValue = settedUpValue;
 //        this.ship_id = ship_id;
 //    }
-    public Alarm() {
+    public Alarm(String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
 
     }
 
