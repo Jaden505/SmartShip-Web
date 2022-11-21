@@ -72,7 +72,7 @@ public class UserController {
 
                 foundUser.setEmail(user.getEmail());
                 foundUser.setPassword(user.getPassword());
-                foundUser.setRoleID(user.getRoleID());
+//                foundUser.setRoleID(user.getRoleID());
                 foundUser.setUsername(user.getUsername());
 //                foundUser.setShipID(foundUser.getShipID());
 

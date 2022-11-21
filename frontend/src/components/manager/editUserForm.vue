@@ -3,7 +3,7 @@
 
   <div class="popup" >
     <div class="popup-inner">
-      <td class="material-icons close-popup" @click="TogglePopup()">close</td>
+      <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
 
       <h1>Edit Operator</h1>
       <form>
@@ -16,7 +16,7 @@
           <input type="text" v-model="current.email"><br/>
         </div>
       </form>
-      <el-button class="primary update-btn" @click="TogglePopup()">Update</el-button>
+      <el-button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</el-button>
     </div>
   </div>
 </template>
