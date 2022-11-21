@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: "editUserForm",
   props: ['TogglePopup', 'operator'],
@@ -29,6 +31,12 @@ export default {
   data(){
     return {
       current: this.operator
+    }
+  },
+
+  methods: {
+    update(user_id, current) {
+      UserService.updateUser(user_id, current)
     }
   }
 }
