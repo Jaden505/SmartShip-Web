@@ -1,28 +1,28 @@
-import http from "../http-common";
+const API_URL = 'http://localhost:8085/api/';
 
 class ShipDataService {
     getAll() {
-        return http.get("/ships");
+        return API_URL.get("ships");
     }
     // todo the right endpoint
     getWater() {
-        return http.get("test/chart");
+        return API_URL.get("test/chart");
     }
 
     get(id) {
-        return http.get(`/ships/${id}`);
+        return API_URL.get(`ships/${id}`);
     }
 
     create(data) {
-        return http.post("/ships", data);
+        return API_URL.post("ships", data);
     }
 
     update(id, data) {
-        return http.put(`/ships/${id}`, data);
+        return API_URL.put(`ships/${id}`, data);
     }
 
     delete(id) {
-        return http.delete(`/ships/${id}`);
+        return API_URL.delete(`/ships/${id}`);
     }
 }
 

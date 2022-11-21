@@ -1,8 +1,8 @@
-import http from "../http-common";
+const API_URL = 'http://localhost:8085/api/';
 
 class EngineService {
     getEngine() {
-        return http.get("/test/engine");
+        return API_URL.get("test/engine");
     }
 }
 

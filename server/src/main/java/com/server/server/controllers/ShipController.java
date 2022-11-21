@@ -24,7 +24,7 @@ public class ShipController {
 
     // todo this doesn't get used for testing
     @GetMapping("/test/chart/{id}")
-    public Optional<Ship> getById(@PathVariable long id){
+    public Optional<Ship> getById(@PathVariable int id){
         Optional<Ship> ship = shipRepo.findById(id);
         if(ship.isPresent()){
             return ship;
