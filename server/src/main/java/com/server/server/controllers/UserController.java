@@ -74,7 +74,7 @@ public class UserController {
                 foundUser.setPassword(user.getPassword());
                 foundUser.setRoleID(user.getRoleID());
                 foundUser.setUsername(user.getUsername());
-                foundUser.setShipID(foundUser.getShipID());
+//                foundUser.setShipID(foundUser.getShipID());
 
                 return new ResponseEntity<>(userRepo.save(foundUser), HttpStatus.OK);
             } else {

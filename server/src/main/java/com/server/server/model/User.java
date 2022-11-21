@@ -28,8 +28,8 @@ public class User {
    @Column(name = "roleID")
    private int roleID;
 
-   @Column(name = "shipID")
-   private int shipID;
+//   @Column(name = "shipID")
+//   private int shipID;
 
    public String getEmail() {
       return email;
@@ -63,11 +63,11 @@ public class User {
       this.roleID = roleID;
    }
 
-   public int getShipID() {
-      return shipID;
-   }
-
-   public void setShipID(int shipID) {
-      this.shipID = shipID;
-   }
+//   public int getShipID() {
+//      return shipID;
+//   }
+//
+//   public void setShipID(int shipID) {
+//      this.shipID = shipID;
+//   }
 }
