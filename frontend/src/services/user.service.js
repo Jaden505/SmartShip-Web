@@ -1,9 +1,7 @@
 import authHeader from './auth-header';
 import http from "../http-common";
-import axios from "axios";
 
 class UserService {
-
     getUsers() {
         return http.get('/users/all');
     }
@@ -13,7 +11,7 @@ class UserService {
     }
 
     updateUser(user_id, user){
-        return axios.put('/users/id=' + user_id,  {
+        return http.put('/users/id=' + user_id,  {
             username: user.username,
             password: user.password,
             email: user.email
@@ -21,7 +19,7 @@ class UserService {
     }
 
     createUser(user){
-        return axios.put('/users/create',  {
+        return http.put('/users/create',  {
             username: user.username,
             password: user.password,
             email: user.email
@@ -29,7 +27,7 @@ class UserService {
     }
 
     deleteUser(user_id){
-        return axios.delete('/users/id=' + user_id);
+        return http.delete('/users/id=' + user_id);
     }
 }
 

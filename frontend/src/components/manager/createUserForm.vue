@@ -9,7 +9,7 @@
       <form>
         <div class="user-edit-field">
           <label>Name</label><br>
-          <input type="text" v-model="newUser.name"><br/>
+          <input type="text" v-model="newUser.username"><br/>
         </div>
         <div class="user-edit-field">
           <label>Email</label><br>
@@ -41,7 +41,7 @@ export default {
 
   methods: {
     checkFields() {
-      return (this.newUser.name !== "" && this.newUser.email !== "" && this.newUser.password !== "");
+      return (this.newUser.username !== "" && this.newUser.email !== "" && this.newUser.password !== "");
     },
 
     create() {
