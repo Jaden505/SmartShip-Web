@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <el-button type="primary" @click="TogglePopup('buttonTrigger')">Add user</el-button>
+  <el-button type="primary" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
 
   <table>
     <thead>
@@ -19,7 +19,7 @@
       <td>{{ operator.username }}</td>
       <td>{{ operator.email }}</td>
       <td>{{ operator.shipID }}</td>
-      <td class="material-icons" @click="TogglePopup('buttonTrigger'); this.operator = operator">edit</td>
+      <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
       <td class="material-icons" @click="deleteUser(operator.id)">delete</td>
     </tr>
     </tbody>
@@ -27,9 +27,14 @@
 
 
   <editForm
-    v-if="popupTrigger.buttonTrigger"
-    :TogglePopup="() => TogglePopup('buttonTrigger')"
+    v-if="popupTrigger.buttonTriggerEdit"
+    :TogglePopup="() => TogglePopup('buttonTriggerEdit')"
     :operator = this.operator
+  />
+
+  <createForm
+      v-if="popupTrigger.buttonTriggerCreate"
+      :TogglePopup="() => TogglePopup('buttonTriggerCreate')"
   />
 
 </template>
@@ -37,12 +42,14 @@
 <script>
 import UserService from "../../services/user.service";
 import editForm from "@/components/manager/editUserForm";
+import createForm from "@/components/manager/createUserForm";
 import { ref } from 'vue';
 
 export default {
   name: "ManagerTable",
   components: {
     editForm,
+    createForm
   },
 
   mounted() {
@@ -58,7 +65,8 @@ export default {
 
   setup(){
    const popupTrigger = ref({
-      buttonTrigger: false
+      buttonTriggerEdit: false,
+      buttonTriggerCreate: false
     });
 
    const TogglePopup = (trigger) => {

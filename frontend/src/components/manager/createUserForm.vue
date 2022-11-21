@@ -89,6 +89,7 @@ label{
 input{
   width: 100%;
   padding: 1%;
+  text-align: center;
 }
 
 button{
