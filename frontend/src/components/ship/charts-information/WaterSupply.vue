@@ -16,7 +16,11 @@ export default {
   mounted() {
     console.log('Component mounted')
     // this.getChart();
-    const ctx = document.getElementById('waterSupplyChart');
+    const ctx = document.getElementById('waterSupplyChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+    gradient.addColorStop(0, '#29acda');
+    gradient.addColorStop(1, 'rgba(0, 44, 72, 0)');
+
 
     // Chart
     const myChart = new Chart(ctx, {
@@ -26,15 +30,9 @@ export default {
         datasets: [{
           label: 'Water',
           data: [],
+          backgroundColor: gradient,
+          fill: true,
           barThickness: 40,
-          backgroundColor: [
-            'rgba(75, 192, 192, 1)',
-            'rgba(75, 192, 192, 1)'
-          ],
-          borderColor: [
-            'rgba(75, 192, 192, 1)',
-            'rgba(75, 192, 192, 1)'
-          ],
           borderWidth: 1,
         }]
       },
@@ -66,6 +64,7 @@ export default {
         },
         plugins: {
           legend: {
+            display: false,
             font: {
               size: 30
             }

@@ -120,7 +120,7 @@ export default {
 
       this.$store.dispatch("auth/login", user).then(
           () => {
-            this.$router.push("/dashboard");
+            this.$router.push("/power-usage");
           },
           (error) => {
             this.loading = false;

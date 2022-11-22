@@ -5,7 +5,6 @@ import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
-import WaterSupply from "@/components/ship/charts-information/WaterSupply";
 import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 
 const routes = [
@@ -28,10 +27,6 @@ const routes = [
                 path: "/info",
                 component: ShipInfo,
                 props: true
-            }, {
-                path: "/water-supply",
-                component: WaterSupply,
-                props: true
             },
             {
                 path: "/engine-info",
@@ -47,19 +42,6 @@ export const router = createRouter({
     routes,
 })
 
-// router.beforeEach((to, from, next) => {
-//     const publicPages = ["/"];
-//     const authRequired = !publicPages.includes(to.path);
-//     const loggedIn = localStorage.getItem('user');
-//
-//     // trying to access a restricted page + not logged in
-//     // redirect to login page
-//     if (authRequired && !loggedIn) {
-//         next('/login');
-//     } else {
-//         next();
-//     }
-// });
 router.beforeEach((to, from, next) => {
     const publicPages = ['/'];
     const authRequired = !publicPages.includes(to.path);

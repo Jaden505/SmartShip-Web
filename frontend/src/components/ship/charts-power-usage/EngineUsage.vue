@@ -1,8 +1,5 @@
 <template>
-  <el-card shadow="always" class="el-card">
-      <h1>Starboard Engine Usage</h1>
-      <canvas class="chart-container" ref="chart-container"></canvas>
-  </el-card>
+  <canvas id="engineUsage"></canvas>
 </template>
 
 <script>
@@ -10,47 +7,75 @@ import Chart from "chart.js/auto";
 
 export default {
   name: "EngineUsage",
-
-  mounted() {
-    let chart_container = this.$refs["chart-container"];
-
-    const labels = ["09:00", "10:00", "11:00", "12:00", "13:00"];
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: "Kilowatt an hour",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      }]
-    };
-
-    const config = {
-      type: 'line',
-      data: data,
+  data() {
+    return {
+      chart: []
     }
+  },
+  mounted() {
+    console.log('Component mounted')
+    // this.getChart();
+    const ctx = document.getElementById('engineUsage').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+    gradient.addColorStop(0, '#29acda');
+    gradient.addColorStop(1, 'rgba(0, 44, 72, 0)');
 
-    let chart = new Chart(chart_container, config);
+    // Chart
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['9:45', '9:46', '9:47', '9:48', '9:49', '9:50'],
+        datasets: [{
+          data: [65, 59, 80, 81, 56, 55, 40],
+          backgroundColor: gradient,
+          fill: true,
+          barThickness: 40,
+          borderColor: '#29acda',
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 17,
+                weight: "bold"
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            ticks: {
+              font: {
+                size: 13,
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false,
+            font: {
+              size: 30
+            }
+          }
+        }
+      }
+    });
 
-    chart;
-  }
+    myChart;
+  },
 }
+
 </script>
 
 <style scoped>
-.el-card {
-  background: #002C48;
-  border: none;
-  color: #E0E1DD;
-  text-align: center;
-  border-radius: 20px;
-}
-
-.chart-container {
-  display: flex;
-  margin-bottom: 30px;
-  height: 370px;
-  width: 190px;
-}
 </style>

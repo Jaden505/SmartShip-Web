@@ -13,8 +13,8 @@ module.exports = {
         blue: {
           'regular': '#29acda',
           'light': "#60EFFF",
-          'dark': "#00111C",
-          'card-blue': '#002C48',
+          'dark': "#141419",
+          'card-blue': '#202020',
           'light-card': '#15415E'
         },
         white: {
