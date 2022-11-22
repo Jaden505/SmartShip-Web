@@ -89,4 +89,14 @@ public class ShipController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/ships/shipId={id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
+        try{
+            shipRepo.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

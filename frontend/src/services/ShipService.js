@@ -12,7 +12,7 @@ class ShipDataService {
     create(ship) {
         return http.post("/ships/create", ship);
     }
-    
+
     updateShip(ship_id, ship) {
         return http.put('/ships/shipId=' + ship_id,
             {
@@ -23,8 +23,8 @@ class ShipDataService {
             });
     }
 
-    delete(id) {
-        return http.delete(`/ships/${id}`);
+    deleteShip(ship_id) {
+        return http.delete("ships/shipId=" + ship_id)
     }
 }
 
