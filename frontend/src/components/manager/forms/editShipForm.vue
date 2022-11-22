@@ -5,7 +5,7 @@
     <div class="popup-inner">
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
 
-      <h1>Edit Operator</h1>
+      <h1>Edit Ship</h1>
       <form>
         <div class="user-edit-field">
           <label>Ship name</label><br>
