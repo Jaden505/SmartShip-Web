@@ -19,7 +19,7 @@
         <div class="user-edit-field">
           <label>Status</label><br>
           <select v-model="newShip.status">
-            <option v-for="(role,index) in roles" :key="index" :value="role.id">{{ role.name }}</option>
+            <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.name }}</option>
           </select>
         </div>
       </form>
@@ -30,7 +30,7 @@
 
 <script>
 import ShipService from "@/services/ShipService";
-import RoleService from "@/services/role.service";
+import StatusService from "@/services/status.service";
 import Ship from "@/models/ship"
 
 export default {
@@ -38,13 +38,13 @@ export default {
   props: ['TogglePopup'],
 
   mounted() {
-    this.getRoles();
+    this.getStatuses();
   },
 
   data(){
     return {
       newShip: new Ship("", "", ""),
-      roles: []
+      statuses: []
     }
   },
 
@@ -62,10 +62,10 @@ export default {
       }
     },
 
-    getRoles() {
-      RoleService.get()
+    getStatuses() {
+      StatusService.get()
           .then(response => {
-            this.roles = response.data;
+            this.statuses = response.data;
             console.log(response.data);
           })
           .catch(e => {

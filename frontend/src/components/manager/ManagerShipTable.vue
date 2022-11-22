@@ -19,7 +19,7 @@
     <tr v-for="(ship, index) in ships" :key="index">
       <td>{{ ship.id }}</td>
       <td>{{ ship.name }}</td>
-      <td>{{ getRoleNameById(ship.status) }}</td>
+      <td>{{ getStatusNameById(ship.status) }}</td>
       <td>{{ getUsersByShipId(ship.id) }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
       <td class="material-icons" @click="deleteShip(ship.id)">delete</td>
@@ -47,7 +47,7 @@ import ShipService from "@/services/ShipService";
 import editForm from "@/components/manager/forms/editShipForm";
 import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
-import RoleService from "@/services/role.service";
+import StatusService from "@/services/status.service";
 
 export default {
   name: "ManagerTable",
@@ -59,7 +59,7 @@ export default {
   mounted() {
     this.getUsers();
     this.getShips();
-    this.getRoles();
+    this.getStatuses();
   },
 
   data() {
@@ -67,7 +67,7 @@ export default {
       users: [],
       ship: null,
       ships: [],
-      roles: []
+      statuses: []
     }
   },
 
@@ -138,10 +138,10 @@ export default {
       else return "No operators";
     },
 
-    getRoles() {
-      RoleService.get()
+    getStatuses() {
+      StatusService.get()
           .then(response => {
-            this.roles = response.data;
+            this.statuses = response.data;
             console.log(response.data);
           })
           .catch(e => {
@@ -149,10 +149,10 @@ export default {
           });
     },
 
-    getRoleNameById(id) {
-      let role_name = (this.roles[id-1].name).toString().substring(5);
-      role_name = role_name.charAt(0) + role_name.substring(1).toLowerCase(); // Make lowercase except for first letter
-      return role_name;
+    getStatusNameById(id) {
+      let status_name = (this.statuses[id-1].status).toString();
+      status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
+      return status_name;
     }
   }
 }

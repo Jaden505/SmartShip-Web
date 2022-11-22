@@ -1,8 +1,7 @@
 package com.server.server.controllers;
 
-import com.server.server.model.Role;
-import com.server.server.repository.RoleRepository;
-import com.server.server.repository.UserRepository;
+import com.server.server.model.Status;
+import com.server.server.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,20 +14,20 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080")
 @Controller
 @RequestMapping("/api")
-public class RoleController {
+public class StatusController {
     @Autowired
-    private RoleRepository roleRepo;
+    private StatusRepository statusRepo;
 
-    @GetMapping("/roles")
-    public ResponseEntity<List<Role>> getUsers(){
+    @GetMapping("/statuses")
+    public ResponseEntity<List<Status>> getStatuses(){
         try{
-            List<Role> roles = roleRepo.findAll();
+            List<Status> statuses = statusRepo.findAll();
 
-            if (roles.isEmpty()) {
+            if (statuses.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(roles, HttpStatus.OK);
+            return new ResponseEntity<>(statuses, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
