@@ -1,16 +1,13 @@
 import authHeader from './auth-header';
-import axios from "axios";
-
-const API_URL = 'http://localhost:8085/api/'
 import http from "../http-common";
 
 class UserService {
     getUsers() {
-        return axios.get(API_URL + 'users/all');
+        return http.get( 'users/all');
     }
 
     getUsersByRole(role_id) {
-        return axios.post(API_URL + 'users/role=' + role_id, { headers: authHeader() });
+        return http.post( 'users/role=' + role_id, { headers: authHeader() });
     }
 
     updateUser(user_id, user){

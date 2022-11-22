@@ -52,6 +52,22 @@ public class ShipController {
          } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/ships/create")
+    public ResponseEntity<Ship> createShip(@RequestBody Ship ship_details){
+        Ship newShip = new Ship();
+
+        newShip.setName(ship_details.getName());
+        newShip.setLocation(ship_details.getLocation());
+        newShip.setStatus(ship_details.getStatus());
+
+        try{
+            Ship ship = shipRepo.save(newShip);
+            return new ResponseEntity<>(ship, HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 

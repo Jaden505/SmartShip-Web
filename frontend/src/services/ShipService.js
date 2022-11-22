@@ -1,30 +1,26 @@
 import http from "../http-common";
-import axios from "axios";
-
-const API_URL = 'http://localhost:8085/api/'
 
 class ShipDataService {
     getAll() {
         return http.get("/ships");
     }
 
-
     get(id){
-        return axios.get(API_URL + 'ships/shipId=' + id)
+        return http.get('ships/shipId=' + id)
     }
 
-    create(data) {
-        return http.post("/ships", data);
+    create(ship) {
+        return http.post("/ships/create", ship);
     }
-
-    updateShip(ship_id, ship){
+    
+    updateShip(ship_id, ship) {
         return http.put('/ships/shipId=' + ship_id,
             {
-            name: ship.name,
-            location: ship.location,
-            origin: ship.origin,
-            destination: ship.destination
-        });
+                name: ship.name,
+                location: ship.location,
+                origin: ship.origin,
+                destination: ship.destination
+            });
     }
 
     delete(id) {
