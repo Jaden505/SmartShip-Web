@@ -1,7 +1,9 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <el-button type="primary" class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
+  <div class="button-section">
+    <el-button type="primary" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
+  </div>
 
   <table>
     <thead>
@@ -9,7 +11,7 @@
       <th>Operator Id</th>
       <th>Operator Name</th>
       <th>Operator Email</th>
-      <th>Assigned Ship Id</th>
+      <th>Assigned Ship</th>
       <th></th>
     </tr>
     </thead>
@@ -129,6 +131,12 @@ export default {
 </script>
 
 <style scoped>
+
+.button-section{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 table {
   width: 90%;
