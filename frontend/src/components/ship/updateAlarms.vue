@@ -1,26 +1,31 @@
 <template>
-  <form>
+  <form @submit="handleAlarm" :validation-schema="schema">
     <div id="container">
       <div id="allParameters">
         <div class="Parameters">
-          {{ parametertext }}
-          <input type="text" v-model="this.alarm.parameter"/>
+          <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Parameter</label>
+          <field name="parameter" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Parameter"/>
+          <ErrorMessage name="parameter" class="error-feedback" />
         </div>
         <div class="Parameters">
-          {{ categorytext }}
-          <input type="text" v-model="this.alarm.category"/>
+          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
+          <field name="category" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Category"/>
+          <ErrorMessage name="category" class="error-feedback" />
         </div>
         <div class="Parameters">
-          {{ realTimeValuetext }}
-          <input type="number" v-model="this.alarm.valueSinceLastUpdate"/>
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Value</label>
+          <field name="value" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Value"/>
+          <ErrorMessage name="value" class="error-feedback" />
         </div>
         <div class="Parameters">
-          {{ settedUpValuetext }}
-          <input type="number" v-model="this.alarm.settedUpValue"/>
+          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">setted up Value</label>
+          <field name="settedUpValue" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="setted up Value"/>
+          <ErrorMessage name="settedUpValue" class="error-feedback" />
         </div>
         <div class="Parameters">
-          {{ ship_idtext }}
-          <input type="text" v-model="this.alarm.ship_id"/>
+          <label for="id" class="block mb-2 text-sm font-medium text-white-text">Ship id</label>
+          <field name="shipId" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Ship id"/>
+          <ErrorMessage name="shipId" class="error-feedback" />
         </div>
         <button class="button" id="cancel" @click="cancelModal()">
           {{ cancel }}
@@ -110,6 +115,11 @@ input{
   background-color: deeppink;
 }
 
+
+
+/*Bartek zn schuld */
+
+.form-control{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
 
 
 </style>
