@@ -17,7 +17,6 @@
         <div class="sections">
           <el-card class="section" shadow="always">
             <h2 class="temperature_title">Engine 1 Temperature</h2>
-            <p class="temperature">60.4°</p>
           </el-card>
           <el-card class="section" shadow="always">
             <h2 class="temperature_title">Engine 2 Temperature</h2>
@@ -31,9 +30,15 @@
 
 <script>
 import Chart from "chart.js/auto";
+import EngineService from "@/services/EngineService";
 
 export default {
   name: "EngineInformation",
+  data() {
+    return {
+      engineInfo: []
+    }
+  },
   mounted() {
     console.log('Component mounted')
     const ctx = document.getElementById('engineInformationChart');
@@ -48,7 +53,6 @@ export default {
       ],
       datasets: [{
         label: '',
-        data: [300, 75, 40],
         backgroundColor: [
           'rgb(57,96,162)',
           'rgb(255, 205, 86)',
@@ -70,7 +74,7 @@ export default {
       ],
       datasets: [{
         label: '',
-        data: [100, 60, 40],
+        data: [],
         backgroundColor: [
           'rgb(57,96,162)',
           'rgb(255, 205, 86)',
@@ -100,11 +104,41 @@ export default {
       type: 'doughnut',
       data: data2,
     });
+
+    // display data
+    EngineService.getEngine().then(response => {
+      this.engineInfo = response.data;
+
+      // for now... this will be more efficient in the future
+      // engine1 rpm
+      myChart.data.datasets[0].data[0] = response.data[0].rpmGood
+      myChart.data.datasets[0].data[1] = response.data[0].rpmWarning
+      myChart.data.datasets[0].data[2] = response.data[0].rpmCritical
+      myChart.update()
+
+      // engine2 rpm
+      myChart2.data.datasets[0].data[0] = response.data[1].rpmGood
+      myChart2.data.datasets[0].data[1] = response.data[1].rpmWarning
+      myChart2.data.datasets[0].data[2] = response.data[1].rpmCritical
+      myChart2.update()
+
+      // engine1 kw
+      myChart3.data.datasets[0].data[0] = response.data[0].kwGood
+      myChart3.data.datasets[0].data[1] = response.data[0].kwWarning
+      myChart3.data.datasets[0].data[2] = response.data[0].kwCritical
+      myChart3.update()
+
+      // engine2 kw
+      myChart4.data.datasets[0].data[0] = response.data[1].kwGood
+      myChart4.data.datasets[0].data[1] = response.data[1].kwWarning
+      myChart4.data.datasets[0].data[2] = response.data[1].kwCritical
+      myChart4.update()
+    })
     myChart;
     myChart2;
     myChart3;
     myChart4;
-  }
+  },
 }
 </script>
 
@@ -134,9 +168,9 @@ export default {
 
 .section {
   margin: 10px;
-  box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 3px 4px 12px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.5);
 }
 
 .temperature_title {

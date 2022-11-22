@@ -5,8 +5,8 @@ import PowerUsage from "@/components/ship/PowerUsage";
 import ShipInfo from "@/components/ship/Information";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
-import Alarms from "@/components/ship/Alarms";
-import NotiOverview from "@/components/ship/NotificationOverview";
+import WaterSupply from "@/components/ship/charts-information/WaterSupply";
+import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 
 const routes = [
     {path : "/",
@@ -28,15 +28,14 @@ const routes = [
                 path: "/info",
                 component: ShipInfo,
                 props: true
-            },
-            {
-                path: "/Alarms",
-                component: Alarms,
+            }, {
+                path: "/water-supply",
+                component: WaterSupply,
                 props: true
             },
             {
-                path: "/notification-overview",
-                component: NotiOverview,
+                path: "/engine-info",
+                component: EngineInformation,
                 props: true
             }
         ]
@@ -61,3 +60,16 @@ export const router = createRouter({
 //         next();
 //     }
 // });
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+
+    // trying to access a restricted page + not logged in
+    // redirect to login page
+    if (authRequired && !loggedIn) {
+        next('/');
+    } else {
+        next();
+    }
+});

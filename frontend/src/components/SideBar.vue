@@ -43,6 +43,13 @@
             <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-gray-800 focus:outline-none
           focus:ring-1 focus:ring-gray-500 focus:bg-gray-800" :to="item.to">{{item.name}}</router-link>
           </li>
+          <li class="relative text-gray-unselected">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+
+            </div>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-gray-800 focus:outline-none
+          focus:ring-1 focus:ring-gray-500 focus:bg-gray-800" @click.prevent="logout" to>Sign Out</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -70,12 +77,16 @@ export default {
         {name: 'Notification', to: '/notification-overview', icon: <font-awesome-icon icon="fa-solid fa-bell" />
         },
         {name: 'Alarms', to: '/alarms', icon: <font-awesome-icon icon="fa-solid fa-alarm-clock" />
-        },
-        {name: 'Sign Out', to: '/', icon: <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
-        },
+        }
       ]
     }
   },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
+  }
 }
 </script>
 
