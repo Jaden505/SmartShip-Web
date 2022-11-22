@@ -5,19 +5,24 @@
     <div class="popup-inner">
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
 
-      <h1>Create Operator</h1>
+      <h1>Create Ship</h1>
       <form>
         <div class="user-edit-field">
           <label>Name</label><br>
-          <input type="text" v-model="newUser.username"><br/>
+          <input type="text" v-model="newShip.name"><br/>
         </div>
         <div class="user-edit-field">
-          <label>Email</label><br>
-          <input type="email" v-model="newUser.email"><br/>
+          <label>Location</label><br>
+          <input type="text" v-model="newShip.location"><br/>
         </div>
+
         <div class="user-edit-field">
-          <label>Password</label><br>
-          <input type="password" v-model="newUser.password"><br/>
+          <label>Status</label><br>
+          <select v-model="newShip.status">
+            <option value="1">Active</option>
+            <option value="2">Idle</option>
+            <option value="3">Maintenance</option>
+          </select>
         </div>
       </form>
       <el-button class="primary update-btn" @click="TogglePopup(); create()">Create</el-button>
@@ -26,8 +31,8 @@
 </template>
 
 <script>
-import UserService from "@/services/user.service";
-import User from "@/models/user"
+import ShipService from "@/services/ShipService";
+import Ship from "@/models/ship"
 
 export default {
   name: "createUserForm",
@@ -35,21 +40,21 @@ export default {
 
   data(){
     return {
-      newUser: new User("", "", "")
+      newShip: new Ship("", "", "")
     }
   },
 
   methods: {
     checkFields() {
-      return (this.newUser.username !== "" && this.newUser.email !== "" && this.newUser.password !== "");
+      return (this.newShip.name !== "" && this.newShip.location !== "" && this.newShip.status !== "");
     },
 
     create() {
       if (this.checkFields()) {
-        UserService.createUser(this.newUser)
+        ShipService.create(this.newShip)
       }
       else {
-        alert("Please fill all fields to create a user.")
+        alert("Please fill all fields to create a ship.")
       }
     }
   }

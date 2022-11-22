@@ -10,6 +10,7 @@
     <tr>
       <th>Ship Id</th>
       <th>Ship Name</th>
+      <th>Ship status</th>
       <th>Assigned operators</th>
       <th></th>
     </tr>
@@ -18,6 +19,7 @@
     <tr v-for="(ship, index) in ships" :key="index">
       <td>{{ ship.id }}</td>
       <td>{{ ship.name }}</td>
+      <td>{{ ship.status }}</td>
       <td>{{ getUsersByShipId(ship.id) }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
       <td class="material-icons">delete</td>
