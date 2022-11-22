@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="smartship@localhost" uuid="8a750634-868c-40c2-902c-b4dc059f75d6">
+    <data-source source="LOCAL" name="smartship" uuid="48456aed-37b4-4bcc-97a4-ab280e034fdf">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

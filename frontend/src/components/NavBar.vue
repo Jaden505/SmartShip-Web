@@ -38,8 +38,8 @@
       <div class="dropdown">
         <button class="dropbtn"><h1>Manage</h1></button>
         <div class="dropdown-content">
-          <h3><router-link class="link-dropdown" to="/manager/operators">Operators</router-link></h3>
-          <h3><router-link class="link-dropdown" to="/manager/ships">Ships</router-link></h3>
+          <h1><router-link class="link-dropdown" to="/manager/operators">Operators</router-link></h1>
+          <h1><router-link class="link-dropdown" to="/manager/ships">Ships</router-link></h1>
         </div>
       </div>
 

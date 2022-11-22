@@ -1,29 +1,40 @@
 package com.server.server.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "user")
+@Table(name = "user",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 public class User {
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long id;
+   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
 
-   @Column(name = "email")
+   @NotBlank
+   @Size(max = 20)
+   private String username;
+
+   @NotBlank
+   @Size(max = 50)
+   @Email
    private String email;
 
-   @Column(name = "password")
+   @NotBlank
+   @Size(max = 120)
    private String password;
 
-   @Column(name = "username")
-   private String username;
+   @ManyToMany(fetch = FetchType.LAZY)
+   @JoinTable(	name = "user_role",
+           joinColumns = @JoinColumn(name = "user_id"),
+           inverseJoinColumns = @JoinColumn(name = "role_id"))
+   private Set<Role> roles = new HashSet<>();
 
    @Column(name = "roleID")
    private int roleID;
@@ -31,12 +42,19 @@ public class User {
    @Column(name = "shipID")
    private int shipID;
 
-   public String getEmail() {
-      return email;
+   public User(String username, String email, String password) {
+      this.username = username;
+      this.email = email;
+      this.password = password;
    }
 
-   public String getPassword() {
-      return password;
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
    }
 
    public String getUsername() {
@@ -69,5 +87,20 @@ public class User {
 
    public void setShipID(int shipID) {
       this.shipID = shipID;
+
+   public String getEmail() {
+      return email;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+
+   public Set<Role> getRoles() {
+      return roles;
+   }
+
+   public void setRoles(Set<Role> roles) {
+      this.roles = roles;
    }
 }

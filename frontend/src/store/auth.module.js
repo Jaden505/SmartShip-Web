@@ -21,10 +21,29 @@ export const auth = {
                 }
             );
         },
+<<<<<<< HEAD
         // logout({ commit }) {
         //     AuthService.logout();
         //     commit('logout');
         // },
+=======
+        logout({ commit }) {
+            AuthService.logout();
+            commit('logout');
+        },
+        register({ commit }, user) {
+            return AuthService.register(user).then(
+                response => {
+                    commit('registerSuccess');
+                    return Promise.resolve(response.data);
+                },
+                error => {
+                    commit('registerFailure');
+                    return Promise.reject(error);
+                }
+            );
+        }
+>>>>>>> 95658ca2a82f7f420896e3a002eda3042a8c91f7
     },
     mutations: {
         loginSuccess(state, user) {
@@ -35,9 +54,22 @@ export const auth = {
             state.status.loggedIn = false;
             state.user = null;
         },
+<<<<<<< HEAD
         // logout(state) {
         //     state.status.loggedIn = false;
         //     state.user = null;
         // }
+=======
+        logout(state) {
+            state.status.loggedIn = false;
+            state.user = null;
+        },
+        registerSuccess(state) {
+            state.status.loggedIn = false;
+        },
+        registerFailure(state) {
+            state.status.loggedIn = false;
+        }
+>>>>>>> 95658ca2a82f7f420896e3a002eda3042a8c91f7
     }
 };

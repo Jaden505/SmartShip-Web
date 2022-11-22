@@ -1,59 +1,83 @@
 <template>
-  <div class="card">
-    <h1>Sea conditions</h1>
-
-    <div class="section">
-      <p>Battery pack 1 level</p>
-      <h1 class="condition-value">88%</h1>
-    </div>
-
-
-
-    <div class="section">
-      <p>Battery pack 2 level</p>
-      <h1 class="condition-value">67%</h1>
-    </div>
-
-    <br><br>
-
-    <div class="section">
-      <p>Battery pack 1 temperature</p>
-      <h1 class="condition-value">45°C</h1>
-    </div>
-
-    <div class="section">
-      <p>Battery pack 2 temperature</p>
-      <h1 class="condition-value">60°C</h1>
-    </div>
-  </div>
+  <canvas id="batteryInfo"></canvas>
 </template>
 
 <script>
+import Chart from "chart.js/auto";
+
 export default {
-  name: "BatteryInfo"
+  name: "BatteryInfo",
+  data() {
+    return {
+      chart: []
+    }
+  },
+  mounted() {
+    console.log('Component mounted')
+    // this.getChart();
+    const ctx = document.getElementById('batteryInfo').getContext('2d');
+
+    // Chart
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['9:45', '9:46', '9:47', '9:48', '9:49', '9:50'],
+        datasets: [{
+          label: 'Battery Pack 1',
+          data: [86, 86, 86, 85, 85, 85, 84],
+          barThickness: 40,
+          borderColor: '#15415E',
+          borderWidth: 2,
+        }, {
+            label: 'Battery Pack 2',
+            data: [99, 99, 98, 95, 95, 95],
+            barThickness: 40,
+            borderColor: '#29acda',
+            borderWidth: 2,
+          }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 17,
+                weight: "bold"
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 13,
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            font: {
+              size: 30
+            }
+          }
+        }
+      }
+    });
+
+    myChart;
+  },
 }
+
 </script>
 
 <style scoped>
-.card {
-  background-color: #163b7a;
-  color:white;
-  width: 700px;
-  display: inline-block;
-  padding: 30px;
-}
-h1{
-  color:deepskyblue;
-}
-
-.section {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-  display: inline-block;
-  width: 250px;
-}
-
-.condition-value {
-  color: deepskyblue;
-}
 </style>

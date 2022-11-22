@@ -1,95 +1,91 @@
 <template>
-  <div class="card">
-    <h1>Water Supply</h1>
-    <div class="chart-container">
-      <canvas id="waterSupplyChart"></canvas>
-    </div>
-    <div class="flex-container">
-      <div class="section">
-        <p>Current Consumption</p>
-        <h2 class="waterAmount">3T</h2>
-      </div>
-      <div class="section">
-        <p>Consumption Last 24h</p>
-        <h2 class="waterAmount">25T</h2>
-      </div>
-    </div>
-
-  </div>
+    <canvas id="waterSupplyChart"></canvas>
 </template>
 
 <script>
 import Chart from 'chart.js/auto';
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "WaterSupply",
+  data() {
+    return {
+      chart: []
+    }
+  },
   mounted() {
     console.log('Component mounted')
-    const ctx = document.getElementById('waterSupplyChart');
+    // this.getChart();
+    const ctx = document.getElementById('waterSupplyChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+    gradient.addColorStop(0, '#29acda');
+    gradient.addColorStop(1, 'rgba(0, 44, 72, 0)');
 
+
+    // Chart
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Tank 1', 'Tank 2'],
         datasets: [{
           label: 'Water',
-          data: [7, 10],
+          data: [],
+          backgroundColor: gradient,
+          fill: true,
           barThickness: 40,
-          backgroundColor: [
-            'rgba(75, 192, 192, 1)',
-            'rgba(75, 192, 192, 1)'
-          ],
-          borderColor: [
-            'rgba(75, 192, 192, 1)',
-            'rgba(75, 192, 192, 1)'
-          ],
           borderWidth: 1,
         }]
       },
       options: {
+        maintainAspectRatio: false,
+        responsive: true,
         scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 17,
+                weight: "bold"
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
           y: {
-            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 13,
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false,
+            font: {
+              size: 30
+            }
           }
         }
       }
     });
-    myChart;
-  }
+
+    // display data
+    ShipService.getWater().then(response => {
+      this.chart = response.data;
+      myChart.data.datasets[0].data[0] = response.data[0].waterTank1
+      myChart.data.datasets[0].data[1] = response.data[0].waterTank2
+      myChart.update()
+      myChart;
+    })
+
+  },
 }
 
 </script>
 
 <style scoped>
-.card {
-  background-color: #163b7a;
-  color: white;
-}
-
-h1 {
-  color: deepskyblue;
-}
-
-.chart-container {
-  /*display: flex;*/
-  /*margin-left: 42%;*/
-  /*height:300px;*/
-  /*width: 500px;*/
-}
-
-.section {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-  /*border-radius: 10px;*/
-  padding: 20px;
-  margin-left: 10px;
-}
-
-.flex-container {
-  display: flex;
-}
-
-.waterAmount {
-  color: deepskyblue;
-}
 </style>

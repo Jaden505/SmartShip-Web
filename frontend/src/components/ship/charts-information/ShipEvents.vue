@@ -1,7 +1,8 @@
 <template>
-  <div class="card">
+  <el-card shadow="always" class="el-card">
     <h1>Ship Events</h1>
-    <div class="container">
+
+    <div class="content">
       <ul>
         <li>
           Not working...
@@ -15,7 +16,7 @@
       </ul>
       <img id="shipImg" v-bind:src="ship">
     </div>
-  </div>
+  </el-card >
 </template>
 
 <script>
@@ -30,22 +31,12 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  background-color: #163b7a;
-  color: white;
-  width: 700px;
-}
-h1{
-  color: deepskyblue;
-}
-.container{
-  display: flex;
-  justify-content: space-around;
-}
-
-li{
-  margin-top:20px;
-  color: #dddddd;
+.el-card {
+  background: #002C48;
+  border: none;
+  color: #E0E1DD;
+  text-align: center;
+  border-radius: 20px;
 }
 
 #shipImg {

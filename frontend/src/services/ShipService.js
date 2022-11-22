@@ -1,8 +1,14 @@
-import http from "../http-common";
+import axios from "axios";
+
+const API_URL = 'http://localhost:8085/api/';
 
 class ShipDataService {
     getAll() {
-        return http.get("/ships");
+        return API_URL.get("ships");
+    }
+    // todo the right endpoint
+    getWater() {
+        return axios.get(API_URL + 'test/chart');
     }
 
     get(id){
