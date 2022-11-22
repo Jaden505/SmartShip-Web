@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <el-button type="primary" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
+  <el-button type="primary" class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
 
   <table>
     <thead>
@@ -42,9 +42,9 @@
 <script>
 import UserService from "../../services/user.service";
 import ShipService from "@/services/ShipService";
-import editForm from "@/components/manager/editUserForm";
+import editForm from "@/components/manager/forms/editUserForm";
 import {ref} from 'vue';
-import createForm from "@/components/manager/createUserForm";
+import createForm from "@/components/manager/forms/createUserForm";
 
 export default {
   name: "ManagerTable",
@@ -172,5 +172,11 @@ tbody tr:nth-child(even) {
 .material-icons {
   font-size: 28px;
   padding-top: 8px;
+}
+
+.create-user-btn {
+  float: right;
+  margin-right: 5.1%;
+  margin-top: 5%;
 }
 </style>
