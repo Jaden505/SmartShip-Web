@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ShipRepository extends JpaRepository<Ship, Integer> {
-
+    
     List<Ship> findShipById(int shipId);
 
 }

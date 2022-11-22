@@ -43,19 +43,19 @@ public class Ship {
     private int kW;
 
 
-    public Ship(String name, String status, String gpsLongtitude, String gpsLatitude, String origin, String destination, int waterTank1, int waterTank2,
-                int rpm, int kW) {
-        this.name = name;
-        this.status = status;
-        this.gpsLongtitude = gpsLongtitude;
-        this.gpsLatitude = gpsLatitude;
-        this.origin = origin;
-        this.destination = destination;
-        this.waterTank1 = waterTank1;
-        this.waterTank2 = waterTank2;
-        this.kW = kW;
-        this.rpm = rpm;
-    }
+//    public Ship(String name, String status, String gpsLongtitude, String gpsLatitude, String origin, String destination, int waterTank1, int waterTank2,
+//                int rpm, int kW) {
+//        this.name = name;
+//        this.status = status;
+//        this.gpsLongtitude = gpsLongtitude;
+//        this.gpsLatitude = gpsLatitude;
+//        this.origin = origin;
+//        this.destination = destination;
+//        this.waterTank1 = waterTank1;
+//        this.waterTank2 = waterTank2;
+//        this.kW = kW;
+//        this.rpm = rpm;
+//    }
 
     public int getRpm() {
         return rpm;
