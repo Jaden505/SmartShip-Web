@@ -52,7 +52,14 @@ public class UserController {
     }
 
     @PostMapping("/users/create")
-    public ResponseEntity<User> createUser(@RequestBody User newUser){
+    public ResponseEntity<User> createUser(@RequestBody User user_details){
+        User newUser = new User();
+
+        newUser.setUsername(user_details.getUsername());
+        newUser.setPassword(user_details.getPassword());
+        newUser.setEmail(user_details.getEmail());
+        newUser.setRoleID(1);
+
         try{
             User user = userRepo.save(newUser);
             return new ResponseEntity<>(user, HttpStatus.CREATED);

@@ -46,7 +46,7 @@ export default {
 
     create() {
       if (this.checkFields()) {
-        UserService.createUser()
+        UserService.createUser(this.newUser)
       }
       else {
         alert("Please fill all fields to create a user.")

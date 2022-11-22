@@ -19,7 +19,7 @@ class UserService {
     }
 
     createUser(user){
-        return http.put('/users/create',  {
+        return http.post('/users/create',  {
             username: user.username,
             password: user.password,
             email: user.email
