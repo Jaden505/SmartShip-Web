@@ -36,7 +36,7 @@ export default {
 
 .nav{
   width: 100%;
-  background-color: #002080;
+  background-color: #163b7a;
 }
 
 ul{
@@ -49,21 +49,22 @@ ul{
 }
 
 li{
-  background-color: white;
+  background-color: lightgrey;
   text-align: center;
   padding: 1%;
-  border: 2px solid black;
   margin: 1%;
   font-size: 24px;
   transition: background-color 0.7s;
 }
 
 li:hover{
-  background-color: deepskyblue;
+  background-color: dodgerblue;
+  color: lightgrey;
 }
 
 .active{
-  background-color: deepskyblue;
+  background-color: dodgerblue;
+  color: lightgrey;
 }
 
 a{
