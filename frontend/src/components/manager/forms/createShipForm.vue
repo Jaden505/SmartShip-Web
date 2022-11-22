@@ -19,7 +19,7 @@
         <div class="user-edit-field">
           <label>Status</label><br>
           <select v-model="newShip.status">
-            <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.name }}</option>
+            <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.status }}</option>
           </select>
         </div>
       </form>
@@ -107,6 +107,12 @@ label{
 }
 
 input{
+  width: 100%;
+  padding: 1%;
+  text-align: center;
+}
+
+select{
   width: 100%;
   padding: 1%;
   text-align: center;
