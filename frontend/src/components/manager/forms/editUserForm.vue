@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup" >
+  <div class="popup">
     <div class="popup-inner">
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
 
@@ -19,6 +19,12 @@
           <label>Password</label><br>
           <input type="password" v-model="current.password"><br/>
         </div>
+        <div class="user-edit-field">
+          <label>Ship</label><br>
+          <select v-model="current.shipID">
+            <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
+          </select>
+        </div>
       </form>
       <el-button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</el-button>
     </div>
@@ -27,21 +33,38 @@
 
 <script>
 import UserService from "@/services/user.service";
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "editUserForm",
   props: ['TogglePopup', 'operator'],
 
-  data(){
+  data() {
     return {
-      current: this.operator
+      current: this.operator,
+      ships: []
     }
   },
 
   methods: {
     update(user_id, current) {
       UserService.updateUser(user_id, current)
+    },
+
+    getShips() {
+      ShipService.getAll()
+          .then(response => {
+            this.ships = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
     }
+  },
+
+  created() {
+    this.getShips()
   }
 }
 </script>
@@ -66,23 +89,29 @@ export default {
   padding: 3%;
 }
 
-h1{
+h1 {
   color: white;
 }
 
-label{
+label {
   width: 100%;
   text-align: center;
   color: white;
 }
 
-input{
+input {
   width: 100%;
   padding: 1%;
   text-align: center;
 }
 
-button{
+select{
+  width: 100%;
+  padding: 1%;
+  text-align: center;
+}
+
+button {
   margin-top: 10%;
   width: 100%;
 }

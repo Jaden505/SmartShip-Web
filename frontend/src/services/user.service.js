@@ -17,7 +17,8 @@ class UserService {
         return http.put('/users/id=' + user_id,  {
             username: user.username,
             password: user.password,
-            email: user.email
+            email: user.email,
+            shipID: user.shipID
         });
     }
 
@@ -25,7 +26,7 @@ class UserService {
         return http.post('/users/create',  {
             username: user.username,
             password: user.password,
-            email: user.email
+            email: user.email,
         });
     }
 
