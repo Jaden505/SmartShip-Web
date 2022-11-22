@@ -18,7 +18,7 @@
       <td>{{ operator.id }}</td>
       <td>{{ operator.username }}</td>
       <td>{{ operator.email }}</td>
-      <td>{{ getShip(operator.shipID) }}</td>
+      <td>{{ getShipName(operator.shipID) }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
       <td class="material-icons" @click="deleteUser(operator.id)">delete</td>
     </tr>
@@ -46,8 +46,6 @@ import editForm from "@/components/manager/editUserForm";
 import {ref} from 'vue';
 import createForm from "@/components/manager/createUserForm";
 
-
-
 export default {
   name: "ManagerTable",
   components: {
@@ -57,12 +55,14 @@ export default {
 
   mounted() {
     this.getUsers();
+    this.getShips();
   },
 
   data() {
     return {
       users: [],
       operator: null,
+      ships: []
     }
   },
 
@@ -107,16 +107,23 @@ export default {
       }
     },
 
-    async getShip(ship_id) {
-
-      let response = await ShipService.get(ship_id);
-      let result = response.data[0].name
-      console.log(result)
-      return result
-
+    getShips() {
+      ShipService.getAll()
+          .then(response => {
+            this.ships = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
     },
 
+    getShipName(ship_id) {
+      let ship = this.ships.filter(ship => ship.id == ship_id);
 
+      if (ship !== []) return ship[0].name;
+      else return "No ship assigned";
+    }
   }
 }
 </script>
