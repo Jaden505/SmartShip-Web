@@ -53,7 +53,7 @@ public class UserController {
 
     @PostMapping("/users/create")
     public ResponseEntity<User> createUser(@RequestBody User user_details){
-        User newUser = new User();
+        User newUser = new User("", "", "");
 
         newUser.setUsername(user_details.getUsername());
         newUser.setPassword(user_details.getPassword());
@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @PutMapping("/users/id={id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user){
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
         try{
             Optional<User> findUser = userRepo.findById(id);
 
@@ -94,7 +94,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/id={id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable long id){
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
         try{
             userRepo.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

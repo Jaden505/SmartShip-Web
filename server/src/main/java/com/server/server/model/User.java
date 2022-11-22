@@ -48,7 +48,6 @@ public class User {
       this.password = password;
    }
 
-
    public int getId() {
       return id;
    }
@@ -87,6 +86,7 @@ public class User {
 
    public void setShipID(int shipID) {
       this.shipID = shipID;
+   }
 
    public String getEmail() {
       return email;
