@@ -5,19 +5,23 @@
     <div class="popup-inner">
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
 
-      <h1>Edit Operator</h1>
+      <h1>Edit Ship</h1>
       <form>
         <div class="user-edit-field">
-          <label>Name</label><br>
-          <input type="text" v-model="current.username"><br/>
+          <label>Ship name</label><br>
+          <input type="text" v-model="current.name"><br/>
         </div>
         <div class="user-edit-field">
-          <label>Email</label><br>
-          <input type="email" v-model="current.email"><br/>
+          <label>Location</label><br>
+          <input type="text" v-model="current.location"><br/>
         </div>
         <div class="user-edit-field">
-          <label>Password</label><br>
-          <input type="password" v-model="current.password"><br/>
+          <label>Origin</label><br>
+          <input type="text" v-model="current.origin"><br/>
+        </div>
+        <div class="user-edit-field">
+          <label>Destination</label><br>
+          <input type="text" v-model="current.destination"><br/>
         </div>
       </form>
       <el-button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</el-button>
@@ -26,21 +30,21 @@
 </template>
 
 <script>
-import UserService from "@/services/user.service";
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "editUserForm",
-  props: ['TogglePopup', 'operator'],
+  props: ['TogglePopup', 'ship'],
 
   data(){
     return {
-      current: this.operator
+      current: this.ship
     }
   },
 
   methods: {
-    update(user_id, current) {
-      UserService.updateUser(user_id, current)
+    update(ship_id, current) {
+        ShipService.updateShip(ship_id, current)
     }
   }
 }

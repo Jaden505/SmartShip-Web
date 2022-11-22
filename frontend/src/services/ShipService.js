@@ -13,12 +13,18 @@ class ShipDataService {
         return http.post("/ships/create", ship);
     }
 
-    update(id, ship) {
-        return http.put(`/ships/${id}`, ship);
+    updateShip(ship_id, ship) {
+        return http.put('/ships/shipId=' + ship_id,
+            {
+                name: ship.name,
+                location: ship.location,
+                origin: ship.origin,
+                destination: ship.destination
+            });
     }
 
-    delete(id) {
-        return http.delete(`/ships/${id}`);
+    deleteShip(ship_id) {
+        return http.delete("ships/shipId=" + ship_id)
     }
 }
 

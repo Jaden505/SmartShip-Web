@@ -22,7 +22,7 @@
       <td>{{ getRoleNameById(ship.status) }}</td>
       <td>{{ getUsersByShipId(ship.id) }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
-      <td class="material-icons">delete</td>
+      <td class="material-icons" @click="deleteShip(ship.id)">delete</td>
     </tr>
     </tbody>
   </table>
@@ -103,10 +103,11 @@ export default {
       this.ship = ship
     },
 
-    deleteUser(user_id){
-      if (confirm("Are you sure you want to delete this operator?")) {
-        UserService.deleteUser(user_id).catch(e => {
+    deleteShip(ship_id){
+      if (confirm("Are you sure you want to delete this ship?")) {
+        ShipService.deleteShip(ship_id).catch(e => {
           console.log(e)
+          alert("This ship has operators assigned!")
         })
         location.reload()
       }
