@@ -13,7 +13,7 @@
         <tr v-for="(ship, index) in ships" :key="index">
             <td>{{ ship.id }}</td>
             <td>{{ ship.name }}</td>
-            <td>{{ ship.operators }}</td>
+            <td>{{ getUsersByShipId(ship.id) }}</td>
             <td class="material-icons">edit</td>
             <td class="material-icons">delete</td>
         </tr>
@@ -24,22 +24,25 @@
   
   <script>
   import ShipDataService from "../../services/ShipService";
+  import UserService from "../../services/user.service";
 
   export default {
     name: "ManagerTable",
 
     mounted() {
+        this.getUsers()
         this.getShips();
     },
 
     data() {
         return {
             ships: [],
+            user: []
         }
     },
 
     methods: {
-        getShips() {
+      getShips() {
         ShipDataService.getAll()
             .then(response => {
                 this.ships = response.data;
@@ -48,7 +51,32 @@
             .catch(e => {
                 console.log(e);
         });
+        },
+
+      getUsers() {
+        UserService.getUsers()
+            .then(response => {
+              this.users = response.data;
+              console.log(response.data);
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        },
+
+      getUsersByShipId(ship_id) {
+        let operators = this.users.filter(user => user.shipID == ship_id);
+
+        if (operators !== []) {
+          operators.forEach((op, index) => {
+            operators[index] = op.username;
+          })
+
+          return operators.toString();
         }
+
+        else return "No operators";
+      }
     }
   }
   </script>
