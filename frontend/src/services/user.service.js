@@ -1,11 +1,10 @@
 import authHeader from './auth-header';
-// import http from "../http-common";
 import axios from "axios";
 
 const API_URL = 'http://localhost:8085/api/'
+import http from "../http-common";
 
 class UserService {
-
     getUsers() {
         return axios.get(API_URL + 'users/all');
     }
@@ -15,7 +14,15 @@ class UserService {
     }
 
     updateUser(user_id, user){
-        return axios.put(API_URL + 'users/id=' + user_id,  {
+        return http.put('/users/id=' + user_id,  {
+            username: user.username,
+            password: user.password,
+            email: user.email
+        });
+    }
+
+    createUser(user){
+        return http.post('/users/create',  {
             username: user.username,
             password: user.password,
             email: user.email
@@ -23,7 +30,7 @@ class UserService {
     }
 
     deleteUser(user_id){
-        return axios.delete(API_URL + 'users/id=' + user_id);
+        return http.delete('/users/id=' + user_id);
     }
 }
 
