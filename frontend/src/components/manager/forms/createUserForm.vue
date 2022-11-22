@@ -19,6 +19,12 @@
           <label>Password</label><br>
           <input type="password" v-model="newUser.password"><br/>
         </div>
+        <div class="user-edit-field">
+          <label>Ship</label><br>
+          <select v-model="newUser.shipID">
+            <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
+          </select>
+        </div>
       </form>
       <el-button class="primary update-btn" @click="TogglePopup(); create()">Create</el-button>
     </div>
@@ -27,7 +33,7 @@
 
 <script>
 import UserService from "@/services/user.service";
-import User from "@/models/user"
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "createUserForm",
@@ -35,7 +41,14 @@ export default {
 
   data(){
     return {
-      newUser: new User("", "", "")
+      newUser: {
+        username: null,
+        email: null,
+        password: null,
+        shipID: null,
+      },
+
+      ships: []
     }
   },
 
@@ -51,7 +64,23 @@ export default {
       else {
         alert("Please fill all fields to create a user.")
       }
+      location.reload()
+    },
+
+    getShips() {
+      ShipService.getAll()
+          .then(response => {
+            this.ships = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
     }
+  },
+
+  created() {
+    this.getShips()
   }
 }
 </script>
@@ -87,6 +116,12 @@ label{
 }
 
 input{
+  width: 100%;
+  padding: 1%;
+  text-align: center;
+}
+
+select{
   width: 100%;
   padding: 1%;
   text-align: center;

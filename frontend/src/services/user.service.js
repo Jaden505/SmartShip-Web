@@ -27,6 +27,7 @@ class UserService {
             username: user.username,
             password: user.password,
             email: user.email,
+            shipID: user.shipID
         });
     }
 
