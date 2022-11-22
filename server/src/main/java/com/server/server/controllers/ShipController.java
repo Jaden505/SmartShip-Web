@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,5 +53,24 @@ public class ShipController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @PutMapping("/ships/shipId={id}")
+    public ResponseEntity<Ship> updateShip(@PathVariable int id, @RequestBody Ship ship){
+        try{
+            List<Ship> findShip = shipRepo.findShipById(id);
+            Ship foundShip = findShip.get(0);
+
+            foundShip.setName(ship.getName());
+            foundShip.setLocation(ship.getLocation());
+            foundShip.setOrigin(ship.getName());
+            foundShip.setDestination(ship.getDestination());
+
+            return new ResponseEntity<>(shipRepo.save(foundShip), HttpStatus.OK);
+            
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
