@@ -98,6 +98,7 @@ export default {
 .dashboard-content {
   width: 100%;
   border-right: 0.0625rem solid #F2F2F2;
+  overflow: scroll;
 }
 
 .dashboard-list__item {
