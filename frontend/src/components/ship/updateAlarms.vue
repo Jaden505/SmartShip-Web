@@ -1,48 +1,47 @@
 <template>
-  <form @submit="handleAlarm" :validation-schema="schema">
     <div id="container">
       <div id="allParameters">
-        <div class="Parameters">
+        <div class="submit-form">
+        <div class="Parameters form-group">
           <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Parameter</label>
-          <field name="parameter" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Parameter"/>
-          <ErrorMessage name="parameter" class="error-feedback" />
+          <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
         </div>
-        <div class="Parameters">
+        <div class="Parameters form-group">
           <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
-          <field name="category" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Category"/>
-          <ErrorMessage name="category" class="error-feedback" />
+          <input v-model="alarm.category" class="form-control" type="text" name="category"/>
         </div>
-        <div class="Parameters">
+        <div class="Parameters form-group">
           <label for="value" class="block mb-2 text-sm font-medium text-white-text">Value</label>
-          <field name="value" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Value"/>
-          <ErrorMessage name="value" class="error-feedback" />
+          <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
         </div>
-        <div class="Parameters">
+        <div class="Parameters form-group">
           <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">setted up Value</label>
-          <field name="settedUpValue" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="setted up Value"/>
-          <ErrorMessage name="settedUpValue" class="error-feedback" />
+          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
         </div>
-        <div class="Parameters">
+        <div class="Parameters form-group">
           <label for="id" class="block mb-2 text-sm font-medium text-white-text">Ship id</label>
-          <field name="shipId" class="form-control bg-gray-700 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Ship id"/>
-          <ErrorMessage name="shipId" class="error-feedback" />
+          <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
         </div>
-        <button class="button" id="cancel" @click="cancelModal()">
-          {{ cancel }}
-        </button>
+<!--        <button class="button" id="cancel" @click="cancelModal()">-->
+<!--          {{ cancel }}-->
+<!--        </button>-->
 
-        <button class="button" id="update" @click="updateAlarms()">
-          {{ update }}
-        </button>
+          <div class="form-group">
+            <button class="button" id="update" @click="addAlarm">
+                      {{ update }}
+            </button>
+          </div>
+
+        </div>
       </div>
     </div>
-  </form>
 </template>
 
 <script>
+import AlarmService from "@/services/AlarmService";
+
 export default {
   name: "AddAlarms",
-  props:["alarm"],
   data() {
     return {
       parametertext: "Parameter: ",
@@ -52,19 +51,34 @@ export default {
       ship_idtext: "Ship-id: ",
       update: "Update",
       cancel: "Cancel",
-      parameter: "",
-      category: "",
-      valueSinceLastUpdate: "",
-      settedUpValue: "",
+      alarm: {
+        parameter: "",
+        category: "",
+        valueSinceLastUpdate: "",
+        settedUpValue: "",
+        shipId:"",
+      }
     }
   },
-  methods:{
-    // eslint-disable-next-line vue/no-dupe-keys
-    cancelModal(){
-      this.$emit('cancel')
-    },
-    updateAlarms(){
-      this.$emit('update')
+  methods: {
+    addAlarm() {
+
+      const alarm = {
+        parameter: this.alarm.parameter,
+        category: this.alarm.category,
+        valueSinceLastUpdate: this.alarm.valueSinceLastUpdate,
+        settedUpValue: this.alarm.settedUpValue,
+        shipId: this.alarm.shipId
+      };
+
+      AlarmService.addAlarm(alarm)
+          .then(response => {
+            window.location.reload(true)
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
   }
 }
@@ -119,7 +133,10 @@ input{
 
 /*Bartek zn schuld */
 
-.form-control{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:.375rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+input{
+  width: 100%;
+  height: 20%;
+}
 
 
 </style>

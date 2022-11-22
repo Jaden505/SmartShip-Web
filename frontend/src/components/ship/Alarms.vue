@@ -25,8 +25,7 @@
         <!--        <input type="button" class="flex-child" id="slide_start_button">-->
         <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
     </div>
-  <AddAlarms v-if="this.select" :alarm="this.selectedalarm" @cancel="cancelModal()" @update="updateAlarms(this.selectedalarm.id)"></AddAlarms>
-  <AddAlarms v-if="this.add" :alarm="this.addedalarm" @cancel="cancelModal()" @click="addAlarm()"></AddAlarms>
+  <AddAlarms v-if="this.add"></AddAlarms>
 </template>
 <script>
 import AddAlarms from "@/components/ship/updateAlarms";
@@ -49,7 +48,6 @@ export default {
       select: false,
       add: false,
       selectedalarm:"",
-      addedalarm: "",
     }
   },
   methods: {
@@ -66,17 +64,6 @@ export default {
     openPop(){
       this.add = true;
     },
-    addAlarm(){
-      AlarmService.post()
-          .then(response => {
-            window.location.reload(true)
-            console.log(response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-    },
-
     updateAlarms(id) {
       AlarmService.put(id)
           .then(response => {
