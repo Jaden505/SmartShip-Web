@@ -18,7 +18,7 @@
       <td>{{ operator.id }}</td>
       <td>{{ operator.username }}</td>
       <td>{{ operator.email }}</td>
-      <td>{{ operator.shipID }}</td>
+      <td>{{ getShip(operator.shipID) }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTrigger'); this.operator = operator">edit</td>
       <td class="material-icons" @click="deleteUser(operator.id)">delete</td>
     </tr>
@@ -36,8 +36,9 @@
 
 <script>
 import UserService from "../../services/user.service";
+import ShipService from "@/services/ShipService";
 import editForm from "@/components/manager/editUserForm";
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 export default {
   name: "ManagerTable",
@@ -52,7 +53,7 @@ export default {
   data() {
     return {
       users: [],
-      operator: null
+      operator: null,
     }
   },
 
@@ -94,7 +95,18 @@ export default {
         })
         location.reload()
       }
-    }
+    },
+
+    async getShip(ship_id) {
+
+      let response = await ShipService.get(ship_id);
+      let result = response.data[0].name
+      console.log(result)
+      return result
+
+    },
+
+
   }
 }
 </script>

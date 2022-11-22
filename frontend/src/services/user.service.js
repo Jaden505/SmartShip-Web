@@ -1,5 +1,5 @@
 import authHeader from './auth-header';
-import http from "../http-common";
+// import http from "../http-common";
 import axios from "axios";
 
 const API_URL = 'http://localhost:8085/api/'
@@ -7,11 +7,11 @@ const API_URL = 'http://localhost:8085/api/'
 class UserService {
 
     getUsers() {
-        return http.get('/users/all');
+        return axios.get(API_URL + 'users/all');
     }
 
     getUsersByRole(role_id) {
-        return http.post('/users/role=' + role_id, { headers: authHeader() });
+        return axios.post(API_URL + 'users/role=' + role_id, { headers: authHeader() });
     }
 
     updateUser(user_id, user){

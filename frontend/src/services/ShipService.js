@@ -1,12 +1,16 @@
 import http from "../http-common";
+import axios from "axios";
+
+const API_URL = 'http://localhost:8085/api/'
 
 class ShipDataService {
     getAll() {
         return http.get("/ships");
     }
 
-    get(id) {
-        return http.get(`/ships/${id}`);
+
+    get(id){
+        return axios.get(API_URL + 'ships/shipId=' + id)
     }
 
     create(data) {

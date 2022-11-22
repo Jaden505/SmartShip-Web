@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/users/role={roleID}")
-    public ResponseEntity<List<User>> getUsersByRole(@PathVariable Integer roleID){
+    public ResponseEntity<List<User>> getUsersByRole(@PathVariable int roleID){
         try{
             List<User> users = userRepo.findByRoleID(roleID);
 
