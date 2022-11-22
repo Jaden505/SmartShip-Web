@@ -19,7 +19,7 @@ import java.util.Optional;
 public class AlarmController {
 
     @Autowired
-    private AlarmRepository alarmRepo;
+    AlarmRepository alarmRepo;
 
     @GetMapping("/Alarms")
     public List<Alarm> allNotifications(Model alarm) {
@@ -51,13 +51,15 @@ public class AlarmController {
         }
     }
 //
-    @PostMapping("/Alarms/{id}")
+    @PostMapping("/Alarms")
     public ResponseEntity<Alarm>  addAlarms(@RequestBody Alarm alarm){
-        if(alarm==null){
-            Alarm data = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getValueSinceLastUpdate(), alarm.getSettedUpValue(), alarm.getShip_id());
-            return new ResponseEntity<>(alarmRepo.save(alarm), HttpStatus.OK);
+        try{
+            Alarm _alarm = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getValueSinceLastUpdate(), alarm.getSettedUpValue(), alarm.getShip_id());
+            return new ResponseEntity<>(alarmRepo.save(_alarm), HttpStatus.OK);
         }
-        else     return new ResponseEntity<>(HttpStatus.CONFLICT);
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
 }

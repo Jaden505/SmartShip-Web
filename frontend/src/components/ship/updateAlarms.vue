@@ -1,35 +1,37 @@
 <template>
-  <div id="container">
-    <div id="allParameters">
-      <div class="Parameters">
-        {{ parametertext }}
-        <input type="text" v-model="this.alarm.parameter"/>
-      </div>
-      <div class="Parameters">
-        {{ categorytext }}
-        <input type="text" v-model="this.alarm.category"/>
-      </div>
-      <div class="Parameters">
-        {{ realTimeValuetext }}
-        <input type="number" v-model="this.alarm.valueSinceLastUpdate"/>
-      </div>
-      <div class="Parameters">
-        {{ settedUpValuetext }}
-        <input type="number" v-model="this.alarm.settedUpValue"/>
-      </div>
-      <div class="Parameters">
-        {{ ship_idtext }}
-        <input type="text" v-model="this.alarm.ship_id"/>
-      </div>
-      <button class="button" id="cancel" @click="cancelModal()">
-        {{ cancel }}
-      </button>
+  <form>
+    <div id="container">
+      <div id="allParameters">
+        <div class="Parameters">
+          {{ parametertext }}
+          <input type="text" v-model="this.alarm.parameter"/>
+        </div>
+        <div class="Parameters">
+          {{ categorytext }}
+          <input type="text" v-model="this.alarm.category"/>
+        </div>
+        <div class="Parameters">
+          {{ realTimeValuetext }}
+          <input type="number" v-model="this.alarm.valueSinceLastUpdate"/>
+        </div>
+        <div class="Parameters">
+          {{ settedUpValuetext }}
+          <input type="number" v-model="this.alarm.settedUpValue"/>
+        </div>
+        <div class="Parameters">
+          {{ ship_idtext }}
+          <input type="text" v-model="this.alarm.ship_id"/>
+        </div>
+        <button class="button" id="cancel" @click="cancelModal()">
+          {{ cancel }}
+        </button>
 
-      <button class="button" id="update" @click="updateAlarms()">
-        {{ update }}
-      </button>
+        <button class="button" id="update" @click="updateAlarms()">
+          {{ update }}
+        </button>
+      </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>

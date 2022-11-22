@@ -1,20 +1,22 @@
-import http from "../http-common";
+import axios from 'axios';
+const API_URL = 'http://localhost:8085/api/test/Alarms';
 
 class Alarms {
     getAll(){
-        return  http.get("/test/Alarms")
+        return axios.get(API_URL);
     }
 
     delete(index){
         // return http.delete("/test/Alarms/{index}")
-        return http.delete("/test/Alarms/"+index)
+        return axios.delete(API_URL + "/" + index);
     }
+
     put(id){
         // return http.delete("/test/Alarms/{index}")
-        return http.put("/test/Alarms/"+id)
+        return axios.put(API_URL + "/" + id);
     }
-    post(id){
-        return http.post("/test/Alarms/"+id)
+    post(){
+        return axios.post(API_URL);
     }
     // add(alarm){
     //     // return http.delete("/test/Alarms/{index}")

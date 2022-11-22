@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "alarm")
 public class Alarm {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "parameter")
@@ -35,7 +35,11 @@ public class Alarm {
 //        this.ship_id = ship_id;
 //    }
     public Alarm(String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
-
+        this.parameter = parameter;
+        this.category = category;
+        this.valueSinceLastUpdate = valueSinceLastUpdate;
+        this.settedUpValue = settedUpValue;
+        this.ship_id = ship_id;
     }
 
     public Alarm() {
