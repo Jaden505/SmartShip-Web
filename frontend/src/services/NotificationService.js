@@ -1,22 +1,9 @@
-import http from "../http-common";
-
+import axios from 'axios';
+const API_URL = 'http://localhost:8085/api/test/Notification-Overview';
 class Notification {
     getAll(){
-        return  http.get("/test/Notification-Overview")
+        return axios.get(API_URL);
     }
-
-    delete(index){
-        // return http.delete("/test/Alarms/{index}")
-        return http.delete("/test/Notification-Overview/"+index)
-    }
-    put(id){
-        // return http.delete("/test/Alarms/{index}")
-        return http.put("/test/Notification-Overview/"+id)
-    }
-    // add(alarm){
-    //     // return http.delete("/test/Alarms/{index}")
-    //     return http.put("/test/Alarms/"+alarm)
-    // }
 }
 
 

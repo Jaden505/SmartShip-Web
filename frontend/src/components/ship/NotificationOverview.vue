@@ -7,7 +7,11 @@
           <div v-for="(notification, index) in notifications"
                :key="index" class="dashboard-list__item" :class="{'active': selectedNotification === notification}"
                @click="setNotification(notification)">
-            <h2>{{ notification.title }}</h2><!-- Date (Element)--><span>{{notification.date}}</span>
+            <h2>{{ notification.title }}</h2><!-- Date (Element)-->
+            <span>
+              {{new Date(notification.date).getDate()}}-{{new Date(notification.date).getMonth()+1}}-{{new Date(notification.date).getFullYear()}}
+              {{new Date(notification.date).getHours()}}:{{new Date(notification.date).getMinutes()}}
+            </span>
           </div>
         </div>
       </div>
@@ -36,14 +40,13 @@ import NotificationService from "@/services/NotificationService";
 export default {
   mounted() {
     this.getNotifications();
-
   },
   name: "NotificationOverview",
   data() {
     return {
       selected: false,
       notifications: [],
-      selectedNotification: ""
+      selectedNotification: "",
     }
   },
   methods: {
@@ -62,16 +65,6 @@ export default {
             console.log(e)
           })
     },
-    deleteNotification(index) {
-      NotificationService.delete(index)
-          .then(response => {
-            window.location.reload(true)
-            console.log(response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-    }
   }
 }
 </script>
