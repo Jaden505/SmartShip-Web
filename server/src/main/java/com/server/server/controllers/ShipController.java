@@ -58,7 +58,8 @@ public class ShipController {
         Ship newShip = new Ship();
 
         newShip.setName(ship_details.getName());
-        newShip.setLocation(ship_details.getLocation());
+        newShip.setGpsLongtitude(ship_details.getGpsLongtitude());
+        newShip.setGpsLatitude(ship_details.getGpsLatitude());
         newShip.setStatus(ship_details.getStatus());
 
         try{
@@ -77,7 +78,8 @@ public class ShipController {
             Ship foundShip = findShip.get(0);
 
             foundShip.setName(ship.getName());
-            foundShip.setLocation(ship.getLocation());
+            foundShip.setGpsLongtitude(ship.getGpsLongtitude());
+            foundShip.setGpsLatitude(ship.getGpsLatitude());
             foundShip.setOrigin(ship.getName());
             foundShip.setDestination(ship.getDestination());
 
@@ -90,13 +92,14 @@ public class ShipController {
     }
 
     @DeleteMapping("/ships/shipId={id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
-        try{
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id) {
+        try {
             shipRepo.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
 
     // todo eventually this can be deleted for now use /test
     @GetMapping("/test/chart")
@@ -112,6 +115,5 @@ public class ShipController {
             return ship;
         }
         return null;
-    }
     }
 }
