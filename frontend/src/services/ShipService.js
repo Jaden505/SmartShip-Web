@@ -6,7 +6,7 @@ class ShipDataService {
     }
 
     get(id){
-        return http.get('ships/shipId=' + id)
+        return http.get('/ships/shipId=' + id)
     }
 
     create(ship) {

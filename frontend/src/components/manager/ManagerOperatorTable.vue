@@ -1,9 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="button-section">
-    <el-button type="primary" class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
-  </div>
+  <el-button type="primary" class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
 
   <table>
     <thead>

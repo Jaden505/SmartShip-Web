@@ -19,9 +19,7 @@
         <div class="user-edit-field">
           <label>Status</label><br>
           <select v-model="newShip.status">
-            <option value="1">Active</option>
-            <option value="2">Idle</option>
-            <option value="3">Maintenance</option>
+            <option v-for="(role,index) in roles" :key="index" :value="role.id">{{ role.name }}</option>
           </select>
         </div>
       </form>
@@ -32,15 +30,21 @@
 
 <script>
 import ShipService from "@/services/ShipService";
+import RoleService from "@/services/role.service";
 import Ship from "@/models/ship"
 
 export default {
   name: "createUserForm",
   props: ['TogglePopup'],
 
+  mounted() {
+    this.getRoles();
+  },
+
   data(){
     return {
-      newShip: new Ship("", "", "")
+      newShip: new Ship("", "", ""),
+      roles: []
     }
   },
 
@@ -56,6 +60,17 @@ export default {
       else {
         alert("Please fill all fields to create a ship.")
       }
+    },
+
+    getRoles() {
+      RoleService.get()
+          .then(response => {
+            this.roles = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
     }
   }
 }
