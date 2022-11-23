@@ -1,20 +1,19 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-import http from "../http-common";
 
-const API_URL = 'http://localhost:8081/api/test/';
+const API_URL = 'http://localhost:8085/api/test/';
 
 class UserService {
     getUsers() {
-        return http.get( 'users/all');
+        return axios.get( API_URL + 'users/all');
     }
 
     getUsersByRole(role_id) {
-        return http.post( 'users/role=' + role_id, { headers: authHeader() });
+        return axios.post( API_URL + 'users/role=' + role_id, { headers: authHeader() });
     }
 
     updateUser(user_id, user){
-        return http.put('/users/id=' + user_id,  {
+        return axios.put(API_URL + 'users/id=' + user_id,  {
             username: user.username,
             password: user.password,
             email: user.email,
@@ -23,7 +22,7 @@ class UserService {
     }
 
     createUser(user){
-        return http.post('/users/create',  {
+        return axios.post('users/create',  {
             username: user.username,
             password: user.password,
             email: user.email,
@@ -32,7 +31,7 @@ class UserService {
     }
 
     deleteUser(user_id) {
-        return http.delete('/users/id=' + user_id);
+        return axios.delete(API_URL + 'users/id=' + user_id);
     }
 
     getPublicContent() {

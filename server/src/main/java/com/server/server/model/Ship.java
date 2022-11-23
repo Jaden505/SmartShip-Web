@@ -15,9 +15,6 @@ public class Ship {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "location")
-    private String location;
-
     @Column(name = "gps_latitude")
     private String gpsLatitude;
 
@@ -137,14 +134,6 @@ public class Ship {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     @Override

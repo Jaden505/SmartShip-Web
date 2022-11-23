@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/test")
 public class UserController {
     @Autowired
     private UserRepository userRepo;
