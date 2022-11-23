@@ -15,7 +15,8 @@ module.exports = {
           'light': "#60EFFF",
           'dark': "#141419",
           'card-blue': '#202020',
-          'light-card': '#15415E'
+          'light-card': '#15415E',
+          'nice': '#474C4F'
         },
         white: {
           'text': '#E0E1DD',
