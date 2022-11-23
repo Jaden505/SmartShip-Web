@@ -1,12 +1,12 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <el-button type="primary" class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</el-button>
+  <button class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
 
   <table>
     <thead>
     <tr>
-      <th>Operator Id</th>
+      <th>Operator Id</th>c
       <th>Operator Name</th>
       <th>Operator Email</th>
       <th>Assigned Ship</th>

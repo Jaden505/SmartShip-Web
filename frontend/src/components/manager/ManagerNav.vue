@@ -34,11 +34,6 @@ export default {
 
 <style scoped>
 
-.nav{
-  width: 100%;
-  background-color: #163b7a;
-}
-
 ul{
   width: 40%;
   margin-left: auto;
