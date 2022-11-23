@@ -33,7 +33,7 @@ public class User {
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(	name = "user_role",
            joinColumns = @JoinColumn(name = "user_id"),
-           inverseJoinColumns = @JoinColumn(name = "role_id"))
+           inverseJoinColumns = @JoinColumn(name = "roleID"))
    private Set<Role> roles = new HashSet<>();
 
    @Column(name = "roleID")
@@ -42,10 +42,7 @@ public class User {
    @Column(name = "shipID")
    private int shipID;
 
-   public User(String username, String email, String password) {
-      this.username = username;
-      this.email = email;
-      this.password = password;
+   public User() {
    }
 
    public int getId() {

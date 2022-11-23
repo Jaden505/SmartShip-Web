@@ -53,7 +53,7 @@ public class UserController {
 
     @PostMapping("/users/create")
     public ResponseEntity<User> createUser(@RequestBody User user_details){
-        User newUser = new User("", "", "");
+        User newUser = new User();
 
         newUser.setUsername(user_details.getUsername());
         newUser.setPassword(user_details.getPassword());

@@ -1,17 +1,10 @@
-<<<<<<< HEAD
-=======
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
->>>>>>> 95658ca2a82f7f420896e3a002eda3042a8c91f7
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body{
-<<<<<<< HEAD
-    background-color: #00111C;
-=======
     background-color: #151515;
->>>>>>> 95658ca2a82f7f420896e3a002eda3042a8c91f7
     font-family: Arial, Helvetica, sans-serif;
 }

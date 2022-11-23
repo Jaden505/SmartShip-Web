@@ -21,12 +21,6 @@ export const auth = {
                 }
             );
         },
-<<<<<<< HEAD
-        // logout({ commit }) {
-        //     AuthService.logout();
-        //     commit('logout');
-        // },
-=======
         logout({ commit }) {
             AuthService.logout();
             commit('logout');
@@ -43,7 +37,6 @@ export const auth = {
                 }
             );
         }
->>>>>>> 95658ca2a82f7f420896e3a002eda3042a8c91f7
     },
     mutations: {
         loginSuccess(state, user) {
@@ -54,12 +47,6 @@ export const auth = {
             state.status.loggedIn = false;
             state.user = null;
         },
-<<<<<<< HEAD
-        // logout(state) {
-        //     state.status.loggedIn = false;
-        //     state.user = null;
-        // }
-=======
         logout(state) {
             state.status.loggedIn = false;
             state.user = null;
@@ -70,6 +57,5 @@ export const auth = {
         registerFailure(state) {
             state.status.loggedIn = false;
         }
->>>>>>> 95658ca2a82f7f420896e3a002eda3042a8c91f7
     }
 };
