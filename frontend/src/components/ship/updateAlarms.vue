@@ -2,6 +2,7 @@
     <div id="container">
       <div id="allParameters">
         <div class="submit-form">
+        <p class="title">Create new alarm</p>
         <div class="Parameters form-group">
           <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Parameter</label>
           <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
@@ -26,11 +27,9 @@
 <!--          {{ cancel }}-->
 <!--        </button>-->
 
-          <div class="form-group">
             <button class="button" id="update" @click="addAlarm">
                       {{ update }}
             </button>
-          </div>
 
         </div>
       </div>
@@ -134,8 +133,30 @@ input{
 /*Bartek zn schuld */
 
 input{
-  width: 100%;
+  width: 70%;
   height: 20%;
+  margin-left: 78px;
+}
+
+div.submit-form{
+  width: 500px;
+}
+
+label{
+  margin-left: 78px;
+}
+
+.button{
+  width: 35%;
+  margin-left: 252px;
+  margin-bottom: 23px;
+}
+
+.title{
+  margin-top: 20px;
+  margin-left: 130px;
+  font-size: 200%;
+  color: white;
 }
 
 
