@@ -37,13 +37,11 @@ const routes = [
                 component: EngineInformation,
                 props: true
             },
-<<<<<<< HEAD
             {path : "/manager", component: ManagerDashboard,
                 children: [
                     {path: "/manager/operators", component: ManagerOperator},
                     {path: "/manager/ships", component: ManagerShips}
-            ]}
-=======
+            ]},
             {
                 path: "/notification-Overview",
                 component: NotificationOverview,
@@ -54,7 +52,6 @@ const routes = [
                 component: Alarms,
                 props: true
             }
->>>>>>> 7870fd00be9db7e294096423b86273f6b8152991
         ]
     }
 ]
