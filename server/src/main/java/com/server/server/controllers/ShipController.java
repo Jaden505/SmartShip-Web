@@ -61,6 +61,7 @@ public class ShipController {
         newShip.setGpsLongtitude(ship_details.getGpsLongtitude());
         newShip.setGpsLatitude(ship_details.getGpsLatitude());
         newShip.setStatus(ship_details.getStatus());
+        newShip.setLocation(ship_details.getLocation());
         newShip.setRpm(0);
         newShip.setkW(0);
         newShip.setWaterTank1(1);
