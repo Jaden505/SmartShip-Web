@@ -1,5 +1,6 @@
 import axios from "axios";
-import http from "../http-common"
+
+import http from "../http-common";
 
 const API_URL = 'http://localhost:8085/api/';
 
