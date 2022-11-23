@@ -1,6 +1,5 @@
 import http from "../http-common";
 
-
 class ShipDataService {
     getAll() {
         return http.get("/ships/all");
