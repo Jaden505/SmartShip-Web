@@ -58,8 +58,8 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faShip, faBolt, faStar, faMoon, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons'
-library.add(faShip, faBolt, faStar, faMoon, faBell, faArrowRightFromBracket)
+import { faShip, faBolt, faStar, faEye, faMoon, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons'
+library.add(faShip, faBolt, faStar, faEye, faMoon, faBell, faArrowRightFromBracket)
 
 export default {
   name: "SideBar",
@@ -71,6 +71,8 @@ export default {
         {name: 'Ship Information', to: '/ship-overview', icon: <font-awesome-icon icon="fa-solid fa-ship" />
         },
         {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
+        },
+        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-eye"/>
         }
       ],
       items_bottom: [

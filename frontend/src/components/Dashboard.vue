@@ -92,6 +92,8 @@ export default {
         {name: 'Ship Information', to: '/ship-overview', icon: <font-awesome-icon icon="fa-solid fa-ship" />
         },
         {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
+        },
+        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-star" />
         }
       ]
     }
