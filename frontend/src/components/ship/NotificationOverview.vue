@@ -4,8 +4,8 @@
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
-        <div class="grid grid-cols-2 gap-8 w-100 p-4">
-          <div class="bg-blue-card-blue p-4 rounded-md">
+        <div class="flex w-full p-4">
+          <div class="bg-blue-card-blue p-4 m-2 rounded-md w-1/3">
             <div class="pb-4">
               <h4 class="text-xl font-semibold text-white-text">Notifications</h4>
             </div>
@@ -19,7 +19,7 @@
             </span>
             </div>
           </div>
-          <div class="bg-blue-card-blue p-4 rounded-md text-white-text">
+          <div class="bg-blue-card-blue p-4 m-2 rounded-md text-white-text w-2/3">
             <div class="pb-4">
               <h4 class="text-xl font-semibold text-white-text">Details</h4>
             </div>
