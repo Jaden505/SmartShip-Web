@@ -31,16 +31,16 @@ public class Ship {
     private String destination;
 
     @Column(name = "water_tank1")
-    private int waterTank1;
+    private Integer waterTank1;
 
     @Column(name = "water_tank2")
-    private int waterTank2;
+    private Integer waterTank2;
 
     @Column(name = "rpm")
-    private int rpm;
+    private Integer rpm;
 
     @Column(name = "kw")
-    private int kW;
+    private Integer kW;
 
 
 //    public Ship(String name, String status, String gpsLongtitude, String gpsLatitude, String origin, String destination, int waterTank1, int waterTank2,
@@ -57,7 +57,7 @@ public class Ship {
 //        this.rpm = rpm;
 //    }
 
-    public int getRpm() {
+    public Integer getRpm() {
         return rpm;
     }
 
@@ -65,7 +65,7 @@ public class Ship {
         this.rpm = rpm;
     }
 
-    public int getkW() {
+    public Integer getkW() {
         return kW;
     }
 
@@ -73,19 +73,19 @@ public class Ship {
         this.kW = kW;
     }
 
-    public int getWaterTank1() {
+    public Integer getWaterTank1() {
         return waterTank1;
     }
 
-    public void setWaterTank1(int waterTank1) {
+    public void setWaterTank1(Integer waterTank1) {
         this.waterTank1 = waterTank1;
     }
 
-    public int getWaterTank2() {
+    public Integer getWaterTank2() {
         return waterTank2;
     }
 
-    public void setWaterTank2(int waterTank2) {
+    public void setWaterTank2(Integer waterTank2) {
         this.waterTank2 = waterTank2;
     }
 

@@ -40,7 +40,7 @@ public class User {
    private int roleID;
 
    @Column(name = "shipID")
-   private int shipID;
+   private Integer shipID;
 
    public User() {
    }
@@ -77,11 +77,11 @@ public class User {
       this.roleID = roleID;
    }
 
-   public int getShipID() {
+   public Integer getShipID() {
       return shipID;
    }
 
-   public void setShipID(int shipID) {
+   public void setShipID(Integer shipID) {
       this.shipID = shipID;
    }
 

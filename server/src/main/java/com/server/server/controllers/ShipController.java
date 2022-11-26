@@ -62,10 +62,6 @@ public class ShipController {
         newShip.setGpsLatitude(ship_details.getGpsLatitude());
         newShip.setStatus(ship_details.getStatus());
         newShip.setLocation(ship_details.getLocation());
-        newShip.setRpm(0);
-        newShip.setkW(0);
-        newShip.setWaterTank1(1);
-        newShip.setWaterTank1(2);
 
         try {
             Ship ship = shipRepo.save(newShip);
@@ -87,10 +83,6 @@ public class ShipController {
             foundShip.setGpsLatitude(ship.getGpsLatitude());
             foundShip.setOrigin(ship.getName());
             foundShip.setDestination(ship.getDestination());
-            foundShip.setRpm(0);
-            foundShip.setkW(0);
-            foundShip.setWaterTank1(1);
-            foundShip.setWaterTank1(2);
 
             return new ResponseEntity<>(shipRepo.save(foundShip), HttpStatus.OK);
 

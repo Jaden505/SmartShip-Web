@@ -1,10 +1,8 @@
-import axios from 'axios';
-
-const API_URL = 'http://localhost:8085/api/test/';
+import http from "../http-common";
 
 class StatusService {
     get() {
-        return axios.get( API_URL + 'statuses');
+        return http.get( '/statuses');
     }
 }
 

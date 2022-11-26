@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/test")
 public class StatusController {
     @Autowired
     private StatusRepository statusRepo;

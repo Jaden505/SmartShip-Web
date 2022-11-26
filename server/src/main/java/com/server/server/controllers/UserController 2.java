@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/test")
 public class UserController {
     @Autowired
     private UserRepository userRepo;
@@ -53,13 +53,13 @@ public class UserController {
 
     @PostMapping("/users/create")
     public ResponseEntity<User> createUser(@RequestBody User user_details){
-        User newUser = new User("", "", "");
+        User newUser = new User();
 
         newUser.setUsername(user_details.getUsername());
         newUser.setPassword(user_details.getPassword());
         newUser.setEmail(user_details.getEmail());
         newUser.setRoleID(1);
-        newUser.setShipID(user_details.getShipID());
+        newUser.setShipID(1);
 
         try{
             User user = userRepo.save(newUser);
