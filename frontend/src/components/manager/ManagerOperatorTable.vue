@@ -108,21 +108,21 @@ export default {
     },
 
     getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
+      // ShipService.getAll()
+      //     .then(response => {
+      //       this.ships = response.data;
+      //       console.log(response.data);
+      //     })
+      //     .catch(e => {
+      //       console.log(e);
+      //     });
     },
 
     getShipName(ship_id) {
-      let ship = this.ships.filter(ship => ship.id == ship_id);
-
-      if (ship !== []) return ship[0].name;
-      else return "No ship assigned";
+      // let ship = this.ships.filter(ship => ship.id == ship_id);
+      //
+      // if (ship !== []) return ship[0].name;
+      // else return "No ship assigned";
     }
   }
 }
