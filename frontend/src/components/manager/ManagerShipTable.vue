@@ -20,7 +20,7 @@
       <td>{{ ship.id }}</td>
       <td>{{ ship.name }}</td>
       <td>{{ getStatusNameById(ship.status) }}</td>
-      <td>{{ getUsersByShipId(ship.id, index) }}</td>
+      <td>{{ getUsersByShipId(ship.status) }}</td>
       <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
       <td class="material-icons" @click="deleteShip(ship.id)">delete</td>
     </tr>
@@ -150,9 +150,8 @@ export default {
           });
     },
 
-    getStatusNameById(id, index) {
-      console.log(this.statuses, id)
-      let status_name = (this.statuses[index].status).toString();
+    getStatusNameById(status_id) {
+      let status_name = (this.statuses[status_id].status).toString();
       status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
       return status_name;
     }

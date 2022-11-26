@@ -4,7 +4,7 @@ const API_URL = 'http://localhost:8085/api/test/';
 
 class ShipDataService {
     getAll() {
-        return axios.get(API_URL + "ships");
+        return axios.get(API_URL + "ships/all");
     }
 
     get(id){

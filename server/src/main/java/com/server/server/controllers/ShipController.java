@@ -22,7 +22,7 @@ public class ShipController {
     @Autowired
     private ShipRepository shipRepo;
 
-    @GetMapping("/ships")
+    @GetMapping("/ships/all")
     public ResponseEntity<List<Ship>> getShips() {
         try {
             List<Ship> ships = new ArrayList<>(shipRepo.findAll());
@@ -30,7 +30,6 @@ public class ShipController {
             if (ships.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-
 
             return new ResponseEntity<>(ships, HttpStatus.OK);
         } catch (Exception e) {
