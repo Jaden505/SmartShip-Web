@@ -1,5 +1,7 @@
 package com.server.server.controllers;
 
+import com.server.server.controllers.LoginController;
+
 import com.server.server.model.User;
 import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,23 +54,26 @@ public class UserController {
     }
 
     @PostMapping("/users/create")
-    public ResponseEntity<User> createUser(@RequestBody User user_details){
-        User newUser = new User();
+    public ResponseEntity<?> createUser(@RequestBody User user_details){
+//        User newUser = new User();
+//
+//        newUser.setUsername(user_details.getUsername());
+//        newUser.setPassword(user_details.getPassword());
+//        newUser.setEmail(user_details.getEmail());
+//        newUser.setRoleID(user_details.getRoleID());
+//        newUser.setShipID(user_details.getShipID());
 
-        newUser.setUsername(user_details.getUsername());
-        newUser.setPassword(user_details.getPassword());
-        newUser.setEmail(user_details.getEmail());
-        newUser.setRoleID(user_details.getRoleID());
-        newUser.setShipID(user_details.getShipID());
+//        try{
+//            User user = userRepo.save();
+//            return new ResponseEntity<>(user, HttpStatus.CREATED);
+//        } catch (Exception e){
+//            System.out.println(e);
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
 
-        try{
-            User user = userRepo.save(newUser);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (Exception e){
-            System.out.println(e);
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
 
+        LoginController create = new LoginController();
+        return create.registerUser(user_details);
     }
 
     @PutMapping("/users/id={id}")

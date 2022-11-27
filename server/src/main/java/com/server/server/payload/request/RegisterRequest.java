@@ -14,7 +14,7 @@ public class RegisterRequest {
     @Email
     private String email;
 
-    private Set<String> role;
+    private int roleID;
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -44,11 +44,11 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public Set<String> getRole() {
-        return this.role;
+    public int getRoleID() {
+        return this.roleID;
     }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
     }
 }
