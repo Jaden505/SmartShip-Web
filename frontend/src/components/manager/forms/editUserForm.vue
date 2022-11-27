@@ -26,7 +26,7 @@
           </select>
         </div>
       </form>
-      <el-button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</el-button>
+      <button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</button>
     </div>
   </div>
 </template>

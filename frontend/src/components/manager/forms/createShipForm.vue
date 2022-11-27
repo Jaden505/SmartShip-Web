@@ -23,7 +23,7 @@
           </select>
         </div>
       </form>
-      <el-button class="primary update-btn" @click="TogglePopup(); create()">Create</el-button>
+      <button class="primary update-btn" @click="TogglePopup(); create()">Create</button>
     </div>
   </div>
 </template>
