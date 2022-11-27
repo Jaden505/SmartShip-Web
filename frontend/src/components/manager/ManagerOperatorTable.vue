@@ -45,6 +45,7 @@ import ShipService from "@/services/ShipService";
 import editForm from "@/components/manager/forms/editUserForm";
 import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createUserForm";
+import { isProxy, toRaw } from 'vue';
 
 export default {
   name: "ManagerTable",
@@ -108,21 +109,26 @@ export default {
     },
 
     getShips() {
-      // ShipService.getAll()
-      //     .then(response => {
-      //       this.ships = response.data;
-      //       console.log(response.data);
-      //     })
-      //     .catch(e => {
-      //       console.log(e);
-      //     });
+      ShipService.getAll()
+          .then(response => {
+            this.ships = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
     },
 
     getShipName(ship_id) {
-      // let ship = this.ships.filter(ship => ship.id == ship_id);
-      //
-      // if (ship !== []) return ship[0].name;
-      // else return "No ship assigned";
+      console.log()
+      let ship = this.ships.filter(ship => ship.id == ship_id);
+
+      if (ship !== []) {
+        isProxy(ship) ? ship = toRaw(ship[0]).name : ship = ship[0].name;
+        return ship;
+      }
+
+      else return "No ship assigned";
     }
   }
 }

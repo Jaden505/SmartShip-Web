@@ -45,7 +45,7 @@ export default {
         username: null,
         email: null,
         password: null,
-        shipID: null,
+        shipID: 0,
       },
 
       ships: []

@@ -43,7 +43,7 @@ export default {
 
   data(){
     return {
-      newShip: new Ship("", "", ""),
+      newShip: new Ship("", "", "", 1, 2, 0, 0), // Defaults
       statuses: []
     }
   },

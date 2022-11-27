@@ -59,7 +59,6 @@ public class UserController {
         newUser.setPassword(user_details.getPassword());
         newUser.setEmail(user_details.getEmail());
         newUser.setRoleID(1);
-        newUser.setShipID(1);
 
         try{
             User user = userRepo.save(newUser);
