@@ -1,32 +1,32 @@
-
-
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <el-button type="primary" class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add Ship</el-button>
+  <div>
+    <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add Ship</button>
 
-  <table>
-    <thead>
-    <tr>
-      <th>Ship Id</th>
-      <th>Ship Name</th>
-      <th>Ship status</th>
-      <th>Assigned operators</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="(ship, index) in ships" :key="index">
-      <td>{{ ship.id }}</td>
-      <td>{{ ship.name }}</td>
-      <td>{{ getStatusNameById(ship.status) }}</td>
-      <td>{{ getUsersByShipId(ship.status) }}</td>
-      <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
-      <td class="material-icons" @click="deleteShip(ship.id)">delete</td>
-    </tr>
-    </tbody>
-  </table>
-
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
+      <tr class="columns">
+        <th scope="col" class="py-3 px-6">Ship Id</th>
+        <th scope="col" class="py-3 px-6">Ship Name</th>
+        <th scope="col" class="py-3 px-6">Ship status</th>
+        <th scope="col" class="py-3 px-6">Assigned operators</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(ship, index) in ships" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" :key="index">
+        <td class="py-4 px-6">{{ ship.id }}</td>
+        <td class="py-4 px-6">{{ ship.name }}</td>
+        <td class="py-4 px-6">{{ getStatusNameById(ship.status) }}</td>
+        <td class="py-4 px-6">{{ getUsersByShipId(ship.id) }}</td>
+        <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
+        <td class="material-icons py-4 px-6" @click="deleteShip(ship.id)">delete</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
   <editForm
       v-if="popupTrigger.buttonTriggerEdit"
@@ -151,7 +151,7 @@ export default {
     },
 
     getStatusNameById(status_id) {
-      let status_name = (this.statuses[status_id].status).toString();
+      let status_name = (this.statuses[status_id-1].status).toString();
       status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
       return status_name;
     }
@@ -160,54 +160,4 @@ export default {
 </script>
 
 <style scoped>
-
-table {
-  width: 90%;
-  border: solid black 2px;
-  margin: 1% auto 0 auto;
-}
-
-thead {
-  background-color: #163b7a;
-  border-bottom: 2px solid black;
-}
-
-thead th {
-  padding: 1%;
-  font-size: 22px;
-  color: lightgrey;
-}
-
-tbody td {
-  padding: 1%;
-  font-size: 20px;
-}
-
-tbody tr {
-  background-color: white;
-}
-
-tbody tr:hover {
-  background-color: white;
-  opacity: 0.8;
-}
-
-tbody tr:nth-child(even) {
-  background-color: deepskyblue;
-}
-
-.material-icons:hover {
-  cursor: pointer;
-}
-
-.material-icons {
-  font-size: 28px;
-  padding-top: 8px;
-}
-
-.create-user-btn {
-  float: right;
-  margin-right: 5.1%;
-  margin-top: 5%;
-}
 </style>

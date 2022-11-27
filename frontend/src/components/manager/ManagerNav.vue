@@ -1,8 +1,8 @@
 <template>
   <div class="nav">
     <ul>
-      <router-link to="/manager/operators"><li @click="setOpActive" :class="{active: opIsActive}">Operator</li></router-link>
-      <router-link to="/manager/ships"><li @click="setShActive" :class="{active: shIsActive}">Ship</li></router-link>
+      <router-link class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" to="/manager/operators"><li @click="setOpActive" :class="{active: opIsActive}">Operator</li></router-link>
+      <router-link to="/manager/ships" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text"><li @click="setShActive" :class="{active: shIsActive}">Ship</li></router-link>
     </ul>
   </div>
 </template>
@@ -33,12 +33,6 @@ export default {
 </script>
 
 <style scoped>
-
-.nav{
-  width: 100%;
-  background-color: #163b7a;
-}
-
 ul{
   width: 40%;
   margin-left: auto;
@@ -49,7 +43,6 @@ ul{
 }
 
 li{
-  background-color: lightgrey;
   text-align: center;
   padding: 1%;
   margin: 1%;
@@ -58,12 +51,10 @@ li{
 }
 
 li:hover{
-  background-color: dodgerblue;
   color: lightgrey;
 }
 
 .active{
-  background-color: dodgerblue;
   color: lightgrey;
 }
 

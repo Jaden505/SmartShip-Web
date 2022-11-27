@@ -1,11 +1,12 @@
 <template>
-  <ManagerNav></ManagerNav>
-
-  <div class="welcome">
-    <h1>Welcome Manager</h1>
+  <div class="p-4" v-motion
+       :initial="{ opacity: 0, y: 100 }"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :variants="{ custom: { scale: 2 } }"
+       :delay="100">
+    <ManagerNav></ManagerNav>
+    <router-view></router-view>
   </div>
-
-  <router-view></router-view>
 </template>
 
 <script>
@@ -28,19 +29,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-.welcome{
-  margin-top: 1%;
-  margin-bottom: 1%;
-}
-
-h1{
-  color: white;
-  text-align: center;
-}
-
-
-
-</style>
