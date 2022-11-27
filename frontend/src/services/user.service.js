@@ -22,11 +22,12 @@ class UserService {
     }
 
     createUser(user){
-        return axios.post('users/create',  {
+        return axios.post(API_URL +'users/create',  {
             username: user.username,
             password: user.password,
             email: user.email,
-            shipID: user.shipID
+            shipID: user.shipID,
+            roleID: user.roleID
         });
     }
 

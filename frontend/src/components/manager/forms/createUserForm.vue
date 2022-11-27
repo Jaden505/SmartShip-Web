@@ -45,6 +45,7 @@ export default {
         username: null,
         email: null,
         password: null,
+        roleID: 1, // operator role
         shipID: 0,
       },
 
@@ -64,7 +65,7 @@ export default {
       else {
         alert("Please fill all fields to create a user.")
       }
-      location.reload()
+      // location.reload()
     },
 
     getShips() {

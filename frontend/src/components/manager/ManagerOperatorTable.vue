@@ -120,7 +120,6 @@ export default {
     },
 
     getShipName(ship_id) {
-      console.log()
       let ship = this.ships.filter(ship => ship.id == ship_id);
 
       if (ship !== []) {
