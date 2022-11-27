@@ -105,7 +105,7 @@ export default {
 
     deleteShip(ship_id){
       if (confirm("Are you sure you want to delete this ship?")) {
-        ShipService.deleteShip(ship_id).catch(e => {
+        ShipService.deleteShip(ship_id-1).catch(e => {
           console.log(e)
           alert("This ship has operators assigned!")
         })

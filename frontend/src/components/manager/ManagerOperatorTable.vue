@@ -102,7 +102,7 @@ export default {
 
     deleteUser(user_id){
       if (confirm("Are you sure you want to delete this operator?")) {
-        UserService.deleteUser(user_id).catch(e => {
+        UserService.deleteUser(user_id-1).catch(e => {
           console.log(e)
         })
         location.reload()
