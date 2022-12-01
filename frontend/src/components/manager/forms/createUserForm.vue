@@ -1,8 +1,10 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="col-md-12 popup">
+  <div class="col-md-12 popup rounded-lg">
     <div class="card card-container popup-inner">
+      <td class="material-icons close-popup" @click="TogglePopup()">close</td>
+
       <Form @submit="createOperator" :validation-schema="schema">
         <div v-if="!successful">
           <div class="form-group">
@@ -22,7 +24,7 @@
           </div>
 
           <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
+            <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" :disabled="loading">
               <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               Create
             </button>
@@ -115,8 +117,8 @@ export default {
 }
 
 .popup-inner {
-  background: #163b7a;
-  padding: 3%;
+  background: #151515;
+  padding: 4%;
 }
 
 h1{
@@ -126,13 +128,14 @@ h1{
 label{
   width: 100%;
   text-align: center;
-  color: white;
+  color: lightgrey;
 }
 
 input{
   width: 100%;
   padding: 1%;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 select{
@@ -146,25 +149,22 @@ button{
   width: 100%;
 }
 
-.user-edit-field {
-  padding: 10px;
-}
-
-.update-btn {
-  background-color: deepskyblue;
-  color: white;
-}
-
-.update-btn:hover {
-  background-color: dodgerblue;
-}
-
 .close-popup {
   padding-bottom: 20px;
 }
 
 .close-popup:hover {
   color: lightgrey;
+  cursor: pointer;
+}
+
+.close-popup {
+  padding-bottom: 30px;
+  color: lightgrey;
+}
+
+.close-popup:hover {
+  color: grey;
   cursor: pointer;
 }
 </style>
