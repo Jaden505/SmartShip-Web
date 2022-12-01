@@ -103,7 +103,7 @@ public class LoginController {
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
         user.setRoleID(1);
-        user.setShipID(1);
+        user.setShipID(signUpRequest.getShipID());
 
         System.out.println(user);
 

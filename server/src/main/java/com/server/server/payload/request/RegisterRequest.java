@@ -1,7 +1,5 @@
 package com.server.server.payload.request;
 
-import java.util.Set;
-
 import javax.validation.constraints.*;
 
 public class RegisterRequest {
@@ -15,6 +13,7 @@ public class RegisterRequest {
     private String email;
 
     private int roleID;
+    private int shipID;
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -50,5 +49,13 @@ public class RegisterRequest {
 
     public void setRoleID(int roleID) {
         this.roleID = roleID;
+    }
+
+    public int getShipID() {
+        return shipID;
+    }
+
+    public void setShipID(int shipID) {
+        this.shipID = shipID;
     }
 }
