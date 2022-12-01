@@ -37,7 +37,7 @@ public class ShipController {
         }
     }
 
-    @GetMapping("/ships/shipId={id}")
+    @GetMapping("/ships/{id}")
     public ResponseEntity<List<Ship>> getSpecificShip(@PathVariable int id) {
         try {
             List<Ship> ship = shipRepo.findShipById(id);
@@ -76,7 +76,7 @@ public class ShipController {
 
     }
 
-    @PutMapping("/ships/shipId={id}")
+    @PutMapping("/ships/{id}")
     public ResponseEntity<Ship> updateShip(@PathVariable int id, @RequestBody Ship ship) {
         try {
             List<Ship> findShip = shipRepo.findShipById(id);
@@ -100,7 +100,7 @@ public class ShipController {
         }
     }
 
-    @DeleteMapping("/ships/shipId={id}")
+    @DeleteMapping("/ships/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id) {
         try {
             shipRepo.deleteById(id);

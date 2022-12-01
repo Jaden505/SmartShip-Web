@@ -42,7 +42,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/role={roleID}")
+    @GetMapping("/users/role/{roleID}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable int roleID){
         try{
             List<User> users = userRepo.findByRoleID(roleID);
@@ -58,7 +58,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/id={id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
         try{
             Optional<User> findUser = userRepo.findById(id);
@@ -81,7 +81,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/id={id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
         try{
             userRepo.deleteById(id);

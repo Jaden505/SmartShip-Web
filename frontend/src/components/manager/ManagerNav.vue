@@ -65,6 +65,4 @@ a{
   color: black;
   flex: 1;
 }
-
-
 </style>
