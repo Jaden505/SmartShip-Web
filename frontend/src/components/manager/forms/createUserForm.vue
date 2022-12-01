@@ -1,71 +1,94 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup" >
-    <div class="popup-inner">
+  <div class="col-md-12 popup rounded-lg">
+    <div class="card card-container popup-inner">
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
 
-      <h1>Create Operator</h1>
-      <form>
-        <div class="user-edit-field">
-          <label>Name</label><br>
-          <input type="text" v-model="newUser.username"><br/>
+      <Form @submit="createOperator" :validation-schema="schema">
+        <div v-if="!successful">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <Field name="username" type="text" class="form-control" />
+            <ErrorMessage name="username" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <Field name="email" type="email" class="form-control" />
+            <ErrorMessage name="email" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <Field name="password" type="password" class="form-control" />
+            <ErrorMessage name="password" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <label>Ship</label><br>
+            <select name="shipID" ref="shipID">
+              <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" :disabled="loading">
+              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+              Create
+            </button>
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Email</label><br>
-          <input type="email" v-model="newUser.email"><br/>
-        </div>
-        <div class="user-edit-field">
-          <label>Password</label><br>
-          <input type="password" v-model="newUser.password"><br/>
-        </div>
-        <div class="user-edit-field">
-          <label>Ship</label><br>
-          <select v-model="newUser.shipID">
-            <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
-          </select>
-        </div>
-      </form>
-      <button class="primary update-btn" @click="TogglePopup(); create()">Create</button>
+      </Form>
+
+      <div
+          v-if="message"
+          class="alert"
+          :class="successful ? 'alert-success' : 'alert-danger'"
+      >
+        {{ message }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import UserService from "@/services/user.service";
 import ShipService from "@/services/ShipService";
+import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
   name: "createUserForm",
   props: ['TogglePopup'],
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
 
   data(){
     return {
-      newUser: {
-        username: null,
-        email: null,
-        password: null,
-        roleID: 1, // operator role
-        shipID: 0,
-      },
-
       ships: []
     }
   },
 
   methods: {
-    checkFields() {
-      return (this.newUser.username !== "" && this.newUser.email !== "" && this.newUser.password !== "");
-    },
+    createOperator(user) {
+      user.roleID = 1; // Default operator role
+      user.shipID = this.$refs.shipID.selectedIndex; // Set ship id
 
-    create() {
-      if (this.checkFields()) {
-        UserService.createUser(this.newUser)
-      }
-      else {
-        alert("Please fill all fields to create a user.")
-      }
-      // location.reload()
+      this.$store.dispatch("auth/register", user).then(
+          () => {
+            location.reload()
+          },
+          (error) => {
+            this.loading = false;
+            this.message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            console.log(this.message)
+          }
+      );
     },
 
     getShips() {
@@ -102,8 +125,8 @@ export default {
 }
 
 .popup-inner {
-  background: #163b7a;
-  padding: 3%;
+  background: #151515;
+  padding: 4%;
 }
 
 h1{
@@ -113,13 +136,14 @@ h1{
 label{
   width: 100%;
   text-align: center;
-  color: white;
+  color: lightgrey;
 }
 
 input{
   width: 100%;
   padding: 1%;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 select{
@@ -133,25 +157,22 @@ button{
   width: 100%;
 }
 
-.user-edit-field {
-  padding: 10px;
-}
-
-.update-btn {
-  background-color: deepskyblue;
-  color: white;
-}
-
-.update-btn:hover {
-  background-color: dodgerblue;
-}
-
 .close-popup {
   padding-bottom: 20px;
 }
 
 .close-popup:hover {
   color: lightgrey;
+  cursor: pointer;
+}
+
+.close-popup {
+  padding-bottom: 30px;
+  color: lightgrey;
+}
+
+.close-popup:hover {
+  color: grey;
   cursor: pointer;
 }
 </style>

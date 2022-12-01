@@ -1,10 +1,14 @@
 package com.server.server.controllers;
 
+import com.server.server.controllers.LoginController;
+
 import com.server.server.model.User;
+import com.server.server.payload.response.MessageResponse;
 import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +22,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @GetMapping("/users/all")
     public ResponseEntity<List<User>> getUsers(){
@@ -49,26 +56,6 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @PostMapping("/users/create")
-    public ResponseEntity<User> createUser(@RequestBody User user_details){
-        User newUser = new User();
-
-        newUser.setUsername(user_details.getUsername());
-        newUser.setPassword(user_details.getPassword());
-        newUser.setEmail(user_details.getEmail());
-        newUser.setRoleID(user_details.getRoleID());
-        newUser.setShipID(user_details.getShipID());
-
-        try{
-            User user = userRepo.save(newUser);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (Exception e){
-            System.out.println(e);
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
     }
 
     @PutMapping("/users/id={id}")

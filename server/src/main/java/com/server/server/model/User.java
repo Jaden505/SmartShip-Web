@@ -14,7 +14,8 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "email")
         })
 public class User {
-   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
 
    @NotBlank
@@ -31,7 +32,7 @@ public class User {
    private String password;
 
    @ManyToMany(fetch = FetchType.LAZY)
-   @JoinTable(	name = "user_role",
+   @JoinTable(name = "user_role",
            joinColumns = @JoinColumn(name = "user_id"),
            inverseJoinColumns = @JoinColumn(name = "roleID"))
    private Set<Role> roles = new HashSet<>();
@@ -91,13 +92,5 @@ public class User {
 
    public String getPassword() {
       return password;
-   }
-
-   public Set<Role> getRoles() {
-      return roles;
-   }
-
-   public void setRoles(Set<Role> roles) {
-      this.roles = roles;
    }
 }
