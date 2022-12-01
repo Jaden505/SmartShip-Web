@@ -3,10 +3,12 @@ package com.server.server.controllers;
 import com.server.server.controllers.LoginController;
 
 import com.server.server.model.User;
+import com.server.server.payload.response.MessageResponse;
 import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @GetMapping("/users/all")
     public ResponseEntity<List<User>> getUsers(){
@@ -51,12 +56,6 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @PostMapping("/users/create")
-    public ResponseEntity<?> createUser(@RequestBody User user_details){
-        LoginController create = new LoginController();
-        return create.registerUser(user_details);
     }
 
     @PutMapping("/users/id={id}")

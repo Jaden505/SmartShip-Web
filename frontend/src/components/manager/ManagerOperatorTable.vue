@@ -19,7 +19,7 @@
       <td class="py-4 px-6">{{ operator.id }}</td>
       <td class="py-4 px-6">{{ operator.username }}</td>
       <td class="py-4 px-6">{{ operator.email }}</td>
-      <td class="py-4 px-6">{{ getShipName(operator.shipID) }}</td>
+<!--      <td class="py-4 px-6">{{ getShipName(operator.shipID) }}</td>-->
       <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
       <td class="material-icons py-4 px-6" @click="deleteUser(operator.id)">delete</td>
     </tr>
@@ -44,7 +44,6 @@
 import UserService from "../../services/user.service";
 import ShipService from "@/services/ShipService";
 import editForm from "@/components/manager/forms/editUserForm";
-import Managernav from "@/components/manager/ManagerNav";
 import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createUserForm";
 import { isProxy, toRaw } from 'vue';

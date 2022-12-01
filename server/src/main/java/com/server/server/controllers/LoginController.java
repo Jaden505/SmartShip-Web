@@ -102,39 +102,10 @@ public class LoginController {
         user.setUsername(signUpRequest.getUsername());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setRoleID(signUpRequest.getRoleID());
+        user.setRoleID(1);
+        user.setShipID(1);
 
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }
-
-    public ResponseEntity<?> registerUser(User signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
-
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        if (!roleRepository.existsById(signUpRequest.getRoleID())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: This role doesnt exits by given id!"));
-        }
-
-        // Create new user's account
-        User user = new User();
-
-        user.setUsername(signUpRequest.getUsername());
-        user.setEmail(signUpRequest.getEmail());
-        user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setRoleID(signUpRequest.getRoleID());
+        System.out.println(user);
 
         userRepository.save(user);
 
