@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -66,7 +67,7 @@ public class LoginController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        Role role = userDetails.getAuthority();
+        GrantedAuthority role = userDetails.getAuthority();
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
@@ -89,7 +90,7 @@ public class LoginController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        if (!roleRepository.existsByRoleID(signUpRequest.getRoleID())) {
+        if (!roleRepository.existsById(signUpRequest.getRoleID())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: This role doesnt exits by given id!"));
@@ -121,7 +122,7 @@ public class LoginController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        if (!roleRepository.existsByRoleID(signUpRequest.getRoleID())) {
+        if (!roleRepository.existsById(signUpRequest.getRoleID())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: This role doesnt exits by given id!"));
