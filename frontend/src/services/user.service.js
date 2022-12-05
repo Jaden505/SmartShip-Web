@@ -9,7 +9,7 @@ class UserService {
     }
 
     getUsersByRole(role_id) {
-        return axios.get( API_URL + 'users/role/' + role_id, { headers: authHeader() });
+        return axios.get( API_URL + 'users/role/' + role_id);
     }
 
     updateUser(user_id, user){

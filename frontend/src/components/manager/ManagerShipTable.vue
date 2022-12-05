@@ -103,10 +103,11 @@ export default {
       this.ship = ship
     },
 
-    deleteShip(ship_id){
+    async deleteShip(ship_id){
       if (confirm("Are you sure you want to delete this ship?")) {
-        ShipService.deleteShip(ship_id).catch(e => {
+        await ShipService.deleteShip(ship_id).catch(e => {
           alert("This ship has operators assigned!")
+          console.log(e)
         })
         location.reload()
       }
@@ -159,4 +160,7 @@ export default {
 </script>
 
 <style scoped>
+.material-icons:hover {
+  cursor: pointer;
+}
 </style>

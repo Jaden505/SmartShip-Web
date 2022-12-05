@@ -26,7 +26,7 @@ class ShipDataService {
     }
 
     deleteShip(ship_id) {
-        return axios.delete("ships/" + ship_id)
+        return axios.delete(API_URL + "ships/" + ship_id)
     }
 
     getWater() {

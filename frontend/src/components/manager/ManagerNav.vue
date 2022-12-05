@@ -1,10 +1,10 @@
 <template>
   <div class="nav">
     <ul>
-      <router-link class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" to="/manager/operators"><li @click="setOpActive" :class="{active: opIsActive}">Operator</li></router-link>
+      <router-link class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" to="/manager/operators"><li @click="setOpActive" :class="{active: opIsActive}">Operators</li></router-link>
     </ul>
     <ul>
-      <router-link to="/manager/ships" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text"><li @click="setShActive" :class="{active: shIsActive}">Ship</li></router-link>
+      <router-link to="/manager/ships" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text"><li @click="setShActive" :class="{active: shIsActive}">Ships</li></router-link>
     </ul>
   </div>
 </template>
