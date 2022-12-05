@@ -1,15 +1,18 @@
 <template>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
   <div>
     <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add Ship</button>
 
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-      <tr>
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
+      <tr class="columns">
         <th scope="col" class="py-3 px-6">Ship Id</th>
         <th scope="col" class="py-3 px-6">Ship Name</th>
-        <th scope="col" class="py-3 px-6">
-          Ship status</th>
+        <th scope="col" class="py-3 px-6">Ship status</th>
         <th scope="col" class="py-3 px-6">Assigned operators</th>
+        <th></th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -100,11 +103,11 @@ export default {
       this.ship = ship
     },
 
-    deleteShip(ship_id){
+    async deleteShip(ship_id){
       if (confirm("Are you sure you want to delete this ship?")) {
-        ShipService.deleteShip(ship_id).catch(e => {
-          console.log(e)
+        await ShipService.deleteShip(ship_id).catch(e => {
           alert("This ship has operators assigned!")
+          console.log(e)
         })
         location.reload()
       }
@@ -139,6 +142,7 @@ export default {
       StatusService.get()
           .then(response => {
             this.statuses = response.data;
+            console.log(this.statuses)
             console.log(response.data);
           })
           .catch(e => {
@@ -146,8 +150,8 @@ export default {
           });
     },
 
-    getStatusNameById(id) {
-      let status_name = (this.statuses[id-1].status).toString();
+    getStatusNameById(status_id) {
+      let status_name = (this.statuses[status_id-1].status).toString();
       status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
       return status_name;
     }
@@ -156,4 +160,7 @@ export default {
 </script>
 
 <style scoped>
+.material-icons:hover {
+  cursor: pointer;
+}
 </style>

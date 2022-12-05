@@ -4,7 +4,7 @@ const API_URL = 'http://localhost:8085/api/test/';
 
 class ShipDataService {
     getAll() {
-        return axios.get(API_URL + "ships");
+        return axios.get(API_URL + "ships/all");
     }
     // todo the right endpoint
     getWater() {
@@ -12,7 +12,7 @@ class ShipDataService {
     }
 
     get(id){
-        return axios.get(API_URL +'ships/shipId=' + id)
+        return axios.get(API_URL + 'ships/' + id)
     }
 
     create(ship) {
@@ -20,7 +20,7 @@ class ShipDataService {
     }
 
     updateShip(ship_id, ship) {
-        return axios.put(API_URL +'ships/shipId=' + ship_id,
+        return axios.put(API_URL + 'ships/' + ship_id,
             {
                 name: ship.name,
                 location: ship.location,
@@ -30,7 +30,11 @@ class ShipDataService {
     }
 
     deleteShip(ship_id) {
-        return axios.delete(API_URL +"ships/shipId=" + ship_id)
+        return axios.delete(API_URL + "ships/" + ship_id)
+    }
+
+    getWater() {
+        return axios.get(API_URL + 'chart');
     }
 }
 

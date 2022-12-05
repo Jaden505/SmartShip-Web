@@ -1,8 +1,10 @@
 <template>
   <div class="nav">
     <ul>
-      <router-link to="/manager/operators"><li @click="setOpActive" :class="{active: opIsActive}">Operator</li></router-link>
-      <router-link to="/manager/ships"><li @click="setShActive" :class="{active: shIsActive}">Ship</li></router-link>
+      <router-link class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" to="/manager/operators"><li @click="setOpActive" :class="{active: opIsActive}">Operators</li></router-link>
+    </ul>
+    <ul>
+      <router-link to="/manager/ships" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text"><li @click="setShActive" :class="{active: shIsActive}">Ships</li></router-link>
     </ul>
   </div>
 </template>
@@ -13,7 +15,7 @@ export default {
 
   data(){
     return{
-      opIsActive: true,
+      opIsActive: false,
       shIsActive: false
     }
   },
@@ -33,7 +35,6 @@ export default {
 </script>
 
 <style scoped>
-
 ul{
   width: 40%;
   margin-left: auto;
@@ -44,7 +45,6 @@ ul{
 }
 
 li{
-  background-color: lightgrey;
   text-align: center;
   padding: 1%;
   margin: 1%;
@@ -52,13 +52,11 @@ li{
   transition: background-color 0.7s;
 }
 
-li:hover{
-  background-color: dodgerblue;
+ul:hover li{
   color: lightgrey;
 }
 
 .active{
-  background-color: dodgerblue;
   color: lightgrey;
 }
 
@@ -67,6 +65,4 @@ a{
   color: black;
   flex: 1;
 }
-
-
 </style>

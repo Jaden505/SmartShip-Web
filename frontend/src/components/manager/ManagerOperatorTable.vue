@@ -1,26 +1,27 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <button class="create-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
+  <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
 
-  <table>
-    <thead>
-    <tr>
-      <th>Operator Id</th>c
-      <th>Operator Name</th>
-      <th>Operator Email</th>
-      <th>Assigned Ship</th>
-      <th></th>
-    </tr>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
+        <tr>
+          <th scope="col" class="py-3 px-6">Operator Id</th>
+          <th scope="col" class="py-3 px-6">Operator Name</th>
+          <th scope="col" class="py-3 px-6">Operator Email</th>
+          <th scope="col" class="py-3 px-6">Assigned Ship</th>
+          <th></th>
+          <th></th>
+        </tr>
     </thead>
     <tbody>
-    <tr v-for="(operator, index) in users" :key="index">
-      <td>{{ operator.id }}</td>
-      <td>{{ operator.username }}</td>
-      <td>{{ operator.email }}</td>
-      <td>{{ getShipName(operator.shipID) }}</td>
-      <td class="material-icons" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
-      <td class="material-icons" @click="deleteUser(operator.id)">delete</td>
+    <tr v-for="(operator, index) in users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <td class="py-4 px-6">{{ operator.id }}</td>
+      <td class="py-4 px-6">{{ operator.username }}</td>
+      <td class="py-4 px-6">{{ operator.email }}</td>
+      <td class="py-4 px-6">{{ getShipName(operator.shipID) }}</td>
+      <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
+      <td class="material-icons py-4 px-6" @click="deleteUser(operator.id)">delete</td>
     </tr>
     </tbody>
   </table>
@@ -45,6 +46,7 @@ import ShipService from "@/services/ShipService";
 import editForm from "@/components/manager/forms/editUserForm";
 import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createUserForm";
+import { isProxy, toRaw } from 'vue';
 
 export default {
   name: "ManagerTable",
@@ -121,7 +123,11 @@ export default {
     getShipName(ship_id) {
       let ship = this.ships.filter(ship => ship.id == ship_id);
 
-      if (ship !== []) return ship[0].name;
+      if (ship !== []) {
+        isProxy(ship) ? ship = toRaw(ship[0]).name : ship = ship[0].name;
+        return ship;
+      }
+
       else return "No ship assigned";
     }
   }
@@ -130,59 +136,4 @@ export default {
 
 <style scoped>
 
-.button-section{
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-table {
-  width: 90%;
-  border: solid black 2px;
-  margin: 1% auto 0 auto;
-}
-
-thead {
-  background-color: #163b7a;
-  border-bottom: 2px solid black;
-}
-
-thead th {
-  padding: 1%;
-  font-size: 22px;
-  color: lightgrey;
-}
-
-tbody td {
-  padding: 1%;
-  font-size: 20px;
-}
-
-tbody tr {
-  background-color: white;
-}
-
-tbody tr:hover {
-  background-color: white;
-  opacity: 0.8;
-}
-
-tbody tr:nth-child(even) {
-  background-color: deepskyblue;
-}
-
-.material-icons:hover {
-  cursor: pointer;
-}
-
-.material-icons {
-  font-size: 28px;
-  padding-top: 8px;
-}
-
-.create-user-btn {
-  float: right;
-  margin-right: 5.1%;
-  margin-top: 5%;
-}
 </style>

@@ -1,10 +1,14 @@
 package com.server.server.controllers;
 
+import com.server.server.controllers.LoginController;
+
 import com.server.server.model.User;
+import com.server.server.payload.response.MessageResponse;
 import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +22,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @GetMapping("/users/all")
     public ResponseEntity<List<User>> getUsers(){
@@ -35,7 +42,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/role={roleID}")
+    @GetMapping("/users/role/{roleID}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable int roleID){
         try{
             List<User> users = userRepo.findByRoleID(roleID);
@@ -51,26 +58,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/create")
-    public ResponseEntity<User> createUser(@RequestBody User user_details){
-        User newUser = new User();
-
-        newUser.setUsername(user_details.getUsername());
-        newUser.setPassword(user_details.getPassword());
-        newUser.setEmail(user_details.getEmail());
-        newUser.setRoleID(1);
-        newUser.setShipID(user_details.getShipID());
-
-        try{
-            User user = userRepo.save(newUser);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
-    @PutMapping("/users/id={id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
         try{
             Optional<User> findUser = userRepo.findById(id);
@@ -93,7 +81,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/id={id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
         try{
             userRepo.deleteById(id);

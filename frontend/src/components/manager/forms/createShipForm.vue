@@ -23,7 +23,7 @@
           </select>
         </div>
       </form>
-      <el-button class="primary update-btn" @click="TogglePopup(); create()">Create</el-button>
+      <button class="primary update-btn" @click="TogglePopup(); create()">Create</button>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
 
   data(){
     return {
-      newShip: new Ship("", "", ""),
+      newShip: new Ship("", "", "", 1, 2, 0, 0), // Defaults
       statuses: []
     }
   },

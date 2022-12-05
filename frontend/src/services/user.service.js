@@ -9,11 +9,11 @@ class UserService {
     }
 
     getUsersByRole(role_id) {
-        return axios.post( API_URL + 'users/role=' + role_id, { headers: authHeader() });
+        return axios.get( API_URL + 'users/role/' + role_id);
     }
 
     updateUser(user_id, user){
-        return axios.put(API_URL + 'users/id=' + user_id,  {
+        return axios.put(API_URL + 'users/' + user_id,  {
             username: user.username,
             password: user.password,
             email: user.email,
@@ -22,16 +22,17 @@ class UserService {
     }
 
     createUser(user){
-        return axios.post('users/create',  {
+        return axios.post(API_URL +'users/create',  {
             username: user.username,
             password: user.password,
             email: user.email,
-            shipID: user.shipID
+            shipID: user.shipID,
+            roleID: user.roleID
         });
     }
 
     deleteUser(user_id) {
-        return axios.delete(API_URL + 'users/id=' + user_id);
+        return axios.delete(API_URL + 'users/' + user_id);
     }
 
     getPublicContent() {
