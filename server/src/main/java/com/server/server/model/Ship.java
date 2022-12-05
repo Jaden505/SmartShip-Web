@@ -30,65 +30,6 @@ public class Ship {
     @Column(name = "destination")
     private String destination;
 
-    @Column(name = "water_tank1")
-    private Integer waterTank1;
-
-    @Column(name = "water_tank2")
-    private Integer waterTank2;
-
-    @Column(name = "rpm")
-    private Integer rpm;
-
-    @Column(name = "kw")
-    private Integer kW;
-
-
-//    public Ship(String name, String status, String gpsLongtitude, String gpsLatitude, String origin, String destination, int waterTank1, int waterTank2,
-//                int rpm, int kW) {
-//        this.name = name;
-//        this.status = status;
-//        this.gpsLongtitude = gpsLongtitude;
-//        this.gpsLatitude = gpsLatitude;
-//        this.origin = origin;
-//        this.destination = destination;
-//        this.waterTank1 = waterTank1;
-//        this.waterTank2 = waterTank2;
-//        this.kW = kW;
-//        this.rpm = rpm;
-//    }
-
-    public Integer getRpm() {
-        return rpm;
-    }
-
-    public void setRpm(int rpm) {
-        this.rpm = rpm;
-    }
-
-    public Integer getkW() {
-        return kW;
-    }
-
-    public void setkW(int kW) {
-        this.kW = kW;
-    }
-
-    public Integer getWaterTank1() {
-        return waterTank1;
-    }
-
-    public void setWaterTank1(Integer waterTank1) {
-        this.waterTank1 = waterTank1;
-    }
-
-    public Integer getWaterTank2() {
-        return waterTank2;
-    }
-
-    public void setWaterTank2(Integer waterTank2) {
-        this.waterTank2 = waterTank2;
-    }
-
     public int getId() {
         return id;
     }
@@ -145,10 +86,5 @@ public class Ship {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "Ship [id=" + id + "]";
     }
 }

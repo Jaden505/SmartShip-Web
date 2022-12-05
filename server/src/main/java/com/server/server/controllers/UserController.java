@@ -45,7 +45,7 @@ public class UserController {
     @GetMapping("/users/role/{roleID}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable int roleID){
         try{
-            List<User> users = userRepo.findByRoleID(roleID);
+            List<User> users = userRepo.findByRoleId(roleID);
 
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -69,7 +69,6 @@ public class UserController {
                 foundUser.setEmail(user.getEmail());
                 foundUser.setPassword(user.getPassword());
                 foundUser.setUsername(user.getUsername());
-                foundUser.setShipID(user.getShipID());
 
                 return new ResponseEntity<>(userRepo.save(foundUser), HttpStatus.OK);
             } else {
