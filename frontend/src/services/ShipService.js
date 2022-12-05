@@ -32,10 +32,6 @@ class ShipDataService {
     deleteShip(ship_id) {
         return axios.delete(API_URL + "ships/" + ship_id)
     }
-
-    getWater() {
-        return axios.get(API_URL + 'chart');
-    }
 }
 
 export default new ShipDataService();
