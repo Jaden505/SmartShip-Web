@@ -21,14 +21,6 @@ export const auth = {
                 }
             );
         },
-
-
-        // logout({ commit }) {
-        //     AuthService.logout();
-        //     commit('logout');
-        // },
-
-
         logout({ commit }) {
             AuthService.logout();
             commit('logout');
@@ -55,13 +47,6 @@ export const auth = {
             state.status.loggedIn = false;
             state.user = null;
         },
-
-        // logout(state) {
-        //     state.status.loggedIn = false;
-        //     state.user = null;
-        // }
-
-
         logout(state) {
             state.status.loggedIn = false;
             state.user = null;
@@ -72,7 +57,6 @@ export const auth = {
         registerFailure(state) {
             state.status.loggedIn = false;
         }
-
 
     }
 };
