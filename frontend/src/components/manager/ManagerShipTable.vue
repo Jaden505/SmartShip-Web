@@ -39,6 +39,11 @@
       :TogglePopup="() => TogglePopup('buttonTriggerCreate')"
   />
 
+  <warning-ship
+    v-if="popupTrigger.buttonTriggerWarning"
+    :TogglePopup="() => TogglePopup('buttonTriggerWarning')"
+  />
+
 </template>
 
 <script>
@@ -47,13 +52,15 @@ import ShipService from "@/services/ShipService";
 import editForm from "@/components/manager/forms/editShipForm";
 import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
+import warningShip from "@/components/manager/forms/warningShip";
 import StatusService from "@/services/status.service";
 
 export default {
   name: "ManagerTable",
   components: {
     editForm,
-    createForm
+    createForm,
+    warningShip
   },
 
   mounted() {
@@ -74,7 +81,8 @@ export default {
   setup(){
     const popupTrigger = ref({
       buttonTriggerEdit: false,
-      buttonTriggerCreate: false
+      buttonTriggerCreate: false,
+      buttonTriggerWarning: false
     });
 
     const TogglePopup = (trigger) => {
@@ -106,10 +114,10 @@ export default {
     async deleteShip(ship_id){
       if (confirm("Are you sure you want to delete this ship?")) {
         await ShipService.deleteShip(ship_id).catch(e => {
-          alert("This ship has operators assigned!")
+          // alert("This ship has operators assigned!")
+          this.TogglePopup('buttonTriggerWarning')
           console.log(e)
         })
-        location.reload()
       }
     },
 
