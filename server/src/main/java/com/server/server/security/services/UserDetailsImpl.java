@@ -3,9 +3,7 @@ package com.server.server.security.services;
 import java.util.Collection;
 import java.util.Objects;
 
-import com.server.server.model.Role;
 import com.server.server.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +12,6 @@ import com.server.server.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
-    @Autowired
-    private static RoleRepository roleRepo;
-
     private static final long serialVersionUID = 1L;
 
     private int id;
@@ -39,8 +34,8 @@ public class UserDetailsImpl implements UserDetails {
         this.authority = authority;
     }
 
-    public static UserDetailsImpl build(User user) {
-        String roleName = roleRepo.findById(user.getRoleID()).getName();
+    public static UserDetailsImpl build(User user, RoleRepository roleRepo) {
+        String roleName = roleRepo.findById(user.getId()).getName();
         GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
 
         return new UserDetailsImpl(
