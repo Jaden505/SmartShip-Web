@@ -117,6 +117,41 @@ INSERT INTO `role` VALUES (1,'ROLE_OPERATOR'),(2,'ROLE_ADMIN'),(3,'ROLE_MANAGER'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sensor_data`
+--
+
+DROP TABLE IF EXISTS `sensor_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sensor_data` (
+  `id` int NOT NULL,
+  `gps_latitude` varchar(255) DEFAULT NULL,
+  `gps_longtitude` varchar(255) DEFAULT NULL,
+  `group` varchar(255) DEFAULT NULL,
+  `sensor_id` varchar(255) DEFAULT NULL,
+  `sensor_name` varchar(255) DEFAULT NULL,
+  `speed` varchar(255) DEFAULT NULL,
+  `time` datetime(6) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `ship_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKmnxu6uugadslnwcl9sbrmhexe` (`ship_id`),
+  CONSTRAINT `FKmnxu6uugadslnwcl9sbrmhexe` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sensor_data`
+--
+
+LOCK TABLES `sensor_data` WRITE;
+/*!40000 ALTER TABLE `sensor_data` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sensor_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ship`
 --
 
@@ -221,4 +256,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-05 23:02:06
+-- Dump completed on 2022-12-07  0:40:35
