@@ -9,6 +9,7 @@
       <th scope="col" class="py-3 px-6">Manager Id</th>
       <th scope="col" class="py-3 px-6">Manager Name</th>
       <th scope="col" class="py-3 px-6">Manager Email</th>
+      <th scope="col" class="py-3 px-6">Assigned Ship</th>
       <th></th>
       <th></th>
     </tr>
@@ -18,17 +19,17 @@
       <td class="py-4 px-6">{{ manager.id }}</td>
       <td class="py-4 px-6">{{ manager.username }}</td>
       <td class="py-4 px-6">{{ manager.email }}</td>
-      <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.manager = operator">edit</td>
-      <td class="material-icons py-4 px-6" @click="deleteUser(manager.id)">delete</td>
+      <td class="py-4 px-6">{{ getShipName(manager.shipID) }}</td>
+      <td class="material-icons py-4 px-6 pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager">edit</td>
+      <td class="material-icons py-4 px-6 pointer" @click="deleteUser(manager.id)">delete</td>
     </tr>
     </tbody>
   </table>
 
-
   <edit-manger-form
       v-if="popupTrigger.buttonTriggerEdit"
       :TogglePopup="() => TogglePopup('buttonTriggerEdit')"
-      :operator = this.operator
+      :manager = this.manager
   />
 
   <createForm
@@ -41,8 +42,9 @@
 <script>
 import UserService from "../../services/user.service";
 import editMangerForm from "@/components/admin/forms/editMangerForm";
-import {ref} from 'vue';
+import {isProxy, ref, toRaw} from 'vue';
 import createForm from "@/components/manager/forms/createUserForm";
+import ShipService from "@/services/ShipService";
 
 export default {
   name: "ManagerTable",
@@ -53,12 +55,14 @@ export default {
 
   mounted() {
     this.getUsers();
+    this.getShips();
   },
 
   data() {
     return {
       users: [],
-      operator: null,
+      ships: [],
+      manager: null,
     }
   },
 
@@ -90,12 +94,34 @@ export default {
           });
     },
 
-    toggle(operator){
-      this.operator = operator
+    getShips() {
+      ShipService.getAll()
+          .then(response => {
+            this.ships = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+    },
+
+    getShipName(ship_id) {
+      let ship = this.ships.filter(ship => ship.id == ship_id);
+
+      if (ship !== []) {
+        isProxy(ship) ? ship = toRaw(ship[0]).name : ship = ship[0].name;
+        return ship;
+      }
+
+      else return "No ship assigned";
+    },
+
+    toggle(manager){
+      this.manager = manager
     },
 
     deleteUser(user_id){
-      if (confirm("Are you sure you want to delete this operator?")) {
+      if (confirm("Are you sure you want to delete this manager?")) {
         UserService.deleteUser(user_id).catch(e => {
           console.log(e)
         })
@@ -108,5 +134,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .pointer{
+    cursor: pointer;
+  }
 </style>

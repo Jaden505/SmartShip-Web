@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <div class="popup" >
-    <div class="popup-inner">
+    <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
         <h1>Cannot delete this ship!</h1>
         <p>This ship has operators assigned. Please remove all the operators before deleting this ship!</p>
