@@ -32,7 +32,7 @@
       :manager = this.manager
   />
 
-  <createForm
+  <create-manager-form
       v-if="popupTrigger.buttonTriggerCreate"
       :TogglePopup="() => TogglePopup('buttonTriggerCreate')"
   />
@@ -42,15 +42,15 @@
 <script>
 import UserService from "../../services/user.service";
 import editMangerForm from "@/components/admin/forms/editMangerForm";
+import createManagerForm from "@/components/admin/forms/createManagerForm";
 import {isProxy, ref, toRaw} from 'vue';
-import createForm from "@/components/manager/forms/createUserForm";
 import ShipService from "@/services/ShipService";
 
 export default {
   name: "ManagerTable",
   components: {
     editMangerForm,
-    createForm
+    createManagerForm
   },
 
   mounted() {

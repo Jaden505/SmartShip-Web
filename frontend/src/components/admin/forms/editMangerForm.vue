@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <div class="popup">
-    <div class="popup-inner"  v-motion-fade>
+    <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
       <h1 class="font-bold">Edit Manager</h1>
       <form class="w-full max-w-sm">
@@ -80,7 +80,7 @@ import UserService from "@/services/user.service";
 import ShipService from "@/services/ShipService";
 
 export default {
-  name: "editUserForm",
+  name: "editManagerForm",
   props: ['TogglePopup', 'manager'],
 
   data() {
