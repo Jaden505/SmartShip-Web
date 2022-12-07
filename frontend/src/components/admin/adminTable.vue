@@ -14,12 +14,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(operator, index) in users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <td class="py-4 px-6">{{ operator.id }}</td>
-      <td class="py-4 px-6">{{ operator.username }}</td>
-      <td class="py-4 px-6">{{ operator.email }}</td>
-      <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
-      <td class="material-icons py-4 px-6" @click="deleteUser(operator.id)">delete</td>
+    <tr v-for="(manager, index) in users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <td class="py-4 px-6">{{ manager.id }}</td>
+      <td class="py-4 px-6">{{ manager.username }}</td>
+      <td class="py-4 px-6">{{ manager.email }}</td>
+      <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.manager = operator">edit</td>
+      <td class="material-icons py-4 px-6" @click="deleteUser(manager.id)">delete</td>
     </tr>
     </tbody>
   </table>
