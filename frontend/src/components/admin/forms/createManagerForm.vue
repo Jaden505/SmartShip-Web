@@ -216,6 +216,6 @@ button {
 }
 
 button:hover{
-  background-color: deepskyblue;
+  background-color: lightskyblue;
 }
 </style>
