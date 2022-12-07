@@ -25,6 +25,7 @@
           <div class="form-group">
             <label>Ship</label><br>
             <select name="shipID" ref="shipID">
+              <option :value="null"></option>
               <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
             </select>
           </div>

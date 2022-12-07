@@ -55,6 +55,7 @@
             <div class="inline-block relative w-48">
               <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                       v-model="current.shipID">
+                <option :value="null"></option>
                 <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
               </select>
               <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

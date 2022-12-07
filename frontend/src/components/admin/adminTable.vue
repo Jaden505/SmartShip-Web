@@ -106,6 +106,10 @@ export default {
     },
 
     getShipName(ship_id) {
+      if (ship_id == null){
+        return "No ship assigned";
+      }
+
       let ship = this.ships.filter(ship => ship.id == ship_id);
 
       if (ship !== []) {
@@ -113,7 +117,6 @@ export default {
         return ship;
       }
 
-      else return "No ship assigned";
     },
 
     toggle(manager){

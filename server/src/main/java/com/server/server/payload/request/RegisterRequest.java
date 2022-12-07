@@ -13,7 +13,7 @@ public class RegisterRequest {
     private String email;
 
     private int roleID;
-    private int shipID;
+    private Integer shipID;
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -51,11 +51,11 @@ public class RegisterRequest {
         this.roleID = roleID;
     }
 
-    public int getShipID() {
+    public Integer getShipID() {
         return shipID;
     }
 
-    public void setShipID(int shipID) {
+    public void setShipID(Integer shipID) {
         this.shipID = shipID;
     }
 }

@@ -22,6 +22,7 @@
         <div class="user-edit-field">
           <label>Ship</label><br>
           <select v-model="current.shipID">
+            <option :value="null"></option>
             <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
           </select>
         </div>

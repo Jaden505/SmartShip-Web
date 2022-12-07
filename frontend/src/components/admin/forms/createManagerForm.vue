@@ -51,6 +51,7 @@
             </div>
             <div class="md:w-2/3">
               <select name="shipID" ref="shipID">
+                <option :value=null></option>
                 <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
               </select>
             </div>
@@ -90,7 +91,7 @@ export default {
 
   data(){
     return {
-      ships: []
+      ships: [],
     }
   },
 
