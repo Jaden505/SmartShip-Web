@@ -49,6 +49,9 @@
 
         </div>
       </div>
+      <div class="col-span-2 bg-blue-card-blue rounded-md">
+
+      </div>
     </div>
     </div>
 </template>
