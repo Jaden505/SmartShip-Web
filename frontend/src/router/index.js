@@ -11,6 +11,7 @@ import Dashboard from "@/components/Dashboard";
 import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 import NotificationOverview from "@/components/ship/NotificationOverview";
 import Alarms from "@/components/ship/Alarms";
+import Map from "@/components/ship/Map";
 
 const routes = [
     {path : "/", component: Login},
@@ -50,6 +51,11 @@ const routes = [
             {
                 path: "/alarms",
                 component: Alarms,
+                props: true
+            },
+            {
+                path: "/map",
+                component: Map,
                 props: true
             }
         ]
