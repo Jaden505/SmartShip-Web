@@ -1,9 +1,11 @@
 package com.server.server.security.services;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-import com.server.server.repository.RoleRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,31 +25,31 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private GrantedAuthority authority;
+    private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(int id, String username, String email, String password,
-                           GrantedAuthority authority) {
+                           Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.authority = authority;
+        this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(User user, RoleRepository roleRepo) {
-        String roleName = roleRepo.findById(user.getId()).getName();
-        GrantedAuthority authority = new SimpleGrantedAuthority(roleName);
+    public static UserDetailsImpl build(User user) {
+        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole().toString()));
 
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authority);
+                authorities);
     }
 
-    public GrantedAuthority getAuthority() {
-        return authority;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     public int getId() {
@@ -56,11 +58,6 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getEmail() {
         return email;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
     }
 
     @Override
