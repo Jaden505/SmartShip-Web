@@ -15,7 +15,7 @@
 <script>
 
 import leaflet from "leaflet";
-import maplibreGL from "maplibre-gl";
+import libre from "maplibre-gl";
 
 
 import leafletDev from "leaflet-ptv-developer";
@@ -41,25 +41,34 @@ export default {
       fullscreenControl: true
     }).setView(coordinates, 17);
 
-    maplibreGL.setRTLTextPlugin(
+    libre.setRTLTextPlugin(
         'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
         null,
         true
     );
 
-    var vectorLayer = maplibreGL({
-      attribution: '&copy; ' + new Date().getFullYear() + ' PTV Group, HERE',
-      interactive:false,
-      maxZoom: 18,
-      style: 'https://vectormaps-resources.myptv.com/styles/latest/standard.json',
-      transformRequest: (url, resourceType) => {
-        if (resourceType === 'Tile' && url.startsWith('https://api.myptv.com')) {
-          return {
-            url: url + '?apiKey=' + "RVVfOGFhMDk3MTFkNDM4NDkxOGExZTQzNWRmZmMwNTI5MzI6ZTBlMTZjYzItMWQ3Yi00YzYxLTk2NTAtYzc1Y2QyOTFiYWUz"
-          }
-        }
-      }
-    }).addTo(map);
+    console.log(libre.version);
+
+   var map1 = new libre.Map({
+      container: 'map', // container id
+      style: 'https://demotiles.maplibre.org/style.json', // style URL
+      center: [0, 0], // starting position [lng, lat]
+      zoom: 1 // starting zoom
+    });
+
+    // var vectorLayer = libre.maplibreGL({
+    //   attribution: '&copy; ' + new Date().getFullYear() + ' PTV Group, HERE',
+    //   interactive:false,
+    //   maxZoom: 18,
+    //   style: 'https://vectormaps-resources.myptv.com/styles/latest/standard.json',
+    //   transformRequest: (url, resourceType) => {
+    //     if (resourceType === 'Tile' && url.startsWith('https://api.myptv.com')) {
+    //       return {
+    //         url: url + '?apiKey=' + "RVVfOGFhMDk3MTFkNDM4NDkxOGExZTQzNWRmZmMwNTI5MzI6ZTBlMTZjYzItMWQ3Yi00YzYxLTk2NTAtYzc1Y2QyOTFiYWUz"
+    //       }
+    //     }
+    //   }
+    // }).addTo(map);
   }
 
     // const API_KEY = 'RVVfOGFhMDk3MTFkNDM4NDkxOGExZTQzNWRmZmMwNTI5MzI6ZTBlMTZjYzItMWQ3Yi00YzYxLTk2NTAtYzc1Y2QyOTFiYWUz';
