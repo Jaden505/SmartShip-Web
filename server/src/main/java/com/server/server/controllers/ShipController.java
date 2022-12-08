@@ -83,6 +83,7 @@ public class ShipController {
             Ship foundShip = findShip.get(0);
 
             foundShip.setName(ship.getName());
+            foundShip.setLocation(ship.getLocation());
             foundShip.setGpsLongtitude(ship.getGpsLongtitude());
             foundShip.setGpsLatitude(ship.getGpsLatitude());
             foundShip.setOrigin(ship.getName());
