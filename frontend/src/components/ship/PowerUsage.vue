@@ -16,6 +16,7 @@
           <h4 class="text-xl font-semibold text-white-text">Startboard Engine Usage</h4>
         </div>
         <div class="relative p-4 h-72">
+          <div class="position-number" :class="{hidden: !isEditing}">1</div>
           <EngineUsage/>
         </div>
       </div>
@@ -24,11 +25,12 @@
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
         <div class="flex items-center justify-between p-4">
-            <h4 class="text-xl font-semibold text-white-text">Battery Pack Levels</h4>
-          </div>
-          <div class="relative p-4 h-72">
-            <BatteryInfo/>
-          </div>
+          <h4 class="text-xl font-semibold text-white-text">Battery Pack Levels</h4>
+        </div>
+        <div class="relative p-4 h-72">
+          <div class="position-number" :class="{hidden: !isEditing}">2</div>
+          <BatteryInfoLine/>
+        </div>
       </div>
     </div>
 
@@ -39,41 +41,8 @@
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
         </div>
-        <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue">
-          <div>
-            <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
-              Battery Pack 1 Level
-            </h6>
-            <span class="text-5xl font-semibold text-white-text">95</span>
-          </div>
-        </div>
-
-        <div class="items-center text-center shadow-md p-4 bg-white rounded-md bg-blue-card-blue">
-          <div>
-            <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
-              Battery Pack 1 Temperature
-            </h6>
-            <span class="text-5xl font-semibold text-white-text">56.8</span>
-          </div>
-        </div>
-
-        <div class="items-center text-center p-4 bg-white shadow-md rounded-md bg-blue-card-blue">
-          <div>
-            <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
-              Battery Pack 2 Level
-            </h6>
-            <span class="text-5xl font-bold text-white-text">84</span>
-          </div>
-        </div>
-
-        <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue">
-          <div>
-            <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
-              Battery Pack 2 Temperature
-            </h6>
-            <span class="text-5xl font-semibold text-white-text">58.3</span>
-          </div>
-        </div>
+        <div class="position-number" :class="{hidden: !isEditing}">3</div>
+        <BatteryInfoCards/>
       </div>
     </div>
   </div>
@@ -82,12 +51,14 @@
 <script>
 
 import EngineUsage from "@/components/ship/charts-power-usage/EngineUsage";
-import BatteryInfo from "@/components/ship/charts-power-usage/BatteryInfo";
+import BatteryInfoLine from "@/components/ship/charts-power-usage/BatteryInfoLine";
+import BatteryInfoCards from "@/components/ship/charts-power-usage/BatteryInfoCards";
 export default {
   name: "PowerUsage",
   components: {
-    BatteryInfo,
-    EngineUsage
+    BatteryInfoLine,
+    EngineUsage,
+    BatteryInfoCards
   },
 
   data() {
@@ -126,5 +97,15 @@ export default {
 .hide-top-cols {
   height: 0;
   z-index: 1;
+}
+
+.position-number {
+  opacity: 50%;
+  color: white;
+  font-size: 50px;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
 </style>
