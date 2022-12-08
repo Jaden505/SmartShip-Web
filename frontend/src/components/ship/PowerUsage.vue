@@ -11,6 +11,7 @@
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4">
       <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md">
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
+        <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
         <div class="flex items-center justify-between p-4">
           <h4 class="text-xl font-semibold text-white-text">Startboard Engine Usage</h4>
         </div>
@@ -21,28 +22,23 @@
 
       <div class="col-span-2 bg-blue-card-blue shadow-md rounded-md">
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
+        <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
         <div class="flex items-center justify-between p-4">
-          <h4 class="text-xl font-semibold text-white-text">Battery Pack Levels</h4>
-        </div>
-        <div class="relative p-4 h-72">
-          <BatteryInfo/>
-        </div>
+            <h4 class="text-xl font-semibold text-white-text">Battery Pack Levels</h4>
+          </div>
+          <div class="relative p-4 h-72">
+            <BatteryInfo/>
+          </div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-2">
-      <!-- CARD -->
-      <!--      <div class="bg-blue-card-blue shadow-md rounded-md">-->
-      <!--        &lt;!&ndash; CARD HEADER &ndash;&gt;-->
-      <!--        <div class="flex items-center justify-between p-4">-->
-      <!--          <h4 class="text-xl font-semibold text-white-text">Doughnut Chart</h4>-->
-      <!--        </div>-->
-      <!--        &lt;!&ndash; CHART &ndash;&gt;-->
-      <!--        <div class="relative p-4 h-72">-->
-
-      <!--        </div>-->
-      <!--      </div>-->
-      <div class="grid grid-cols-2 gap-8">
+      <div class="grid grid-cols-2 gap-8 shadow-md rounded-md">
+        <div class="hide-top-cols" :class="{hidden: !isEditing}"></div>
+        <div class="hide-top-cols edit-icons-holder" :class="{hidden: !isEditing}">
+          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
+          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
+        </div>
         <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue">
           <div>
             <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
@@ -79,9 +75,7 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -110,6 +104,7 @@ export default {
 }
 
 .material-icons {
+  padding: 15px;
   float: right;
   background-color: #0d6efd;
   background-image:
@@ -119,7 +114,17 @@ export default {
       );
 }
 
+.edit-icons-holder {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .hidden {
-  visibility: hidden;
+  display:none;
+}
+
+.hide-top-cols {
+  height: 0;
+  z-index: 1;
 }
 </style>
