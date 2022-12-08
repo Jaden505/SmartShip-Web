@@ -8,10 +8,12 @@ import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,9 +67,11 @@ public class UserController {
 
             if (findUser.isPresent()){
                 User foundUser = findUser.get();
+                BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
+                foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
                 foundUser.setEmail(user.getEmail());
-                foundUser.setPassword(user.getPassword());
+                foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
                 foundUser.setUsername(user.getUsername());
                 foundUser.setShipID(user.getShipID());
 
