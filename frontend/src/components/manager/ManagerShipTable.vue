@@ -113,11 +113,13 @@ export default {
 
     async deleteShip(ship_id){
       if (confirm("Are you sure you want to delete this ship?")) {
-        await ShipService.deleteShip(ship_id).catch(e => {
-          // alert("This ship has operators assigned!")
+        try{
+          await ShipService.deleteShip(ship_id)
+          location.reload()
+        } catch (e){
           this.TogglePopup('buttonTriggerWarning')
           console.log(e)
-        })
+        }
       }
     },
 

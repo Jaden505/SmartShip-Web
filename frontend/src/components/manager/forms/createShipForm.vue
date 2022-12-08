@@ -82,6 +82,7 @@ export default {
     create() {
       if (this.checkFields()) {
         ShipService.create(this.newShip)
+        location.reload()
       }
       else {
         alert("Please fill all fields to create a ship.")
