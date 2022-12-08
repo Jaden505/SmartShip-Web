@@ -4,7 +4,7 @@
   <div class="popup">
     <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
-      <h1>Create Manager</h1>
+      <h1 class="font-bold">Create Manager</h1>
       <Form @submit="createOperator" :validation-schema="schema" class="w-full max-w-sm">
         <div v-if="!successful">
 

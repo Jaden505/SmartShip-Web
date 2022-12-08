@@ -1,30 +1,75 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup" >
-    <div class="popup-inner">
+  <div class="popup">
+    <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
-
-      <h1>Edit Ship</h1>
-      <form>
-        <div class="user-edit-field">
-          <label>Ship name</label><br>
-          <input type="text" v-model="current.name"><br/>
+      <h1 class="font-bold">Edit Ship</h1>
+      <form class="w-full max-w-sm">
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+              Ship name
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                id="name"
+                type="text"
+                v-model="current.name">
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Location</label><br>
-          <input type="text" v-model="current.location"><br/>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="location">
+              Location
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                id="location"
+                type="text"
+                v-model="current.location">
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Origin</label><br>
-          <input type="text" v-model="current.origin"><br/>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="origin">
+              Origin
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                id="origin"
+                type="text"
+                v-model="current.origin">
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Destination</label><br>
-          <input type="text" v-model="current.destination"><br/>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="destination">
+              Destination
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                id="destination"
+                type="text"
+                v-model="current.destination">
+          </div>
+        </div>
+        <div class="md:flex md:items-center">
+          <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  type="button"
+                  @click="TogglePopup(); update(current.id, current)">
+            Update
+          </button>
         </div>
       </form>
-      <button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</button>
     </div>
   </div>
 </template>
@@ -36,7 +81,7 @@ export default {
   name: "editUserForm",
   props: ['TogglePopup', 'ship'],
 
-  data(){
+  data() {
     return {
       current: this.ship
     }
@@ -44,7 +89,7 @@ export default {
 
   methods: {
     update(ship_id, current) {
-        ShipService.updateShip(ship_id, current)
+      ShipService.updateShip(ship_id, current)
     }
   }
 }
@@ -66,50 +111,61 @@ export default {
 }
 
 .popup-inner {
-  background: #163b7a;
+  background: #00111C;
   padding: 3%;
-}
-
-h1{
-  color: white;
-}
-
-label{
-  width: 100%;
-  text-align: center;
-  color: white;
-}
-
-input{
-  width: 100%;
-  padding: 1%;
-  text-align: center;
-}
-
-button{
-  margin-top: 10%;
-  width: 100%;
-}
-
-.user-edit-field {
-  padding: 10px;
-}
-
-.update-btn {
-  background-color: deepskyblue;
-  color: white;
-}
-
-.update-btn:hover {
-  background-color: dodgerblue;
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 5px 5px black;
 }
 
 .close-popup {
   padding-bottom: 20px;
+  transition: color 0.5s;
 }
 
 .close-popup:hover {
   color: lightgrey;
   cursor: pointer;
 }
+
+/*Form*/
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5%;
+}
+
+label {
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+input {
+  width: 100%;
+  padding: 1%;
+}
+
+input:focus{
+  border: 2px solid black;
+}
+
+select{
+  width: 100%;
+  padding: 1%;
+}
+
+button {
+  margin-top: 10%;
+  width: 100%;
+  background-color: white;
+  transition: background-color 0.5s;
+}
+
+button:hover{
+  background-color: lightskyblue;
+}
+
 </style>

@@ -20,8 +20,8 @@
       <td class="py-4 px-6">{{ operator.username }}</td>
       <td class="py-4 px-6">{{ operator.email }}</td>
       <td class="py-4 px-6">{{ getShipName(operator.shipID) }}</td>
-      <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
-      <td class="material-icons py-4 px-6" @click="deleteUser(operator.id)">delete</td>
+      <td class="material-icons py-4 px-6 pointer" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
+      <td class="material-icons py-4 px-6 pointer" @click="deleteUser(operator.id)">delete</td>
     </tr>
     </tbody>
   </table>
@@ -137,5 +137,9 @@ export default {
 </script>
 
 <style scoped>
+
+.pointer{
+  cursor: pointer;
+}
 
 </style>

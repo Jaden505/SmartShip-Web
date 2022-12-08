@@ -2,34 +2,79 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <div class="popup">
-    <div class="popup-inner">
+    <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
-
-      <h1>Edit Operator</h1>
-      <form>
-        <div class="user-edit-field">
-          <label>Name</label><br>
-          <input type="text" v-model="current.username"><br/>
+      <h1 class="font-bold">Edit Operator</h1>
+      <form class="w-full max-w-sm">
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+              Name
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                   id="name"
+                   type="text"
+                   v-model="current.username">
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Email</label><br>
-          <input type="email" v-model="current.email"><br/>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
+              Email
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                   id="email"
+                   type="email"
+                   v-model="current.email">
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Password</label><br>
-          <input type="password" v-model="current.password"><br/>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+              Password
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                   id="password"
+                   type="password"
+                   v-model="current.password">
+          </div>
         </div>
-        <div class="user-edit-field">
-          <label>Ship</label><br>
-          <select v-model="current.shipID">
-            <option :value="null"></option>
-            <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
-          </select>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+              Ship
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <div class="inline-block relative w-48">
+              <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                      v-model="current.shipID">
+                <option :value="null"></option>
+                <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:flex md:items-center">
+          <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  type="button"
+                  @click="TogglePopup(); update(current.id, current)">
+            Update
+          </button>
         </div>
       </form>
-      <button class="primary update-btn" @click="TogglePopup(); update(current.id, current)">Update</button>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -86,12 +131,29 @@ export default {
 }
 
 .popup-inner {
-  background: #163b7a;
+  background: #00111C;
   padding: 3%;
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 5px 5px black;
 }
+
+.close-popup {
+  padding-bottom: 20px;
+}
+
+.close-popup:hover {
+  color: lightgrey;
+  cursor: pointer;
+}
+
+/*Form*/
 
 h1 {
   color: white;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5%;
 }
 
 label {
@@ -103,39 +165,25 @@ label {
 input {
   width: 100%;
   padding: 1%;
-  text-align: center;
+}
+
+input:focus{
+  border: 2px solid black;
 }
 
 select{
   width: 100%;
   padding: 1%;
-  text-align: center;
 }
 
 button {
   margin-top: 10%;
   width: 100%;
+  background-color: white;
+  transition: background-color 0.5s;
 }
 
-.user-edit-field {
-  padding: 10px;
-}
-
-.update-btn {
-  background-color: deepskyblue;
-  color: white;
-}
-
-.update-btn:hover {
-  background-color: dodgerblue;
-}
-
-.close-popup {
-  padding-bottom: 20px;
-}
-
-.close-popup:hover {
-  color: lightgrey;
-  cursor: pointer;
+button:hover{
+  background-color: lightskyblue;
 }
 </style>

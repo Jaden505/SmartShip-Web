@@ -1,37 +1,63 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="col-md-12 popup rounded-lg">
-    <div class="card card-container popup-inner">
+  <div class="popup">
+    <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
-
-      <Form @submit="createOperator" :validation-schema="schema">
+      <h1 class="font-bold">Create Manager</h1>
+      <Form @submit="createOperator" :validation-schema="schema" class="w-full max-w-sm">
         <div v-if="!successful">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <Field name="username" type="text" class="form-control" />
-            <ErrorMessage name="username" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <Field name="email" type="email" class="form-control" />
-            <ErrorMessage name="email" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <Field name="password" type="password" class="form-control" />
-            <ErrorMessage name="password" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label>Ship</label><br>
-            <select name="shipID" ref="shipID">
-              <option :value="null"></option>
-              <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
-            </select>
+
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+                Name
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <Field name="username" type="text" class="form-control" />
+              <ErrorMessage name="username" class="error-feedback" />
+            </div>
           </div>
 
-          <div class="form-group">
-            <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" :disabled="loading">
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
+                Email
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <Field name="email" type="email" class="form-control" />
+              <ErrorMessage name="email" class="error-feedback" />
+            </div>
+          </div>
+
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+                Password
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <Field name="password" type="password" class="form-control" />
+              <ErrorMessage name="password" class="error-feedback" />
+            </div>
+          </div>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="ship">
+                Ship
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <select name="shipID" ref="shipID">
+                <option :value=null></option>
+                <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group md:flex md:items-center">
+            <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" :disabled="loading">
               <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               Create
             </button>
@@ -55,7 +81,7 @@ import ShipService from "@/services/ShipService";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
-  name: "createUserForm",
+  name: "createManagerForm",
   props: ['TogglePopup'],
   components: {
     Form,
@@ -65,7 +91,7 @@ export default {
 
   data(){
     return {
-      ships: []
+      ships: [],
     }
   },
 
@@ -126,40 +152,16 @@ export default {
 }
 
 .popup-inner {
-  background: #151515;
-  padding: 4%;
-}
-
-h1{
-  color: white;
-}
-
-label{
-  width: 100%;
-  text-align: center;
-  color: lightgrey;
-}
-
-input{
-  width: 100%;
-  padding: 1%;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-select{
-  width: 100%;
-  padding: 1%;
-  text-align: center;
-}
-
-button{
-  margin-top: 10%;
-  width: 100%;
+  background: #00111C;
+  padding: 3%;
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 5px 5px black;
 }
 
 .close-popup {
   padding-bottom: 20px;
+  transition: color 0.5s;
 }
 
 .close-popup:hover {
@@ -175,5 +177,45 @@ button{
 .close-popup:hover {
   color: grey;
   cursor: pointer;
+}
+
+/*Form*/
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5%;
+}
+
+label {
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+input {
+  width: 100%;
+  padding: 1%;
+}
+
+input:focus{
+  border: 2px solid black;
+}
+
+select{
+  width: 100%;
+  padding: 1%;
+}
+
+button {
+  margin-top: 10%;
+  width: 100%;
+  background-color: white;
+  transition: background-color 0.5s;
+}
+
+button:hover{
+  background-color: lightskyblue;
 }
 </style>
