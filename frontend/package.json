@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "npx http-server -p ${PORT} ./dist"
+    "start": "npx http-server -p 8081 ./dist"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
