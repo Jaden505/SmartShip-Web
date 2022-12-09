@@ -9,7 +9,9 @@
     <button @click="this.isEditing = !this.isEditing" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4">
-      <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md">
+
+      <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md" draggable="true" @dragstart="dmc.onDragStart($event, this)"
+           v-on:dragend="dmc.dropHandler($event, this)" v-on:dragover="dmc.dragHandler($event)">
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
         <div class="flex items-center justify-between p-4">
@@ -21,7 +23,8 @@
         </div>
       </div>
 
-      <div class="col-span-2 bg-blue-card-blue shadow-md rounded-md">
+      <div class="col-span-2 bg-blue-card-blue shadow-md rounded-md" draggable="true" @dragstart="dmc.onDragStart($event, this)"
+           v-on:dragend="dmc.dropHandler($event, this)" v-on:dragover="dmc.dragHandler($event)">
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
         <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
         <div class="flex items-center justify-between p-4">
@@ -53,19 +56,26 @@
 import EngineUsage from "@/components/ship/charts-power-usage/EngineUsage";
 import BatteryInfoLine from "@/components/ship/charts-power-usage/BatteryInfoLine";
 import BatteryInfoCards from "@/components/ship/charts-power-usage/BatteryInfoCards";
+import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
+
 export default {
   name: "PowerUsage",
   components: {
     BatteryInfoLine,
     EngineUsage,
-    BatteryInfoCards
+    BatteryInfoCards,
   },
 
   data() {
     return {
-      isEditing: false
+      isEditing: false,
+      dmc: null
     }
   },
+
+  mounted() {
+    this.dmc = new DashboardMoveComponents(null);
+  }
 }
 </script>
 
