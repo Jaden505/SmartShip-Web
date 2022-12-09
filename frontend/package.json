@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "npx http-server -p ${PORT} ./dist"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -19,6 +20,7 @@
     "chart.js": "^3.9.1",
     "core-js": "^3.8.3",
     "http_common": "^1.0.3",
+    "http-server": "^14.1.1",
     "vee-validate": "^4.7.1",
     "vue": "^3.2.13",
     "vue-chartjs": "^4.1.2",
