@@ -11,7 +11,9 @@
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4">
 
       <div id="position-1" class="show-context">
-        <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable" draggable="true" @dragstart="dmc.onDragStart($event)">
+        <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
+             draggable="true" @dragstart="dmc.onDragStart($event)"
+             @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
           <div class="flex items-center justify-between p-4">
@@ -25,7 +27,9 @@
       </div>
 
       <div id="position-2" class="show-context">
-        <div class="col-span-2 bg-blue-card-blue shadow-md rounded-md droppable" @drop.prevent="dmc.dropHandler($event)">
+        <div class="col-span-2 bg-blue-card-blue shadow-md rounded-md droppable"
+             draggable="true" @dragstart="dmc.onDragStart($event)"
+             @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
           <div class="flex items-center justify-between p-4">

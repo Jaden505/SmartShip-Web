@@ -25,11 +25,12 @@ export class DashboardMoveComponents {
         this.component.style.left = ev.clientX - left - this.offsetX + 'px';
         this.component.style.top = ev.clientY - top - this.offsetY + 'px';
 
-        console.log(dropped_container, this.component)
-
         this.swap(this.component, dropped_container)
-
         this.component.style.position = 'static';
+    }
+
+    dragHandler(ev) {
+        ev.dataTransfer.dropEffect = "move";
     }
 
     swap(node1, node2) {
