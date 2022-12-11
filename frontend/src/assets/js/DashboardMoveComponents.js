@@ -6,11 +6,11 @@ export class DashboardMoveComponents {
     }
 
     onDragStart(ev) {
-        this.component = ev.target;
-        const rect = ev.target.getBoundingClientRect();
+        this.component = ev.target.parentNode;
+        const rect = this.component.getBoundingClientRect();
 
-        this.offsetX = ev.clientX - rect.x;
-        this.offsetY = ev.clientY - rect.y;
+        this.offsetX = window.innerWidth; - rect.x;
+        this.offsetY = window.innerHeight - rect.y;
     }
 
     dropHandler(ev) {
@@ -27,6 +27,8 @@ export class DashboardMoveComponents {
 
         this.swap(this.component, dropped_container)
         this.component.style.position = 'static';
+
+        this.updatePosition()
     }
 
     dragHandler(ev) {
@@ -38,5 +40,13 @@ export class DashboardMoveComponents {
         const parent = node2.parentNode;
         node1.replaceWith(node2);
         parent.insertBefore(node1, afterNode2);
+    }
+
+    updatePosition() {
+        const wrapper_positions = document.querySelectorAll('.position-number')
+
+        wrapper_positions.forEach((wrapper, index) => {
+            wrapper.textContent = index+1;
+        })
     }
 }

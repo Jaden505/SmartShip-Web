@@ -8,53 +8,22 @@
        :delay="100">
     <button @click="this.isEditing = !this.isEditing" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
-    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4">
-
-      <div id="position-1" class="show-context">
+    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
+      <div class="show-context" v-for="(component, index) in componentsList" :key="index">
         <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
              draggable="true" @dragstart="dmc.onDragStart($event)"
              @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
           <div class="flex items-center justify-between p-4">
-            <h4 class="text-xl font-semibold text-white-text">Startboard Engine Usage</h4>
+            <h4 class="text-xl font-semibold text-white-text">{{component.name}}</h4>
           </div>
           <div class="relative p-4 h-72">
-            <div class="position-number" :class="{hidden: !isEditing}">1</div>
-            <EngineUsage/>
+            <div class="position-number" :class="{hidden: !isEditing}"></div>
+            <component :is="component"  />
           </div>
         </div>
       </div>
-
-      <div id="position-2" class="show-context">
-        <div class="col-span-2 bg-blue-card-blue shadow-md rounded-md droppable"
-             draggable="true" @dragstart="dmc.onDragStart($event)"
-             @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
-          <div class="flex items-center justify-between p-4">
-            <h4 class="text-xl font-semibold text-white-text">Battery Pack Levels</h4>
-          </div>
-          <div class="relative p-4 h-72">
-            <div class="position-number" :class="{hidden: !isEditing}">2</div>
-            <BatteryInfoLine/>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-2">
-
-      <div class="grid grid-cols-2 gap-8 shadow-md rounded-md droppable">
-        <div class="hide-top-cols" :class="{hidden: !isEditing}"></div>
-        <div class="hide-top-cols edit-icons-holder" :class="{hidden: !isEditing}">
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
-        </div>
-        <div class="position-number" :class="{hidden: !isEditing}">3</div>
-        <BatteryInfoCards/>
-      </div>
-
     </div>
   </div>
 </template>
@@ -77,12 +46,14 @@ export default {
   data() {
     return {
       isEditing: false,
-      dmc: null
+      dmc: null,
+      componentsList: [BatteryInfoLine, EngineUsage]
     }
   },
 
   mounted() {
     this.dmc = new DashboardMoveComponents(null);
+    this.dmc.updatePosition()
   },
 }
 </script>
@@ -123,8 +94,9 @@ export default {
   font-size: 50px;
 
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .show-context {
