@@ -113,7 +113,7 @@ export default {
                 error.message ||
                 error.toString();
 
-            console.log(this.message)
+            alert(this.message)
           }
       );
     },
