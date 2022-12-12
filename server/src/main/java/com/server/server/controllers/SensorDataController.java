@@ -1,26 +1,57 @@
 package com.server.server.controllers;
 
 import com.server.server.model.SensorData;
-import com.server.server.payload.request.LoginRequest;
+import com.server.server.repository.SensorDataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/sensorData")
+@RequestMapping("/api/test/sensorData")
 public class SensorDataController {
 
+    @Autowired
+    SensorData sensorData;
+
+    @Autowired
+    SensorDataRepository repo;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addSensorData(@RequestBody SensorData sensorData) {
+    public ResponseEntity<SensorData> addSensorData(@RequestBody SensorData body) {
+
+//        LocalDateTime test = body.getTime();
+//        DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+//        String jo = test.format(timeColonFormatter);
+//        LocalDateTime colonTime = LocalDateTime.parse(jo, timeColonFormatter);
+//        System.out.println(timeColonFormatter.format(colonTime));
+//        colonTime = body.getTime();
+//        System.out.println(body.getTime());
+
+        sensorData.setSensorId(body.getSensorId());
+        sensorData.setGroup(body.getGroup());
+        sensorData.setSensorName(body.getSensorName());
+        sensorData.setShip(body.getShip());
+        sensorData.setTime(body.getTime());
+        sensorData.setType(body.getType());
+        sensorData.setValue(body.getValue());
+        sensorData.setUnit(body.getUnit());
+        sensorData.setSpeed(body.getSpeed());
+        sensorData.setGpsLatitude(body.getGpsLatitude());
+        sensorData.setGpsLongtitude(body.getGpsLongtitude());
 
 
-
-        return ResponseEntity.created()
-                .body();
-
+        try {
+            SensorData sensorDataSave = repo.save(sensorData);
+            return new ResponseEntity<>(sensorDataSave, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

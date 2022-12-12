@@ -1,8 +1,14 @@
 package com.server.server.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+@Component
 @Entity
 @Table(name = "sensor_data")
 public class SensorData {
@@ -20,6 +26,7 @@ public class SensorData {
     @JoinColumn(name = "ship_id", nullable = true)
     private Ship ship;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     @Column(name = "time")
     private LocalDateTime time;
 
@@ -44,10 +51,10 @@ public class SensorData {
     private int id;
 
     protected SensorData() {
-
     }
 
     public SensorData(String sensorId, String group, String sensorName, Ship ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
+        this();
         this.sensorId = sensorId;
         this.group = group;
         this.sensorName = sensorName;
@@ -155,5 +162,23 @@ public class SensorData {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "SensorData{" +
+                "sensorId='" + sensorId + '\'' +
+                ", group='" + group + '\'' +
+                ", sensorName='" + sensorName + '\'' +
+                ", ship=" + ship +
+                ", time=" + time +
+                ", type='" + type + '\'' +
+                ", value='" + value + '\'' +
+                ", unit='" + unit + '\'' +
+                ", speed='" + speed + '\'' +
+                ", gpsLatitude='" + gpsLatitude + '\'' +
+                ", gpsLongtitude='" + gpsLongtitude + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
