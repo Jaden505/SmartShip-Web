@@ -37,8 +37,8 @@
             </label>
           </div>
           <div class="md:w-2/3">
-            <select v-model="newShip.status">
-              <option v-for="(status,index) in statuses" :key="index" :value="status.id" :class="{error: isError}">{{ status.status }}</option>
+            <select :class="{error: isError}" v-model="newShip.status">
+              <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.status }}</option>
             </select>
           </div>
         </div>

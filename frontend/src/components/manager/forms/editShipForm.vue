@@ -20,20 +20,7 @@
                 v-model="current.name">
           </div>
         </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="location">
-              Location
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                id="location"
-                type="text"
-                v-model="current.location">
-          </div>
-        </div>
+
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="origin">
@@ -48,6 +35,35 @@
                 v-model="current.origin">
           </div>
         </div>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">
+              Status
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <select v-model="current.status">
+              <option v-for="(status,index) in statuses" :key="index" :value="status.id" >{{ status.status }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="location">
+              Location
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                id="location"
+                type="text"
+                v-model="current.location">
+          </div>
+        </div>
+
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="destination">
@@ -62,6 +78,7 @@
                 v-model="current.destination">
           </div>
         </div>
+
         <div class="md:flex md:items-center">
           <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="button"
@@ -76,6 +93,7 @@
 
 <script>
 import ShipService from "@/services/ShipService";
+import StatusService from "@/services/status.service";
 
 export default {
   name: "editUserForm",
@@ -83,15 +101,31 @@ export default {
 
   data() {
     return {
-      current: this.ship
+      current: this.ship,
+      statuses: []
     }
   },
 
   methods: {
     update(ship_id, current) {
       ShipService.updateShip(ship_id, current)
+    },
+
+    getStatuses() {
+      StatusService.get()
+          .then(response => {
+            this.statuses = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
     }
-  }
+  },
+
+  mounted() {
+    this.getStatuses();
+  },
 }
 </script>
 
