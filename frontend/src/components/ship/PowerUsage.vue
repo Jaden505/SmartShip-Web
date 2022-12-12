@@ -6,14 +6,14 @@
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
-    <button @click="this.isEditing = !this.isEditing" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
+    <button @click="this.switchEditing();" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
+    <button :class="{hidden: !isEditing}" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Toevoegen</button>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
         <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
-             draggable="true" @dragstart="dmc.onDragStart($event)"
+             draggable="false" @dragstart="dmc.onDragStart($event)"
              @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">fullscreen_exit</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-white-text">{{component.name}}</h4>
@@ -55,6 +55,16 @@ export default {
     this.dmc = new DashboardMoveComponents(null);
     this.dmc.updatePosition()
   },
+
+  methods: {
+    switchEditing() {
+      this.isEditing = !this.isEditing;
+
+      document.querySelectorAll(".droppable").forEach(component => {
+        component.draggable = !component.draggable;
+      })
+    }
+  }
 }
 </script>
 
