@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:8085/api/test/Alarms';
+const API_URL = process.env.VUE_APP_API_URL + '/api/test/Alarms';
 
 class Alarms {
     getAll() {
@@ -24,15 +24,6 @@ class Alarms {
             setted_up_value: alarm.settedUpValue,
             ship_id: alarm.ship_idtext
         });
-            // parameter: alarm.parameter,
-            // category: alarm.category,
-            // value_since_last_update: alarm.valueSinceLastUpdate,
-            // setted_up_value: alarm.settedUpValue,
-            // ship_id: alarm.ship_idtext,;
-        // add(alarm){
-        //     // return http.delete("/test/Alarms/{index}")
-        //     return http.put("/test/Alarms/"+alarm)
-        // }
     }
 }
 
