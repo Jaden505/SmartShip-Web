@@ -3,7 +3,11 @@
 
   <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <button v-if="activeButtonShip" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn" @click="activate">Filter Ship</button>
+  <button v-if="activeButtonOp" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn" @click="reActivate">Filter Operator</button><br>
+
+  <input v-if="activeSearch" type="text" id="myInput" @keyup="search" :placeholder="'Search for '+ searchTitle" title="Type in a name">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="opTable">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
         <tr>
           <th scope="col" class="py-3 px-6">Operator Id</th>
@@ -64,7 +68,13 @@ export default {
     return {
       users: [],
       operator: null,
-      ships: []
+      ships: [],
+
+      activeSearch: false,
+      activeButtonShip: true,
+      activeButtonOp: false,
+      searchTitle: null,
+      columnNumber: null
     }
   },
 
@@ -131,7 +141,42 @@ export default {
         return ship;
       }
 
+    },
+
+    search(){
+      let input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("opTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[this.columnNumber];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    },
+
+    activate(){
+      this.activeSearch = true
+      this.activeButtonShip = false
+      this.activeButtonOp = true
+      this.searchTitle = 'ship'
+      this.columnNumber = 3
+    },
+
+    reActivate(){
+      this.activeButtonShip = true
+      this.activeButtonOp = false
+      this.searchTitle = 'operator'
+      this.columnNumber = 1
     }
+
   }
 }
 </script>
@@ -140,6 +185,19 @@ export default {
 
 .pointer{
   cursor: pointer;
+}
+
+.topBtn{
+  float: right;
+}
+
+#myInput{
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 </style>
