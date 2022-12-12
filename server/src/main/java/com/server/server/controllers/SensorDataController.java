@@ -7,9 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -24,14 +21,6 @@ public class SensorDataController {
 
     @PostMapping("/add")
     public ResponseEntity<SensorData> addSensorData(@RequestBody SensorData body) {
-
-//        LocalDateTime test = body.getTime();
-//        DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
-//        String jo = test.format(timeColonFormatter);
-//        LocalDateTime colonTime = LocalDateTime.parse(jo, timeColonFormatter);
-//        System.out.println(timeColonFormatter.format(colonTime));
-//        colonTime = body.getTime();
-//        System.out.println(body.getTime());
 
         sensorData.setSensorId(body.getSensorId());
         sensorData.setGroup(body.getGroup());

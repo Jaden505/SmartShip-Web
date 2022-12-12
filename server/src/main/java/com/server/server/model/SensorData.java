@@ -26,7 +26,7 @@ public class SensorData {
     @JoinColumn(name = "ship_id", nullable = true)
     private Ship ship;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "HH:mm:ss dd/MM/yyyy")
     @Column(name = "time")
     private LocalDateTime time;
 
