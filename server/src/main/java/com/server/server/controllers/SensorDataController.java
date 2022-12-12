@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -34,7 +36,6 @@ public class SensorDataController {
         sensorData.setGpsLatitude(body.getGpsLatitude());
         sensorData.setGpsLongtitude(body.getGpsLongtitude());
 
-
         try {
             SensorData sensorDataSave = repo.save(sensorData);
             return new ResponseEntity<>(sensorDataSave, HttpStatus.CREATED);
@@ -42,6 +43,4 @@ public class SensorDataController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

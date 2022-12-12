@@ -1,18 +1,17 @@
 package com.server.server.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Component
 @Entity
 @Table(name = "sensor_data")
 public class SensorData {
 
+    @Id
     @Column(name = "sensor_id")
     private String sensorId;
 
@@ -47,8 +46,6 @@ public class SensorData {
 
     @Column(name = "gps_longtitude")
     private String gpsLongtitude;
-    @Id
-    private int id;
 
     protected SensorData() {
     }
@@ -156,13 +153,6 @@ public class SensorData {
         this.gpsLongtitude = gpsLongtitude;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     @Override
     public String toString() {
@@ -178,7 +168,6 @@ public class SensorData {
                 ", speed='" + speed + '\'' +
                 ", gpsLatitude='" + gpsLatitude + '\'' +
                 ", gpsLongtitude='" + gpsLongtitude + '\'' +
-                ", id=" + id +
                 '}';
     }
 }
