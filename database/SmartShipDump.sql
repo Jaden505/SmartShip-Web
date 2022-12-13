@@ -29,9 +29,10 @@ CREATE TABLE `alarm` (
   `category` varchar(255) DEFAULT NULL,
   `parameter` varchar(255) DEFAULT NULL,
   `setted_up_value` double DEFAULT NULL,
-  `ship_id` int DEFAULT NULL,
+  `ship_id` varchar(255) DEFAULT NULL,
   `value_since_last_update` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `alarm_ship_fk_idx` (`ship_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,38 +42,8 @@ CREATE TABLE `alarm` (
 
 LOCK TABLES `alarm` WRITE;
 /*!40000 ALTER TABLE `alarm` DISABLE KEYS */;
-INSERT INTO `alarm` VALUES (2,'engine 1','Engine temperature',0,0,0);
+INSERT INTO `alarm` VALUES (2,'engine 1','Engine temperature',0,'0',0);
 /*!40000 ALTER TABLE `alarm` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `engine`
---
-
-DROP TABLE IF EXISTS `engine`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `engine` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `kw_critical` int DEFAULT NULL,
-  `kw_good` int DEFAULT NULL,
-  `kw_warning` int DEFAULT NULL,
-  `rpm_critical` int DEFAULT NULL,
-  `rpm_good` int DEFAULT NULL,
-  `rpm_warning` int DEFAULT NULL,
-  `id_ship` int DEFAULT NULL,
-  `temperature` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `engine`
---
-
-LOCK TABLES `engine` WRITE;
-/*!40000 ALTER TABLE `engine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `engine` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -110,14 +81,14 @@ CREATE TABLE `notification` (
   `category` varchar(30) NOT NULL,
   `valueSinceLastUpdate` double(5,2) NOT NULL,
   `settedUpValue` double(5,2) NOT NULL,
-  `ship_id` int NOT NULL,
+  `ship_id` varchar(255) NOT NULL,
   `date` datetime DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
   `temperature` double DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_ship_idx` (`ship_id`),
-  CONSTRAINT `fk_ship` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `ship_fk_idx` (`ship_id`),
+  CONSTRAINT `notification_ship_fk` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -155,6 +126,43 @@ INSERT INTO `role` VALUES (1,'ROLE_USER'),(2,'ROLE_MANAGER'),(3,'ROLE_ADMIN');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sensor_data`
+--
+
+DROP TABLE IF EXISTS `sensor_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sensor_data` (
+  `sensor_id` varchar(255) NOT NULL,
+  `gps_latitude` varchar(255) DEFAULT NULL,
+  `gps_longtitude` varchar(255) DEFAULT NULL,
+  `group` varchar(255) DEFAULT NULL,
+  `sensor_name` varchar(255) DEFAULT NULL,
+  `ship` varchar(255) DEFAULT NULL,
+  `speed` varchar(255) DEFAULT NULL,
+  `time` datetime(6) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL,
+  `ship_id` int DEFAULT NULL,
+  PRIMARY KEY (`sensor_id`),
+  KEY `fk_sensor_ship_idx` (`ship`),
+  CONSTRAINT `fk_sensor_ship` FOREIGN KEY (`ship`) REFERENCES `ship` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sensor_data`
+--
+
+LOCK TABLES `sensor_data` WRITE;
+/*!40000 ALTER TABLE `sensor_data` DISABLE KEYS */;
+INSERT INTO `sensor_data` VALUES ('bb7baec4-c049-45c5-81ce-2715801','N52°3\'53.754','E3°40\'53.123','Sea Conditions','Wind Direction','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Speed','kts','7',0,NULL),('bb7baec4-c049-45c5-81ce-27158016bfff','N52°3\'53.754','E3°40\'53.123','Fuel','Depletion Rate','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Depletion rate','T/H','15',0,NULL),('bb7baec4-c049-45c5-81ce-2715801bff','N52°3\'53.754','E3°40\'53.123','Battery','Percentage Left','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Depletion rate','%','15',0,NULL),('bb7baec4-c049-45c5-81ce-2715801e','N52°3\'53.754','E3°40\'53.123','Sea Conditions','Wind Speed','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Speed','kts','7',0,NULL),('bb7baec4-c049-45c5-81ce-2715801e6b','N52°3\'53.754','E3°40\'53.123','Motor','Engine 1 Oil Temperature','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Temperature','Celcius','67.68',0,NULL),('bb7baec4-c049-45c5-81ce-2715801e6bfff','N52°3\'53.754','E3°40\'53.123','Motor','Engine 1 Temperature','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Temperature','Celcius','67.68',0,NULL),('bb7baec4-c049-45c5-81ce-2715801e6bffff','N52°3\'53.754','E3°40\'53.123','Motor','Engine 1 Oil Level','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Quantity','L','350',0,NULL),('bb7baec4-c049-45c5-81ce-2715801e6bffffff','N52°3\'53.754','E3°40\'53.123','Motor','Engine 1 RPM','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','RPM','RPM','65',0,NULL),('bb7baec4-c049-45c5-81ce-2715801e6bfffffff','N52°3\'53.754','E3°40\'53.123','Battery','Depletion Rate','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Depletion rate','KW/H','15',0,NULL),('bb7baec4-c049-45c5-81ce-271801e6bff','N52°3\'53.754','E3°40\'53.123','Fuel','Percentage Left','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Depletion rate','%','15',0,NULL),('bb7baec4-c049-45c5-82ce-2715801e6bff','N52°3\'53.754','E3°40\'53.123','Fuel','Percentage Left','07202515-a483-464c-b704-5671f104044b','12.8','2022-07-15 13:10:00.000000','Depletion rate','%','15',0,NULL);
+/*!40000 ALTER TABLE `sensor_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ship`
 --
 
@@ -162,7 +170,7 @@ DROP TABLE IF EXISTS `ship`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ship` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(255) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `location` varchar(45) NOT NULL,
   `status` int NOT NULL,
@@ -177,7 +185,7 @@ CREATE TABLE `ship` (
   PRIMARY KEY (`id`),
   KEY `fk_status_idx` (`status`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +194,7 @@ CREATE TABLE `ship` (
 
 LOCK TABLES `ship` WRITE;
 /*!40000 ALTER TABLE `ship` DISABLE KEYS */;
-INSERT INTO `ship` VALUES (1,'Titanicc','Pakistan',1,'Titanicc','eaf',2,2,NULL,NULL,0,0),(2,'Maria','Parijs',2,'Maria','Paris',1,0,NULL,NULL,0,0),(4,'fea','eaf',1,'fea',NULL,2,0,NULL,NULL,0,0);
+INSERT INTO `ship` VALUES ('07202515-a483-464c-b704-5671f104044b',NULL,'Hawai',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('1','Titanicc','Pakistan',1,'Titanicc','eaf',2,2,NULL,NULL,0,0),('2','Maria','Parijs',2,'Maria','Paris',1,0,NULL,NULL,0,0),('4','fea','eaf',1,'fea',NULL,2,0,NULL,NULL,0,0);
 /*!40000 ALTER TABLE `ship` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,17 +234,19 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `roleID` int NOT NULL,
-  `shipID` int DEFAULT NULL,
+  `role_id` int NOT NULL,
+  `ship_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`),
   UNIQUE KEY `UKob8kqyqqgmefl0aco34akdtpe` (`email`),
-  KEY `fk_roleIDx` (`roleID`),
-  KEY `ship_fk_idx` (`shipID`),
-  CONSTRAINT `role_fk` FOREIGN KEY (`roleID`) REFERENCES `role` (`id`),
-  CONSTRAINT `ship_fk` FOREIGN KEY (`shipID`) REFERENCES `ship` (`id`)
+  UNIQUE KEY `UKh74ord48otcajdi21yrl7k4d1` (`username`),
+  UNIQUE KEY `UKoshmjvr6wht0bg9oivn75aajr` (`email`),
+  KEY `fk_user_role` (`role_id`),
+  KEY `fk_user_ship_idx` (`ship_id`),
+  CONSTRAINT `fk_role_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `fk_ship_user` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,61 +256,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raihan@gmail.com','$2a$2a$10$VcdzH8Q.o4KEo6df.XesdOmXdXQwT5ugNQvu1Pl0390rmfOeA1bhS','Raihan',1,1),(2,'btynior@gmail.com','$2a$10$Hxv16Y5DtCRXcdbc3U5/zODRnN/o9boyOevGwRxsxsLigRvQ3ebb.','Vincent',2,1),(3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',2,2),(4,'peter@gmail.com','$2a$10$sQiuq6I0s1yVDv1yGsMEHeup/ZRgxh2SFh4HlyhK463M3j6QJnmrm','Peter',3,1),(5,'maico@gmail.com','$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n','Maico',3,2),(14,'Johnny@gmail.com','$2a$10$smPKe6NO9ewVZFCq9ctGc.mq1cjwOTQaYTkOl5nbGbBFFrIRaUZ7C','Johny',1,1),(23,'maccie@gmail.com','$2a$10$UCZYXJwpVQN/aW7TmgMZCOekGZBrLQk/r.9S9BE48MKH.NPLRCose','maccie',1,4);
+INSERT INTO `user` VALUES (1,'raihan@gmail.com','$2a$2a$10$VcdzH8Q.o4KEo6df.XesdOmXdXQwT5ugNQvu1Pl0390rmfOeA1bhS','Raihan',1,NULL),(2,'btynior@gmail.com','$2a$10$Hxv16Y5DtCRXcdbc3U5/zODRnN/o9boyOevGwRxsxsLigRvQ3ebb.','Vincent',1,NULL),(3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',3,NULL),(4,'peter@gmail.com','$2a$10$sQiuq6I0s1yVDv1yGsMEHeup/ZRgxh2SFh4HlyhK463M3j6QJnmrm','Peter',1,NULL),(5,'maico@gmail.com','$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n','Maico',2,NULL),(14,'Johnny@gmail.com','$2a$10$smPKe6NO9ewVZFCq9ctGc.mq1cjwOTQaYTkOl5nbGbBFFrIRaUZ7C','Johny',3,NULL),(23,'maccie@gmail.com','$2a$10$UCZYXJwpVQN/aW7TmgMZCOekGZBrLQk/r.9S9BE48MKH.NPLRCose','maccie',2,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_role`
---
-
-DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_role` (
-  `user_id` int NOT NULL,
-  `roleid` int NOT NULL,
-  PRIMARY KEY (`user_id`,`roleid`),
-  KEY `FKbo5ik0bthje7hum554xb17ry6` (`roleid`),
-  CONSTRAINT `FK859n2jvi8ivhui0rl0esws6o` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKbo5ik0bthje7hum554xb17ry6` FOREIGN KEY (`roleid`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_role`
---
-
-LOCK TABLES `user_role` WRITE;
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `watertank`
---
-
-DROP TABLE IF EXISTS `watertank`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `watertank` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `amount_in_liters` int NOT NULL,
-  `ship_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_watertank` (`ship_id`),
-  CONSTRAINT `fk_watertank` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `watertank`
---
-
-LOCK TABLES `watertank` WRITE;
-/*!40000 ALTER TABLE `watertank` DISABLE KEYS */;
-INSERT INTO `watertank` VALUES (1,38,1),(2,44,1);
-/*!40000 ALTER TABLE `watertank` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -320,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-05 15:11:29
+-- Dump completed on 2022-12-13 21:17:08

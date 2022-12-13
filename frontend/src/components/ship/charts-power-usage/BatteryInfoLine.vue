@@ -6,7 +6,7 @@
 import Chart from "chart.js/auto";
 
 export default {
-  name: "BatteryInfo",
+  name: "BatteryInfoLine",
   data() {
     return {
       chart: []
