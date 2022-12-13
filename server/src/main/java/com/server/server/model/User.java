@@ -1,5 +1,7 @@
 package com.server.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,18 +30,14 @@ public class User {
    @Size(max = 120)
    private String password;
 
-   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @JoinColumn(name = "role_id")
+   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    private Role role;
 
-   @Column(name = "roleID")
-   private int roleID;
-
-   @Column(name = "shipID")
-   private Integer shipID;
-
-   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @JoinColumn(name = "ship_id", nullable = true)
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    private Ship ship;
 
 
@@ -68,18 +66,6 @@ public class User {
 
    public void setUsername(String username) {
       this.username = username;
-   }
-
-   public void setRoleID(int roleID) {
-      this.roleID = roleID;
-   }
-
-   public Integer getShipID() {
-      return shipID;
-   }
-
-   public void setShipID(Integer shipID) {
-      this.shipID = shipID;
    }
 
    public String getEmail() {

@@ -38,7 +38,7 @@ public class ShipController {
     }
 
     @GetMapping("/ships/{id}")
-    public ResponseEntity<List<Ship>> getSpecificShip(@PathVariable int id) {
+    public ResponseEntity<List<Ship>> getSpecificShip(@PathVariable String id) {
         try {
             List<Ship> ship = shipRepo.findShipById(id);
 
@@ -62,12 +62,6 @@ public class ShipController {
         newShip.setGpsLatitude(ship_details.getGpsLatitude());
         newShip.setStatus(ship_details.getStatus());
         newShip.setLocation(ship_details.getLocation());
-        newShip.setOrigin(ship_details.getOrigin());
-        newShip.setDestination(ship_details.getDestination());
-        newShip.setRpm(0);
-        newShip.setKw(0);
-        newShip.setWaterTank1(1);
-        newShip.setWaterTank1(2);
 
         try {
             Ship ship = shipRepo.save(newShip);
@@ -79,13 +73,12 @@ public class ShipController {
     }
 
     @PutMapping("/ships/{id}")
-    public ResponseEntity<Ship> updateShip(@PathVariable int id, @RequestBody Ship ship) {
+    public ResponseEntity<Ship> updateShip(@PathVariable String id, @RequestBody Ship ship) {
         try {
             List<Ship> findShip = shipRepo.findShipById(id);
             Ship foundShip = findShip.get(0);
 
             foundShip.setName(ship.getName());
-            foundShip.setLocation(ship.getLocation());
             foundShip.setGpsLongtitude(ship.getGpsLongtitude());
             foundShip.setGpsLatitude(ship.getGpsLatitude());
             foundShip.setOrigin(ship.getName());
@@ -100,7 +93,7 @@ public class ShipController {
     }
 
     @DeleteMapping("/ships/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable String id) {
         try {
             shipRepo.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -117,9 +110,9 @@ public class ShipController {
 
     // todo this doesn't get used for testing
     @GetMapping("/chart/{id}")
-    public Optional<Ship> getById(@PathVariable int id) {
-        Optional<Ship> ship = shipRepo.findById(id);
-        if (ship.isPresent()) {
+    public List<Ship> getById(@PathVariable String id) {
+        List<Ship> ship = shipRepo.findShipById(id);
+        if (ship.isEmpty()) {
             return ship;
         }
         return null;

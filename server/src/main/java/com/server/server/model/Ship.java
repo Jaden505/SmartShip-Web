@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Ship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     @Column(name = "name")
     private String name;
@@ -30,19 +30,7 @@ public class Ship {
     @Column(name = "destination")
     private String destination;
 
-    @Column(name = "rpm")
-    private int rpm;
-
-    @Column(name = "kw")
-    private int kw;
-
-    @Column(name = "water_tank1")
-    private int waterTank1;
-
-    @Column(name = "water_tank2")
-    private int waterTank2;
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -98,37 +86,5 @@ public class Ship {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public int getRpm() {
-        return rpm;
-    }
-
-    public void setRpm(int rpm) {
-        this.rpm = rpm;
-    }
-
-    public int getKw() {
-        return kw;
-    }
-
-    public void setKw(int kw) {
-        this.kw = kw;
-    }
-
-    public int getWaterTank1() {
-        return waterTank1;
-    }
-
-    public void setWaterTank1(int waterTank1) {
-        this.waterTank1 = waterTank1;
-    }
-
-    public int getWaterTank2() {
-        return waterTank2;
-    }
-
-    public void setWaterTank2(int waterTank2) {
-        this.waterTank2 = waterTank2;
     }
 }
