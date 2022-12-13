@@ -72,7 +72,7 @@ export default {
                     "\nDESTINATION: " + this.ship[0].destination +
                     "\nSTATUS: " + this.ship[0].status +
                     "\nLATITUDE: " + this.ship[0].gpsLatitude +
-                    "\nLONGTITUDE: " + this.ship[0].gpsLatitude).openPopup();
+                    "\nLONGTITUDE: " + this.ship[0].gpsLongtitude).openPopup();
 
           ship_popup.addTo(map)
           // begin_popup.addTo(map)
