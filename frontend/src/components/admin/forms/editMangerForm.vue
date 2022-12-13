@@ -4,7 +4,7 @@
   <div class="popup">
     <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
-      <h1 class="font-bold">Edit Operator</h1>
+      <h1 class="font-bold">Edit Manager</h1>
       <form class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
@@ -32,6 +32,7 @@
                    v-model="current.email">
           </div>
         </div>
+
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
@@ -45,6 +46,7 @@
                    v-model="current.password">
           </div>
         </div>
+
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
@@ -65,16 +67,15 @@
           </div>
         </div>
         <div class="md:flex md:items-center">
-          <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                  type="button"
-                  @click="TogglePopup(); update(current.id, current)">
-            Update
-          </button>
+            <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                    type="button"
+                    @click="TogglePopup(); update(current.id, current)">
+              Update
+            </button>
         </div>
       </form>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -82,12 +83,12 @@ import UserService from "@/services/user.service";
 import ShipService from "@/services/ShipService";
 
 export default {
-  name: "editUserForm",
-  props: ['TogglePopup', 'operator'],
+  name: "editManagerForm",
+  props: ['TogglePopup', 'manager'],
 
   data() {
     return {
-      current: this.operator,
+      current: this.manager,
       ships: []
     }
   },
@@ -140,6 +141,7 @@ export default {
 
 .close-popup {
   padding-bottom: 20px;
+  transition: color 0.5s;
 }
 
 .close-popup:hover {
