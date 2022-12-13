@@ -65,7 +65,7 @@ export default {
           console.log(response.data)
           console.log(this.ship[0].latitude)
           // eslint-disable-next-line no-undef
-          let shiplocation = L.marker([49.012, 8.4044], {icon: ship_icon});
+          let shiplocation = L.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon});
           let ship_popup = shiplocation.bindPopup(
                     "NAME:\n"+this.ship[0].name +
                     "\nORIGIN: " + this.ship[0].origin +

@@ -30,7 +30,7 @@ public class Ship {
     @Column(name = "water_tank2")
     private int watertank2;
 
-    @Column(name = "latitude")
+    @Column(name = "gps_latitude")
     private String gpsLatitude;
 
     @Column(name = "gps_longtitude")
