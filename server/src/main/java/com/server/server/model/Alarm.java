@@ -23,7 +23,7 @@ public class Alarm {
     private double settedUpValue;
 
     @Column(name = "ship_id")
-    private int ship_id;
+    private String ship_id;
 
 
 //    public Notification(Long id, String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
@@ -34,7 +34,7 @@ public class Alarm {
 //        this.settedUpValue = settedUpValue;
 //        this.ship_id = ship_id;
 //    }
-    public Alarm(String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
+    public Alarm(String parameter, String category, double valueSinceLastUpdate, double settedUpValue, String ship_id) {
         this.parameter = parameter;
         this.category = category;
         this.valueSinceLastUpdate = valueSinceLastUpdate;
@@ -87,11 +87,11 @@ public class Alarm {
         this.settedUpValue = settedUpValue;
     }
 
-    public int getShip_id() {
+    public String getShip_id() {
         return ship_id;
     }
 
-    public void setShip_id(int ship_id) {
+    public void setShip_id(String ship_id) {
         this.ship_id = ship_id;
     }
 }

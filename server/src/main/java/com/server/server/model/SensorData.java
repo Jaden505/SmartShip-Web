@@ -1,12 +1,17 @@
 package com.server.server.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Component
 @Entity
 @Table(name = "sensor_data")
 public class SensorData {
 
+    @Id
     @Column(name = "sensor_id")
     private String sensorId;
 
@@ -16,10 +21,11 @@ public class SensorData {
     @Column(name = "sensor_name")
     private String sensorName;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ship_id", nullable = true)
-    private Ship ship;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ship", nullable = true)
+    private String ship;
 
+    @JsonFormat(pattern = "HH:mm:ss dd/MM/yyyy")
     @Column(name = "time")
     private LocalDateTime time;
 
@@ -40,14 +46,12 @@ public class SensorData {
 
     @Column(name = "gps_longtitude")
     private String gpsLongtitude;
-    @Id
-    private int id;
 
     protected SensorData() {
-
     }
 
-    public SensorData(String sensorId, String group, String sensorName, Ship ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
+    public SensorData(String sensorId, String group, String sensorName, String ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
+        this();
         this.sensorId = sensorId;
         this.group = group;
         this.sensorName = sensorName;
@@ -85,11 +89,11 @@ public class SensorData {
         this.sensorName = sensorName;
     }
 
-    public Ship getShip() {
+    public String getShip() {
         return ship;
     }
 
-    public void setShip(Ship ship) {
+    public void setShip(String ship) {
         this.ship = ship;
     }
 
@@ -149,11 +153,21 @@ public class SensorData {
         this.gpsLongtitude = gpsLongtitude;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "SensorData{" +
+                "sensorId='" + sensorId + '\'' +
+                ", group='" + group + '\'' +
+                ", sensorName='" + sensorName + '\'' +
+                ", ship=" + ship +
+                ", time=" + time +
+                ", type='" + type + '\'' +
+                ", value='" + value + '\'' +
+                ", unit='" + unit + '\'' +
+                ", speed='" + speed + '\'' +
+                ", gpsLatitude='" + gpsLatitude + '\'' +
+                ", gpsLongtitude='" + gpsLongtitude + '\'' +
+                '}';
     }
 }
