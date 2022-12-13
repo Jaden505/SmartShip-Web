@@ -38,7 +38,7 @@ export default {
           const coordinates = leaflet.latLng(49.012, 8.4044); // Karlsruhe, Germany
           const map = leaflet.map('map', {
             fullscreenControl: true
-          }).setView(coordinates, 17);
+          }).setView(coordinates, 10);
 
           libre.setRTLTextPlugin(
               'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
