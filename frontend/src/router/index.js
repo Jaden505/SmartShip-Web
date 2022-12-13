@@ -8,6 +8,7 @@ import ManagerOperator from "@/components/manager/ManagerOperatorTable";
 import ManagerShips from "@/components/manager/ManagerShipTable";
 import ShipsTable from "@/components/ship/ShipsTable";
 import Dashboard from "@/components/Dashboard";
+import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 import NotificationOverview from "@/components/ship/NotificationOverview";
 import Alarms from "@/components/ship/Alarms";
 
@@ -29,6 +30,11 @@ const routes = [
             {
                 path: "/info",
                 component: ShipInfo,
+                props: true
+            },
+            {
+                path: "/engine-info",
+                component: EngineInformation,
                 props: true
             },
             {path : "/manager", component: ManagerDashboard,
