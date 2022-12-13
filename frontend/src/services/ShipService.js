@@ -1,10 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API_URL = 'http://localhost:8085/api/test/';
 
 class ShipDataService {
     getAll() {
         return axios.get(API_URL + "ships/all");
+    }
+    // todo the right endpoint
+    getWater() {
+        return axios.get(API_URL + 'chart');
     }
 
     get(id){
@@ -27,10 +31,6 @@ class ShipDataService {
 
     deleteShip(ship_id) {
         return axios.delete(API_URL + "ships/" + ship_id)
-    }
-
-    getWater() {
-        return axios.get(API_URL + 'chart');
     }
 }
 

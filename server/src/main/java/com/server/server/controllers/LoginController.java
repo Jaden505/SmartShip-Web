@@ -61,17 +61,21 @@ public class LoginController {
 
         System.out.println(authentication);
 
+
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        GrantedAuthority role = userDetails.getAuthority();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                role));
+                roles));
     }
 
     @PostMapping("/signup")
@@ -88,12 +92,6 @@ public class LoginController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        if (!roleRepository.existsById(signUpRequest.getRoleID())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: This role doesnt exits by given id!"));
-        }
-
         // Create new user's account
         User user = new User();
 
@@ -103,7 +101,32 @@ public class LoginController {
         user.setRoleID(signUpRequest.getRoleID());
         user.setShipID(signUpRequest.getShipID());
 
-        System.out.println(user);
+        String role = signUpRequest.getRole();
+
+        if (role == null) {
+            Role userRole = roleRepository.findByName(ERole.ROLE_OPERATOR)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            user.setRole(userRole);
+        } else {
+                switch (role) {
+                    case "admin":
+                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        user.setRole(adminRole);
+
+                        break;
+                    case "manager":
+                        Role modRole = roleRepository.findByName(ERole.ROLE_MANAGER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        user.setRole(modRole);
+
+                        break;
+                    default:
+                        Role userRole = roleRepository.findByName(ERole.ROLE_OPERATOR)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        user.setRole(userRole);
+                }
+        }
 
         userRepository.save(user);
 

@@ -1,6 +1,9 @@
 package com.server.server.payload.request;
 
+import com.server.server.model.Role;
+
 import javax.validation.constraints.*;
+import java.util.Set;
 
 public class RegisterRequest {
     @NotBlank
@@ -14,6 +17,8 @@ public class RegisterRequest {
 
     private int roleID;
     private Integer shipID;
+    private String role;
+
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -39,12 +44,16 @@ public class RegisterRequest {
         return password;
     }
 
+    public int getRoleID() {
+        return roleID;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public int getRoleID() {
-        return this.roleID;
+    public String getRole() {
+        return role;
     }
 
     public void setRoleID(int roleID) {
@@ -57,5 +66,10 @@ public class RegisterRequest {
 
     public void setShipID(Integer shipID) {
         this.shipID = shipID;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+
     }
 }

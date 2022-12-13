@@ -4,8 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "user",
@@ -14,8 +12,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "email")
         })
 public class User {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
 
    @NotBlank
@@ -31,17 +28,20 @@ public class User {
    @Size(max = 120)
    private String password;
 
-   @ManyToMany(fetch = FetchType.LAZY)
-   @JoinTable(name = "user_role",
-           joinColumns = @JoinColumn(name = "user_id"),
-           inverseJoinColumns = @JoinColumn(name = "roleID"))
-   private Set<Role> roles = new HashSet<>();
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JoinColumn(name = "role_id")
+   private Role role;
 
    @Column(name = "roleID")
    private int roleID;
 
    @Column(name = "shipID")
    private Integer shipID;
+
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JoinColumn(name = "ship_id", nullable = true)
+   private Ship ship;
+
 
    public User() {
    }
@@ -56,10 +56,6 @@ public class User {
 
    public String getUsername() {
       return username;
-   }
-
-   public int getRoleID() {
-      return roleID;
    }
 
    public void setEmail(String email) {
@@ -92,5 +88,21 @@ public class User {
 
    public String getPassword() {
       return password;
+   }
+
+   public Role getRole() {
+      return role;
+   }
+
+   public Ship getShip() {
+      return ship;
+   }
+
+   public void setShip(Ship ship) {
+      this.ship = ship;
+   }
+
+   public void setRole(Role role) {
+      this.role = role;
    }
 }

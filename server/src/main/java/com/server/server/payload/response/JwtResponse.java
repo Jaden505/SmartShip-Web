@@ -3,20 +3,22 @@ package com.server.server.payload.response;
 import com.server.server.model.Role;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.List;
+
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private int id;
     private String username;
     private String email;
-    private GrantedAuthority role;
+    private List<String> roles;
 
-    public JwtResponse(String accessToken, int id, String username, String email, GrantedAuthority role) {
+    public JwtResponse(String accessToken, int id, String username, String email, List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
     }
 
     public String getAccessToken() {
@@ -59,7 +61,7 @@ public class JwtResponse {
         this.username = username;
     }
 
-    public GrantedAuthority getRole() {
-        return role;
+    public List<String> getRoles() {
+        return roles;
     }
 }
