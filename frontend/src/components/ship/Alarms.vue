@@ -117,8 +117,8 @@ export default {
 .flex-box {
   width: 320px;
   height: 170px;
-  background-color: #002C60;
-  color: #0061FF;
+  background-color: #343434;
+  color: white;
   border-radius: 20px;
   margin: 20px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 2);
@@ -145,7 +145,7 @@ export default {
 }
 
 .flex-child:first-child {
-  background-color: #0061FF;
+  background-color: #656565;
   color: #202020;
   margin-left: 73%;
 }

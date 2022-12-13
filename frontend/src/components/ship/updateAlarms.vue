@@ -93,14 +93,13 @@ export default {
   justify-content: center;
   width: auto;
   height: auto;
-  background-color: #002C60;
+  background-color: #343434;
   border-radius: 20px;
   margin: 20px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 2);
 }
 
 .Parameters {
-  color: #0061FF;
   margin-top: 3%;
   display: block;
   font-size: 30px;
@@ -122,7 +121,7 @@ input{
   border-radius: 20px;
 }
 #update{
-  background-color: lightgreen;
+  background-color: #656565;
 }
 #cancel{
   background-color: deeppink;

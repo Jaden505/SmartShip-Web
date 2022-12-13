@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="col-span-2 bg-blue-card-blue rounded-md">
-
+        <Map/>
       </div>
     </div>
     </div>
@@ -58,9 +58,10 @@
 
 <script>
 import WaterSupply from "@/components/ship/charts-information/WaterSupply";
+import Map from "@/components/ship/Map";
 export default {
     name: "ShipsTable",
-  components: {WaterSupply}
+    components: {WaterSupply, Map}
 }
 </script>
 
