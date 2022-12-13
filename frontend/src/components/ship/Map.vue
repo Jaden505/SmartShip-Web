@@ -31,7 +31,7 @@ import ShipService from "@/services/ShipService";
 export default {
   name: "Map",
   mounted() {
-    ShipService.getAll()
+    ShipService.get(0)
         .then(response => {
           this.ship = response.data
           const API_KEY = 'RVVfOGFhMDk3MTFkNDM4NDkxOGExZTQzNWRmZmMwNTI5MzI6ZTBlMTZjYzItMWQ3Yi00YzYxLTk2NTAtYzc1Y2QyOTFiYWUz';
@@ -63,16 +63,14 @@ export default {
           //   iconSize: [40, 40],
           // });
           // eslint-disable-next-line no-undef
-          let shiplocation = L.marker([this.ship[0].gpsLatitude,this.ship[0].gpsLongtitude , {icon: ship_icon}]);
-          let ship_popup = shiplocation.bindPopup("Ship information").openPopup();
-
-          // eslint-disable-next-line no-undef
-          // let begin = L.marker([49.012, 8.4044], {icon: begin_icon});
-          // let begin_popup = begin.bindPopup("Begin information").openPopup();
-          //
-          // // eslint-disable-next-line no-undef
-          // let destination = L.marker([49.012, 8.9044], {icon: destination_icon});
-          // let destination_popup = destination.bindPopup("Destination information").openPopup();
+          let shiplocation = L.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon});
+          let ship_popup = shiplocation.bindPopup(
+                    "NAME:\n"+this.ship[0].name +
+                    "ORIGIN: " + this.ship[0].origin +
+                    "\nDESTINATION: " + this.ship[0].destination +
+                    "\nSTATUS: " + this.ship[0].status +
+                    "\nLATITUDE: " + this.ship[0].gpsLatitude +
+                    "\nLONGTITUDE: " + this.ship[0].gpsLongtitude).openPopup();
 
           ship_popup.addTo(map)
           // begin_popup.addTo(map)
