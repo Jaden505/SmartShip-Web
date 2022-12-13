@@ -31,7 +31,7 @@ import ShipService from "@/services/ShipService";
 export default {
   name: "Map",
   mounted() {
-    ShipService.get(0)
+    ShipService.get(5)
         .then(response => {
           this.ship = response.data
           const API_KEY = 'RVVfOGFhMDk3MTFkNDM4NDkxOGExZTQzNWRmZmMwNTI5MzI6ZTBlMTZjYzItMWQ3Yi00YzYxLTk2NTAtYzc1Y2QyOTFiYWUz';
@@ -62,15 +62,17 @@ export default {
           //   iconUrl: 'https://d35k22e9287vnh.cloudfront.net/224x/images/e/end.png',
           //   iconSize: [40, 40],
           // });
+          console.log(response.data)
+          console.log(this.ship[0].latitude)
           // eslint-disable-next-line no-undef
-          let shiplocation = L.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon});
+          let shiplocation = L.marker([49.012, 8.4044], {icon: ship_icon});
           let ship_popup = shiplocation.bindPopup(
                     "NAME:\n"+this.ship[0].name +
-                    "ORIGIN: " + this.ship[0].origin +
+                    "\nORIGIN: " + this.ship[0].origin +
                     "\nDESTINATION: " + this.ship[0].destination +
                     "\nSTATUS: " + this.ship[0].status +
                     "\nLATITUDE: " + this.ship[0].gpsLatitude +
-                    "\nLONGTITUDE: " + this.ship[0].gpsLongtitude).openPopup();
+                    "\nLONGTITUDE: " + this.ship[0].gpsLatitude).openPopup();
 
           ship_popup.addTo(map)
           // begin_popup.addTo(map)

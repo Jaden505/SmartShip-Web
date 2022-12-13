@@ -38,7 +38,7 @@ public class ShipController {
     }
 
     @GetMapping("/ships/{id}")
-    public ResponseEntity<List<Ship>> getSpecificShip(@PathVariable int id) {
+    public ResponseEntity<List<Ship>> getSpecificShip(@PathVariable String id) {
         try {
             List<Ship> ship = shipRepo.findShipById(id);
 
@@ -73,7 +73,7 @@ public class ShipController {
     }
 
     @PutMapping("/ships/{id}")
-    public ResponseEntity<Ship> updateShip(@PathVariable int id, @RequestBody Ship ship) {
+    public ResponseEntity<Ship> updateShip(@PathVariable String id, @RequestBody Ship ship) {
         try {
             List<Ship> findShip = shipRepo.findShipById(id);
             Ship foundShip = findShip.get(0);
@@ -93,7 +93,7 @@ public class ShipController {
     }
 
     @DeleteMapping("/ships/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable String id) {
         try {
             shipRepo.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -110,7 +110,7 @@ public class ShipController {
 
     // todo this doesn't get used for testing
     @GetMapping("/chart/{id}")
-    public Optional<Ship> getById(@PathVariable int id) {
+    public Optional<Ship> getById(@PathVariable String id) {
         Optional<Ship> ship = shipRepo.findById(id);
         if (ship.isPresent()) {
             return ship;
