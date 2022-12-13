@@ -42,7 +42,10 @@ export class DashboardMoveComponents {
         parent.insertBefore(node1, afterNode2);
     }
 
-    updatePosition() {
+    async updatePosition() {
+        // Wait for element to be added
+        await new Promise(resolve => setTimeout(resolve, 1));
+
         const wrapper_positions = document.querySelectorAll('.position-number')
 
         wrapper_positions.forEach((wrapper, index) => {

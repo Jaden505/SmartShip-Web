@@ -16,29 +16,11 @@
       <span class="text-5xl font-semibold text-white-text">56.8</span>
     </div>
   </div>
-
-  <div class="items-center text-center p-4 bg-white shadow-md rounded-md bg-blue-card-blue">
-    <div>
-      <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
-        Battery Pack 2 Level
-      </h6>
-      <span class="text-5xl font-bold text-white-text">84</span>
-    </div>
-  </div>
-
-  <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue">
-    <div>
-      <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
-        Battery Pack 2 Temperature
-      </h6>
-      <span class="text-5xl font-semibold text-white-text">58.3</span>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: "BatteryInfoCards"
+  name: "BatteryInfo1"
 }
 </script>
 
