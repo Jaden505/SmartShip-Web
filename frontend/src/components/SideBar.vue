@@ -73,6 +73,8 @@ export default {
         {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
         },
         {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-eye"/>
+        },
+        {name: 'Admin', to: '/admin', icon:<font-awesome-icon icon="fa-solid fa-people-roof" />
         }
       ],
       items_bottom: [

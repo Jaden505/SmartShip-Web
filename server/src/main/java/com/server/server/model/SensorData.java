@@ -22,7 +22,9 @@ public class SensorData {
     private String sensorName;
 
 //    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ship", nullable = true)
+
+
+    @JoinColumn(name = "ship_id", nullable = true)
     private String ship;
 
     @JsonFormat(pattern = "HH:mm:ss dd/MM/yyyy")

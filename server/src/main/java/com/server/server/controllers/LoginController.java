@@ -98,6 +98,8 @@ public class LoginController {
         user.setUsername(signUpRequest.getUsername());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
+//        user.setRoleID(signUpRequest.getRoleID());
+//        user.setShipID(signUpRequest.getShipID());
 
         String role = signUpRequest.getRole();
 

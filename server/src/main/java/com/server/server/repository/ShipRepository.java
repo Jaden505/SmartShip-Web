@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ShipRepository extends JpaRepository<Ship, Integer> {
+public interface ShipRepository extends JpaRepository<Ship, String> {
     
     List<Ship> findShipById(int shipId);
+    List<Ship> findShipById(String shipId);
+
 
 }

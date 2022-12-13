@@ -11,6 +11,8 @@ import Dashboard from "@/components/Dashboard";
 import EngineInformation from "@/components/ship/charts-information/EngineInformation";
 import NotificationOverview from "@/components/ship/NotificationOverview";
 import Alarms from "@/components/ship/Alarms";
+import AdminTable from "@/components/admin/adminTable";
+import adminTable from "@/components/admin/adminTable";
 
 const routes = [
     {path : "/", component: Login},
@@ -50,6 +52,11 @@ const routes = [
             {
                 path: "/alarms",
                 component: Alarms,
+                props: true
+            },
+            {
+                path: "/admin",
+                component: adminTable,
                 props: true
             }
         ]

@@ -2,28 +2,76 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <div class="popup" >
-    <div class="popup-inner">
+    <div class="popup-inner" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
 
-      <h1>Create Ship</h1>
-      <form>
-        <div class="user-edit-field">
-          <label>Name</label><br>
-          <input type="text" v-model="newShip.name"><br/>
-        </div>
-        <div class="user-edit-field">
-          <label>Location</label><br>
-          <input type="text" v-model="newShip.location"><br/>
+      <h1 class="font-bold">Create Ship</h1>
+      <form class="w-full max-w-sm">
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+              Name
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input type="text" :class="{error: isError}" v-model="newShip.name">
+          </div>
         </div>
 
-        <div class="user-edit-field">
-          <label>Status</label><br>
-          <select v-model="newShip.status">
-            <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.status }}</option>
-          </select>
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="origin">
+              Origin
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input type="text" :class="{error: isError}" v-model="newShip.origin">
+          </div>
         </div>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">
+              Status
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <select :class="{error: isError}" v-model="newShip.status">
+              <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.status }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="location">
+              Location
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input type="text" :class="{error: isError}" v-model="newShip.location">
+          </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="destination">
+              Destination
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input type="text" :class="{error: isError}" v-model="newShip.destination">
+          </div>
+        </div>
+
+        <div class="form-group md:flex md:items-center">
+          <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  @click="create()">Create</button>
+        </div>
+
       </form>
-      <button class="primary update-btn" @click="TogglePopup(); create()">Create</button>
+
     </div>
   </div>
 </template>
@@ -43,22 +91,26 @@ export default {
 
   data(){
     return {
-      newShip: new Ship("", "", "", 1, 2, 0, 0), // Defaults
-      statuses: []
+      newShip: new Ship("", "", "", "","",1, 2, 0, 0), // Defaults
+      statuses: [],
+      isError: false
     }
   },
 
   methods: {
     checkFields() {
-      return (this.newShip.name !== "" && this.newShip.location !== "" && this.newShip.status !== "");
+      return (this.newShip.name !== "" && this.newShip.location !== "" && this.newShip.status !== "" && this.newShip.origin !== "" && this.newShip.destination !== "");
     },
 
     create() {
       if (this.checkFields()) {
+        this.isError = false
         ShipService.create(this.newShip)
+        location.reload()
+        this.TogglePopup()
       }
       else {
-        alert("Please fill all fields to create a ship.")
+        this.isError = true
       }
     },
 
@@ -92,56 +144,81 @@ export default {
 }
 
 .popup-inner {
-  background: #163b7a;
+  background: #00111C;
   padding: 3%;
-}
-
-h1{
-  color: white;
-}
-
-label{
-  width: 100%;
-  text-align: center;
-  color: white;
-}
-
-input{
-  width: 100%;
-  padding: 1%;
-  text-align: center;
-}
-
-select{
-  width: 100%;
-  padding: 1%;
-  text-align: center;
-}
-
-button{
-  margin-top: 10%;
-  width: 100%;
-}
-
-.user-edit-field {
-  padding: 10px;
-}
-
-.update-btn {
-  background-color: deepskyblue;
-  color: white;
-}
-
-.update-btn:hover {
-  background-color: dodgerblue;
+  border: 2px solid black;
+  border-radius: 25px;
+  box-shadow: 5px 5px black;
 }
 
 .close-popup {
   padding-bottom: 20px;
+  transition: color 0.5s;
 }
 
 .close-popup:hover {
   color: lightgrey;
   cursor: pointer;
+}
+
+/*Form*/
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5%;
+}
+
+label {
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+input {
+  width: 100%;
+  padding: 1%;
+}
+
+input:focus{
+  border: 2px solid black;
+}
+
+select{
+  width: 100%;
+  padding: 1%;
+}
+
+button {
+  margin-top: 10%;
+  width: 100%;
+  background-color: white;
+  transition: background-color 0.5s;
+}
+
+button:hover{
+  background-color: lightskyblue;
+}
+
+.error{
+  border: red 2px solid;
+  animation: shake 0.2s ease-in-out 0s 2;
+  box-shadow: 0 0 0.6rem #ff0000;
+}
+
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.5rem;
+  }
+  75% {
+    margin-left: -0.5rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
 }
 </style>
