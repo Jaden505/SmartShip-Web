@@ -7,13 +7,20 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
     <button @click="this.switchEditing();" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
-    <button :class="{hidden: !isEditing}" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Toevoegen</button>
+
+    <div class="dropdown">
+      <button :class="{hidden: !isEditing}" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Toevoegen</button>
+      <div class="dropdown-content">
+        <a v-for="(component, index) in addableComponents" :key="index" @click="switchDisplayComponent(component)">{{component.name}}</a>
+      </div>
+    </div>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
         <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
              draggable="false" @dragstart="dmc.onDragStart($event)"
              @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
+          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-white-text">{{component.name}}</h4>
@@ -47,13 +54,15 @@ export default {
     return {
       isEditing: false,
       dmc: null,
-      componentsList: [BatteryInfoLine, EngineUsage]
+      componentsList: [BatteryInfoLine, EngineUsage],
+      addableComponents: []
     }
   },
 
   mounted() {
     this.dmc = new DashboardMoveComponents(null);
     this.dmc.updatePosition()
+    this.addableComponents.push(BatteryInfoCards)
   },
 
   methods: {
@@ -63,6 +72,19 @@ export default {
       document.querySelectorAll(".droppable").forEach(component => {
         component.draggable = !component.draggable;
       })
+    },
+
+    switchDisplayComponent(component) {
+      // Display
+      if (this.addableComponents.includes(component)) {
+        this.addableComponents.splice(this.addableComponents.indexOf(component), 1);
+        this.componentsList.push(component);
+      }
+      // Hide
+      else if (this.componentsList.includes(component)) {
+        this.componentsList.splice(this.componentsList.indexOf(component), 1);
+        this.addableComponents.push(component);
+      }
     }
   }
 }
@@ -84,18 +106,12 @@ export default {
       );
 }
 
-.edit-icons-holder {
-  margin-left: auto;
-  margin-right: 0;
+.material-icons:hover {
+  cursor: pointer;
 }
 
 .hidden {
   display:none;
-}
-
-.hide-top-cols {
-  height: 0;
-  z-index: 1;
 }
 
 .position-number {
@@ -112,4 +128,31 @@ export default {
 .show-context {
   display: contents;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: lightgrey;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
 </style>
