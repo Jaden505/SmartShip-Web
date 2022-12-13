@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "ship")
 public class Ship {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "name")
@@ -86,5 +85,9 @@ public class Ship {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
