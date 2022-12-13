@@ -1,5 +1,7 @@
 package com.server.server.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.server.server.model.SensorData;
 import com.server.server.repository.SensorDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -30,6 +30,12 @@ public class SensorDataController {
     @PostMapping("/add")
     public ResponseEntity<SensorData> addSensorData(@RequestBody SensorData body) {
 
+//        try {
+//            ObjectMapper mapper = new ObjectMapper();
+//            sensorData.setShip(mapper.writeValueAsString(body.getShip()));
+//        }catch (JsonProcessingException e){
+//            System.out.println("Json Processing");
+//        }
         sensorData.setSensorId(body.getSensorId());
         sensorData.setGroup(body.getGroup());
         sensorData.setSensorName(body.getSensorName());

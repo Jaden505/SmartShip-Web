@@ -21,9 +21,9 @@ public class SensorData {
     @Column(name = "sensor_name")
     private String sensorName;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ship_id", nullable = true)
-    private Ship ship;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ship", nullable = true)
+    private String ship;
 
     @JsonFormat(pattern = "HH:mm:ss dd/MM/yyyy")
     @Column(name = "time")
@@ -50,7 +50,7 @@ public class SensorData {
     protected SensorData() {
     }
 
-    public SensorData(String sensorId, String group, String sensorName, Ship ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
+    public SensorData(String sensorId, String group, String sensorName, String ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
         this();
         this.sensorId = sensorId;
         this.group = group;
@@ -89,11 +89,11 @@ public class SensorData {
         this.sensorName = sensorName;
     }
 
-    public Ship getShip() {
+    public String getShip() {
         return ship;
     }
 
-    public void setShip(Ship ship) {
+    public void setShip(String ship) {
         this.ship = ship;
     }
 
