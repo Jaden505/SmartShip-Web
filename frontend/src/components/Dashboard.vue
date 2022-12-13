@@ -55,7 +55,7 @@
             <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <h3 class="text-white-text font-medium">{{currentUser.username}}</h3>
-              <span class="text-white-disabled font-semibold">{{currentUser.roles[0]}}</span>
+              <span class="text-white-disabled font-semibold">{{getRoleName(currentUser.role)}}</span>
             </div>
           </nav>
         </div>
@@ -100,6 +100,14 @@ export default {
   },
   components: {
     SideBar
+  },
+
+  methods: {
+    getRoleName(role) {
+      let role_name = role['authority'].slice(5);
+      role_name = role_name.charAt(0) + role_name.substring(1).toLowerCase(); // Make lowercase except for first letter
+      return role_name;
+    }
   }
 }
 </script>
