@@ -6,7 +6,7 @@ export class DashboardMoveComponents {
     }
 
     onDragStart(ev) {
-        this.component = ev.target.parentNode;
+        this.component = ev.target;
         const rect = this.component.getBoundingClientRect();
 
         this.offsetX = window.innerWidth; - rect.x;
@@ -16,7 +16,7 @@ export class DashboardMoveComponents {
     dropHandler(ev) {
         const dropped_container = ev.target.parentNode.parentNode;
 
-        if (!dropped_container.classList.contains('droppable')) return;
+        if (!dropped_container.classList.contains('droppable') || dropped_container === this.component.parentNode) return;
 
         const left = parseInt(dropped_container.style.left);
         const top = parseInt(dropped_container.style.top);
