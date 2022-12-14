@@ -31,7 +31,7 @@
             </router-link>
           </div>
           <h2 class="font-semibold inline-block hidden space-x-2 md:flex md:text-sm lg:text-base">
-            <span class="text-blue-regular">Good Morning  <span class="text-white-text">{{currentUser.username}}</span></span>
+            <span class="text-blue-regular">Good Morning  <span class="text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span></span>
           </h2>
           <button type="button" class="transition-colors duration-200 rounded-md text-white-text md:hidden">
             <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
@@ -54,8 +54,16 @@
             </a>
             <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
-              <h3 class="text-white-text font-medium">{{currentUser.username}}</h3>
-              <span class="text-white-disabled font-semibold">{{currentUser.roles[0]}}</span>
+              <h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3>
+              <div v-if="currentUser.role === 'ROLE_ADMIN'">
+                <span class="text-white-disabled font-semibold">Admin</span>
+              </div>
+              <div v-else-if="currentUser.role === 'ROLE_MANAGER'">
+                <span class="text-white-disabled font-semibold">Manager</span>
+              </div>
+              <div v-else>
+                <span class="text-white-disabled font-semibold">Operator</span>
+              </div>
             </div>
           </nav>
         </div>
@@ -103,10 +111,8 @@ export default {
   },
 
   methods: {
-    getRoleName(role) {
-      let role_name = role['authority'].slice(5);
-      role_name = role_name.charAt(0) + role_name.substring(1).toLowerCase(); // Make lowercase except for first letter
-      return role_name;
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
   }
 }
