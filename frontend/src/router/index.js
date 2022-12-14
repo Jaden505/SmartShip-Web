@@ -12,10 +12,12 @@ import EngineInformation from "@/components/ship/charts-information/EngineInform
 import NotificationOverview from "@/components/ship/NotificationOverview";
 import Alarms from "@/components/ship/Alarms";
 import Map from "@/components/ship/Map";
+import AdminTable from "@/components/admin/adminTable";
 
 const routes = [
-    {path : "/", component: Login},
-    {path: "/dashboard",
+    {path: "/", component: Login},
+    {
+        path: "/dashboard",
         component: Dashboard,
         children: [
             {
@@ -26,6 +28,10 @@ const routes = [
             {
                 path: "/power-usage",
                 component: PowerUsage,
+                props: true
+            }, {
+                path: "/admin",
+                component: AdminTable,
                 props: true
             },
             {
@@ -38,11 +44,13 @@ const routes = [
                 component: EngineInformation,
                 props: true
             },
-            {path : "/manager", component: ManagerDashboard,
+            {
+                path: "/manager", component: ManagerDashboard,
                 children: [
                     {path: "/manager/operators", component: ManagerOperator},
                     {path: "/manager/ships", component: ManagerShips}
-            ]},
+                ]
+            },
             {
                 path: "/notification-Overview",
                 component: NotificationOverview,
@@ -63,7 +71,7 @@ const routes = [
 ]
 
 export const router = createRouter({
-    history : createWebHashHistory(),
+    history: createWebHashHistory(),
     routes,
 })
 
