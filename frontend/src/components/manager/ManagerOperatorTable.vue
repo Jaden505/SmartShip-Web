@@ -23,7 +23,7 @@
       <td class="py-4 px-6">{{ operator.id }}</td>
       <td class="py-4 px-6">{{ operator.username }}</td>
       <td class="py-4 px-6">{{ operator.email }}</td>
-      <td class="py-4 px-6">{{ getShipName(operator.shipID) }}</td>
+      <td class="py-4 px-6">{{ getShipName(operator.ship.id) }}</td>
       <td class="material-icons py-4 px-6 pointer" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
       <td class="material-icons py-4 px-6 pointer" @click="deleteUser(operator.id)">delete</td>
     </tr>
