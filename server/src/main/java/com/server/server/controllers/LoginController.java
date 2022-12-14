@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.server.server.repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,6 +49,9 @@ public class LoginController {
     RoleRepository roleRepository;
 
     @Autowired
+    ShipRepository shipRepository;
+
+    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
@@ -75,7 +79,8 @@ public class LoginController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                roles,
+                userDetails.getRole()));
     }
 
     @PostMapping("/signup")
@@ -98,8 +103,7 @@ public class LoginController {
         user.setUsername(signUpRequest.getUsername());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-//        user.setRoleID(signUpRequest.getRoleID());
-//        user.setShipID(signUpRequest.getShipID());
+        user.setShip(shipRepository.findShipById(signUpRequest.getShipID()).get(0));
 
         String role = signUpRequest.getRole();
 

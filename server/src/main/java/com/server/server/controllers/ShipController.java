@@ -57,11 +57,14 @@ public class ShipController {
     public ResponseEntity<Ship> createShip(@RequestBody Ship ship_details) {
         Ship newShip = new Ship();
 
+        newShip.setId(ship_details.getId());
         newShip.setName(ship_details.getName());
+        newShip.setOrigin(ship_details.getOrigin());
         newShip.setGpsLongtitude(ship_details.getGpsLongtitude());
         newShip.setGpsLatitude(ship_details.getGpsLatitude());
         newShip.setStatus(ship_details.getStatus());
         newShip.setLocation(ship_details.getLocation());
+        newShip.setDestination(ship_details.getDestination());
 
         try {
             Ship ship = shipRepo.save(newShip);
