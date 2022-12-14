@@ -17,6 +17,7 @@
 import leaflet from "leaflet";
 import libre from "maplibre-gl";
 import ShipService from "@/services/ShipService";
+import leflet from "leaflet";
 
 // var scripts = [
 //   "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js", "https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.js", "https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.15/leaflet-maplibre-gl.js", "https://unpkg.com/leaflet-ptv-developer@1.0.1/dist/leaflet-ptv-developer.js"];
@@ -31,7 +32,7 @@ import ShipService from "@/services/ShipService";
 export default {
   name: "Map",
   mounted() {
-    ShipService.get(5)
+    ShipService.get(4)
         .then(response => {
           this.ship = response.data
           const API_KEY = 'RVVfOGFhMDk3MTFkNDM4NDkxOGExZTQzNWRmZmMwNTI5MzI6ZTBlMTZjYzItMWQ3Yi00YzYxLTk2NTAtYzc1Y2QyOTFiYWUz';
@@ -46,12 +47,24 @@ export default {
               true
           );
 
+          let info = leaflet.control();
+
+          info.onAdd = function (map){
+            this._div = leaflet.DomUtil.create('div', ' info');
+            this.update();
+            return this._div;
+          };
+
+
           console.log(libre.version);
           // eslint-disable-next-line no-undef
-          let ship_icon = L.icon({
+          const ship_icon = leaflet.icon({
             iconUrl: 'https://cdn.joypixels.com/emoji/joypixels/3.0/png/128/1f6a2.png',
-            iconSize: [40, 40],
+            iconSize: [32, 32],
+            popupAnchor: [16, 32],
+
           });
+          leaflet.marker([49.012, 8.4044], {icon: ship_icon}).addTo(map).bindPopup("49.012, 8.4044");
           // // eslint-disable-next-line no-undef
           // let begin_icon = L.icon({
           //   iconUrl: 'https://cdn2.iconfinder.com/data/icons/classic-development-circle/512/start-1024.png',
@@ -63,18 +76,19 @@ export default {
           //   iconSize: [40, 40],
           // });
           console.log(response.data)
-          console.log(this.ship[0].latitude)
+          console.log(this.ship[0].gpsLatitude)
           // eslint-disable-next-line no-undef
-          let shiplocation = L.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon});
-          let ship_popup = shiplocation.bindPopup(
-                    "NAME:\n"+this.ship[0].name +
-                    "\nORIGIN: " + this.ship[0].origin +
-                    "\nDESTINATION: " + this.ship[0].destination +
-                    "\nSTATUS: " + this.ship[0].status +
-                    "\nLATITUDE: " + this.ship[0].gpsLatitude +
-                    "\nLONGTITUDE: " + this.ship[0].gpsLongtitude).openPopup();
-
-          ship_popup.addTo(map)
+          // const shiplocation =
+          // leaflet.marker([49.012, 8.4044], {icon: ship_icon}).addTo(map).bindPopup("49.012, 8.4044");
+          // const ship_popup = shiplocation.bindPopup(
+          //           "NAME:\n"+this.ship[0].name +
+          //           "\nORIGIN: " + this.ship[0].origin +
+          //           "\nDESTINATION: " + this.ship[0].destination +
+          //           "\nSTATUS: " + this.ship[0].status +
+          //           "\nLATITUDE: " + this.ship[0].gpsLatitude +
+          //           "\nLONGTITUDE: " + this.ship[0].gpsLongtitude).openPopup();
+          //
+          // ship_popup.addTo(map)
           // begin_popup.addTo(map)
           // destination_popup.addTo(map)
 
@@ -103,7 +117,7 @@ export default {
 
 .map {
   position: absolute;
-  bottom: 0;
+  bottom: 100;
   width: 64.5%;
   height: 90%;
 }
