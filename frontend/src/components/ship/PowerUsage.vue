@@ -78,13 +78,13 @@ export default {
     switchDisplayComponent(component) {
       // Display
       if (this.addableComponents.includes(component)) {
-        this.addableComponents.splice(this.addableComponents.indexOf(component), 1);
         this.componentsList.push(component);
+        this.addableComponents.splice(this.addableComponents.indexOf(component), 1);
       }
       // Hide
       else if (this.componentsList.includes(component)) {
-        this.componentsList.splice(this.componentsList.indexOf(component), 1);
         this.addableComponents.push(component);
+        this.componentsList.splice(this.componentsList.indexOf(component), 1);
       }
 
       this.dmc.updatePosition(this.componentsList);

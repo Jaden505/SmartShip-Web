@@ -25,7 +25,7 @@ export default {
 
           const ship_icon = leaflet.icon({
             iconUrl: 'https://cdn.joypixels.com/emoji/joypixels/3.0/png/128/1f6a2.png',
-            iconSize: [40, 40],
+            iconSize: [35, 35],
           });
 
           let shipmarker = leaflet.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon})
