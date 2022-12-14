@@ -16,7 +16,7 @@ public class RegisterRequest {
     private String email;
 
     private int roleID;
-    private Integer shipID;
+    private String shipID;
     private String role;
 
 
@@ -60,11 +60,11 @@ public class RegisterRequest {
         this.roleID = roleID;
     }
 
-    public Integer getShipID() {
+    public String getShipID() {
         return shipID;
     }
 
-    public void setShipID(Integer shipID) {
+    public void setShipID(String shipID) {
         this.shipID = shipID;
     }
 

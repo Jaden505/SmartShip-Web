@@ -2,10 +2,12 @@ package com.server.server.controllers;
 
 import com.server.server.controllers.LoginController;
 
+import com.server.server.model.Ship;
 import com.server.server.model.User;
 import com.server.server.payload.response.MessageResponse;
 import com.server.server.repository.QueryRepo;
 import com.server.server.repository.RoleRepository;
+import com.server.server.repository.ShipRepository;
 import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/api/test")
 public class UserController {
+
+    @Autowired
+    private ShipRepository shipRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private QueryRepo queryRepo;
@@ -60,30 +68,34 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//
-//    @PutMapping("/users/{id}")
-//    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
-//        try{
-//            Optional<User> findUser = userRepo.findById(id);
-//
-//            if (findUser.isPresent()){
-//                User foundUser = findUser.get();
-//                BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
-//                foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//
-//                foundUser.setEmail(user.getEmail());
-//                foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//                foundUser.setUsername(user.getUsername());
-//
-//                return new ResponseEntity<>(userRepo.save(foundUser), HttpStatus.OK);
-//            } else {
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            }
-//
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
+        try{
+            Optional<User> findUser = userRepository.findById(id);
+
+            if (findUser.isPresent()){
+                User foundUser = findUser.get();
+
+                BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
+                foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+                foundUser.setEmail(user.getEmail());
+                foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+                foundUser.setUsername(user.getUsername());
+
+                List<Ship> ship = shipRepository.findShipById(user.getShip().getId());
+                foundUser.setShip(ship.get(0));
+
+                return new ResponseEntity<>(userRepository.save(foundUser), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 //
 //    @DeleteMapping("/users/{id}")
 //    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
