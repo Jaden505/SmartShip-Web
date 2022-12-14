@@ -199,5 +199,10 @@ public class QueryRepo implements UserRepository {
         return namedQuery.getResultList();
     }
 
+    @Override
+    public void deleteById(int id) {
+
+    }
+
 
 }
