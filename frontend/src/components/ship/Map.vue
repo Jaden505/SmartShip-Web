@@ -13,7 +13,7 @@ import ShipService from "@/services/ShipService";
 export default {
   name: "Map",
   mounted() {
-    ShipService.get(5)
+    ShipService.get(1)
         .then(response => {
           this.ship = response.data;
           const map = leaflet.map('map').setView([0, 0], 1);
