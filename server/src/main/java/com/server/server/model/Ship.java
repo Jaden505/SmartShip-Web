@@ -23,23 +23,12 @@ public class Ship {
     @Column(name = "destination")
     private String destination;
 
-    @Column(name = "water_tank1")
-    private int watertank1;
-
-    @Column(name = "water_tank2")
-    private int watertank2;
-
     @Column(name = "gps_latitude")
     private String gpsLatitude;
 
     @Column(name = "gps_longtitude")
     private String gpsLongtitude;
 
-    @Column(name = "kw")
-    private int kw;
-
-    @Column(name = "rpm")
-    private int rpm;
 
     public String getId() {
         return id;
