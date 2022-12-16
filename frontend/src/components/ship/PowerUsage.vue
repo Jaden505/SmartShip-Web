@@ -6,15 +6,18 @@
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
-    <button @click="this.switchEditing();" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
+    <button @click="this.switchEditing();"
+            class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
     <div class="dropdown">
-      <button :class="{hidden: !isEditing}" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Add</button>
+      <button :class="{hidden: !isEditing}"
+              class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Add</button>
       <div class="dropdown-content">
         <a v-for="(component, index) in addableComponents" :key="index" @click="switchDisplayComponent(component)">{{component.name}}</a>
       </div>
     </div>
-    <button :class="{hidden: !isEditing}" class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
+    <button :class="{hidden: !isEditing}" @click="setComponents()"
+            class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
@@ -28,7 +31,7 @@
           </div>
           <div class="relative p-4 h-72">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
-            <component :is="component"  />
+            <component :is="component" />
           </div>
         </div>
       </div>
@@ -55,15 +58,32 @@ export default {
     return {
       isEditing: false,
       dmc: null,
-      componentsList: [BatteryInfoLine, EngineUsage],
-      addableComponents: []
+      componentsList: [],
+      addableComponents: [BatteryInfoLine, EngineUsage, BatteryInfo1]
     }
   },
 
   mounted() {
     this.dmc = new DashboardMoveComponents(null);
+
+    if (localStorage.components) {
+      let component_names = this.addableComponents.map(component => component.name);
+
+      for (let component of JSON.parse(localStorage.components)) {
+        // Check if component was saved in local storage
+        if (component_names.includes(component)) {
+          this.switchDisplayComponent(this.addableComponents[component_names.indexOf(component)]);
+          component_names.splice(component_names.indexOf(component), 1);
+        }
+      }
+    }
+    else {
+      // Display all components by default
+      this.componentsList = this.addableComponents;
+      this.addableComponents = [];
+    }
+
     this.dmc.updatePosition(this.componentsList);
-    this.addableComponents.push(BatteryInfo1)
   },
 
   methods: {
@@ -88,6 +108,10 @@ export default {
       }
 
       this.dmc.updatePosition(this.componentsList);
+    },
+
+    setComponents() {
+      localStorage.setItem('components', JSON.stringify(this.componentsList.map(component => component.name)));
     }
   }
 }
