@@ -134,7 +134,7 @@ export default {
       if (ship == null){
         return "No ship assigned";
       }
-      let shipFound = this.ships.filter(shipFound => ship.id == ship.id);
+      let shipFound = this.ships.filter(shipFound => shipFound.id == ship.id);
 
       if (shipFound !== []) {
         isProxy(shipFound) ? ship = toRaw(shipFound[0]).name : shipFound = shipFound[0].name;
