@@ -22,8 +22,8 @@
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
         <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
-             :draggable="isEditing" @dragstart="dmc.onDragStart($event)"
-             @drop.prevent="dmc.dropHandler($event)" @dragover.prevent="dmc.dragHandler($event)">
+             :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
+             @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</td>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
           <div class="flex items-center justify-between p-4">
@@ -66,6 +66,7 @@ export default {
   mounted() {
     this.dmc = new DashboardMoveComponents(null);
 
+    // Get components from local storage
     if (localStorage.components) {
       let component_names = this.addableComponents.map(component => component.name);
 
@@ -82,8 +83,6 @@ export default {
       this.componentsList = this.addableComponents;
       this.addableComponents = [];
     }
-
-    this.dmc.updatePosition(this.componentsList);
   },
 
   methods: {
@@ -106,11 +105,10 @@ export default {
         this.addableComponents.push(component);
         this.componentsList.splice(this.componentsList.indexOf(component), 1);
       }
-
-      this.dmc.updatePosition(this.componentsList);
     },
 
     setComponents() {
+      // Save components names in local storage
       localStorage.setItem('components', JSON.stringify(this.componentsList.map(component => component.name)));
     }
   }
