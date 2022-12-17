@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -53,7 +54,7 @@ public class QueryRepo implements UserRepository {
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(Integer id) {
 
     }
 
@@ -199,10 +200,7 @@ public class QueryRepo implements UserRepository {
         return namedQuery.getResultList();
     }
 
-    @Override
-    public void deleteById(int id) {
 
-    }
 
 
 }

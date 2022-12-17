@@ -31,7 +31,7 @@ public class User {
    private String password;
 
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   @JoinColumn(name = "role_id")
+   @JoinColumn(name = "role_id", nullable = true)
    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    private Role role;
 

@@ -98,8 +98,15 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id){
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Integer id){
         try{
+            Optional<User> user = userRepository.findById(id);
+
+            if (user.isPresent()){
+                user.get().setRole(null);
+                user.get().setShip(null);
+            }
+
             userRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e){
