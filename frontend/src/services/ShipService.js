@@ -25,7 +25,8 @@ class ShipDataService {
                 name: ship.name,
                 location: ship.location,
                 origin: ship.origin,
-                destination: ship.destination
+                destination: ship.destination,
+                status: ship.status
             });
     }
 

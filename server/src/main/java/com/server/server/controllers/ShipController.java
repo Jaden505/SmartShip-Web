@@ -84,7 +84,9 @@ public class ShipController {
             foundShip.setName(ship.getName());
             foundShip.setGpsLongtitude(ship.getGpsLongtitude());
             foundShip.setGpsLatitude(ship.getGpsLatitude());
+            foundShip.setStatus(ship.getStatus());
             foundShip.setOrigin(ship.getName());
+            foundShip.setLocation(ship.getLocation());
             foundShip.setDestination(ship.getDestination());
 
             return new ResponseEntity<>(shipRepo.save(foundShip), HttpStatus.OK);
