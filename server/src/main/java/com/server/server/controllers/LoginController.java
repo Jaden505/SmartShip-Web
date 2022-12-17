@@ -2,6 +2,7 @@ package com.server.server.controllers;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -103,7 +104,12 @@ public class LoginController {
         user.setUsername(signUpRequest.getUsername());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setShip(shipRepository.findShipById(signUpRequest.getShipID()).get(0));
+
+        if (Objects.equals(signUpRequest.getShipID(), "")){
+            user.setShip(null);
+        } else{
+            user.setShip(shipRepository.findShipById(signUpRequest.getShipID()).get(0));
+        }
 
         String role = signUpRequest.getRole();
 

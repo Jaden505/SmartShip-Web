@@ -23,7 +23,7 @@
       <td class="py-4 px-6">{{ operator.id }}</td>
       <td class="py-4 px-6">{{ operator.username }}</td>
       <td class="py-4 px-6">{{ operator.email }}</td>
-      <td class="py-4 px-6">{{ getShipName(operator.ship.id) }}</td>
+      <td class="py-4 px-6">{{ getShipName(operator.ship) }}</td>
       <td class="material-icons py-4 px-6 pointer" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
       <td class="material-icons py-4 px-6 pointer" @click="deleteUser(operator.id)">delete</td>
     </tr>
@@ -130,15 +130,15 @@ export default {
           });
     },
 
-    getShipName(ship_id) {
-      if (ship_id == null){
+    getShipName(ship) {
+      if (ship == null){
         return "No ship assigned";
       }
-      let ship = this.ships.filter(ship => ship.id == ship_id);
+      let shipFound = this.ships.filter(shipFound => ship.id == ship.id);
 
-      if (ship !== []) {
-        isProxy(ship) ? ship = toRaw(ship[0]).name : ship = ship[0].name;
-        return ship;
+      if (shipFound !== []) {
+        isProxy(shipFound) ? ship = toRaw(shipFound[0]).name : shipFound = shipFound[0].name;
+        return shipFound;
       }
 
     },
