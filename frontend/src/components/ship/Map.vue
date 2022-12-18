@@ -13,6 +13,7 @@ import ShipService from "@/services/ShipService";
 export default {
   name: "Map",
   mounted() {
+    console.log(JSON.parse(localStorage.getItem('user')).id)
     ShipService.get(1)
         .then(response => {
           this.ship = response.data;
