@@ -15,7 +15,7 @@ public class RegisterRequest {
     @Email
     private String email;
 
-    private int roleID;
+    private String roleID;
     private String shipID;
     private String role;
 
@@ -44,7 +44,7 @@ public class RegisterRequest {
         return password;
     }
 
-    public int getRoleID() {
+    public String getRoleID() {
         return roleID;
     }
 
@@ -56,7 +56,7 @@ public class RegisterRequest {
         return role;
     }
 
-    public void setRoleID(int roleID) {
+    public void setRoleID(String roleID) {
         this.roleID = roleID;
     }
 

@@ -97,7 +97,7 @@ export default {
 
   methods: {
     createOperator(user) {
-      user.roleID = 2; // Default manager role
+      user.roleID = "manager"; // Default manager role
       user.shipID = this.$refs.shipID.value; // Set ship id
 
       this.$store.dispatch("auth/register", user).then(

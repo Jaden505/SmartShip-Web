@@ -111,7 +111,7 @@ public class LoginController {
             user.setShip(shipRepository.findShipById(signUpRequest.getShipID()).get(0));
         }
 
-        String role = signUpRequest.getRole();
+        String role = signUpRequest.getRoleID();
 
         if (role == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
