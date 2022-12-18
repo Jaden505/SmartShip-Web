@@ -1,0 +1,36 @@
+stages:
+  - deploy
+
+deploy_fe:
+  stage: deploy
+  image: node:latest
+  tags:
+    - hva
+  only:
+    refs:
+      - deployment
+    changes:
+      - "frontend/**/*"
+  script:
+    - apt-get update && apt-get install -y curl
+    - curl -fsSL https://railway.app/install.sh | sh
+    - export RAILWAY_TOKEN=${RAILWAY_FE_TOKEN}
+    - cd frontend
+    - railway up --service=dist -d
+
+deploy_be:
+  stage: deploy
+  image: node:latest
+  tags:
+    - hva
+  only:
+    refs:
+      - deployment
+    changes:
+      - "server/**/*"
+  script:
+    - apt-get update && apt-get install -y curl
+    - curl -fsSL https://railway.app/install.sh | sh
+    - export RAILWAY_TOKEN=${RAILWAY_BE_TOKEN}
+    - cd server
+    - railway up --service=server -d
