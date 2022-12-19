@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import NotificationService from "@/services/NotificationService";
+import AlarmService from "@/services/alarm.service";
 
 export default {
   mounted() {
@@ -57,7 +57,7 @@ export default {
       this.selected = true
     },
     getNotifications() {
-      NotificationService.getAll()
+      AlarmService.getAllNotifications()
           .then(response => {
             this.notifications = response.data
             this.selectedNotification = this.notifications[0]

@@ -79,7 +79,7 @@
 
 <script>
 import UserService from "@/services/user.service";
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 
 export default {
   name: "editUserForm",

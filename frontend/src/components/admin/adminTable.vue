@@ -44,7 +44,7 @@ import UserService from "../../services/user.service";
 import editMangerForm from "@/components/admin/forms/editMangerForm";
 import createManagerForm from "@/components/admin/forms/createManagerForm";
 import {isProxy, ref, toRaw} from 'vue';
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 
 export default {
   name: "ManagerTable",

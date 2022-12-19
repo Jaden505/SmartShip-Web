@@ -4,7 +4,7 @@
 
 <script>
 import Chart from 'chart.js/auto';
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 
 export default {
   name: "WaterSupply",

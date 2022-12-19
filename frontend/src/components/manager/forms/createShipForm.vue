@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 import StatusService from "@/services/status.service";
 import Ship from "@/models/ship"
 

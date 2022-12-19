@@ -32,6 +32,13 @@
             <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-gray-800 focus:outline-none
           focus:ring-1 focus:ring-gray-500 focus:bg-gray-800" :to="item.to">{{item.name}}</router-link>
           </li>
+          <li v-for="item in items_optional.filter(item => item.role === userRole)" :key="item.name" class="relative text-gray-unselected">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+              <Component :is="item.icon" class="w-5 h-5"/>
+            </div>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-gray-800 focus:outline-none
+          focus:ring-1 focus:ring-gray-500 focus:bg-gray-800" :to="item.to">{{item.name}}</router-link>
+          </li>
         </ul>
       </nav>
       <div class="flex-shrink-0 px-4 py-4 space-y-2">
@@ -72,9 +79,11 @@ export default {
         },
         {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
         },
-        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-eye"/>
+      ],
+      items_optional: [
+        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-eye"/>, role: 'ROLE_MANAGER'
         },
-        {name: 'Admin', to: '/admin', icon:<font-awesome-icon icon="fa-solid fa-people-roof" />
+        {name: 'Admin', to: '/admin', icon:<font-awesome-icon icon="fa-solid fa-people-roof" />, role: 'ROLE_ADMIN'
         }
       ],
       items_bottom: [
@@ -82,14 +91,18 @@ export default {
         },
         {name: 'Alarms', to: '/alarms', icon: <font-awesome-icon icon="fa-solid fa-alarm-clock" />
         }
-      ]
+      ],
+      userRole: ''
     }
+  },
+  created() {
+    this.userRole = JSON.parse(localStorage.getItem('user')).roles[0];
   },
   methods: {
     logout() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/login');
-    }
+    },
   }
 }
 </script>

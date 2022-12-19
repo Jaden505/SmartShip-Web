@@ -46,7 +46,7 @@
 
 <script>
 import UserService from "../../services/user.service";
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 import editForm from "@/components/manager/forms/editUserForm";
 import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createUserForm";

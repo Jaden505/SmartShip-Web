@@ -23,10 +23,6 @@
           <label for="id" class="block mb-2 text-sm font-medium text-white-text">Ship id</label>
           <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
         </div>
-<!--        <button class="button" id="cancel" @click="cancelModal()">-->
-<!--          {{ cancel }}-->
-<!--        </button>-->
-
             <button class="button" id="update" @click="addAlarm">
                       {{ update }}
             </button>
@@ -37,7 +33,7 @@
 </template>
 
 <script>
-import AlarmService from "@/services/AlarmService";
+import AlarmService from "@/services/alarm.service";
 
 export default {
   name: "AddAlarms",

@@ -37,21 +37,6 @@ class UserService {
         return axios.delete(API_URL + 'users/' + user_id);
     }
 
-    getPublicContent() {
-        return axios.get(API_URL + 'all');
-    }
-
-    getUserBoard() {
-        return axios.get(API_URL + 'user', { headers: authHeader() });
-    }
-
-    getModeratorBoard() {
-        return axios.get(API_URL + 'manager', { headers: authHeader() });
-    }
-
-    getAdminBoard() {
-        return axios.get(API_URL + 'admin', { headers: authHeader() });
-    }
 }
 
 export default new UserService();

@@ -5,8 +5,7 @@
 <script>
 
 import leaflet from "leaflet";
-import ShipService from "@/services/ShipService";
-
+import ShipService from "@/services/ship.service";
 
 export default {
   name: "Map",
