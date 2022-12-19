@@ -55,7 +55,6 @@ public class UserController {
     }
 
     @GetMapping("/users/role/{roleID}")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable int roleID){
         try{
             List<User> users = queryRepo.findByRoleId(roleID);
