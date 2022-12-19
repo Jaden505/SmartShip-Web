@@ -85,8 +85,12 @@ public class UserController {
                 foundUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
                 foundUser.setUsername(user.getUsername());
 
-                List<Ship> ship = shipRepository.findShipById(user.getShip().getId());
-                foundUser.setShip(ship.get(0));
+                if (user.getShip() == null){
+                    foundUser.setShip(null);
+                } else {
+                    List<Ship> ship = shipRepository.findShipById(user.getShip().getId());
+                    foundUser.setShip(ship.get(0));
+                }
 
                 return new ResponseEntity<>(userRepository.save(foundUser), HttpStatus.OK);
             } else {
