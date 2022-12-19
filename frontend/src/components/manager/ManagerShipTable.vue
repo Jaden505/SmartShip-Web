@@ -19,7 +19,7 @@
         <td class="py-4 px-6">{{ ship.id }}</td>
         <td class="py-4 px-6">{{ ship.name }}</td>
         <td class="py-4 px-6">{{ getStatusNameById(ship.status) }}</td>
-        <td class="py-4 px-6">{{ getUsersByShipId(ship.id) }}</td>
+        <td class="py-4 px-6">{{ getUsersByShipId(ship) }}</td>
         <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
         <td class="material-icons py-4 px-6" @click="deleteShip(ship.id)">delete</td>
       </tr>
@@ -133,10 +133,10 @@ export default {
           });
     },
 
-    getUsersByShipId(ship_id) {
-      let operators = this.users.filter(user => user.shipID == ship_id);
+    getUsersByShipId(ship) {
+      let operators = this.users.filter(user => user.ship === ship);
 
-      if (operators !== []) {
+      if (operators.length !== 0) {
         operators.forEach((op, index) => {
           operators[index] = op.username;
         })
