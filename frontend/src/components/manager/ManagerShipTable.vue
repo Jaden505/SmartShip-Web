@@ -3,25 +3,27 @@
 
   <div>
     <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add Ship</button>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
-      <tr class="columns">
-        <th scope="col" class="py-3 px-6">Ship Id</th>
-        <th scope="col" class="py-3 px-6">Ship Name</th>
-        <th scope="col" class="py-3 px-6">Ship status</th>
-        <th scope="col" class="py-3 px-6">Assigned operators</th>
+    <table class="text-center table-auto w-full" id="opTable">
+      <thead>
+      <tr>
+        <th scope="col">Ship Id</th>
+        <th scope="col">Ship Name</th>
+        <th scope="col">Ship status</th>
+        <th scope="col">Assigned operators</th>
         <th></th>
         <th></th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(ship, index) in ships" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" :key="index">
-        <td class="py-4 px-6">{{ ship.id }}</td>
-        <td class="py-4 px-6">{{ ship.name }}</td>
-        <td class="py-4 px-6">{{ getStatusNameById(ship.status) }}</td>
-        <td class="py-4 px-6">{{ getUsersByShipId(ship.id) }}</td>
-        <td class="material-icons py-4 px-6" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</td>
-        <td class="material-icons py-4 px-6" @click="deleteShip(ship.id)">delete</td>
+      <tr v-for="(ship, index) in ships" class="bg-blue-card-blue" :key="index">
+        <td class="px-3 py-4">{{ ship.id }}</td>
+        <td class="px-3 py-4">{{ ship.name }}</td>
+        <td class="px-3 py-4">{{ getStatusNameById(ship.status) }}</td>
+        <td class="px-3 py-4">{{ getUsersByShipId(ship.id) }}</td>
+        <td>
+          <div class="material-icons px-3 py-4" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</div>
+          <div class="material-icons px-3 py-4" @click="deleteShip(ship.id)">delete</div>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -170,7 +172,19 @@ export default {
 </script>
 
 <style scoped>
-.material-icons:hover {
-  cursor: pointer;
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
+
+/*Set border-radius on the top-left and bottom-left of the first table data on the table row*/
+td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+/*// Set border-radius on the top-right and bottom-right of the last table data on the table row*/
+td:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
 </style>

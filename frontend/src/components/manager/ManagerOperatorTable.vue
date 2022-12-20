@@ -7,25 +7,28 @@
   <button v-if="activeButtonOp" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn" @click="reActivate">Filter Operator</button><br>
 
   <input v-if="activeSearch" type="text" id="myInput" @keyup="search" :placeholder="'Search for '+ searchTitle" title="Type in a name">
-    <table class="" id="opTable">
-      <thead class="">
+
+  <table class="text-center table-auto w-full" id="opTable">
+      <thead>
         <tr>
-          <th scope="col" class="py-3 px-6">Operator Id</th>
-          <th scope="col" class="py-3 px-6">Operator Name</th>
-          <th scope="col" class="py-3 px-6">Operator Email</th>
-          <th scope="col" class="py-3 px-6">Assigned Ship</th>
+          <th scope="col" class="">Operator Id</th>
+          <th scope="col" class="">Operator Name</th>
+          <th scope="col" class="">Operator Email</th>
+          <th scope="col" class="">Assigned Ship</th>
           <th></th>
           <th></th>
         </tr>
     </thead>
     <tbody>
-    <tr v-for="(operator, index) in users" :key="index" class="">
-      <td class="py-4 px-6">{{ operator.id }}</td>
-      <td class="py-4 px-6">{{ operator.username }}</td>
-      <td class="py-4 px-6">{{ operator.email }}</td>
-      <td class="py-4 px-6">{{ getShipName(operator.ship) }}</td>
-      <td class="material-icons py-4 px-6 pointer" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</td>
-      <td class="material-icons py-4 px-6 pointer" @click="deleteUser(operator.id)">delete</td>
+    <tr v-for="(operator, index) in users" :key="index" class="bg-blue-card-blue">
+      <td class="px-3 py-4">{{ operator.id }}</td>
+      <td class="px-3 py-4">{{ operator.username }}</td>
+      <td class="px-3 py-4">{{ operator.email }}</td>
+      <td class="px-3 py-4">{{ getShipName(operator.ship) }}</td>
+      <td>
+        <div class="material-icons px-3 py-4" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</div>
+        <div class="material-icons px-3 py-4" @click="deleteUser(operator.id)">delete</div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -182,13 +185,19 @@ export default {
 </script>
 
 <style scoped>
-
-.pointer{
-  cursor: pointer;
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
 
-.topBtn{
-  float: right;
-}
+/*Set border-radius on the top-left and bottom-left of the first table data on the table row*/
+   td:first-child {
+     border-radius: 10px 0 0 10px;
+   }
+
+/*// Set border-radius on the top-right and bottom-right of the last table data on the table row*/
+   td:last-child {
+     border-radius: 0 10px 10px 0;
+   }
 
 </style>
