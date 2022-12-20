@@ -5,7 +5,9 @@ const API_URL = 'http://localhost:8085/api/test/';
 
 class UserService {
     getUsers() {
-        return axios.get( API_URL + 'users/all');
+        return axios.get( API_URL + 'users/all', {
+            headers: authHeader()
+        });
     }
 
     getUsersByRole(role_id) {
@@ -20,6 +22,8 @@ class UserService {
             password: user.password,
             email: user.email,
             ship: user.ship
+        }, {
+            headers: authHeader()
         });
     }
 
@@ -30,11 +34,15 @@ class UserService {
             email: user.email,
             shipID: user.shipID,
             roleID: user.roleID
+        }, {
+            headers: authHeader()
         });
     }
 
     deleteUser(user_id) {
-        return axios.delete(API_URL + 'users/' + user_id);
+        return axios.delete(API_URL + 'users/' + user_id, {
+            headers: authHeader()
+        });
     }
 
 }
