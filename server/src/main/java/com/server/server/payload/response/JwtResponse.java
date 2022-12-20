@@ -4,6 +4,7 @@ import com.server.server.model.Role;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
+import java.util.Set;
 
 public class JwtResponse {
     private String token;
@@ -15,13 +16,16 @@ public class JwtResponse {
 
     private String role;
 
-    public JwtResponse(String accessToken, int id, String username, String email, List<String> roles, String role) {
+    private String ship;
+
+    public JwtResponse(String accessToken, int id, String username, String email, List<String> roles, String role, String ship) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
         this.roles = roles;
         this.role = role;
+        this.ship = ship;
     }
 
     public String getAccessToken() {
@@ -62,6 +66,22 @@ public class JwtResponse {
 
     public String getRole() {
         return role;
+    }
+
+    public String getShip() {
+        return ship;
+    }
+
+    public void setShip(String ship) {
+        this.ship = ship;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public void setRole(String role) {

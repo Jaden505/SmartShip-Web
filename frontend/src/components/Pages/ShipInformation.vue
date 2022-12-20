@@ -7,7 +7,7 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
     <button @click="this.switchEditing();"
-            class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
+            class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
     <div class="dropdown">
       <button :class="{hidden: !isEditing}"
@@ -21,7 +21,7 @@
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
-        <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
+        <div class="col-span-2 shadow-md bg-black-light rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</td>
@@ -40,18 +40,17 @@
 </template>
 
 <script>
-
-import EngineUsage from "@/components/ship/charts-power-usage/EngineUsage";
+import WaterSupply from "@/components/ship/charts-information/WaterSupply";
+import Map from "@/components/ship/Map";
 import BatteryInfoLine from "@/components/ship/charts-power-usage/BatteryInfoLine";
+import EngineUsage from "@/components/ship/charts-power-usage/EngineUsage";
 import BatteryInfo1 from "@/components/ship/charts-power-usage/BatteryInfo1";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
-
 export default {
-  name: "PowerUsage",
+    name: "ShipInformation",
   components: {
-    BatteryInfoLine,
-    EngineUsage,
-    BatteryInfo1,
+    Map,
+    WaterSupply
   },
 
   data() {
@@ -59,7 +58,7 @@ export default {
       isEditing: false,
       dmc: null,
       componentsList: [],
-      addableComponents: [BatteryInfoLine, EngineUsage, BatteryInfo1]
+      addableComponents: [WaterSupply, Map]
     }
   },
 
@@ -67,10 +66,10 @@ export default {
     this.dmc = new DashboardMoveComponents(null);
 
     // Get components from local storage
-    if (localStorage.components) {
+    if (localStorage.Components_Ship_Information) {
       let component_names = this.addableComponents.map(component => component.name);
 
-      for (let component of JSON.parse(localStorage.components)) {
+      for (let component of JSON.parse(localStorage.Components_Ship_Information)) {
         // Check if component was saved in local storage
         if (component_names.includes(component)) {
           this.switchDisplayComponent(this.addableComponents[component_names.indexOf(component)]);
@@ -109,7 +108,7 @@ export default {
 
     setComponents() {
       // Save components names in local storage
-      localStorage.setItem('components', JSON.stringify(this.componentsList.map(component => component.name)));
+      localStorage.setItem('Components_Ship_Information', JSON.stringify(this.componentsList.map(component => component.name)));
     }
   }
 }

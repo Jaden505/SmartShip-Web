@@ -1,11 +1,10 @@
 package com.server.server.security.services;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import com.server.server.model.Ship;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,18 +28,23 @@ public class UserDetailsImpl implements UserDetails {
 
     private String role;
 
+    private Ship ship;
+
     public UserDetailsImpl(int id, String username, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities, String role) {
+                           Collection<? extends GrantedAuthority> authorities, String role, Ship ship) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
         this.role = role;
+        this.ship = ship;
     }
 
     public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole().toString()));
+        List<GrantedAuthority> authorities = Set.of(user.getRole()).stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .collect(Collectors.toList());
 
         return new UserDetailsImpl(
                 user.getId(),
@@ -48,7 +52,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 authorities,
-                user.getRole().getName().toString());
+                user.getRole().getName().toString(),
+                user.getShip());
     }
 
     @Override
@@ -100,6 +105,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Ship getShip() {
+        return ship;
     }
 
     @Override

@@ -1,16 +1,15 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
 import Login from "@/components/Login";
-import PowerUsage from "@/components/ship/PowerUsage";
-import ShipInfo from "@/components/ship/Information";
+import PowerUsage from "@/components/Pages/PowerUsage";
+import ShipInfo from "@/components/ship/Rating";
 import ManagerDashboard from "@/components/manager/ManagerDashboard";
 import ManagerOperator from "@/components/manager/ManagerOperatorTable";
 import ManagerShips from "@/components/manager/ManagerShipTable";
-import ShipsTable from "@/components/ship/ShipsTable";
+import ShipsTable from "@/components/Pages/ShipInformation";
 import Dashboard from "@/components/Dashboard";
-import EngineInformation from "@/components/ship/charts-information/EngineInformation";
-import NotificationOverview from "@/components/ship/NotificationOverview";
-import Alarms from "@/components/ship/Alarms";
+import NotificationOverview from "@/components/Pages/NotificationOverview";
+import Alarms from "@/components/Pages/Alarms";
 import Map from "@/components/ship/Map";
 import AdminTable from "@/components/admin/adminTable";
 
@@ -37,11 +36,6 @@ const routes = [
             {
                 path: "/info",
                 component: ShipInfo,
-                props: true
-            },
-            {
-                path: "/engine-info",
-                component: EngineInformation,
                 props: true
             },
             {

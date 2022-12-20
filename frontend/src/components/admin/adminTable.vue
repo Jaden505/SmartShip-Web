@@ -1,30 +1,42 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
+  <div v-motion :delay="100"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :initial="{ opacity: 0, y: 100 }"
+       :variants="{ custom: { scale: 2 } }"
+       class="mt-4 p-4">
+    <div class="flex flex-row space-x-2">
+      <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
+    </div>
+    <div class="mt-4">
+      <table class="text-center table-auto w-full text-white-text">
+        <thead>
+        <tr>
+          <th scope="col" >Manager Id</th>
+          <th scope="col" >Manager Name</th>
+          <th scope="col" >Manager Email</th>
+          <th scope="col" >Assigned Ship</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(manager, index) in users" :key="index" class="bg-black-light">
+          <td>{{ manager.id }}</td>
+          <td >{{ manager.username }}</td>
+          <td >{{ manager.email }}</td>
+          <td >{{ getShipName(manager.ship) }}</td>
+          <td>
+            <div class="material-icons px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager">edit</div>
+            <div class="material-icons px-3 py-4 cursor-pointer" @click="deleteUser(manager.id)">delete</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
-    <tr>
-      <th scope="col" class="py-3 px-6">Manager Id</th>
-      <th scope="col" class="py-3 px-6">Manager Name</th>
-      <th scope="col" class="py-3 px-6">Manager Email</th>
-      <th scope="col" class="py-3 px-6">Assigned Ship</th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="(manager, index) in users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <td class="py-4 px-6">{{ manager.id }}</td>
-      <td class="py-4 px-6">{{ manager.username }}</td>
-      <td class="py-4 px-6">{{ manager.email }}</td>
-      <td class="py-4 px-6">{{ getShipName(manager.ship) }}</td>
-      <td class="material-icons py-4 px-6 pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager">edit</td>
-      <td class="material-icons py-4 px-6 pointer" @click="deleteUser(manager.id)">delete</td>
-    </tr>
-    </tbody>
-  </table>
 
   <edit-manger-form
       v-if="popupTrigger.buttonTriggerEdit"
@@ -44,7 +56,7 @@ import UserService from "../../services/user.service";
 import editMangerForm from "@/components/admin/forms/editMangerForm";
 import createManagerForm from "@/components/admin/forms/createManagerForm";
 import {isProxy, ref, toRaw} from 'vue';
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 
 export default {
   name: "ManagerTable",
@@ -137,7 +149,17 @@ export default {
 </script>
 
 <style scoped>
-  .pointer{
-    cursor: pointer;
-  }
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+td:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
 </style>

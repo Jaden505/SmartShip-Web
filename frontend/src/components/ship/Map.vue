@@ -1,20 +1,16 @@
 <template>
-  <body>
   <div class="map" id="map"></div>
-  </body>
 </template>
 
 <script>
 
 import leaflet from "leaflet";
-import ShipService from "@/services/ShipService";
-
+import ShipService from "@/services/ship.service";
 
 export default {
   name: "Map",
   mounted() {
-    console.log(JSON.parse(localStorage.getItem('user')).id)
-    ShipService.get(1)
+    ShipService.get(JSON.parse(localStorage.getItem('user')).ship)
         .then(response => {
           this.ship = response.data;
           const map = leaflet.map('map').setView([0, 0], 1);

@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import ShipService from "@/services/ShipService";
+import ShipService from "@/services/ship.service";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
