@@ -7,8 +7,8 @@
   <button v-if="activeButtonOp" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn" @click="reActivate">Filter Operator</button><br>
 
   <input v-if="activeSearch" type="text" id="myInput" @keyup="search" :placeholder="'Search for '+ searchTitle" title="Type in a name">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="opTable">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 columns">
+    <table class="" id="opTable">
+      <thead class="">
         <tr>
           <th scope="col" class="py-3 px-6">Operator Id</th>
           <th scope="col" class="py-3 px-6">Operator Name</th>
@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-    <tr v-for="(operator, index) in users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <tr v-for="(operator, index) in users" :key="index" class="">
       <td class="py-4 px-6">{{ operator.id }}</td>
       <td class="py-4 px-6">{{ operator.username }}</td>
       <td class="py-4 px-6">{{ operator.email }}</td>
@@ -189,15 +189,6 @@ export default {
 
 .topBtn{
   float: right;
-}
-
-#myInput{
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-top: 1%;
-  margin-bottom: 1%;
 }
 
 </style>
