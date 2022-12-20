@@ -1,18 +1,24 @@
 import axios from 'axios';
+import authHeader from "@/services/auth-header";
 const API_URL_ALARMS = 'http://localhost:8085/api/test/Alarms';
-const API_URL_NOTIFICATION = 'http://localhost:8085/api/test/Notification-Overview';
 
 class Alarms {
     getAll() {
-        return axios.get(API_URL_ALARMS);
+        return axios.get(API_URL_ALARMS, {
+            headers: authHeader()
+        });
     }
 
     delete(index) {
-        return axios.delete(API_URL_ALARMS + "/" + index);
+        return axios.delete(API_URL_ALARMS + "/" + index, {
+            headers: authHeader()
+        });
     }
 
     put(id) {
-        return axios.put(API_URL_ALARMS + "/" + id);
+        return axios.put(API_URL_ALARMS + "/" + id, {
+            headers: authHeader()
+        });
     }
 
     addAlarm(alarm) {
@@ -22,11 +28,9 @@ class Alarms {
             value_since_last_update: alarm.valueSinceLastUpdate,
             setted_up_value: alarm.settedUpValue,
             ship_id: alarm.ship_idtext
+        }, {
+            headers: authHeader()
         });
-    }
-
-    getAllNotifications(){
-        return axios.get(API_URL_NOTIFICATION);
     }
 }
 

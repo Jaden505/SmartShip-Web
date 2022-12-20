@@ -1,22 +1,31 @@
 import axios from "axios";
+import authHeader from "@/services/auth-header";
 
 const API_URL = 'http://localhost:8085/api/test/';
 
 class ShipDataService {
     getAll() {
-        return axios.get(API_URL + "ships/all");
+        return axios.get(API_URL + "ships/all", {
+            headers: authHeader()
+        });
     }
     // todo the right endpoint
     getWater() {
-        return axios.get(API_URL + 'chart');
+        return axios.get(API_URL + 'chart', {
+            headers: authHeader()
+        });
     }
 
     get(id){
-        return axios.get(API_URL + 'ships/' + id)
+        return axios.get(API_URL + 'ships/' + id, {
+            headers: authHeader()
+        })
     }
 
     create(ship) {
-        return axios.post(API_URL +"ships/create", ship);
+        return axios.post(API_URL +"ships/create", ship, {
+            headers: authHeader()
+        });
     }
 
     updateShip(ship_id, ship) {
@@ -27,11 +36,15 @@ class ShipDataService {
                 origin: ship.origin,
                 destination: ship.destination,
                 status: ship.status
+            }, {
+                headers: authHeader()
             });
     }
 
     deleteShip(ship_id) {
-        return axios.delete(API_URL + "ships/" + ship_id)
+        return axios.delete(API_URL + "ships/" + ship_id, {
+            headers: authHeader()
+        })
     }
 }
 

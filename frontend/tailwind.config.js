@@ -16,6 +16,7 @@ module.exports = {
         },
         blue: {
           'regular': '#29acda',
+          'light': '#60EFFF'
         },
         white: {
           'text': '#E0E1DD',

@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="flex items-center w-full px-6 mx-auto lg:w-3/6">
-          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-blue-card-blue">
+          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Sign in to your account
@@ -60,7 +60,7 @@
                 <!--                <a href="#" class="text-sm font-medium text-white-text">Forgot password?</a>-->
                 <!--              </div>-->
                 <div class="form-group">
-                  <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
+                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
                   <span
                       v-show="loading"
                       class="spinner-border spinner-border-sm"
