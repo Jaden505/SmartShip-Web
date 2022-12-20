@@ -176,12 +176,8 @@ CREATE TABLE `ship` (
                         `status` int NOT NULL,
                         `origin` varchar(45) DEFAULT NULL,
                         `destination` varchar(45) DEFAULT NULL,
-                        `water_tank1` int DEFAULT NULL,
-                        `water_tank2` int DEFAULT NULL,
                         `gps_latitude` varchar(255) DEFAULT NULL,
                         `gps_longtitude` varchar(255) DEFAULT NULL,
-                        `kw` int DEFAULT NULL,
-                        `rpm` int DEFAULT NULL,
                         PRIMARY KEY (`id`),
                         KEY `fk_status_idx` (`status`),
                         CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`id`)
@@ -194,7 +190,7 @@ CREATE TABLE `ship` (
 
 LOCK TABLES `ship` WRITE;
 /*!40000 ALTER TABLE `ship` DISABLE KEYS */;
-INSERT INTO `ship` VALUES ('07202515-a483-464c-b704-5671f104044b','testtt','Hawai',1,'testtt','bfbd',NULL,NULL,NULL,NULL,NULL,NULL),('1','Titanicc','Pakistan',1,'Titanicc','eaf',2,2,'28.762840','-39.636483',0,0),('6528','About','Paris',2,'Netherlands','Amsterdam',NULL,NULL,NULL,NULL,NULL,NULL),('sebfjh','Maria','Amsterdam',3,'Maria','Parijs',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `ship` VALUES ('07202515-a483-464c-b704-5671f104044b','Serendipity','Amsterdam',1,'Europe','Kaapstad',NULL,NULL),('3001','Imagination','Rotterdam',2,'Europe','New York',NULL,NULL),('3002','Liberty','Berlijn',3,'Europe','Brussel',NULL,NULL),('3003','Wanderlust','Las Vegas',2,'America','Moscow',NULL,NULL),('3004','Gale','Washington DC',1,'America','Amsterdam',NULL,NULL),('3005','Zephyr','Antwerpen',2,'Europe','Zagreb',NULL,NULL),('3006','Sapphire','Paris',2,'Europe','Madrid',NULL,NULL),('3007','Amazonite','Las Angles',1,'America','Sydney',NULL,NULL),('3008','Atlantis','Kopenhagen',3,'Europe','Eindhoven',NULL,NULL),('3009','Leviathan','Mumbai',2,'Europe','Nairobi',NULL,NULL),('3010','Noah','Barcelona',1,'Europe','Marrakech',NULL,NULL),('3011','Neptune','Mexico-city',1,'America','Melbourne',NULL,NULL),('3012','Wayfarer','Brussel',3,'Europe','Tokyo',NULL,NULL);
 /*!40000 ALTER TABLE `ship` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +243,7 @@ CREATE TABLE `user` (
                         KEY `fk_user_ship_idx` (`ship_id`),
                         CONSTRAINT `fk_role_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT,
                         CONSTRAINT `fk_ship_user` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +252,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',3,NULL),(5,'maico@gmail.com','$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n$2a$12$Jma1KATBy5s8TnyQ4oxBiOEeHZNH/dI32V98/veBavu1xbNGmxB6O\n','Maico',2,NULL),(14,'Johnny@gmail.com','$2a$10$smPKe6NO9ewVZFCq9ctGc.mq1cjwOTQaYTkOl5nbGbBFFrIRaUZ7C','Johny',3,NULL),(23,'maccie@gmail.com','$2a$10$UCZYXJwpVQN/aW7TmgMZCOekGZBrLQk/r.9S9BE48MKH.NPLRCose','maccie',2,'1'),(28,'Jan@jan','$2a$10$6ZSa5SNbCCcwkFuO/9ubBuhLEf2MQ7057OVrXZaz53dceD.Id/MSy','Jan',1,'sebfjh'),(29,'piet@mail','$2a$10$W9KfAR9EZzim5YIZ..RacOIlEmvmiv0bM3uolPEf4b1ysaYHoxKXK','piet',1,'1'),(30,'Hendrik@mail','$2a$10$DzCJc52VLhx/ZWcSuWBM.u36EcOVA8WHDjALA.XkkHXHistMhciSO','Hendrik',1,'07202515-a483-464c-b704-5671f104044b'),(31,'Milos@mail','$2a$10$6R00k4oANvXMiZNy71CH.OLq6m5bUN73zj4fEgxAWds8riOpIovOa','Milos',1,'sebfjh');
+INSERT INTO `user` VALUES (3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',3,NULL),(14,'Johnny@gmail.com','$2a$10$smPKe6NO9ewVZFCq9ctGc.mq1cjwOTQaYTkOl5nbGbBFFrIRaUZ7C','Johny',3,NULL),(44,'raihan@gmail.com','$2a$10$md3lI5DHIeqKo3xgz4yUw.p4UN7KU0gmQS739/pzcTXAGcfHf8vA2','Raihan',1,'07202515-a483-464c-b704-5671f104044b'),(45,'bartek@gmail.com','$2a$10$hv6etttPD2sy8or8c4VEO.bkg0iMnMaQ4FUAplofW50xHOpWA0KHq','Bartek',1,'3009'),(46,'vincent@gmail.com','$2a$10$W0cUD0RuJ29Qph5oJ9IVTOFeUxO/BfDwBvpTBXI.NNjEoGv9p26Xa','Vincent',1,'3005'),(47,'milos@gmail.com','$2a$10$krR3URtaD33wODltPAyaKOb3RV94/r26BrzSLFJsadLsizUDm.iEG','Milos',1,'3011'),(48,'jaden@gmail.com','$2a$10$A7F1dwfU.JTy3340gqh/t.1Xb3oXonh93bHBwnu6dRcgolADx.jeO','Jaden',1,'3002'),(49,'jolicoeur@gmail.com','$2a$10$BPWNB1iPK.W0yAtvQ6wFDuKYG4QarszJtvhpzbRBvIBLg5jP4APxu','Joli-Coeur',1,'3010'),(50,'alwine@gmail.com','$2a$10$M1Jz12TyqwUAtgefqN6wkO4N0hSOsIGA/z/TWDVmxPCP6oYf5FJ6O','Alwine',1,'3011'),(51,'khasim@gmail.com','$2a$10$A/Z0/9NP7Q2C0pjvh4bD0ud4l4qmwHyCK/FSQAO0vgQdJHnhljkzW','Khasim',1,'3012'),(52,'veronika@gmail.com','$2a$10$bG5weN5y9iR60oh/xLi8MuPxC/b1tvnFovbmMtAaMqLqCCvh1QEpO','Veronika',1,'07202515-a483-464c-b704-5671f104044b'),(53,'karita@gmail.com','$2a$10$AWexB/A7eb0pb7wQYMymdO8Tq4YlUadrm/eNp6wYfsQZYKKkGrZ/W','Karita',1,'3008'),(54,'sameera@gmail.com','$2a$10$BmPrwEibWUPkdI64p6FFv.WiGB.fFaH.SwTVNQ1MfNc2QSYK5AkKq','Sameera',1,'3010'),(55,'manca@gmail.com','$2a$10$uQ09YS61TBH5ggxwACyMhueVswfrTN3Gk8M4vyQZOOdVa3VBpNHVi','Manca',1,'3002'),(56,'jamilah@gmail.com','$2a$10$6hk.PEs.Q11oTzjbuM0AxuQngZsAx4bMZBbLlJuE68FWzR1hROUYu','Jamilah',1,'07202515-a483-464c-b704-5671f104044b'),(57,'egilmar@gmail.com','$2a$10$SvPRGVfCPjWcbiQV00Jlluq16SAbV8MTl5aX445NufkhT3fr5JkWW','Egilmar',2,NULL),(58,'robin@gmail.com','$2a$10$Au1Ea8gju7QPnxE59uc1b.VARU/qdmuYofEb/uiqlxbQocKOJvdsO','Robin',2,NULL),(59,'neo@gmail.com','$2a$10$kiEIJIRs.zSoVNV9uXqz..QKsjc1MS4PhAfHAznjAQtge2xfVJSwa','Neo',2,NULL),(60,'anubis@gmail.com','$2a$10$8jXZQrF9iFkdrLNTnBd3s.JSIbtanH3MqTuPRlW9eQxnjQ66oZtjm','Anubis',2,NULL),(61,'topher@gmail.com','$2a$10$3Jq3IAgb4g7Pc9oTRmCWIuaMQC9VJUnaBhz5j33s2Qdi.KcplMjtm','Topher',2,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-14 11:05:46
+-- Dump completed on 2022-12-19 21:25:17

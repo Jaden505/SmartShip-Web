@@ -135,10 +135,10 @@ export default {
           });
     },
 
-    getUsersByShipId(ship_id) {
-      let operators = this.users.filter(user => user.shipID == ship_id);
+    getUsersByShipId(ship) {
+      let operators = this.users.filter(user => user.ship === ship);
 
-      if (operators !== []) {
+      if (operators.length !== 0) {
         operators.forEach((op, index) => {
           operators[index] = op.username;
         })
