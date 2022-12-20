@@ -76,13 +76,25 @@ public class LoginController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles,
-                userDetails.getRole(),
-                userDetails.getShip().getId()));
+        if (userDetails.getShip() == null){
+            return ResponseEntity.ok(new JwtResponse(jwt,
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles,
+                    userDetails.getRole(),
+                    null));
+        } else {
+            return ResponseEntity.ok(new JwtResponse(jwt,
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles,
+                    userDetails.getRole(),
+                    userDetails.getShip().getId()));
+        }
+
+
     }
 
     @PostMapping("/signup")
