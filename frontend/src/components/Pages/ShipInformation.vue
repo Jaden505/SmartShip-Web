@@ -7,7 +7,7 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
     <button @click="this.switchEditing();"
-            class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
+            class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
     <div class="dropdown">
       <button :class="{hidden: !isEditing}"
@@ -21,7 +21,7 @@
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
-        <div class="col-span-2 shadow-md bg-blue-card-blue rounded-md droppable"
+        <div class="col-span-2 shadow-md bg-black-light rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
           <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</td>

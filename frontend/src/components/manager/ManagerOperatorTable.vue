@@ -1,43 +1,62 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
-
-  <button v-if="activeButtonShip" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn" @click="activate">Filter Ship</button>
-  <button v-if="activeButtonOp" class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn" @click="reActivate">Filter Operator</button><br>
-
-  <input v-if="activeSearch" type="text" id="myInput" @keyup="search" :placeholder="'Search for '+ searchTitle" title="Type in a name">
-
-  <table class="text-center table-auto w-full" id="opTable">
-      <thead>
+  <div v-motion :delay="100"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :initial="{ opacity: 0, y: 100 }"
+       :variants="{ custom: { scale: 2 } }"
+       class="mt-4">
+    <div class="flex flex-row space-x-2">
+      <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text"
+              @click="TogglePopup('buttonTriggerCreate')">Add user
+      </button>
+      <button v-if="activeButtonShip"
+              class="bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn"
+              @click="activate">Filter Ship
+      </button>
+      <button v-if="activeButtonOp"
+              class="bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text topBtn"
+              @click="reActivate">Filter Operator
+      </button>
+      <br>
+      <input v-if="activeSearch" id="myInput" :placeholder="'Search for '+ searchTitle" title="Type in a name" type="text"
+             @keyup="search">
+    </div>
+    <div class="mt-4">
+      <table id="opTable" class="text-center table-auto w-full text-white-text">
+        <thead>
         <tr>
-          <th scope="col" class="">Operator Id</th>
-          <th scope="col" class="">Operator Name</th>
-          <th scope="col" class="">Operator Email</th>
-          <th scope="col" class="">Assigned Ship</th>
+          <th class="" scope="col">Operator Id</th>
+          <th class="" scope="col">Operator Name</th>
+          <th class="" scope="col">Operator Email</th>
+          <th class="" scope="col">Assigned Ship</th>
           <th></th>
           <th></th>
         </tr>
-    </thead>
-    <tbody>
-    <tr v-for="(operator, index) in users" :key="index" class="bg-blue-card-blue">
-      <td class="px-3 py-4">{{ operator.id }}</td>
-      <td class="px-3 py-4">{{ operator.username }}</td>
-      <td class="px-3 py-4">{{ operator.email }}</td>
-      <td class="px-3 py-4">{{ getShipName(operator.ship) }}</td>
-      <td>
-        <div class="material-icons px-3 py-4" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">edit</div>
-        <div class="material-icons px-3 py-4" @click="deleteUser(operator.id)">delete</div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        </thead>
+        <tbody>
+        <tr v-for="(operator, index) in users" :key="index" class="bg-black-light">
+          <td class="px-3 py-4">{{ operator.id }}</td>
+          <td class="px-3 py-4">{{ operator.username }}</td>
+          <td class="px-3 py-4">{{ operator.email }}</td>
+          <td class="px-3 py-4">{{ getShipName(operator.ship) }}</td>
+          <td>
+            <div class="material-icons px-3 py-4" @click="TogglePopup('buttonTriggerEdit'); this.operator = operator">
+              edit
+            </div>
+            <div class="material-icons px-3 py-4" @click="deleteUser(operator.id)">delete</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 
   <editForm
-    v-if="popupTrigger.buttonTriggerEdit"
-    :TogglePopup="() => TogglePopup('buttonTriggerEdit')"
-    :operator = this.operator
+      v-if="popupTrigger.buttonTriggerEdit"
+      :TogglePopup="() => TogglePopup('buttonTriggerEdit')"
+      :operator=this.operator
   />
 
   <createForm
@@ -51,9 +70,8 @@
 import UserService from "../../services/user.service";
 import ShipService from "@/services/ship.service";
 import editForm from "@/components/manager/forms/editUserForm";
-import {ref} from 'vue';
+import {isProxy, ref, toRaw} from 'vue';
 import createForm from "@/components/manager/forms/createUserForm";
-import { isProxy, toRaw } from 'vue';
 
 export default {
   name: "ManagerTable",
@@ -81,20 +99,20 @@ export default {
     }
   },
 
-  setup(){
-   const popupTrigger = ref({
+  setup() {
+    const popupTrigger = ref({
       buttonTriggerEdit: false,
       buttonTriggerCreate: false
     });
 
-   const TogglePopup = (trigger) => {
-     popupTrigger.value[trigger] = !popupTrigger.value[trigger]
-   };
+    const TogglePopup = (trigger) => {
+      popupTrigger.value[trigger] = !popupTrigger.value[trigger]
+    };
 
-   return {
-     popupTrigger,
-     TogglePopup
-   }
+    return {
+      popupTrigger,
+      TogglePopup
+    }
   },
 
   methods: {
@@ -109,11 +127,11 @@ export default {
           });
     },
 
-    toggle(operator){
+    toggle(operator) {
       this.operator = operator
     },
 
-    deleteUser(user_id){
+    deleteUser(user_id) {
       if (confirm("Are you sure you want to delete this operator?")) {
         UserService.deleteUser(user_id).catch(e => {
           console.log(e)
@@ -134,7 +152,7 @@ export default {
     },
 
     getShipName(ship) {
-      if (ship == null){
+      if (ship == null) {
         return "No ship assigned";
       }
       let shipFound = this.ships.filter(shipFound => shipFound.id == ship.id);
@@ -146,7 +164,7 @@ export default {
 
     },
 
-    search(){
+    search() {
       let input, filter, table, tr, td, i, txtValue;
       input = document.getElementById("myInput");
       filter = input.value.toUpperCase();
@@ -165,7 +183,7 @@ export default {
       }
     },
 
-    activate(){
+    activate() {
       this.activeSearch = true
       this.activeButtonShip = false
       this.activeButtonOp = true
@@ -173,7 +191,7 @@ export default {
       this.columnNumber = 3
     },
 
-    reActivate(){
+    reActivate() {
       this.activeButtonShip = true
       this.activeButtonOp = false
       this.searchTitle = 'operator'
@@ -190,14 +208,12 @@ table {
   border-spacing: 0 10px;
 }
 
-/*Set border-radius on the top-left and bottom-left of the first table data on the table row*/
-   td:first-child {
-     border-radius: 10px 0 0 10px;
-   }
+td:first-child {
+  border-radius: 10px 0 0 10px;
+}
 
-/*// Set border-radius on the top-right and bottom-right of the last table data on the table row*/
-   td:last-child {
-     border-radius: 0 10px 10px 0;
-   }
+td:last-child {
+  border-radius: 0 10px 10px 0;
+}
 
 </style>

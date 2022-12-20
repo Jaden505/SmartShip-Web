@@ -10,13 +10,12 @@ module.exports = {
         sans: ['Montserrat', 'sans-serif']
       },
       colors: {
+        black: {
+          'basic': '#151515',
+          'light': '#202020',
+        },
         blue: {
           'regular': '#29acda',
-          'light': "#60EFFF",
-          'dark': "#141419",
-          'card-blue': '#202020',
-          'light-card': '#15415E',
-          'nice': '#474C4F'
         },
         white: {
           'text': '#E0E1DD',
@@ -25,9 +24,6 @@ module.exports = {
         red: {
           'regular': '#FF0707',
           'pink': '#FF00D5'
-        },
-        gray: {
-          'unselected': '#898A86'
         }
       }
     },

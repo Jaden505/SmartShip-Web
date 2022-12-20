@@ -1,9 +1,16 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div>
-    <button class="text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add Ship</button>
-    <table class="text-center table-auto w-full" id="opTable">
+  <div class="mt-4" v-motion
+       :initial="{ opacity: 0, y: 100 }"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :variants="{ custom: { scale: 2 } }"
+       :delay="100">
+    <div class="flex flex-row space-x-2">
+    <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add Ship</button>
+    </div>
+    <div class="mt-4">
+    <table class="text-center table-auto w-full text-white-text" id="opTable">
       <thead>
       <tr>
         <th scope="col">Ship Id</th>
@@ -15,7 +22,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(ship, index) in ships" class="bg-blue-card-blue" :key="index">
+      <tr v-for="(ship, index) in ships" class="bg-black-light" :key="index">
         <td class="px-3 py-4">{{ ship.id }}</td>
         <td class="px-3 py-4">{{ ship.name }}</td>
         <td class="px-3 py-4">{{ getStatusNameById(ship.status) }}</td>
@@ -27,6 +34,7 @@
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <editForm
