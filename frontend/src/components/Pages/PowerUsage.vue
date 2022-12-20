@@ -11,21 +11,23 @@
 
     <div class="dropdown">
       <button :class="{hidden: !isEditing}"
-              class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Add</button>
+              class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Add</button>
       <div class="dropdown-content">
         <a v-for="(component, index) in addableComponents" :key="index" @click="switchDisplayComponent(component)">{{component.name}}</a>
       </div>
     </div>
     <button :class="{hidden: !isEditing}" @click="setComponents(); this.$router.go()"
-            class="edit-dashboard text-white bg-blue-light-card focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
+            class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
         <div class="col-span-2 shadow-md bg-black-light rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</td>
-          <td class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</td>
+          <div class="bg-blue-regular text-white-text">
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</div>
+          </div>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-white-text">{{component.name}}</h4>
           </div>

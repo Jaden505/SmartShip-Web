@@ -25,13 +25,13 @@
       </div>
       <nav class="flex-1 px-4 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
         <ul class="flex flex-col space-y-1 pt-10">
-          <li v-for="item in items_top" :key="item.name" class="relative text-gray-unselected">
+          <li v-for="item in items_top" :key="item.name" class="relative text-white-disabled">
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
               <Component :is="item.icon" class="w-5 h-5"/>
             </div>
             <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
           </li>
-          <li v-for="item in items_optional.filter(item => item.role === userRole)" :key="item.name" class="relative text-gray-unselected">
+          <li v-for="item in items_optional.filter(item => item.role === userRole)" :key="item.name" class="relative text-white-disabled">
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
               <Component :is="item.icon" class="w-5 h-5"/>
             </div>
@@ -41,7 +41,7 @@
       </nav>
       <div class="flex-shrink-0 px-4 py-4 space-y-2">
         <ul class="flex flex-col space-y-1 pt-10">
-          <li v-for="item in items_bottom" :key="item.name" class="relative text-gray-unselected">
+          <li v-for="item in items_bottom" :key="item.name" class="relative text-white-disabled">
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
               <Component :is="item.icon" class="w-5 h-5"/>
             </div>
@@ -51,8 +51,7 @@
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
 
             </div>
-            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-gray-800 focus:outline-none
-          focus:ring-1 focus:ring-gray-500 focus:bg-gray-800" @click.prevent="logout" to>Sign Out</router-link>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-gray-800 text-white-disabled" @click.prevent="logout" to>Sign Out</router-link>
           </li>
         </ul>
       </div>
