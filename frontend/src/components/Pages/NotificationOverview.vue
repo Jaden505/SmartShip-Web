@@ -23,6 +23,9 @@
             <div>
               <h2 class="text-2xl">{{selectedNotification.title}}</h2>
               <section class="mt-5">
+                <h3 class="text-2xl">{{selectedNotification.category}}</h3>
+                <h3>About the ship with id: {{selectedNotification.ship_id}}</h3>
+                <h3>Current value: {{selectedNotification.value}} {{selectedNotification.unit}}</h3>
                 <h2 class="text-2xl">Notification message</h2>
                 <p>{{ selectedNotification.message }}</p>
               </section>
