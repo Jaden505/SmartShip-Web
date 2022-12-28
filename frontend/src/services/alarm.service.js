@@ -1,6 +1,6 @@
 import axios from 'axios';
 import authHeader from "@/services/auth-header";
-const API_URL_ALARMS = 'http://localhost:8085/api/test/Alarms';
+const API_URL_ALARMS = process.env.VUE_APP_API_URL + '/api/test/Alarms';
 
 class Alarms {
     getAll() {
