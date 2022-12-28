@@ -1,9 +1,7 @@
 package com.server.server.controllers;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.server.server.repository.ShipRepository;
@@ -82,7 +80,6 @@ public class LoginController {
                     userDetails.getUsername(),
                     userDetails.getEmail(),
                     roles,
-                    userDetails.getRole(),
                     null));
         } else {
             return ResponseEntity.ok(new JwtResponse(jwt,
@@ -90,7 +87,6 @@ public class LoginController {
                     userDetails.getUsername(),
                     userDetails.getEmail(),
                     roles,
-                    userDetails.getRole(),
                     userDetails.getShip().getId()));
         }
 
@@ -111,7 +107,7 @@ public class LoginController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
+
         User user = new User();
 
         user.setUsername(signUpRequest.getUsername());

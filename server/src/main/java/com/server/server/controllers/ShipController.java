@@ -107,20 +107,4 @@ public class ShipController {
         }
     }
 
-    // todo eventually this can be deleted for now use /test
-    @GetMapping("/chart")
-    public List<Ship> getWater() {
-        return shipRepo.findAll();
-    }
-
-    // todo this doesn't get used for testing
-    @GetMapping("/chart/{id}")
-    public Optional<Ship> getById(@PathVariable String id) {
-        Optional<Ship> ship = shipRepo.findById(id);
-        if (ship.isPresent()) {
-            return ship;
-        }
-        return null;
-    }
-
 }
