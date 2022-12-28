@@ -1,27 +1,26 @@
 package com.server.server.repository;
 
+import com.server.server.model.ERole;
+import com.server.server.model.Role;
 import com.server.server.model.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
 @Transactional
 @Repository
-public class QueryRepo implements UserRepository {
+public class UserRepositoryJPA implements UserRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -194,13 +193,18 @@ public class QueryRepo implements UserRepository {
     }
 
     @Override
-    public List<User> findByRoleId(int roleId) {
-        TypedQuery<User> namedQuery = entityManager.createQuery("SELECT u FROM User u WHERE u.role.id = ?1 ", User.class);
-        namedQuery.setParameter(1, roleId);
+    public List<User> findByRole(String role) {
+        TypedQuery<User> namedQuery = entityManager.createQuery("SELECT u FROM User u LEFT JOIN Role r ON u.role.id = r.id WHERE u.role.name = ?1" , User.class);
+
+        switch (role) {
+            case "admin" -> namedQuery.setParameter(1, ERole.ROLE_ADMIN);
+            case "manager" -> namedQuery.setParameter(1, ERole.ROLE_MANAGER);
+            case "operator" -> namedQuery.setParameter(1, ERole.ROLE_USER);
+        }
+
         return namedQuery.getResultList();
     }
 
-
-
+    
 
 }

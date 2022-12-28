@@ -1,12 +1,8 @@
 package com.server.server.controllers;
 
-import com.server.server.controllers.LoginController;
-
 import com.server.server.model.Ship;
 import com.server.server.model.User;
-import com.server.server.payload.response.MessageResponse;
-import com.server.server.repository.QueryRepo;
-import com.server.server.repository.RoleRepository;
+import com.server.server.repository.UserRepositoryJPA;
 import com.server.server.repository.ShipRepository;
 import com.server.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.SecureRandom;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +31,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private QueryRepo queryRepo;
+    private UserRepositoryJPA userRepositoryJPA;
 
     @Autowired
     PasswordEncoder encoder;
@@ -44,7 +39,7 @@ public class UserController {
     @GetMapping("/users/all")
     public ResponseEntity<List<User>> getUsers(){
         try{
-            List<User> allUsers = queryRepo.findAll();
+            List<User> allUsers = userRepositoryJPA.findAll();
             System.out.println(allUsers);
 
             return new ResponseEntity<>(allUsers, HttpStatus.OK);
@@ -54,11 +49,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/role/{roleID}")
+    @GetMapping("/users/role/{role}")
     @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<User>> getUsersByRole(@PathVariable int roleID){
+    public ResponseEntity<List<User>> getUsersByRole(@PathVariable String role){
         try{
-            List<User> users = queryRepo.findByRoleId(roleID);
+            List<User> users = userRepositoryJPA.findByRole(role);
 
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

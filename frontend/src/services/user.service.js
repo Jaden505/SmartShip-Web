@@ -10,8 +10,8 @@ class UserService {
         });
     }
 
-    getUsersByRole(role_id) {
-        return axios.get( API_URL + 'users/role/' + role_id, {
+    getUsersByRole(role) {
+        return axios.get( API_URL + 'users/role/' + role, {
             headers: authHeader()
         });
     }

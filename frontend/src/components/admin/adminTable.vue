@@ -96,7 +96,7 @@ export default {
 
   methods: {
     getUsers() {
-      UserService.getUsersByRole(2) // Role manager
+      UserService.getUsersByRole("manager")
           .then(response => {
             this.users = response.data;
             console.log(response.data);

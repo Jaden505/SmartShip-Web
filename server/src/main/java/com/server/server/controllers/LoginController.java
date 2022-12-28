@@ -2,6 +2,7 @@ package com.server.server.controllers;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.server.server.repository.ShipRepository;
@@ -13,11 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.server.server.model.ERole;
 import com.server.server.model.Role;
@@ -30,7 +27,10 @@ import com.server.server.repository.RoleRepository;
 import com.server.server.repository.UserRepository;
 import com.server.server.security.services.UserDetailsImpl;
 import com.server.server.security.jwt.JwtUtils;
+import org.springframework.web.servlet.function.EntityResponse;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 
 
