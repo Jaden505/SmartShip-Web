@@ -7,7 +7,7 @@
       <!--  NAVBAR    -->
       <header class="relative">
         <div class="flex items-center justify-between p-4">
-          <button type="button" class="transition-colors duration-200 rounded-md text-white-text md:hidden">
+          <button type="button" class="text-black-text dark:text-white-text">
             <font-awesome-icon class="w-6 h-6" icon="fa-solid fa-bars" />
           </button>
           <div class="md:hidden">
@@ -31,9 +31,9 @@
             </router-link>
           </div>
           <h2 class="font-semibold inline-block hidden space-x-2 md:flex md:text-sm lg:text-base">
-            <span class="text-blue-regular">Good Morning  <span class="text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span></span>
+            <span class="text-blue-regular">Good Morning</span>  <span class="text-black-text dark:text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span>
           </h2>
-          <button type="button" class="transition-colors duration-200 rounded-md text-white-text md:hidden">
+          <button type="button" class="transition-colors duration-200 rounded-md text-black-text dark:text-white-text md:hidden">
             <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
           </button>
           <nav class="hidden space-x-2 md:flex md:items-center">
@@ -41,28 +41,29 @@
               <label for="simple-search" class="sr-only">Search</label>
               <div class="relative w-full">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                  <svg aria-hidden="true" class="w-5 h-5 text-black-text dark:text-white-text" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                 </div>
-                <input type="text" id="simple-search" class="bg-transparent border text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
+                <input type="text" id="simple-search" class="bg-transparent border text-black-text dark:text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
               </div>
             </form>
             <a class="md:p-0 lg:p-2">
-              <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-white-text"/>
+              <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-black-text dark:text-white-text"/>
             </a>
-            <a class="md:p-0 lg:p-2">
-              <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-white-text"/>
-            </a>
+            <button class="md:p-0 lg:p-2" @click="toggleDark()">
+              <font-awesome-icon icon="fa-solid fa-sun" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
+              <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
+            </button>
             <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
-              <h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3>
+              <h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3>
               <div v-if="currentUser.role === 'ROLE_ADMIN'">
-                <span class="text-white-disabled font-semibold">Admin</span>
+                <span class="text-black-text dark:text-white-text font-semibold">Admin</span>
               </div>
               <div v-else-if="currentUser.role === 'ROLE_MANAGER'">
-                <span class="text-white-disabled font-semibold">Manager</span>
+                <span class="text-black-text dark:text-white-text font-semibold">Manager</span>
               </div>
               <div v-else>
-                <span class="text-white-disabled font-semibold">Operator</span>
+                <span class="text-black-text dark:text-white-text font-semibold">Operator</span>
               </div>
             </div>
           </nav>
@@ -80,10 +81,11 @@
 </template>
 
 <script>
+import {useDark,useToggle} from '@vueuse/core'
 import SideBar from "@/components/SideBar";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBell, faMoon, faBars, faGear, faUser} from "@fortawesome/free-solid-svg-icons";
-library.add(faMoon, faBell, faBars, faGear, faUser)
+import {faBell, faMoon, faBars, faGear, faUser, faSun} from "@fortawesome/free-solid-svg-icons";
+library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
 
 export default {
   name: "DashBoard",
@@ -103,7 +105,8 @@ export default {
         },
         {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-star" />
         }
-      ]
+      ],
+      isDark: useDark()
     }
   },
   components: {
@@ -113,6 +116,10 @@ export default {
   methods: {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    toggleDark() {
+      this.isDark = !this.isDark
+      useToggle(useDark(this.isDark))
     }
   }
 }

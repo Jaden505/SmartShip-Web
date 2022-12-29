@@ -5,12 +5,12 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
         <div class="flex w-full p-4">
-          <div class="bg-black-light p-4 m-2 rounded-md w-1/3">
+          <div class="p-4 m-2 rounded-md w-1/3">
             <div class="pb-4">
-              <h4 class="text-xl font-semibold text-white-text">Notifications</h4>
+              <h4 class="text-xl font-semibold text-black-text dark:text-white-text">Notifications</h4>
             </div>
             <div v-for="(notification, index) in notifications"
-                 :key="index" class="bg-black-light shadow-lg text-white-text rounded-md p-4 mb-2" :class="{'active': selectedNotification === notification}"
+                 :key="index" class="shadow-lg text-black-text dark:text-white-text rounded-md p-4 mb-2" :class="{'active bg-blue-regular dark:bg-black-light ': selectedNotification === notification}"
                  @click="setNotification(notification)">
               <h2 class="text-xl">{{ notification.title }}</h2><!-- Date (Element)-->
               <span class="text-sm">
@@ -19,7 +19,7 @@
             </span>
             </div>
           </div>
-          <div class="bg-black-light p-4 m-2 rounded-md text-white-text w-2/3">
+          <div class="p-4 m-2 rounded-md text-black-text dark:text-white-text w-2/3">
             <div>
               <h2 class="text-2xl">{{selectedNotification.title}}</h2>
               <section class="mt-5">
@@ -75,7 +75,6 @@ export default {
 <style scoped>
 
 .active {
-  background: #dddddd;
   color: #202020;
 }
 

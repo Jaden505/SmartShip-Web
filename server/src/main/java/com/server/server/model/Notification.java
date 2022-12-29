@@ -15,7 +15,7 @@ public class Notification {
     private String title;
 
     @Column(name = "category")
-    private String test;
+    private String category;
 
     @Column(name = "value")
     private double value;
