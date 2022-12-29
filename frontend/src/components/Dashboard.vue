@@ -46,9 +46,9 @@
                 <input type="text" id="simple-search" class="bg-transparent border text-black-text dark:text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
               </div>
             </form>
-            <a class="md:p-0 lg:p-2">
+            <button class="md:p-0 lg:p-2" @click="showPreview()">
               <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-black-text dark:text-white-text"/>
-            </a>
+            </button>
             <button class="md:p-0 lg:p-2" @click="toggleDark()">
               <font-awesome-icon icon="fa-solid fa-sun" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
@@ -71,6 +71,7 @@
       </header>
       <main>
         <div class="mt-2">
+          <NotificationPreview id="preview" v-if="preview" @close="showPreview"></NotificationPreview>
           <router-view>
 
           </router-view>
@@ -83,6 +84,7 @@
 <script>
 import {useDark,useToggle} from '@vueuse/core'
 import SideBar from "@/components/SideBar";
+import NotificationPreview from "@/components/elements/NotificationPreview";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faBell, faMoon, faBars, faGear, faUser, faSun} from "@fortawesome/free-solid-svg-icons";
 library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
@@ -106,13 +108,14 @@ export default {
         {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-star" />
         }
       ],
-      isDark: useDark()
+      isDark: useDark(),
+      preview: false
     }
   },
   components: {
-    SideBar
+    SideBar,
+    NotificationPreview
   },
-
   methods: {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -120,6 +123,14 @@ export default {
     toggleDark() {
       this.isDark = !this.isDark
       useToggle(useDark(this.isDark))
+    },
+    showPreview() {
+      if(this.$route.path === '/notification-overview') {
+        this.preview = false;
+      }
+      else{
+        this.preview = !this.preview
+      }
     }
   }
 }
@@ -131,5 +142,11 @@ export default {
   height: 450px;
   background: linear-gradient(to bottom, #fa39ad, #fe6c4c);
   filter: blur(120px);
+}
+#preview{
+  position: absolute;
+  top: 10%;
+  right:9%;
+  z-index: 100;
 }
 </style>
