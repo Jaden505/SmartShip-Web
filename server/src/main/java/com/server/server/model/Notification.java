@@ -75,4 +75,18 @@ public class Notification {
     public void setUnit(String unit) {
         this.unit = unit;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+
+    public String getShip_id() {
+        return ship_id;
+    }
+
 }
