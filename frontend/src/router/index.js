@@ -1,15 +1,15 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
 import Login from "@/components/Login";
-import PowerUsage from "@/components/Pages/PowerUsage";
+import PowerUsage from "@/components/pages/PowerUsage";
 import ShipInfo from "@/components/ship/Rating";
 import ManagerDashboard from "@/components/manager/ManagerDashboard";
 import ManagerOperator from "@/components/manager/ManagerOperatorTable";
 import ManagerShips from "@/components/manager/ManagerShipTable";
-import ShipsTable from "@/components/Pages/ShipInformation";
+import ShipsTable from "@/components/pages/ShipInformation";
 import Dashboard from "@/components/Dashboard";
-import NotificationOverview from "@/components/Pages/NotificationOverview";
-import Alarms from "@/components/Pages/Alarms";
+import NotificationOverview from "@/components/pages/NotificationOverview";
+import Alarms from "@/components/pages/Alarms";
 import Map from "@/components/ship/Map";
 import AdminTable from "@/components/admin/adminTable";
 

@@ -1,8 +1,10 @@
 package com.server.server.repository;
 
 import com.server.server.model.ERole;
+import com.server.server.model.PasswordResetToken;
 import com.server.server.model.Role;
 import com.server.server.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +26,6 @@ public class UserRepositoryJPA implements UserRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-
 
     @Override
     public List<User> findAll() {
@@ -204,7 +205,4 @@ public class UserRepositoryJPA implements UserRepository {
 
         return namedQuery.getResultList();
     }
-
-    
-
 }
