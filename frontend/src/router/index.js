@@ -12,6 +12,9 @@ import NotificationOverview from "@/components/pages/NotificationOverview";
 import Alarms from "@/components/pages/Alarms";
 import Map from "@/components/ship/Map";
 import AdminTable from "@/components/admin/adminTable";
+import Profile from "@/components/Profile/Profile";
+import Personal from "@/components/Profile/Personal";
+import Ship from "@/components/Profile/Ship";
 
 const routes = [
     {path: "/", component: Login},
@@ -59,6 +62,13 @@ const routes = [
                 path: "/map",
                 component: Map,
                 props: true
+            },
+            {
+                path: "/profile", component: Profile,
+                children: [
+                    {path: "/profile/personal", component: Personal},
+                    {path: "/profile/ship", component: Ship}
+                ]
             }
         ]
     }
