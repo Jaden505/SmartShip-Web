@@ -1,3 +1,4 @@
+<!-- @author: Joli-Coeur Weibolt  Notification-Overview Component -->
 <template>
   <div v-motion
        :initial="{ opacity: 0, y: 100 }"
@@ -9,16 +10,28 @@
             <div class="pb-4">
               <h4 class="text-xl font-semibold text-black-text dark:text-white-text">Notifications</h4>
             </div>
+            <!-- Using v-for to loop through the notifications -->
             <div v-for="(notification, index) in notifications"
-                 :key="index" class="shadow-lg text-black-text dark:text-white-text rounded-md p-4 mb-2" :class="{'active bg-blue-regular dark:bg-black-light ': selectedNotification === notification}"
+                 :key="index" class="shadow-lg text-black-text dark:text-white-text rounded-md p-4 mb-2"
+                 :class="{'active bg-blue-regular dark:bg-black-light ': selectedNotification === notification}"
                  @click="setNotification(notification)">
-              <h2 class="text-xl">{{ notification.title }}</h2><!-- Date (Element)-->
+              <button class="delete md:p-0 lg:p-2"
+                      @click="deleteNotification(notification.id, notification.title, notification.ship_id)">
+                <font-awesome-icon icon="fa-solid fa-trash" class="w-6 h-6 text-black-text dark:text-white-text"/>
+              </button>
+              <h2 class="text-xl">{{ notification.title }}</h2>
+
+              <!--Using the data and the Date constructor to show the date and time of the notification-->
               <span class="text-sm">
-              {{ ('0' + new Date(notification.date).getDate()).slice(-2) }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2) }}-{{ new Date(notification.date).getFullYear() }}
-                {{ ('0' + new Date(notification.date).getHours()).slice(-2) }}:{{ ('0' + new Date(notification.date).getMinutes()).slice(-2) }}
+              {{ ('0' + new Date(notification.date).getDate()).slice(-2)
+                }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
+                }}-{{ new Date(notification.date).getFullYear()
+                }} {{ ('0' + new Date(notification.date).getHours()).slice(-2)
+                }}:{{ ('0' + new Date(notification.date).getMinutes()).slice(-2) }}
             </span>
             </div>
           </div>
+          <!--Notification message-->
           <div class="p-4 m-2 rounded-md text-black-text dark:text-white-text w-2/3">
             <div>
               <h2 class="text-2xl">{{selectedNotification.title}}</h2>
@@ -36,9 +49,10 @@
 </template>
 
 <script>
-
-
 import NotificationService from "@/services/notification.service";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
+library.add(faTrash)
 
 export default {
   mounted() {
@@ -47,7 +61,6 @@ export default {
   name: "NotificationOverview",
   data() {
     return {
-      selected: false,
       notifications: [],
       selectedNotification: "",
     }
@@ -55,7 +68,17 @@ export default {
   methods: {
     setNotification(notification) {
       this.selectedNotification = notification
-      this.selected = true
+    },
+    deleteNotification(id, title, ship_id) {
+      if (confirm("Are you sure you want to delete this notification?\n" +"Title: " + title + "\nShip-id: " + ship_id)){
+        NotificationService.delete(id)
+            .then(() => {
+              this.getNotifications();
+            })
+            .catch(e => {
+              console.log(e)
+            })
+      }
     },
     getNotifications() {
       NotificationService.getAll()
@@ -73,9 +96,8 @@ export default {
 </script>
 
 <style scoped>
-
-.active {
-  color: #202020;
+.delete{
+  float: right;
+  margin-right: -1rem;
 }
-
 </style>

@@ -1,9 +1,9 @@
+<!-- @author: Joli-Coeur Weibolt & Milos Mihajlović  Map Component -->
 <template>
   <div class="map" id="map"></div>
 </template>
 
 <script>
-
 import leaflet from "leaflet";
 import ShipService from "@/services/ship.service";
 
