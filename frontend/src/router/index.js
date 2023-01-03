@@ -12,9 +12,11 @@ import NotificationOverview from "@/components/pages/NotificationOverview";
 import Alarms from "@/components/pages/Alarms";
 import Map from "@/components/ship/Map";
 import AdminTable from "@/components/admin/adminTable";
+import ChangePassword from "@/components/pages/ChangePassword";
 
 const routes = [
-    {path: "/", component: Login},
+    {path: "/",
+        component: Login},
     {
         path: "/dashboard",
         component: Dashboard,
@@ -59,8 +61,14 @@ const routes = [
                 path: "/map",
                 component: Map,
                 props: true
-            }
+            },
         ]
+    },
+    {
+        path: "/changePassword",
+        component: ChangePassword,
+        props: true,
+        query: true,
     }
 ]
 
@@ -70,7 +78,7 @@ export const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/'];
+    const publicPages = ['/', '/changePassword'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
 

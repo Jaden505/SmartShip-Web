@@ -2,15 +2,17 @@ package com.server.server.controllers;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.server.server.model.PasswordResetToken;
+import com.server.server.payload.request.ChangePasswordRequest;
 import com.server.server.payload.request.ResetPasswordRequest;
-import com.server.server.repository.ShipRepository;
+import com.server.server.repository.*;
 import com.server.server.services.MailService;
 import com.server.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,11 +29,8 @@ import com.server.server.payload.request.RegisterRequest;
 import com.server.server.payload.response.MessageResponse;
 import com.server.server.payload.request.LoginRequest;
 import com.server.server.payload.response.JwtResponse;
-import com.server.server.repository.RoleRepository;
-import com.server.server.repository.UserRepository;
 import com.server.server.security.services.UserDetailsImpl;
 import com.server.server.security.jwt.JwtUtils;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -46,6 +45,9 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PasswordTokenRepository passwordTokenRepository;
 
     @Autowired
     MailService mailService;
@@ -172,8 +174,10 @@ public class LoginController {
             System.out.println("No user found!");
         }
 
-        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
-                        .replacePath(null).build().toUriString();
+//        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
+//                        .replacePath(null).build().toUriString();
+
+        String baseUrl = request.getHeader(HttpHeaders.ORIGIN);
 
         System.out.println(baseUrl);
 
@@ -185,17 +189,18 @@ public class LoginController {
         return ResponseEntity.ok(new MessageResponse("Email successfully sent!"));
     }
 
-//    @GetMapping("/changePassword")
-//    public String showChangePasswordPage(Locale locale, Model model,
-//                                         @RequestParam("token") String token) {
-//        String result = securityService.validatePasswordResetToken(token);
-//        if(result != null) {
-//            String message = messages.getMessage("auth.message." + result, null, locale);
-//            return "redirect:/login.html?lang="
-//                    + locale.getLanguage() + "&message=" + message;
-//        } else {
-//            model.addAttribute("token", token);
-//            return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
-//        }
-//    }
+    @PostMapping("/changePassword")
+    public String showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
+        System.out.println(token);
+
+        PasswordResetToken passwordResetToken = passwordTokenRepository.findByToken(token);
+
+        System.out.println(passwordResetToken.getUser().getEmail());
+
+        System.out.println(changePasswordRequest.getNew_password());
+        System.out.println(changePasswordRequest.getOld_password());
+
+        return token;
+    }
+
 }

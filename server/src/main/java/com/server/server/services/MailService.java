@@ -14,7 +14,7 @@ public class MailService {
 
     public void constructResetTokenEmail(
             String contextPath, String token, User user) {
-        String url = contextPath + "/changePassword?token=" + token;
+        String url = contextPath + "/#/changePassword?token=" + token;
         constructEmail("Reset Password", " \r\n" + url, user);
     }
 

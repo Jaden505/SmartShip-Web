@@ -28,4 +28,8 @@ public class PasswordResetToken {
     public PasswordResetToken() {
 
     }
+
+    public User getUser() {
+        return user;
+    }
 }
