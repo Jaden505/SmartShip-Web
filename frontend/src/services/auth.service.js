@@ -31,6 +31,12 @@ class AuthService {
             shipID: user.shipID
         });
     }
+
+    resetPassword(email) {
+        return axios.post(API_URL + 'resetPassword', {
+            email: email,
+        });
+    }
 }
 
 export default new AuthService();

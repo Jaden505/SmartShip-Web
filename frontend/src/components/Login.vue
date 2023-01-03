@@ -56,9 +56,6 @@
                   <Field name="password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Password"/>
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
-<!--                <div class="flex items-center justify-between">-->
-<!--                  <router-link class="text-sm font-medium text-white-text" to>Forgot password?</router-link>-->
-<!--                </div>-->
                 <div class="form-group">
                   <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
                   <span

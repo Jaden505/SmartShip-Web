@@ -205,4 +205,11 @@ public class UserRepositoryJPA implements UserRepository {
 
         return namedQuery.getResultList();
     }
+
+    @Override
+    public User findUserByEmail(String mail) {
+        TypedQuery<User> namedQuery = entityManager.createQuery("SELECT u FROM User u WHERE u.email = ?1" , User.class);
+        namedQuery.setParameter(1, mail);
+        return namedQuery.getSingleResult();
+    }
 }

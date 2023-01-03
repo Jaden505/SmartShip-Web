@@ -6,7 +6,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.server.server.payload.request.ResetPasswordRequest;
 import com.server.server.repository.ShipRepository;
+import com.server.server.services.MailService;
+import com.server.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,10 +31,9 @@ import com.server.server.repository.RoleRepository;
 import com.server.server.repository.UserRepository;
 import com.server.server.security.services.UserDetailsImpl;
 import com.server.server.security.jwt.JwtUtils;
-import org.springframework.web.servlet.function.EntityResponse;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 
 
@@ -41,6 +43,12 @@ import javax.validation.Valid;
 public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    MailService mailService;
 
     @Autowired
     UserRepository userRepository;
@@ -152,4 +160,42 @@ public class LoginController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+    @PostMapping("/resetPassword")
+    public ResponseEntity<?> resetPassword(HttpServletRequest request,
+                                          @RequestBody ResetPasswordRequest resetPasswordRequest) {
+
+        User user = userRepository.findUserByEmail(resetPasswordRequest.getEmail());
+
+        System.out.println(resetPasswordRequest.getEmail());
+        if (user == null) {
+            System.out.println("No user found!");
+        }
+
+        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
+                        .replacePath(null).build().toUriString();
+
+        System.out.println(baseUrl);
+
+        String token = UUID.randomUUID().toString();
+
+        userService.createPasswordResetTokenForUser(user, token);
+        mailService.constructResetTokenEmail(baseUrl, token, user);
+
+        return ResponseEntity.ok(new MessageResponse("Email successfully sent!"));
+    }
+
+//    @GetMapping("/changePassword")
+//    public String showChangePasswordPage(Locale locale, Model model,
+//                                         @RequestParam("token") String token) {
+//        String result = securityService.validatePasswordResetToken(token);
+//        if(result != null) {
+//            String message = messages.getMessage("auth.message." + result, null, locale);
+//            return "redirect:/login.html?lang="
+//                    + locale.getLanguage() + "&message=" + message;
+//        } else {
+//            model.addAttribute("token", token);
+//            return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
+//        }
+//    }
 }
