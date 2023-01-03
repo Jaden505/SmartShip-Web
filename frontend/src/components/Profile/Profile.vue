@@ -21,7 +21,7 @@ export default {
 
   data(){
     return{
-      personalActive: true,
+      personalActive: false,
       shipActive: false
     }
   },
