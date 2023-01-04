@@ -55,10 +55,10 @@
             <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3>
-              <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
+              <div v-if="currentUser.role === 'ROLE_ADMIN'">
                 <span class="text-white-disabled font-semibold">Admin</span>
               </div>
-              <div v-else-if="currentUser.roles[0] === 'ROLE_MANAGER'">
+              <div v-else-if="currentUser.role === 'ROLE_MANAGER'">
                 <span class="text-white-disabled font-semibold">Manager</span>
               </div>
               <div v-else>
