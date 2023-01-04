@@ -1,7 +1,6 @@
 package com.server.server.repository;
 
 import com.server.server.model.PasswordResetToken;
-import com.server.server.model.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +26,13 @@ public class PasswordTokenRepositoryJPA implements PasswordTokenRepository {
     @Override
     public PasswordResetToken findByToken(String token) {
         TypedQuery<PasswordResetToken> namedQuery = entityManager.createQuery("SELECT p FROM PasswordResetToken p WHERE p.token = ?1" , PasswordResetToken.class);
+        namedQuery.setParameter(1, token);
+        return namedQuery.getSingleResult();
+    }
+
+    @Override
+    public PasswordResetToken getUserByToken(String token) {
+        TypedQuery<PasswordResetToken> namedQuery = entityManager.createQuery("SELECT p.user FROM PasswordResetToken p WHERE p.token = ?1" , PasswordResetToken.class);
         namedQuery.setParameter(1, token);
         return namedQuery.getSingleResult();
     }

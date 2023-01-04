@@ -1,16 +1,23 @@
 package com.server.server.services;
 
+import com.server.server.model.PasswordResetToken;
 import com.server.server.model.User;
+import com.server.server.repository.PasswordTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
 
 @Service
 public class MailService {
 
     @Autowired
     private JavaMailSender emailSender;
+
+    @Autowired
+    PasswordTokenRepository passwordTokenRepository;
 
     public void constructResetTokenEmail(
             String contextPath, String token, User user) {
@@ -28,6 +35,25 @@ public class MailService {
         emailSender.send(email);
 
         System.out.println("Mail sent successfully");
+    }
+
+    public PasswordResetToken validatePasswordResetToken(String token) {
+        final PasswordResetToken passToken = passwordTokenRepository.findByToken(token);
+
+//        return !isTokenFound(passToken) ? null
+//                : isTokenExpired(passToken) ? null
+//                : passToken;
+
+        return passToken;
+    }
+
+    private boolean isTokenFound(PasswordResetToken passToken) {
+        return passToken != null;
+    }
+
+    private boolean isTokenExpired(PasswordResetToken passToken) {
+        final Calendar cal = Calendar.getInstance();
+        return passToken.getExpiryDate().before(cal.getTime());
     }
 
 }

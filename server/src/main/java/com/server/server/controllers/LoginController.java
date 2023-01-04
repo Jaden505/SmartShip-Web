@@ -2,6 +2,7 @@ package com.server.server.controllers;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,9 @@ public class LoginController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserRepositoryJPA userRepositoryJPA;
 
     @Autowired
     RoleRepository roleRepository;
@@ -191,11 +195,20 @@ public class LoginController {
 
     @PostMapping("/changePassword")
     public String showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
-        System.out.println(token);
 
-        PasswordResetToken passwordResetToken = passwordTokenRepository.findByToken(token);
+        PasswordResetToken passwordResetToken = mailService.validatePasswordResetToken(token);
 
-        System.out.println(passwordResetToken.getUser().getEmail());
+//        if (passwordResetToken == null) {
+//
+//        }
+
+        PasswordResetToken user = passwordTokenRepository.getUserByToken(passwordResetToken.getToken());
+
+        if (user.getUser() != null && encoder.matches(changePasswordRequest.getOld_password(), user.getUser().getPassword())) {
+            userRepositoryJPA.changePassword(encoder.encode(changePasswordRequest.getNew_password()), user.getUser().getEmail());
+        }
+
+//        System.out.println(passwordResetToken.getUser().getEmail());
 
         System.out.println(changePasswordRequest.getNew_password());
         System.out.println(changePasswordRequest.getOld_password());
