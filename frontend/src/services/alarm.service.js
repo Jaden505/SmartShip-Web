@@ -9,6 +9,12 @@ class Alarms {
         });
     }
 
+    getAllCategories(category){
+        return axios.get(API_URL_ALARMS + 'categories/' + category, {
+            headers: authHeader()
+        });
+    }
+
     delete(index) {
         return axios.delete(API_URL_ALARMS + "/" + index, {
             headers: authHeader()

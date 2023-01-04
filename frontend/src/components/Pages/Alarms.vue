@@ -10,7 +10,7 @@
       <div class="Parameters">{{ parametertext + alarm.parameter }}</div>
       <div class="Parameters">{{ categorytext + alarm.category }}</div>
       <div class="Parameters">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</div>
-      <div class="Parameters">{{ settedUpValuetext+ alarm.settedUpValue }}</div>
+      <div class="Parameters">{{ settedUpValuetext + alarm.settedUpValue }}</div>
       <div class="flex">
 <!--        <button class="flex-child" id="slide_start_button">-->
 <!--          {{ star }}-->

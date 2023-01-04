@@ -4,12 +4,18 @@
         <div class="submit-form">
         <p class="title">Create new alarm</p>
         <div class="Parameters form-group">
-          <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Parameter</label>
-          <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
+          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
+          <select v-model="alarm.category" class="dropdown" type="text" name="category">
+            <option v-for="(category, index) in categories"
+            :value="category"
+            :key="index">
+              {{ category }}
+            </option>
+          </select>
         </div>
         <div class="Parameters form-group">
-          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
-          <input v-model="alarm.category" class="form-control" type="text" name="category"/>
+          <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Censor name</label>
+          <input v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
         </div>
         <div class="Parameters form-group">
           <label for="value" class="block mb-2 text-sm font-medium text-white-text">Value</label>
@@ -23,9 +29,12 @@
           <label for="id" class="block mb-2 text-sm font-medium text-white-text">Ship id</label>
           <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
         </div>
-            <button class="button" id="update" @click="addAlarm">
-                      {{ update }}
-            </button>
+          <button class="button" id="cancel" @click="cancelForm">
+            {{ cancel }}
+          </button>
+          <button class="button" id="update" @click="addAlarm">
+            {{ update }}
+          </button>
 
         </div>
       </div>
@@ -36,6 +45,9 @@
 import AlarmService from "@/services/alarm.service";
 
 export default {
+  mounted() {
+    this.getAlarms();
+  },
   name: "AddAlarms",
   data() {
     return {
@@ -46,6 +58,7 @@ export default {
       ship_idtext: "Ship-id: ",
       update: "Update",
       cancel: "Cancel",
+      categories: [],
       alarm: {
         parameter: "",
         category: "",
@@ -56,6 +69,10 @@ export default {
     }
   },
   methods: {
+    cancelForm(){
+      window.location.reload(true);
+    },
+
     addAlarm() {
 
       const alarm = {
@@ -69,6 +86,16 @@ export default {
       AlarmService.addAlarm(alarm)
           .then(response => {
             window.location.reload(true)
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+    },
+    getAllCategories() {
+      AlarmService.getAllCategories()
+          .then(response => {
+            this.alarms = response.data
             console.log(response.data)
           })
           .catch(e => {
@@ -108,24 +135,6 @@ input{
   border-radius: 20px;
   height: auto;
 }
-.button{
-  width: 30%;
-  height: 50px;
-  margin-top: 10%;
-  margin-left: 100px;
-  color: white;
-  border-radius: 20px;
-}
-#update{
-  background-color: #656565;
-}
-#cancel{
-  background-color: deeppink;
-}
-
-
-
-/*Bartek zn schuld */
 
 input{
   width: 70%;
@@ -154,5 +163,33 @@ label{
   color: white;
 }
 
+#cancel{
+  margin-left: 80px;
+  background-color: #656565;
+}
+
+#cancel , #update {
+  display:inline-block;
+  /* additional code */
+}
+
+#update{
+  background-color: #656565;
+}
+
+.button{
+  width: 35%;
+  height: 50px;
+  margin-top: 10%;
+  margin-left: 10px;
+  color: white;
+  border-radius: 20px;
+}
+
+.dropdown{
+  margin-left: 78px;
+  width: 70%;
+  border-radius: 10px;
+}
 
 </style>

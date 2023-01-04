@@ -19,9 +19,9 @@ public class NotificationController {
 
     @GetMapping("/Notification-Overview")
     public List<Notification> allNotifications(Model notification) {
-        notification.addAttribute("Alarms",notificationRepo.findAll());
         return notificationRepo.findAll();
     }
+
     @DeleteMapping("/Notification-Overview/{index}")
     public ResponseEntity<Void> delete (@PathVariable int index) {
         notificationRepo.deleteById(index);
