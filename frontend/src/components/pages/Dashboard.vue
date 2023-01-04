@@ -54,7 +54,7 @@
             </a>
             <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
-              <h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3>
+              <router-link to="/profile"><h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
               <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
                 <span class="text-white-disabled font-semibold">Admin</span>
               </div>
