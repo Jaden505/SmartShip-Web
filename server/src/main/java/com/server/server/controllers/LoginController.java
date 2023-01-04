@@ -2,10 +2,10 @@ package com.server.server.controllers;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.server.server.exceptions.UserNotFoundException;
 import com.server.server.model.PasswordResetToken;
 import com.server.server.payload.request.ChangePasswordRequest;
 import com.server.server.payload.request.ResetPasswordRequest;
@@ -178,9 +178,6 @@ public class LoginController {
             System.out.println("No user found!");
         }
 
-//        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
-//                        .replacePath(null).build().toUriString();
-
         String baseUrl = request.getHeader(HttpHeaders.ORIGIN);
 
         System.out.println(baseUrl);
@@ -194,26 +191,23 @@ public class LoginController {
     }
 
     @PostMapping("/changePassword")
-    public String showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
+    public ResponseEntity<?> showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
 
         PasswordResetToken passwordResetToken = mailService.validatePasswordResetToken(token);
 
-//        if (passwordResetToken == null) {
-//
-//        }
+        if (passwordResetToken == null) {
+            throw new UserNotFoundException("The reset password token is not valid!");
+        }
 
         PasswordResetToken user = passwordTokenRepository.getUserByToken(passwordResetToken.getToken());
 
         if (user.getUser() != null && encoder.matches(changePasswordRequest.getOld_password(), user.getUser().getPassword())) {
             userRepositoryJPA.changePassword(encoder.encode(changePasswordRequest.getNew_password()), user.getUser().getEmail());
+        } else {
+            throw new UserNotFoundException("The password or reset password token is not valid!");
         }
 
-//        System.out.println(passwordResetToken.getUser().getEmail());
-
-        System.out.println(changePasswordRequest.getNew_password());
-        System.out.println(changePasswordRequest.getOld_password());
-
-        return token;
+        return ResponseEntity.ok(new MessageResponse("Users password successfully changed!"));
     }
 
 }

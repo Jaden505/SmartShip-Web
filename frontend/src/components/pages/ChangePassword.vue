@@ -42,9 +42,6 @@
                 </div>
                 <div class="form-group">
                   <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                  <span
-                      class="spinner-border spinner-border-sm"
-                  ></span>
                     <span class="font-semibold text-white-text">Change Password</span>
                   </button>
                 </div>
@@ -59,6 +56,7 @@
 <script>
 import { Form, Field } from "vee-validate";
 import authService from "@/services/auth.service";
+import {useToast} from "vue-toastification";
 
 export default {
   name: "ChangePassword",
@@ -73,13 +71,18 @@ export default {
       token: null
     }
   },
+  setup() {
+    const toast = useToast();
+    return { toast }
+  },
   created() {
     this.token = this.$route.query.token;
   },
   methods: {
-    handleChangePassword(){
-      authService.changePassword(this.new_password, this.old_password, this.token)
-    }
+    async handleChangePassword(){
+      await authService.changePassword(this.new_password, this.old_password, this.token);
+      this.toast.success("You have successfully changed your password! You can now close this window and go back to th login page.")
+    },
   }
 }
 </script>

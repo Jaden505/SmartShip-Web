@@ -34,7 +34,7 @@
             <span class="text-blue-regular">Good Morning  <span class="text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span></span>
           </h2>
           <button type="button" class="transition-colors duration-200 rounded-md text-white-text md:hidden">
-            <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
+            <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
           </button>
           <nav class="hidden space-x-2 md:flex md:items-center">
             <form class="p-2">
@@ -52,7 +52,7 @@
             <a class="md:p-0 lg:p-2">
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-white-text"/>
             </a>
-            <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
+            <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3>
               <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">

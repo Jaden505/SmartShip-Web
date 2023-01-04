@@ -38,8 +38,8 @@
             </p>
           </div>
         </div>
-        <div class="flex items-center w-full px-6 mx-auto lg:w-3/6">
-          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
+        <div class="flex items-center px-6 mx-auto">
+          <div class="rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Sign in to your account
@@ -57,16 +57,12 @@
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
-                  <span
-                      v-show="loading"
-                      class="spinner-border spinner-border-sm"
-                  ></span>
+                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <span class="font-semibold text-white-text">Sign In</span>
                   </button>
                 </div>
-                <div class="form-group">
-                  <div v-if="message" class="alert alert-danger" role="alert">
+                <div v-if="message" class="form-group">
+                  <div class="alert alert-danger" role="alert">
                     {{ message }}
                   </div>
                 </div>
@@ -82,7 +78,7 @@
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
-import ResetPassword from "@/components/pages/ResetPassword";
+import ResetPassword from "@/components/modals/ResetPassword";
 // import * as yup from "yup";
 
 export default {
@@ -98,9 +94,7 @@ export default {
     //   username: yup.string().required("Username is required!"),
     //   password: yup.string().required("Password is required!"),
     // });
-
     return {
-      loading: false,
       message: "",
       // schema,
     };
