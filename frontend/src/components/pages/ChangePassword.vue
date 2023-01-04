@@ -1,18 +1,11 @@
 <template>
-  <div v-motion-fade class="flex h-screen">
-    <!--  SIDEBAR LEFT  -->
-    <SideBar/>
-    <!--  CONTENT RIGHT  -->
-    <div class="flex-1 h-full overflow-x-hidden overflow-y-auto">
-      <!--  NAVBAR    -->
-      <header class="relative">
-        <div class="flex items-center justify-between p-4">
-          <button type="button" class="transition-colors duration-200 rounded-md text-white-text md:hidden">
-            <font-awesome-icon class="w-6 h-6" icon="fa-solid fa-bars" />
-          </button>
-          <div class="md:hidden">
-            <router-link to="/power-usage">
-              <svg xmlns="http://www.w3.org/2000/svg" width="150" viewBox="0 0 202.72 35.097">
+  <div v-motion-fade>
+    <nav>
+      <div class="flex flex-col h-full">
+        <div class="px-5 pt-6">
+          <div class="flex items-center justify-between">
+            <a href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="180" viewBox="0 0 202.72 35.097">
                 <g id="Group_1" data-name="Group 1" transform="translate(-100 -69.951)">
                   <path id="Path_1" data-name="Path 1" d="M608.4,432.734c-.774,2.789-1.614,5.562-2.292,8.375a1.593,1.593,0,0,1-1.962,1.467c-2.037-.111-4.085-.07-6.127-.01-.821.024-1.126-.271-1.327-1.043-.724-2.779-1.527-5.537-2.3-8.3a1.022,1.022,0,0,0-.4-.623v9.879h-6.765V417.441c.342-.024.675-.068,1.008-.069,2.355-.005,4.71.031,7.064-.019.82-.018,1.114.278,1.316,1.056,1.4,5.392,2.865,10.768,4.309,16.149a2.49,2.49,0,0,0,.507,1.051q.985-3.784,1.968-7.568,1.263-4.875,2.52-9.751c.12-.462.175-.928.879-.92,2.8.032,5.6.013,8.49.013V443.53c-2.072-.289-4.119-.549-6.149-.9-.212-.037-.468-.608-.473-.934-.04-2.666-.026-5.332-.028-8q0-.461,0-.922Z" transform="translate(-463.647 -347.401)" fill="#e0e1dd"/>
                   <path id="Path_2" data-name="Path 2" d="M752.834,434.435h-8.523v11.718c-2.118-.171-4.17.548-5.965-.79a1.549,1.549,0,0,1-.61-1.034c-.033-7.374-.057-14.749,0-22.123.022-3.05,1.659-4.679,4.728-4.738q6.073-.116,12.151-.014c3.2.056,4.8,1.661,4.821,4.858.055,7.236.018,14.472.037,21.708,0,.574-.16.907-.745,1.037-1.578.351-3.146.75-4.728,1.087-.876.187-1.2-.178-1.184-1.118.057-3.115.021-6.232.021-9.348Zm-.008-6.222a16.272,16.272,0,0,0-.046-2.676,1.393,1.393,0,0,0-.958-.92c-2.176-.084-4.358-.074-6.535-.008a1.222,1.222,0,0,0-.912.74,23.094,23.094,0,0,0-.044,2.864Z" transform="translate(-582.855 -347.442)" fill="#e0e1dd"/>
@@ -28,101 +21,72 @@
                   <path id="Path_12" data-name="Path 12" d="M1268.069,546.149a25.772,25.772,0,0,1,2.68-.957c5.885-1.422,11.757-2.908,17.68-4.153a7.682,7.682,0,0,1,8.1,3.273,1.356,1.356,0,0,1,.274.437c.142.579.25,1.167.37,1.751a6.372,6.372,0,0,1-1.742.181c-2.553-.445-5.073-1.132-7.639-1.439-4.532-.542-9.054.085-13.567.5-2.024.187-4.036.5-6.053.756Z" transform="translate(-1003.011 -445.237)" fill="#e0e1dd"/>
                 </g>
               </svg>
-            </router-link>
+            </a>
           </div>
-          <h2 class="font-semibold inline-block hidden space-x-2 md:flex md:text-sm lg:text-base">
-            <span class="text-blue-regular">Good Morning  <span class="text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span></span>
-          </h2>
-          <button type="button" class="transition-colors duration-200 rounded-md text-white-text md:hidden">
-            <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
-          </button>
-          <nav class="hidden space-x-2 md:flex md:items-center">
-            <form class="p-2">
-              <label for="simple-search" class="sr-only">Search</label>
-              <div class="relative w-full">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+        </div>
+      </div>
+    </nav>
+    <div class="px-6 py-16">
+        <div class="px-6">
+          <div class="w-full flex mx-auto rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-white-text font-bold leading-tight tracking-tight md:text-3xl">
+                Change your password
+              </h1>
+              <Form class="space-y-4 md:space-y-6" @submit="handleChangePassword()">
+                <div class="form-group">
+                  <Field name="old_password" v-model="old_password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Old Password"/>
                 </div>
-                <input type="text" id="simple-search" class="bg-transparent border text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
-              </div>
-            </form>
-            <a class="md:p-0 lg:p-2">
-              <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-white-text"/>
-            </a>
-            <a class="md:p-0 lg:p-2">
-              <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-white-text"/>
-            </a>
-            <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../assets/img/example_user.jpg" alt="Bordered avatar">
-            <div class="p-2 lg:text-base lg:inline-block md:hidden">
-              <router-link to="/profile"><h3 class="text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
-              <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
-                <span class="text-white-disabled font-semibold">Admin</span>
-              </div>
-              <div v-else-if="currentUser.roles[0] === 'ROLE_MANAGER'">
-                <span class="text-white-disabled font-semibold">Manager</span>
-              </div>
-              <div v-else>
-                <span class="text-white-disabled font-semibold">Operator</span>
-              </div>
+                <div class="form-group">
+                  <Field name="new_password" v-model="new_password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="New Password"/>
+                </div>
+                <div class="form-group">
+                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    <span class="font-semibold text-white-text">Change Password</span>
+                  </button>
+                </div>
+              </Form>
             </div>
-          </nav>
+          </div>
         </div>
-      </header>
-      <main>
-        <div class="mt-2">
-          <router-view>
-
-          </router-view>
-        </div>
-      </main>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBell, faMoon, faBars, faGear, faUser} from "@fortawesome/free-solid-svg-icons";
-library.add(faMoon, faBell, faBars, faGear, faUser)
+import { Form, Field } from "vee-validate";
+import authService from "@/services/auth.service";
+import {useToast} from "vue-toastification";
 
 export default {
-  name: "DashBoard",
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
+  name: "ChangePassword",
+  components: {
+    Form,
+    Field,
   },
   data() {
     return {
-      items: [
-        {name: 'Power Usage', to: '/power-usage', icon: <font-awesome-icon icon="fa-solid fa-bolt" />
-        },
-        {name: 'Ship Information', to: '/ship-overview', icon: <font-awesome-icon icon="fa-solid fa-ship" />
-        },
-        {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
-        },
-        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-star" />
-        }
-      ]
+      old_password: null,
+      new_password: null,
+      token: null
     }
   },
-  components: {
-    SideBar
+  setup() {
+    const toast = useToast();
+    return { toast }
   },
-
+  created() {
+    this.token = this.$route.query.token;
+  },
   methods: {
-    capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    async handleChangePassword(){
+      await authService.changePassword(this.new_password, this.old_password, this.token);
+      this.toast.success("You have successfully changed your password! You can now close this window and go back to th login page.")
+    },
   }
 }
 </script>
 
 <style scoped>
-.circle {
-  width: 450px;
-  height: 450px;
-  background: linear-gradient(to bottom, #fa39ad, #fe6c4c);
-  filter: blur(120px);
-}
+
 </style>

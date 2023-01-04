@@ -7,7 +7,7 @@ import ManagerDashboard from "@/components/manager/ManagerDashboard";
 import ManagerOperator from "@/components/manager/ManagerOperatorTable";
 import ManagerShips from "@/components/manager/ManagerShipTable";
 import ShipsTable from "@/components/pages/ShipInformation";
-import Dashboard from "@/components/Dashboard";
+import Dashboard from "@/components/pages/Dashboard";
 import NotificationOverview from "@/components/pages/NotificationOverview";
 import Alarms from "@/components/pages/Alarms";
 import Map from "@/components/ship/Map";
@@ -15,9 +15,11 @@ import AdminTable from "@/components/admin/adminTable";
 import Profile from "@/components/Profile/Profile";
 import Personal from "@/components/Profile/Personal";
 import Ship from "@/components/Profile/Ship";
+import ChangePassword from "@/components/pages/ChangePassword";
 
 const routes = [
-    {path: "/", component: Login},
+    {path: "/",
+        component: Login},
     {
         path: "/dashboard",
         component: Dashboard,
@@ -71,6 +73,12 @@ const routes = [
                 ]
             }
         ]
+    },
+    {
+        path: "/changePassword",
+        component: ChangePassword,
+        props: true,
+        query: true,
     }
 ]
 
@@ -80,7 +88,7 @@ export const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/'];
+    const publicPages = ['/', '/changePassword'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
 

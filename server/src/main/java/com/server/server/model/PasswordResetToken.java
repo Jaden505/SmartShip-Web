@@ -28,4 +28,16 @@ public class PasswordResetToken {
     public PasswordResetToken() {
 
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public String getToken() {
+        return token;
+    }
 }

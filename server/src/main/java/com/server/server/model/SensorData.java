@@ -21,11 +21,10 @@ public class SensorData {
     @Column(name = "sensor_name")
     private String sensorName;
 
-//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-
 
     @JoinColumn(name = "ship_id", nullable = true)
-    private String ship;
+    @ManyToOne
+    private Ship ship;
 
     @JsonFormat(pattern = "HH:mm:ss dd/MM/yyyy")
     @Column(name = "time")
@@ -52,7 +51,7 @@ public class SensorData {
     protected SensorData() {
     }
 
-    public SensorData(String sensorId, String group, String sensorName, String ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
+    public SensorData(String sensorId, String group, String sensorName, Ship ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
         this();
         this.sensorId = sensorId;
         this.group = group;
@@ -91,11 +90,11 @@ public class SensorData {
         this.sensorName = sensorName;
     }
 
-    public String getShip() {
+    public Ship getShip() {
         return ship;
     }
 
-    public void setShip(String ship) {
+    public void setShip(Ship ship) {
         this.ship = ship;
     }
 

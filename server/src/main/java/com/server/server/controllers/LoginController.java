@@ -2,12 +2,18 @@ package com.server.server.controllers;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.server.server.repository.ShipRepository;
+import com.server.server.exceptions.UserNotFoundException;
+import com.server.server.model.PasswordResetToken;
+import com.server.server.payload.request.ChangePasswordRequest;
+import com.server.server.payload.request.ResetPasswordRequest;
+import com.server.server.repository.*;
+import com.server.server.services.MailService;
+import com.server.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,14 +30,10 @@ import com.server.server.payload.request.RegisterRequest;
 import com.server.server.payload.response.MessageResponse;
 import com.server.server.payload.request.LoginRequest;
 import com.server.server.payload.response.JwtResponse;
-import com.server.server.repository.RoleRepository;
-import com.server.server.repository.UserRepository;
 import com.server.server.security.services.UserDetailsImpl;
 import com.server.server.security.jwt.JwtUtils;
-import org.springframework.web.servlet.function.EntityResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 
 
@@ -43,7 +45,19 @@ public class LoginController {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
+    PasswordTokenRepository passwordTokenRepository;
+
+    @Autowired
+    MailService mailService;
+
+    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserRepositoryJPA userRepositoryJPA;
 
     @Autowired
     RoleRepository roleRepository;
@@ -152,4 +166,48 @@ public class LoginController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+    @PostMapping("/resetPassword")
+    public ResponseEntity<?> resetPassword(HttpServletRequest request,
+                                          @RequestBody ResetPasswordRequest resetPasswordRequest) {
+
+        User user = userRepository.findUserByEmail(resetPasswordRequest.getEmail());
+
+        System.out.println(resetPasswordRequest.getEmail());
+        if (user == null) {
+            System.out.println("No user found!");
+        }
+
+        String baseUrl = request.getHeader(HttpHeaders.ORIGIN);
+
+        System.out.println(baseUrl);
+
+        String token = UUID.randomUUID().toString();
+
+        userService.createPasswordResetTokenForUser(user, token);
+        mailService.constructResetTokenEmail(baseUrl, token, user);
+
+        return ResponseEntity.ok(new MessageResponse("Email successfully sent!"));
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<?> showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
+
+        PasswordResetToken passwordResetToken = mailService.validatePasswordResetToken(token);
+
+        if (passwordResetToken == null) {
+            throw new UserNotFoundException("The reset password token is not valid!");
+        }
+
+        PasswordResetToken user = passwordTokenRepository.getUserByToken(passwordResetToken.getToken());
+
+        if (user.getUser() != null && encoder.matches(changePasswordRequest.getOld_password(), user.getUser().getPassword())) {
+            userRepositoryJPA.changePassword(encoder.encode(changePasswordRequest.getNew_password()), user.getUser().getEmail());
+        } else {
+            throw new UserNotFoundException("The password or reset password token is not valid!");
+        }
+
+        return ResponseEntity.ok(new MessageResponse("Users password successfully changed!"));
+    }
+
 }
