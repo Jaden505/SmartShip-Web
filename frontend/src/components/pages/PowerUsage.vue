@@ -43,9 +43,9 @@
 
 <script>
 
-import EngineUsage from "@/components/ship/charts-power-usage/EngineUsage";
-import BatteryInfoLine from "@/components/ship/charts-power-usage/BatteryInfoLine";
-import BatteryInfo1 from "@/components/ship/charts-power-usage/BatteryInfo1";
+import EngineUsage from "@/components/ship/charts-power-usage/SingleLineChart";
+import BatteryInfoLine from "@/components/ship/charts-power-usage/MultipleLineChart";
+import BatteryInfo1 from "@/components/ship/charts-power-usage/TextBox";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 
 export default {
