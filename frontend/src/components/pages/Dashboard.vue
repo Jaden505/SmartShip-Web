@@ -31,7 +31,7 @@
             </router-link>
           </div>
           <h2 class="font-semibold inline-block hidden space-x-2 md:flex md:text-sm lg:text-base">
-            <span class="text-blue-regular">Good Morning  <span class="text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span></span>
+            <span class="text-blue-regular">Good Morning</span>  <span class="text-black-text dark:text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span>
           </h2>
           <button type="button" class="transition-colors duration-200 rounded-md text-black-text dark:text-white-text md:hidden">
             <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
