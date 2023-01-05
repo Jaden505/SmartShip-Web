@@ -45,7 +45,7 @@
 
 // Widgets imports
 import EngineUsage from "@/components/widgets/SingleLineChart";
-import BatteryInfoLine from "@/components/widgets/MultipleLinesChart";
+import BatteryInfoLine from "@/components/widgets/BatteriesCharge";
 import SeaConditions from "@/components/widgets/SeaConditions";
 
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
