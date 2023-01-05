@@ -1,8 +1,8 @@
 <template>
-  <button class="text-white-text text-sm" @click="isModalOpen = true">Forgot Password?</button>
+  <button class="text-black-text dark:text-white-text text-sm" @click="isModalOpen = true">Forgot Password?</button>
   <Teleport to="#modal">
     <div class="modal-bg" v-if="isModalOpen">
-      <div v-click-outside="onClickOutside" class="modal p-10 rounded-md shadow-md bg-black-light">
+      <div v-click-outside="onClickOutside" class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
 <!--        <div>-->
 <!--          <h1 class="text-white-text py-2 font-bold leading-tight tracking-tight text-2xl">Please fill your email and click on the send button!</h1>-->
 <!--          <button @click="isModalOpen = false" class="close-modal-btn">x</button>-->
@@ -21,7 +21,7 @@
             <Field name="email" v-model="email" type="text" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Email"/>
           </div>
           <div class="form-group">
-            <button class="bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            <button class="bg-gray-700 dark:bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               <span class="font-semibold text-white-text">Send</span>
             </button>
           </div>
