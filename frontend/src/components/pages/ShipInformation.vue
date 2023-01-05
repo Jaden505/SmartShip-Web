@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import WaterSupply from "@/components/widgets/BarChart";
+import WaterSupply from "@/components/widgets/WaterSupply";
 import Map from "@/components/ship/Map";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 export default {
