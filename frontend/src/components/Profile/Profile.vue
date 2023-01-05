@@ -3,27 +3,27 @@
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :initial="{ opacity: 0, y: 100 }"
        :variants="{ custom: { scale: 2 } }"
-       class="mt-4 p-4">
-
-
-    <div class="name-section bg-blue-regular">
-      <h1>Raihan Saboerali</h1>
-    </div>
-
-
-    <div class="bar">
-      <div class="tab" :class="{active: personalActive}">
-        <router-link to="/profile/personal" @click="setPersonalActive">Personal</router-link>
+       class="mt-4 p-4 relative">
+    <div>
+      <div class="px-4 flex right-0">
+        <img alt="Bordered avatar" class="h-40 w-40 rounded-full ring-4 ring-black-basic" src="../../assets/img/example_user.jpg">
       </div>
-      <div class="tab" :class="{active: shipActive}">
-        <router-link to="/profile/ship" @click="setShipActive">Ship</router-link>
+      <div class="-mt-8">
+        <div class="name-section rounded-t-md bg-blue-regular pt-12 pb-4 px-5">
+          <h1 class="text-2xl">Raihan Saboerali</h1>
+          <h2>Operator</h2>
+        </div>
+        <div class="bar shadow-lg bg-blue-regular flex rounded-b-md">
+          <div :class="{active: personalActive}" class="tab px-5 py-2 rounded-t-md text-md">
+            <router-link to="/profile/personal" @click="setPersonalActive">Personal</router-link>
+          </div>
+          <div :class="{active: shipActive}" class="tab px-5 py-2 rounded-t-md text-md">
+            <router-link to="/profile/ship" @click="setShipActive">Ship</router-link>
+          </div>
+        </div>
+        <router-view></router-view>
       </div>
     </div>
-
-
-    <router-view></router-view>
-
-
   </div>
 </template>
 
@@ -31,20 +31,20 @@
 export default {
   name: "Profile",
 
-  data(){
-    return{
+  data() {
+    return {
       personalActive: false,
       shipActive: false
     }
   },
 
   methods: {
-    setPersonalActive(){
+    setPersonalActive() {
       this.personalActive = true;
       this.shipActive = false;
     },
 
-    setShipActive(){
+    setShipActive() {
       this.shipActive = true;
       this.personalActive = false;
     }
@@ -53,29 +53,10 @@ export default {
 </script>
 
 <style scoped>
-  .name-section{
-    padding: 2%;
-    font-size: 42px;
-    font-weight: lighter;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
 
-  .bar{
-    background-color: rgb(34, 137, 171);
-    display: flex;
-  }
-
-  .tab{
-    padding: 1%;
-    font-size: 24px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-  .active{
-    background-color: rgba(32, 31, 31, 0.97);
-    color: white;
-    transition: background-color 0.6s;
-  }
+.active {
+  background-color: #202020;
+  color: #E0E1DD;
+  transition: background-color 0.6s;
+}
 </style>

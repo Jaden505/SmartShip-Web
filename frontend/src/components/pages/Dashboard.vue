@@ -55,7 +55,9 @@
               <font-awesome-icon icon="fa-solid fa-sun" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
             </button>
-            <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
+            <router-link to="/profile">
+              <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
+            </router-link>
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <router-link to="/profile"><h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
               <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
