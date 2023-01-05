@@ -33,36 +33,43 @@
             <h2 class="title text-transparent text-center bg-clip-text bg-gradient-to-r from-blue-regular to-blue-light max-w-lg mb-6 text-5xl font-sans font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl lg:text-7xl sm:leading-none lg:text-start sm:text-start md:text-start">
               Welcome to SmartShip Dashboard
             </h2>
-            <p class="subtitle text-white-text text-center font-sans leading-tight tracking-tight text-2xl sm:text-2xl md:text-3xl lg:text-3xl md:text-lg lg:text-start sm:text-start md:text-start">
+            <p class="subtitle text-black-text dark:text-white-text text-center font-sans leading-tight tracking-tight text-2xl sm:text-2xl md:text-3xl lg:text-3xl md:text-lg lg:text-start sm:text-start md:text-start">
               Your Journey Begins With Just One Click!
             </p>
           </div>
         </div>
-        <div class="flex items-center px-6 mx-auto">
-          <div class="rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
+        <div class="flex items-center w-full px-6 mx-auto lg:w-3/6">
+          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-white-light">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-white-text font-bold leading-tight tracking-tight md:text-3xl">
+              <h1 class="text-black-text dark:text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Sign in to your account
               </h1>
-<!--              start form-->
+              <!--              start form-->
               <Form class="space-y-4 md:space-y-6" @submit="handleLogin" :validation-schema="schema">
                 <div class="form-group">
-                  <label for="username" class="block mb-2 text-sm font-medium text-white-text">Your username</label>
+                  <label for="username" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Your username</label>
                   <Field name="username" type="text" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Username"/>
                   <ErrorMessage name="username" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                  <label for="password" class="block mb-2 text-sm font-medium text-white-text">Password</label>
+                  <label for="password" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Password</label>
                   <Field name="password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Password"/>
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
+                <!--              <div class="flex items-center justify-between">-->
+                <!--                <a href="#" class="text-sm font-medium text-white-text">Forgot password?</a>-->
+                <!--              </div>-->
                 <div class="form-group">
-                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
+                  <span
+                      v-show="loading"
+                      class="spinner-border spinner-border-sm"
+                  ></span>
                     <span class="font-semibold text-white-text">Sign In</span>
                   </button>
                 </div>
-                <div v-if="message" class="form-group">
-                  <div class="alert alert-danger" role="alert">
+                <div class="form-group">
+                  <div v-if="message" class="alert alert-danger text-black-text dark:text-white-text" role="alert">
                     {{ message }}
                   </div>
                 </div>
