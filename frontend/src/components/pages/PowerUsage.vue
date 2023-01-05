@@ -7,12 +7,12 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
     <button @click="this.switchEditing();"
-            class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
+            class="edit-dashboard text-black-text dark:text-white-text bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
     <div class="dropdown">
       <button :class="{hidden: !isEditing}"
               class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Add</button>
-      <div class="dropdown-content">
+      <div class="dropdown-content text-black-text dark:text-white-text">
         <a v-for="(component, index) in addableComponents" :key="index" @click="switchDisplayComponent(component)">{{component.name}}</a>
       </div>
     </div>
@@ -21,15 +21,15 @@
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
-        <div class="col-span-2 shadow-md bg-black-light rounded-md droppable"
+        <div class="col-span-2 shadow-md rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
-          <div class="bg-blue-regular text-white-text">
+          <div class="bg-blue-regular text-black-text dark:text-white-text">
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</div>
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</div>
           </div>
           <div class="flex items-center justify-between p-4">
-            <h4 class="text-xl font-semibold text-white-text">{{component.name}}</h4>
+            <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component.name}}</h4>
           </div>
           <div class="relative p-4 h-72">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
@@ -164,7 +164,6 @@ export default {
 }
 
 .dropdown-content a {
-  color: lightgrey;
   padding: 12px 16px;
   text-decoration: none;
   display: block;

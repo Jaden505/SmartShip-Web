@@ -1,9 +1,9 @@
+<!-- @author: Joli-Coeur Weibolt & Milos Mihajlović  Map Component -->
 <template>
   <div class="map" id="map"></div>
 </template>
 
 <script>
-
 import leaflet from "leaflet";
 import ShipService from "@/services/ship.service";
 
@@ -27,8 +27,6 @@ export default {
 
           let shipmarker = leaflet.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon})
           let ship_popup = shipmarker.bindPopup("<b>NAME: </b>" + this.ship[0].name+"<br>"+
-              "<b>ORIGIN: </b>"+this.ship[0].origin+"<br>"+
-              "<b>DESTINATION: </b>"+this.ship[0].destination+"<br>"+
               "<b>STATUS: </b>"+this.ship[0].status+"<br>"+
               "<b>LATITUDE: </b>"+this.ship[0].gpsLatitude+"<br>"+
               "<b>LONGTITUDE: </b>"+this.ship[0].gpsLongtitude
@@ -44,7 +42,6 @@ export default {
 
 .map {
   position: absolute;
-  bottom: 100;
   width: 64.5%;
   height: 90%;
 }

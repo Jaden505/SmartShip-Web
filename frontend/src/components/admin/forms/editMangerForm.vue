@@ -2,13 +2,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <div class="popup">
-    <div class="popup-inner" v-motion-fade>
+    <div class="popup-inner bg-blue-regular dark:bg-black-light" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
-      <h1 class="font-bold">Edit Manager</h1>
+      <h1 class="font-bold text-black-text dark:text-white-text">Edit Manager</h1>
       <form class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
               Name
             </label>
           </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
+            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
               Email
             </label>
           </div>
@@ -35,7 +35,7 @@
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
               Password
             </label>
           </div>
@@ -49,7 +49,7 @@
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
               Ship
             </label>
           </div>
@@ -132,7 +132,6 @@ export default {
 }
 
 .popup-inner {
-  background: #00111C;
   padding: 3%;
   border: 2px solid black;
   border-radius: 25px;
@@ -152,7 +151,6 @@ export default {
 /*Form*/
 
 h1 {
-  color: white;
   text-align: center;
   font-size: 24px;
   margin-bottom: 5%;
@@ -161,7 +159,6 @@ h1 {
 label {
   width: 100%;
   text-align: center;
-  color: white;
 }
 
 input {
