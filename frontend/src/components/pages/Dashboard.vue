@@ -58,10 +58,10 @@
             <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <router-link to="/profile"><h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
-              <div v-if="currentUser.role === 'ROLE_ADMIN'">
+              <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
                 <span class="text-black-text dark:text-white-text font-semibold">Admin</span>
               </div>
-              <div v-else-if="currentUser.role === 'ROLE_MANAGER'">
+              <div v-else-if="currentUser.roles[0] === 'ROLE_MANAGER'">
                 <span class="text-black-text dark:text-white-text font-semibold">Manager</span>
               </div>
               <div v-else>
@@ -89,13 +89,15 @@ import SideBar from "@/components/SideBar";
 import NotificationPreview from "@/components/elements/NotificationPreview";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faBell, faMoon, faBars, faGear, faUser, faSun} from "@fortawesome/free-solid-svg-icons";
+import {toRaw} from "vue";
 library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
 
 export default {
   name: "DashBoard",
   computed: {
     currentUser() {
-      return this.$store.state.auth.user;
+      console.log(toRaw(this.$store.state.auth.user));
+      return toRaw(this.$store.state.auth.user);
     }
   },
   data() {

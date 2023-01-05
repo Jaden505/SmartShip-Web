@@ -1,18 +1,30 @@
 <template>
-  <div class="name-section">
-    <h1>Raihan Saboerali</h1>
-  </div>
+  <div v-motion :delay="100"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :initial="{ opacity: 0, y: 100 }"
+       :variants="{ custom: { scale: 2 } }"
+       class="mt-4 p-4">
 
-  <div class="bar">
-    <div class="tab" :class="{active: personalActive}">
-      <router-link to="/profile/personal" @click="setPersonalActive">Personal</router-link>
-    </div>
-    <div class="tab" :class="{active: shipActive}">
-      <router-link to="/profile/ship" @click="setShipActive">Ship</router-link>
-    </div>
-  </div>
 
-  <router-view></router-view>
+    <div class="name-section bg-blue-regular">
+      <h1>Raihan Saboerali</h1>
+    </div>
+
+
+    <div class="bar">
+      <div class="tab" :class="{active: personalActive}">
+        <router-link to="/profile/personal" @click="setPersonalActive">Personal</router-link>
+      </div>
+      <div class="tab" :class="{active: shipActive}">
+        <router-link to="/profile/ship" @click="setShipActive">Ship</router-link>
+      </div>
+    </div>
+
+
+    <router-view></router-view>
+
+
+  </div>
 </template>
 
 <script>
@@ -42,7 +54,6 @@ export default {
 
 <style scoped>
   .name-section{
-    background-color: rgb(34, 137, 171);
     padding: 2%;
     font-size: 42px;
     font-weight: lighter;
