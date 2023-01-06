@@ -10,25 +10,25 @@
         <div class="personal-left">
           <div class="personal-record">
             <label>Firstname</label>
-            <p>Raihan</p>
+            <p>{{ user.firstname }}</p>
           </div>
           <div class="personal-record">
             <label>Lastname</label>
-            <p>Saboerali</p>
+            <p>{{ user.lastname }}</p>
           </div>
           <div class="personal-record">
             <label>Gender</label>
-            <p>Male</p>
+            <p>{{ user.gender }}</p>
           </div>
         </div>
         <div class="personal-right">
           <div class="personal-record">
             <label>Nationality</label>
-            <p>Netherlands</p>
+            <p>{{ user.nationality }}</p>
           </div>
           <div class="personal-record">
             <label>Date of Birth</label>
-            <p>9-02-2003</p>
+            <p>{{ user.dateOfBirth }}</p>
           </div>
         </div>
       </div><!--/personal-info-->
@@ -40,13 +40,13 @@
         <div class="personal-left">
           <div class="personal-record">
             <label>Email</label>
-            <p>raihanja@gmail.com</p>
+            <p>{{ user.email }}</p>
           </div>
         </div>
         <div class="personal-right">
           <div class="personal-record">
             <label>Phone number</label>
-            <p>06-12345678</p>
+            <p>{{ user.phoneNumber }}</p>
           </div>
         </div>
       </div><!--/personal-info-->
@@ -58,33 +58,80 @@
         <div class="personal-left">
           <div class="personal-record">
             <label>Address</label>
-            <p>Kalverstraat 223</p>
+            <p>{{ user.address }}</p>
           </div>
           <div class="personal-record">
             <label>Postal code</label>
-            <p>1098 DE</p>
+            <p>{{ user.postalCode }}</p>
           </div>
         </div>
         <div class="personal-right">
           <div class="personal-record">
             <label>City</label>
-            <p>Amsterdam</p>
+            <p>{{ user.city }}</p>
           </div>
           <div class="personal-record">
             <label>Country</label>
-            <p>The Netherlands</p>
+            <p>{{ user.country }}</p>
           </div>
         </div>
       </div><!--/personal-info-->
-
+      
     </div><!--/content-->
   </div><!--/content-container-->
 
 </template>
 
 <script>
+import {toRaw} from "vue";
+import userService from "@/services/user.service";
+
 export default {
-  name: "Personal"
+  name: "Personal",
+  data(){
+    return {
+      user: {
+        firstname: null,
+        lastname: null,
+        gender: null,
+        nationality: null,
+        dateOfBirth: null,
+        email: null,
+        phoneNumber: null,
+        address: null,
+        postalCode: null,
+        city: null,
+        country: null
+      }
+    }
+  },
+
+  methods: {
+    getUser(){
+      const id = toRaw(this.$store.state.auth.user.id)
+      userService.getUserById(id)
+          .then(response => {
+            this.user.firstname = response.data.firstname;
+            this.user.lastname = response.data.lastname;
+            this.user.gender = response.data.gender;
+            this.user.nationality = response.data.nationality;
+            this.user.dateOfBirth = response.data.dateofbirth;
+            this.user.email = response.data.email;
+            this.user.phoneNumber = response.data.phonenumber;
+            this.user.address = response.data.address;
+            this.user.postalCode = response.data.postalcode;
+            this.user.city = response.data.city;
+            this.user.country = response.data.country;
+          })
+          .catch(e => {
+            console.log(e)
+          })
+    }
+  },
+
+  mounted() {
+    this.getUser();
+  }
 }
 </script>
 

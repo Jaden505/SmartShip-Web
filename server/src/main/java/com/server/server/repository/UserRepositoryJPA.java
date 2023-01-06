@@ -212,6 +212,11 @@ public class UserRepositoryJPA implements UserRepository {
         return namedQuery.getSingleResult();
     }
 
+    @Override
+    public Optional<User> findById(int id) {
+        return Optional.empty();
+    }
+
     public void changePassword(String password, String email) {
         Query query = entityManager.createQuery(
                 "UPDATE User SET password = ?1 WHERE email = ?2");

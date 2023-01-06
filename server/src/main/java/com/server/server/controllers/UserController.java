@@ -66,6 +66,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable int id){
+        try {
+            Optional<User> user = userRepository.findById(id);
+
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
         try{

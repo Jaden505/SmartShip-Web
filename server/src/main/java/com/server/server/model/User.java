@@ -1,11 +1,14 @@
 package com.server.server.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 @Entity
 @Table(name = "user",
@@ -40,6 +43,26 @@ public class User {
    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
    private Ship ship;
 
+   private String firstname;
+
+   private String lastname;
+
+   private String gender;
+
+   private String nationality;
+
+   @JsonFormat(pattern = "yyyy-MM-dd")
+   private Date dateofbirth;
+
+   private String phonenumber;
+
+   private String address;
+
+   private String postalcode;
+
+   private String city;
+
+   private String country;
 
    public User() {
    }
@@ -90,5 +113,85 @@ public class User {
 
    public void setRole(Role role) {
       this.role = role;
+   }
+
+   public String getFirstname() {
+      return firstname;
+   }
+
+   public void setFirstname(String firstname) {
+      this.firstname = firstname;
+   }
+
+   public String getLastname() {
+      return lastname;
+   }
+
+   public void setLastname(String lastname) {
+      this.lastname = lastname;
+   }
+
+   public String getGender() {
+      return gender;
+   }
+
+   public void setGender(String gender) {
+      this.gender = gender;
+   }
+
+   public String getNationality() {
+      return nationality;
+   }
+
+   public void setNationality(String nationality) {
+      this.nationality = nationality;
+   }
+
+   public Date getDateofbirth() {
+      return dateofbirth;
+   }
+
+   public void setDateofbirth(Date dateofbirth) {
+      this.dateofbirth = dateofbirth;
+   }
+
+   public String getPhonenumber() {
+      return phonenumber;
+   }
+
+   public void setPhonenumber(String phonenumber) {
+      this.phonenumber = phonenumber;
+   }
+
+   public String getAddress() {
+      return address;
+   }
+
+   public void setAddress(String address) {
+      this.address = address;
+   }
+
+   public String getPostalcode() {
+      return postalcode;
+   }
+
+   public void setPostalcode(String postalcode) {
+      this.postalcode = postalcode;
+   }
+
+   public String getCity() {
+      return city;
+   }
+
+   public void setCity(String city) {
+      this.city = city;
+   }
+
+   public String getCountry() {
+      return country;
+   }
+
+   public void setCountry(String country) {
+      this.country = country;
    }
 }
