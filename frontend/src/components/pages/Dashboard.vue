@@ -46,17 +46,15 @@
                 <input type="text" id="simple-search" class="bg-transparent border text-black-text dark:text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
               </div>
             </form>
-            <!--calls the showPreview method everytime the button gets clicked-->
             <button class="md:p-0 lg:p-2" @click="showPreview()">
               <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-black-text dark:text-white-text"/>
             </button>
-            <!--Using v-if and else to switch between icons and calls the toggleDark method everytime the button gets clicked -->
             <button class="md:p-0 lg:p-2" @click="toggleDark()">
               <font-awesome-icon icon="fa-solid fa-sun" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
             </button>
             <router-link to="/profile">
-              <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
+              <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" :src="this.userImage" alt="Bordered avatar">
             </router-link>
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <router-link to="/profile"><h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
@@ -92,6 +90,7 @@ import NotificationPreview from "@/components/elements/NotificationPreview";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faBell, faMoon, faBars, faGear, faUser, faSun} from "@fortawesome/free-solid-svg-icons";
 import {toRaw} from "vue";
+import uploadService from "@/services/upload.service";
 library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
 
 export default {
@@ -114,6 +113,7 @@ export default {
         {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-star" />
         }
       ],
+      userImage: null,
       isDark: useDark(),
       preview: false
     }
@@ -122,15 +122,16 @@ export default {
     SideBar,
     NotificationPreview
   },
+  created() {
+    uploadService.getFile(this.currentUser.id).then(response => {
+      console.log(response);
+      this.userImage = response.data;
+    })
+  },
   methods: {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
-    //toggles the dark mode
-    //When the dark mode is active, the dark mode gets deactivated and vice versa
-    //We use built in methods of vueuse to toggle the dark mode.
-    //It uses the local storage to save the state of the dark mode.
-    //It also adds a class to the body element, so we can use it in our css.
     toggleDark() {
       this.isDark = !this.isDark
       useToggle(useDark(this.isDark))

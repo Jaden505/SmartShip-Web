@@ -5,6 +5,30 @@
        :variants="{ custom: { scale: 2 } }"
        class="mt-4 p-4 relative">
     <div>
+      <div class="row">
+        <div class="col-8">
+          <label class="btn btn-default p-0">
+            <input
+                type="file"
+                accept="image/*"
+                ref="file"
+                @change="selectImage"
+            />
+          </label>
+        </div>
+
+        <div class="col-4">
+          <button
+              class="btn btn-success btn-sm float-right"
+              :disabled="!currentImage"
+              @click="upload"
+          >
+            Upload
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
       <div class="px-4 flex right-0">
         <img alt="Bordered avatar" class="h-40 w-40 rounded-full ring-4 ring-black-basic" src="../../assets/img/example_user.jpg">
       </div>
@@ -28,13 +52,17 @@
 </template>
 
 <script>
+import UploadService from "@/services/upload.service";
+import {toRaw} from "vue";
+
 export default {
   name: "Profile",
 
   data() {
     return {
       personalActive: false,
-      shipActive: false
+      shipActive: false,
+      currentImage: undefined,
     }
   },
 
@@ -47,7 +75,31 @@ export default {
     setShipActive() {
       this.shipActive = true;
       this.personalActive = false;
-    }
+    },
+
+    selectImage() {
+      this.currentImage = this.$refs.file.files.item(0);
+    },
+
+    upload() {
+      this.progress = 0;
+
+      console.log(this.currentImage)
+      let user = toRaw(this.$store.state.auth.user);
+
+      UploadService.upload(this.currentImage, user.email)
+          .then((response) => {
+            console.log(response)
+          })
+          .then((images) => {
+            this.imageInfos = images.data;
+          })
+          .catch((err) => {
+            this.progress = 0;
+            this.message = "Could not upload the image! " + err;
+            this.currentImage = undefined;
+          });
+    },
   }
 }
 </script>
