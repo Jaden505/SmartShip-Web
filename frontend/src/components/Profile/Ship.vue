@@ -10,17 +10,17 @@
         <div class="personal-left">
           <div class="personal-record">
             <label>Ship Id</label>
-            <p>3010</p>
+            <p>{{ ship.id }}</p>
           </div>
           <div class="personal-record">
             <label>Ship status</label>
-            <p>Active</p>
+            <p>{{ ship.status }}</p>
           </div>
         </div>
         <div class="personal-right">
           <div class="personal-record">
             <label>Ship name</label>
-            <p>Titanic</p>
+            <p>{{ ship.name }}</p>
           </div>
         </div>
       </div><!--/personal-info-->
@@ -32,13 +32,15 @@
         <div class="personal-left">
           <div class="personal-record">
             <label>Longitude</label>
-            <p>97.324</p>
+            <p v-if="ship.longitude == null">Unknown</p>
+            <p v-else>{{ ship.longitude }}</p>
           </div>
         </div>
         <div class="personal-right">
           <div class="personal-record">
             <label>Latitude</label>
-            <p>82.416</p>
+            <p v-if="ship.latitude == null">Unknown</p>
+            <p v-else>{{ ship.latitude }}</p>
           </div>
         </div>
       </div><!--/personal-info-->
@@ -49,8 +51,44 @@
 </template>
 
 <script>
+import shipService from "@/services/ship.service";
+import {toRaw} from "vue";
+
 export default {
-  name: "Ship"
+  name: "Ship",
+
+  data(){
+    return {
+      ship: {
+        id: null,
+        status: null,
+        name: null,
+        longitude: null,
+        latitude: null
+      }
+    }
+  },
+
+  methods: {
+    getShip(){
+      const id = toRaw(this.$store.state.auth.user.ship)
+      shipService.get(id)
+          .then(response => {
+            this.ship.id = response.data[0].id
+            this.ship.status = response.data[0].status
+            this.ship.name = response.data[0].name
+            this.ship.latitude = response.data[0].gpsLatitude
+            this.ship.longitude = response.data[0].gpsLongtitude
+          })
+          .catch(e => {
+            console.log(e)
+          })
+    }
+  },
+
+  mounted() {
+    this.getShip()
+  }
 }
 </script>
 
