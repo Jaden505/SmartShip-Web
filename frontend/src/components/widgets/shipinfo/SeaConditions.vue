@@ -18,6 +18,7 @@ export default {
       if (newVal !== null) {
         newVal = JSON.parse(newVal);
         this.conditions = await newVal.filter((sensor) => sensor["group"] === "Sea Conditions");
+        console.log(this.conditions)
       }
     }
   },

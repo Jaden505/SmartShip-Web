@@ -9,9 +9,9 @@ class ShipDataService {
             headers: authHeader()
         });
     }
-    // todo the right endpoint
-    getWater() {
-        return axios.get(API_URL + 'chart', {
+
+    getWater(id) {
+        return axios.get(API_URL + 'ships/' + id + '/watersupply', {
             headers: authHeader()
         });
     }

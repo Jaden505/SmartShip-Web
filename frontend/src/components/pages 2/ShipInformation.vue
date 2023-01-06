@@ -28,12 +28,13 @@
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</div>
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</div>
           </div>
+
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-white-text">{{component.name}}</h4>
           </div>
           <div class="relative p-4 h-72">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
-            <component :is="component" :sensordata="JSON.stringify(sensordata)" />
+            <component :is="component" />
           </div>
         </div>
       </div>
@@ -42,39 +43,33 @@
 </template>
 
 <script>
-
-// Widgets imports
-import BatteryInfoLine from "@/components/widgets/powerusage/BatteriesCharge";
-
+import WaterSupply from "@/components/ship/charts-information/WaterSupply";
+import Map from "@/components/ship/Map";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
-import SensordataService from "@/services/sensordata.service";
-
 export default {
-  name: "PowerUsage",
+    name: "ShipInformation",
   components: {
-    BatteryInfoLine,
+    Map,
+    WaterSupply
   },
 
   data() {
     return {
       isEditing: false,
-      sensordata: null,
       dmc: null,
       componentsList: [],
-      addableComponents: [BatteryInfoLine]
+      addableComponents: [WaterSupply, Map]
     }
   },
 
   mounted() {
-    this.getSensorData();
-
     this.dmc = new DashboardMoveComponents(null);
 
     // Get components from local storage
-    if (localStorage.components) {
+    if (localStorage.Components_Ship_Information) {
       let component_names = this.addableComponents.map(component => component.name);
 
-      for (let component of JSON.parse(localStorage.components)) {
+      for (let component of JSON.parse(localStorage.Components_Ship_Information)) {
         // Check if component was saved in local storage
         if (component_names.includes(component)) {
           this.switchDisplayComponent(this.addableComponents[component_names.indexOf(component)]);
@@ -113,20 +108,7 @@ export default {
 
     setComponents() {
       // Save components names in local storage
-      localStorage.setItem('components', JSON.stringify(this.componentsList.map(component => component.name)));
-    },
-
-    getSensorData() {
-      const shipid = this.$store.state.auth.user.ship;
-
-      SensordataService.getByShipId(shipid)
-          .then(response => {
-            this.sensordata = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
+      localStorage.setItem('Components_Ship_Information', JSON.stringify(this.componentsList.map(component => component.name)));
     }
   }
 }

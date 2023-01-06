@@ -1,5 +1,5 @@
 <template>
-  <canvas id="waterSupplyChart"></canvas>
+    <canvas id="waterSupplyChart"></canvas>
 </template>
 
 <script>

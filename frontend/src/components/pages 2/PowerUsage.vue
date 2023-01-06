@@ -33,7 +33,7 @@
           </div>
           <div class="relative p-4 h-72">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
-            <component :is="component" :sensordata="JSON.stringify(sensordata)" />
+            <component :is="component" />
           </div>
         </div>
       </div>
@@ -43,31 +43,29 @@
 
 <script>
 
-// Widgets imports
-import BatteryInfoLine from "@/components/widgets/powerusage/BatteriesCharge";
-
+import EngineUsage from "@/components/ship/charts-power-usage/SingleLineChart";
+import BatteryInfoLine from "@/components/ship/charts-power-usage/MultipleLineChart";
+import BatteryInfo1 from "@/components/ship/charts-power-usage/TextBox";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
-import SensordataService from "@/services/sensordata.service";
 
 export default {
   name: "PowerUsage",
   components: {
     BatteryInfoLine,
+    EngineUsage,
+    BatteryInfo1,
   },
 
   data() {
     return {
       isEditing: false,
-      sensordata: null,
       dmc: null,
       componentsList: [],
-      addableComponents: [BatteryInfoLine]
+      addableComponents: [BatteryInfoLine, EngineUsage, BatteryInfo1]
     }
   },
 
   mounted() {
-    this.getSensorData();
-
     this.dmc = new DashboardMoveComponents(null);
 
     // Get components from local storage
@@ -114,19 +112,6 @@ export default {
     setComponents() {
       // Save components names in local storage
       localStorage.setItem('components', JSON.stringify(this.componentsList.map(component => component.name)));
-    },
-
-    getSensorData() {
-      const shipid = this.$store.state.auth.user.ship;
-
-      SensordataService.getByShipId(shipid)
-          .then(response => {
-            this.sensordata = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
     }
   }
 }

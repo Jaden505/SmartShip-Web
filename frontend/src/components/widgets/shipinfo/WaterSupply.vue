@@ -1,12 +1,13 @@
 <template>
-  <canvas id="engineUsage"></canvas>
+  <canvas id="waterSupplyChart"></canvas>
 </template>
 
 <script>
-import Chart from "chart.js/auto";
+import Chart from 'chart.js/auto';
+import ShipService from "@/services/ship.service";
 
 export default {
-  name: "SingleLineChart",
+  name: "WaterSupply",
   data() {
     return {
       chart: []
@@ -15,23 +16,24 @@ export default {
   mounted() {
     console.log('Component mounted')
     // this.getChart();
-    const ctx = document.getElementById('engineUsage').getContext('2d');
+    const ctx = document.getElementById('waterSupplyChart').getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 0, 250);
     gradient.addColorStop(0, '#29acda');
     gradient.addColorStop(1, 'rgba(0, 44, 72, 0)');
 
+
     // Chart
     const myChart = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
-        labels: ['9:45', '9:46', '9:47', '9:48', '9:49', '9:50'],
+        labels: ['Tank 1', 'Tank 2'],
         datasets: [{
-          data: [65, 59, 80, 81, 56, 55, 40],
+          label: 'Water',
+          data: [],
           backgroundColor: gradient,
           fill: true,
           barThickness: 40,
-          borderColor: '#29acda',
-          borderWidth: 2,
+          borderWidth: 1,
         }]
       },
       options: {
@@ -71,7 +73,20 @@ export default {
       }
     });
 
-    myChart;
+    const shipid = this.$store.state.auth.user.ship;
+
+    // display data
+    ShipService.getWater(shipid).then(response => {
+      console.log(response.data);
+
+      this.chart = response.data;
+      myChart.data.datasets[0].data[0] = response.data[0];
+      myChart.data.datasets[0].data[1] = response.data[1];
+
+      myChart.update()
+      myChart;
+    })
+
   },
 }
 
