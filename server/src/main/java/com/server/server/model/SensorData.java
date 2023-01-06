@@ -1,6 +1,7 @@
 package com.server.server.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -15,8 +16,8 @@ public class SensorData {
     @Column(name = "sensor_id")
     private String sensorId;
 
-    @Column(name = "group")
-    private String group;
+    @Column(name = "category")
+    private String category;
 
     @Column(name = "sensor_name")
     private String sensorName;
@@ -24,6 +25,7 @@ public class SensorData {
 //    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 
 
+    @Nullable
     @JoinColumn(name = "ship_id", nullable = true)
     private String ship;
 
@@ -52,10 +54,10 @@ public class SensorData {
     protected SensorData() {
     }
 
-    public SensorData(String sensorId, String group, String sensorName, String ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
+    public SensorData(String sensorId, String category, String sensorName, String ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
         this();
         this.sensorId = sensorId;
-        this.group = group;
+        this.category = category;
         this.sensorName = sensorName;
         this.ship = ship;
         this.time = time;
@@ -75,12 +77,12 @@ public class SensorData {
         this.sensorId = sensorId;
     }
 
-    public String getGroup() {
-        return group;
+    public String getCategory() {
+        return category;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getSensorName() {
@@ -160,7 +162,7 @@ public class SensorData {
     public String toString() {
         return "SensorData{" +
                 "sensorId='" + sensorId + '\'' +
-                ", group='" + group + '\'' +
+                ", category='" + category + '\'' +
                 ", sensorName='" + sensorName + '\'' +
                 ", ship=" + ship +
                 ", time=" + time +
@@ -172,4 +174,5 @@ public class SensorData {
                 ", gpsLongtitude='" + gpsLongtitude + '\'' +
                 '}';
     }
+
 }

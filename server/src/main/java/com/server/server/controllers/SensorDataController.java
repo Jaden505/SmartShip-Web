@@ -3,6 +3,7 @@ package com.server.server.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.server.server.model.SensorData;
+import com.server.server.repository.QueryRepo;
 import com.server.server.repository.SensorDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,17 @@ public class SensorDataController {
     @Autowired
     SensorDataRepository repo;
 
+    @Autowired
+    QueryRepo queryRepo;
+
     @GetMapping("")
     public ResponseEntity<List<SensorData>> getAll(){
         return ResponseEntity.ok(repo.findAll());
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<SensorData>> getAllCategories(){
+        return ResponseEntity.ok(queryRepo.findAllCategories());
     }
 
     @PostMapping("/add")
@@ -37,7 +46,7 @@ public class SensorDataController {
 //            System.out.println("Json Processing");
 //        }
         sensorData.setSensorId(body.getSensorId());
-        sensorData.setGroup(body.getGroup());
+//        sensorData.setGroup(body.getGroup());
         sensorData.setSensorName(body.getSensorName());
         sensorData.setShip(body.getShip());
         sensorData.setTime(body.getTime());

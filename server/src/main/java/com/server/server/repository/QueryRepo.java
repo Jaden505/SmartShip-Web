@@ -1,20 +1,18 @@
 package com.server.server.repository;
 
+import com.server.server.model.SensorData;
 import com.server.server.model.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -30,6 +28,12 @@ public class QueryRepo implements UserRepository {
     @Override
     public List<User> findAll() {
         TypedQuery<User> namedQuery = entityManager.createQuery("SELECT u FROM User u", User.class);
+        return namedQuery.getResultList();
+    }
+
+
+    public List<SensorData> findAllCategories() {
+        TypedQuery<SensorData> namedQuery = entityManager.createQuery("SELECT s FROM SensorData s", SensorData.class);
         return namedQuery.getResultList();
     }
 

@@ -15,19 +15,21 @@
         </div>
         <div class="Parameters form-group">
           <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Censor name</label>
-          <input v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
+          <select v-model="alarm.category" class="dropdown" type="text" name="category">
+            <option v-for="(category, index) in categories"
+                    :value="category"
+                    :key="index">
+              {{ category }}
+            </option>
+          </select>
         </div>
         <div class="Parameters form-group">
-          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Value</label>
-          <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
-        </div>
-        <div class="Parameters form-group">
-          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">setted up Value</label>
+          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">current Value</label>
           <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
         </div>
         <div class="Parameters form-group">
-          <label for="id" class="block mb-2 text-sm font-medium text-white-text">Ship id</label>
-          <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">your Value</label>
+          <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
         </div>
           <button class="button" id="cancel" @click="cancelForm">
             {{ cancel }}
@@ -59,6 +61,7 @@ export default {
       update: "Update",
       cancel: "Cancel",
       categories: [],
+      sensorCat: [],
       alarm: {
         parameter: "",
         category: "",
