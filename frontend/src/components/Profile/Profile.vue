@@ -10,7 +10,7 @@
       </div>
       <div class="-mt-8">
         <div class="name-section rounded-t-md bg-blue-regular pt-12 pb-4 px-5">
-          <h1 class="text-2xl">Raihan Saboerali</h1>
+          <h1 class="text-2xl">{{ user.firstname + " " + user.lastname }}</h1>
           <h2 v-if="role === 'ROLE_USER'">User</h2>
           <h2 v-if="role === 'ROLE_MANAGER'">Manager</h2>
           <h2 v-if="role === 'ROLE_ADMIN'">Admin</h2>
@@ -40,7 +40,11 @@ export default {
     return {
       personalActive: false,
       shipActive: false,
-      role: null
+      role: null,
+      user: {
+        firstname: null,
+        lastname: null
+      }
     }
   },
 
@@ -64,11 +68,25 @@ export default {
           .catch(e => {
             console.log(e)
           })
+    },
+
+    getUser(){
+      const id = toRaw(this.$store.state.auth.user.id)
+      userService.getUserById(id)
+          .then(response => {
+            this.user.firstname = response.data.firstname
+            this.user.lastname = response.data.lastname
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
   },
 
   mounted() {
     this.getRole();
+    this.getUser()
   }
 }
 </script>
