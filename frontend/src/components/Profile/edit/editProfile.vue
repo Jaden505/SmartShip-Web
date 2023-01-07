@@ -141,7 +141,7 @@
         <div class="md:flex md:items-center">
           <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="button"
-                  @click="TogglePopup();">
+                  @click=" updateUser">
             Update
           </button>
         </div>
@@ -153,6 +153,9 @@
 </template>
 
 <script>
+import userService from "@/services/user.service";
+import {toRaw} from "vue";
+
 export default {
   name: "editProfile",
   props: ['TogglePopup', 'user'],
@@ -160,6 +163,18 @@ export default {
   data() {
     return {
       current: this.user
+    }
+  },
+
+  methods: {
+    updateUser(){
+      try {
+        const id = toRaw(this.$store.state.auth.user.id)
+        userService.updateProfile(id, this.current)
+      } catch (e){
+        console.log(e.response.data)
+      }
+
     }
   }
 }

@@ -33,6 +33,22 @@ class UserService {
         });
     }
 
+    updateProfile(user_Id, user){
+        return axios.put(API_URL + 'users/profile/' + user_Id, {
+            firstname: user.firstname,
+            lastname: user.lastname,
+            gender: user.gender,
+            email: user.email,
+            phonenumber: user.phoneNumber,
+            address: user.address,
+            postalcode: user.postalCode,
+            city: user.city,
+            country: user.country
+        }, {
+            headers: authHeader()
+        })
+    }
+
     createUser(user){
         return axios.post(API_URL +'users/create',  {
             username: user.username,
