@@ -12,10 +12,6 @@
             <label>Ship Id</label>
             <p>{{ ship.id }}</p>
           </div>
-          <div class="personal-record">
-            <label>Ship status</label>
-            <p>{{ ship.status }}</p>
-          </div>
         </div>
         <div class="personal-right">
           <div class="personal-record">

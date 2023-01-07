@@ -11,7 +11,9 @@
       <div class="-mt-8">
         <div class="name-section rounded-t-md bg-blue-regular pt-12 pb-4 px-5">
           <h1 class="text-2xl">Raihan Saboerali</h1>
-          <h2>Operator</h2>
+          <h2 v-if="role === 'ROLE_USER'">User</h2>
+          <h2 v-if="role === 'ROLE_MANAGER'">Manager</h2>
+          <h2 v-if="role === 'ROLE_ADMIN'">Admin</h2>
         </div>
         <div class="bar shadow-lg bg-blue-regular flex rounded-b-md">
           <div :class="{active: personalActive}" class="tab px-5 py-2 rounded-t-md text-md">
@@ -28,13 +30,17 @@
 </template>
 
 <script>
+import userService from "@/services/user.service";
+import {toRaw} from "vue";
+
 export default {
   name: "Profile",
 
   data() {
     return {
       personalActive: false,
-      shipActive: false
+      shipActive: false,
+      role: null
     }
   },
 
@@ -47,7 +53,22 @@ export default {
     setShipActive() {
       this.shipActive = true;
       this.personalActive = false;
+    },
+
+    getRole(){
+      const id = toRaw(this.$store.state.auth.user.id)
+      userService.getUserById(id)
+          .then(response => {
+            this.role = response.data.role.name
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
+  },
+
+  mounted() {
+    this.getRole();
   }
 }
 </script>
