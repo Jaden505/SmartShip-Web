@@ -109,6 +109,34 @@ public class UserController {
         }
     }
 
+    @PutMapping("/users/profile/{id}")
+    public ResponseEntity<User> updateProfile(@PathVariable int id, @RequestBody User user){
+        try {
+            Optional<User> foundUser = userRepository.findById(id);
+
+            if (foundUser.isPresent()){
+                User changeUser = foundUser.get();
+
+                changeUser.setFirstname(user.getFirstname());
+                changeUser.setLastname(user.getLastname());
+                changeUser.setGender(user.getGender());
+                changeUser.setEmail(user.getEmail());
+                changeUser.setPhonenumber(user.getPhonenumber());
+                changeUser.setAddress(user.getAddress());
+                changeUser.setPostalcode(user.getPostalcode());
+                changeUser.setCity(user.getCity());
+                changeUser.setCountry(user.getCountry());
+
+                return new ResponseEntity<>(userRepository.save(changeUser), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable Integer id){
         try{
