@@ -41,7 +41,7 @@ public class StorageService {
 
     public byte[] downloadImage(int user){
         Optional<ImageData> dbImageData = Optional.ofNullable(storageRepository.findByUserId(user));
-        byte[] images=ImageUtils.decompressImage(dbImageData.get().getImageData());
+        byte[] images =ImageUtils.decompressImage(dbImageData.get().getImageData());
         return images;
     }
 }

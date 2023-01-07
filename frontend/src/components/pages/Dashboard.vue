@@ -84,17 +84,23 @@
 </template>
 
 <script>
-import {useDark,useToggle} from '@vueuse/core'
+import {useDark, useToggle} from '@vueuse/core'
 import SideBar from "@/components/SideBar";
 import NotificationPreview from "@/components/elements/NotificationPreview";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBell, faMoon, faBars, faGear, faUser, faSun} from "@fortawesome/free-solid-svg-icons";
-import {toRaw} from "vue";
+import {faBars, faBell, faGear, faMoon, faSun, faUser} from "@fortawesome/free-solid-svg-icons";
+import {computed, toRaw} from "vue";
 import uploadService from "@/services/upload.service";
+
 library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
 
 export default {
   name: "DashBoard",
+    provide() {
+      return {
+        userImage: computed(() => this.userImage)
+      }
+  },
   computed: {
     currentUser() {
       console.log(toRaw(this.$store.state.auth.user));
@@ -125,7 +131,7 @@ export default {
   created() {
     uploadService.getFile(this.currentUser.id).then(response => {
       console.log(response);
-      this.userImage = response.data;
+      this.userImage = "data:image/jpeg;base64," + response.data
     })
   },
   methods: {
