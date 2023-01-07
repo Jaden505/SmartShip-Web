@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `smartship` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `smartship`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: smartship
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -84,6 +86,8 @@ CREATE TABLE `notification` (
   `message` varchar(255) DEFAULT NULL,
   `temperature` double DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ship_fk_idx` (`ship_id`),
   CONSTRAINT `notification_ship_fk` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
@@ -96,8 +100,35 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (0,'Engine 1 Temperature','Motor',67.68,50.00,'07202515-a483-464c-b704-5671f104044b','2022-07-15 13:10:00','The temperature of Engine 1 has exceeded the given temperature.',67.68,NULL),(1,'Wind Speed','Sea Conditions ',7.00,9.00,'3001','2022-06-14 12:09:00','The speed of the ship is slower than your setted up value.',7,NULL),(2,'Depletion Rate','Fuel',15.00,10.00,'3002','2022-05-13 11:08:00','The depletion rate of the fuel is greater than your setted up value.',15,NULL),(3,'Percentage Left','Battery',15.00,20.00,'3003','2022-04-12 10:07:00','The battery has less percentage than your setted up value',15,NULL);
+INSERT INTO `notification` VALUES (0,'Engine 1 Temperature','Motor',67.68,50.00,'07202515-a483-464c-b704-5671f104044b','2022-07-15 13:10:00','The temperature of Engine 1 has exceeded the given temperature.',67.68,NULL,NULL,NULL),(1,'Wind Speed','Sea Conditions ',7.00,9.00,'3001','2022-06-14 12:09:00','The speed of the ship is slower than your setted up value.',7,NULL,NULL,NULL),(2,'Depletion Rate','Fuel',15.00,10.00,'3002','2022-05-13 11:08:00','The depletion rate of the fuel is greater than your setted up value.',15,NULL,NULL,NULL),(3,'Percentage Left','Battery',15.00,20.00,'3003','2022-04-12 10:07:00','The battery has less percentage than your setted up value',15,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_reset_token`
+--
+
+DROP TABLE IF EXISTS `password_reset_token`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `password_reset_token` (
+                                        `id` bigint NOT NULL,
+                                        `expiry_date` datetime(6) DEFAULT NULL,
+                                        `token` varchar(255) DEFAULT NULL,
+                                        `user_id` int NOT NULL,
+                                        PRIMARY KEY (`id`),
+                                        KEY `FKjthxr8d7rmlunj1uv3lt1xvl5` (`user_id`),
+                                        CONSTRAINT `FKjthxr8d7rmlunj1uv3lt1xvl5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_reset_token`
+--
+
+LOCK TABLES `password_reset_token` WRITE;
+/*!40000 ALTER TABLE `password_reset_token` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_reset_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -231,6 +262,16 @@ CREATE TABLE `user` (
                         `username` varchar(255) NOT NULL,
                         `role_id` int NOT NULL,
                         `ship_id` varchar(255) DEFAULT NULL,
+                        `firstName` varchar(255) DEFAULT NULL,
+                        `lastName` varchar(255) DEFAULT NULL,
+                        `gender` varchar(255) DEFAULT NULL,
+                        `nationality` varchar(255) DEFAULT NULL,
+                        `dateOfBirth` date DEFAULT NULL,
+                        `phoneNumber` varchar(45) DEFAULT NULL,
+                        `address` varchar(255) DEFAULT NULL,
+                        `postalCode` varchar(45) DEFAULT NULL,
+                        `city` varchar(255) DEFAULT NULL,
+                        `country` varchar(45) DEFAULT NULL,
                         PRIMARY KEY (`id`),
                         UNIQUE KEY `email_UNIQUE` (`email`),
                         UNIQUE KEY `username_UNIQUE` (`username`),
@@ -242,7 +283,7 @@ CREATE TABLE `user` (
                         KEY `fk_user_ship_idx` (`ship_id`),
                         CONSTRAINT `fk_role_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT,
                         CONSTRAINT `fk_ship_user` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +292,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',3,'3010'),(14,'Johnny@gmail.com','$2a$10$smPKe6NO9ewVZFCq9ctGc.mq1cjwOTQaYTkOl5nbGbBFFrIRaUZ7C','Johny',3,'3010'),(44,'raihan@gmail.com','$2a$10$md3lI5DHIeqKo3xgz4yUw.p4UN7KU0gmQS739/pzcTXAGcfHf8vA2','Raihan',1,'07202515-a483-464c-b704-5671f104044b'),(45,'bartek@gmail.com','$2a$10$hv6etttPD2sy8or8c4VEO.bkg0iMnMaQ4FUAplofW50xHOpWA0KHq','Bartek',1,'3009'),(46,'vincent@gmail.com','$2a$10$W0cUD0RuJ29Qph5oJ9IVTOFeUxO/BfDwBvpTBXI.NNjEoGv9p26Xa','Vincent',1,'3005'),(47,'milos@gmail.com','$2a$10$krR3URtaD33wODltPAyaKOb3RV94/r26BrzSLFJsadLsizUDm.iEG','Milos',1,'3011'),(48,'jaden@gmail.com','$2a$10$A7F1dwfU.JTy3340gqh/t.1Xb3oXonh93bHBwnu6dRcgolADx.jeO','Jaden',1,'3002'),(49,'jolicoeur@gmail.com','$2a$10$BPWNB1iPK.W0yAtvQ6wFDuKYG4QarszJtvhpzbRBvIBLg5jP4APxu','Joli-Coeur',1,'3010'),(50,'alwine@gmail.com','$2a$10$M1Jz12TyqwUAtgefqN6wkO4N0hSOsIGA/z/TWDVmxPCP6oYf5FJ6O','Alwine',1,'3011'),(51,'khasim@gmail.com','$2a$10$A/Z0/9NP7Q2C0pjvh4bD0ud4l4qmwHyCK/FSQAO0vgQdJHnhljkzW','Khasim',1,'3012'),(52,'veronika@gmail.com','$2a$10$bG5weN5y9iR60oh/xLi8MuPxC/b1tvnFovbmMtAaMqLqCCvh1QEpO','Veronika',1,'07202515-a483-464c-b704-5671f104044b'),(53,'karita@gmail.com','$2a$10$AWexB/A7eb0pb7wQYMymdO8Tq4YlUadrm/eNp6wYfsQZYKKkGrZ/W','Karita',1,'3008'),(54,'sameera@gmail.com','$2a$10$BmPrwEibWUPkdI64p6FFv.WiGB.fFaH.SwTVNQ1MfNc2QSYK5AkKq','Sameera',1,'3010'),(55,'manca@gmail.com','$2a$10$uQ09YS61TBH5ggxwACyMhueVswfrTN3Gk8M4vyQZOOdVa3VBpNHVi','Manca',1,'3002'),(56,'jamilah@gmail.com','$2a$10$6hk.PEs.Q11oTzjbuM0AxuQngZsAx4bMZBbLlJuE68FWzR1hROUYu','Jamilah',1,'07202515-a483-464c-b704-5671f104044b'),(57,'egilmar@gmail.com','$2a$10$SvPRGVfCPjWcbiQV00Jlluq16SAbV8MTl5aX445NufkhT3fr5JkWW','Egilmar',2,'3010'),(58,'robin@gmail.com','$2a$10$Au1Ea8gju7QPnxE59uc1b.VARU/qdmuYofEb/uiqlxbQocKOJvdsO','Robin',2,'3010'),(59,'neo@gmail.com','$2a$10$kiEIJIRs.zSoVNV9uXqz..QKsjc1MS4PhAfHAznjAQtge2xfVJSwa','Neo',2,'3010'),(60,'anubis@gmail.com','$2a$10$8jXZQrF9iFkdrLNTnBd3s.JSIbtanH3MqTuPRlW9eQxnjQ66oZtjm','Anubis',2,'3010'),(61,'topher@gmail.com','$2a$10$3Jq3IAgb4g7Pc9oTRmCWIuaMQC9VJUnaBhz5j33s2Qdi.KcplMjtm','Topher',2,'3010');
+INSERT INTO `user` VALUES (3,'john@gmail.com','$2a$10$uf9B9HRkQaoMPiYjBUX2V.h5xlxWg4IqiDojqBNJPkgogOgTnptwO','John',3,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,'Johnny@gmail.com','$2a$10$smPKe6NO9ewVZFCq9ctGc.mq1cjwOTQaYTkOl5nbGbBFFrIRaUZ7C','Johny',3,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(44,'raihan@gmail.com','$2a$10$md3lI5DHIeqKo3xgz4yUw.p4UN7KU0gmQS739/pzcTXAGcfHf8vA2','Raihan',1,'07202515-a483-464c-b704-5671f104044b',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(45,'bartek@gmail.com','$2a$10$hv6etttPD2sy8or8c4VEO.bkg0iMnMaQ4FUAplofW50xHOpWA0KHq','Bartek',1,'3009',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(46,'vincent@gmail.com','$2a$10$W0cUD0RuJ29Qph5oJ9IVTOFeUxO/BfDwBvpTBXI.NNjEoGv9p26Xa','Vincent',1,'3005',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(47,'milos@gmail.com','$2a$10$krR3URtaD33wODltPAyaKOb3RV94/r26BrzSLFJsadLsizUDm.iEG','Milos',1,'3011',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(48,'jaden@gmail.com','$2a$10$A7F1dwfU.JTy3340gqh/t.1Xb3oXonh93bHBwnu6dRcgolADx.jeO','Jaden',1,'3002',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(49,'jolicoeur@gmail.com','$2a$10$BPWNB1iPK.W0yAtvQ6wFDuKYG4QarszJtvhpzbRBvIBLg5jP4APxu','Joli-Coeur',1,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(50,'alwine@gmail.com','$2a$10$M1Jz12TyqwUAtgefqN6wkO4N0hSOsIGA/z/TWDVmxPCP6oYf5FJ6O','Alwine',1,'3011',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(51,'khasim@gmail.com','$2a$10$A/Z0/9NP7Q2C0pjvh4bD0ud4l4qmwHyCK/FSQAO0vgQdJHnhljkzW','Khasim',1,'3012',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(52,'veronika@gmail.com','$2a$10$bG5weN5y9iR60oh/xLi8MuPxC/b1tvnFovbmMtAaMqLqCCvh1QEpO','Veronika',1,'07202515-a483-464c-b704-5671f104044b',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(53,'karita@gmail.com','$2a$10$AWexB/A7eb0pb7wQYMymdO8Tq4YlUadrm/eNp6wYfsQZYKKkGrZ/W','Karita',1,'3008',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(54,'sameera@gmail.com','$2a$10$BmPrwEibWUPkdI64p6FFv.WiGB.fFaH.SwTVNQ1MfNc2QSYK5AkKq','Sameera',1,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(55,'manca@gmail.com','$2a$10$uQ09YS61TBH5ggxwACyMhueVswfrTN3Gk8M4vyQZOOdVa3VBpNHVi','Manca',1,'3002',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(56,'jamilah@gmail.com','$2a$10$6hk.PEs.Q11oTzjbuM0AxuQngZsAx4bMZBbLlJuE68FWzR1hROUYu','Jamilah',1,'07202515-a483-464c-b704-5671f104044b',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(57,'egilmar@gmail.com','$2a$10$SvPRGVfCPjWcbiQV00Jlluq16SAbV8MTl5aX445NufkhT3fr5JkWW','Egilmar',2,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(58,'robin@gmail.com','$2a$10$Au1Ea8gju7QPnxE59uc1b.VARU/qdmuYofEb/uiqlxbQocKOJvdsO','Robin',2,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(59,'neo@gmail.com','$2a$10$kiEIJIRs.zSoVNV9uXqz..QKsjc1MS4PhAfHAznjAQtge2xfVJSwa','Neo',2,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(60,'anubis@gmail.com','$2a$10$8jXZQrF9iFkdrLNTnBd3s.JSIbtanH3MqTuPRlW9eQxnjQ66oZtjm','Anubis',2,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(61,'topher@gmail.com','$2a$10$3Jq3IAgb4g7Pc9oTRmCWIuaMQC9VJUnaBhz5j33s2Qdi.KcplMjtm','Topher',2,'3010',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(62,'test@mail.nl','$2a$12$fgZJ5Jukq1GBZnTWDnwXSe8xu.ebSbGZEh4xm38v5RtbDGTv1RH9S','Test',2,'3010','Raihan','Saboerali','Male','Dutch','2003-02-09','06-12345678','Kalverstraat 21','1010 BE','Amsterdam','Netherlands');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,4 +313,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-21  0:53:18
+-- Dump completed on 2023-01-07 18:58:08
