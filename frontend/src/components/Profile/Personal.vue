@@ -6,7 +6,7 @@
 
       <div class="title-section">
         <h1>Personal</h1>
-        <div class="material-icons px-3 py-4 edit" @click="TogglePopup('buttonTriggerEdit')">edit</div>
+        <div class="material-icons px-3 py-4 edit pointer" @click="TogglePopup('buttonTriggerEdit')">edit</div>
       </div>
 
       <hr class="underline">
@@ -228,6 +228,10 @@ h1{
 .personal-right{
   flex: 1;
   padding: 1%;
+}
+
+.pointer{
+  cursor: pointer;
 }
 
 
