@@ -1,9 +1,14 @@
 <template>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <div class="content-container">
     <div class="content">
 
-      <h1>Personal</h1>
+      <div class="title-section">
+        <h1>Personal</h1>
+        <div class="material-icons px-3 py-4 edit" @click="TogglePopup('buttonTriggerEdit')">edit</div>
+      </div>
+
       <hr class="underline">
 
       <div class="personal-info">
@@ -33,8 +38,11 @@
         </div>
       </div><!--/personal-info-->
 
-      <h1>Contact</h1>
-      <hr>
+      <div class="title-section">
+        <h1>Contact</h1>
+      </div>
+
+      <hr class="underline">
 
       <div class="personal-info">
         <div class="personal-left">
@@ -51,8 +59,11 @@
         </div>
       </div><!--/personal-info-->
 
-      <h1>Residence</h1>
-      <hr>
+      <div class="title-section">
+        <h1>Residence</h1>
+      </div>
+
+      <hr class="underline">
 
       <div class="personal-info">
         <div class="personal-left">
@@ -80,14 +91,25 @@
     </div><!--/content-->
   </div><!--/content-container-->
 
+  <edit-profile
+      v-if="popupTrigger.buttonTriggerEdit"
+      :TogglePopup="() => TogglePopup('buttonTriggerEdit')"
+      :user=this.user
+  />
+
+
 </template>
 
 <script>
-import {toRaw} from "vue";
+import {ref, toRaw} from "vue";
 import userService from "@/services/user.service";
+import editProfile from "@/components/Profile/edit/editProfile";
 
 export default {
   name: "Personal",
+  components: {
+    editProfile,
+  },
   data(){
     return {
       user: {
@@ -131,7 +153,22 @@ export default {
 
   mounted() {
     this.getUser();
-  }
+  },
+
+  setup(){
+    const popupTrigger = ref({
+      buttonTriggerEdit: false,
+    });
+
+    const TogglePopup = (trigger) => {
+      popupTrigger.value[trigger] = !popupTrigger.value[trigger]
+    };
+
+    return {
+      popupTrigger,
+      TogglePopup
+    }
+  },
 }
 </script>
 
@@ -146,11 +183,21 @@ export default {
   margin-right: auto;
 }
 
-h1{
-  font-size: 32px;
+.title-section{
+  display: flex;
   padding: 1%;
+  font-size: 32px;
   color: white;
 }
+
+h1{
+  flex: 100;
+}
+
+.edit{
+  flex: 1;
+}
+
 
 .personal-info{
   display: flex;
