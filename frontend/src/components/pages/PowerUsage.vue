@@ -45,6 +45,7 @@
 
 // Widgets imports
 import BatteryInfoLine from "@/components/widgets/powerusage/BatteriesCharge";
+import EngineUsage from "@/components/widgets/powerusage/EngineUsage";
 
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
@@ -53,6 +54,7 @@ export default {
   name: "PowerUsage",
   components: {
     BatteryInfoLine,
+    EngineUsage
   },
 
   data() {
@@ -61,7 +63,7 @@ export default {
       sensordata: null,
       dmc: null,
       componentsList: [],
-      addableComponents: [BatteryInfoLine]
+      addableComponents: [BatteryInfoLine, EngineUsage]
     }
   },
 

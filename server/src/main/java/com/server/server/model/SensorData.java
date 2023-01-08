@@ -15,7 +15,7 @@ public class SensorData {
     @Column(name = "sensor_id")
     private String sensorId;
 
-    @Column(name = "group")
+    @Column(name = "sensor_group")
     private String group;
 
     @Column(name = "sensor_name")
