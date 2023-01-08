@@ -1,5 +1,6 @@
 <template>
-  <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue" v-for="(condition, index) in conditions" :key="index">
+  <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue"
+       v-for="(condition, index) in conditions" :key="index">
     <div>
       <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
         {{ condition.sensorName }}
@@ -7,6 +8,7 @@
       <span class="text-5xl font-semibold text-white-text">{{ condition.value }} {{ condition.unit }}</span>
     </div>
   </div>
+  <h1 v-if="lackData">Not enough data is provided to display this graph</h1>
 </template>
 
 <script>
@@ -18,13 +20,16 @@ export default {
       if (newVal !== null) {
         newVal = JSON.parse(newVal);
         this.conditions = await newVal.filter((sensor) => sensor["group"] === "Sea Conditions");
-        console.log(this.conditions)
+
+        if (this.conditions.length > 2 || this.batteries.length <= 0)
+          this.lackData = true;
       }
     }
   },
 
   data() {
     return {
+      lackData: false,
       conditions: []
     }
   }

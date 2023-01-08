@@ -10,7 +10,7 @@ class ShipDataService {
         });
     }
 
-    getWater(id) {
+    getWaterSupply(id) {
         return axios.get(API_URL + 'ships/' + id + '/watersupply', {
             headers: authHeader()
         });

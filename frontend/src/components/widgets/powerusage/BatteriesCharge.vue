@@ -1,5 +1,6 @@
 <template>
   <canvas id="waterSupplyChart"></canvas>
+  <h1 v-if="lackData">Not enough data is provided to display this graph</h1>
 </template>
 
 <script>
@@ -22,14 +23,20 @@ export default {
 
   data() {
     return {
+      lackData: false,
       batteries: []
     }
   },
 
   methods: {
     createChart() {
-      console.log('Component mounted')
-      // this.getChart();
+      if (this.batteries.length < 2 || this.batteries.length <= 0) {
+        this.lackData = true;
+        return
+      }
+
+      this.usages = this.batteries.slice(this.batteries.length-2, this.batteries.length);
+
       const ctx = document.getElementById('waterSupplyChart').getContext('2d');
       const gradient = ctx.createLinearGradient(0, 0, 0, 250);
       gradient.addColorStop(0, '#29acda');
@@ -95,4 +102,10 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+  font-size: 20px;
+  color: lightgrey;
+  margin-top: 20px;
+}
 </style>
