@@ -23,21 +23,6 @@
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="origin">
-              Origin
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                id="origin"
-                type="text"
-                v-model="current.origin">
-          </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
             <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">
               Status
             </label>
@@ -46,36 +31,6 @@
             <select v-model="current.status">
               <option v-for="(status,index) in statuses" :key="index" :value="status.id" >{{ status.status }}</option>
             </select>
-          </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="location">
-              Location
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                id="location"
-                type="text"
-                v-model="current.location">
-          </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="destination">
-              Destination
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                id="destination"
-                type="text"
-                v-model="current.destination">
           </div>
         </div>
 

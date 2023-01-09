@@ -1,14 +1,9 @@
 export default class Ship {
-    constructor(id, name, location, status, origin, destination, waterTank1, waterTank2, rpm, kw) {
+    constructor(id, name, status, tank1, tank2) {
         this.id = id;
         this.name = name;
-        this.location = location
         this.status = status;
-        this.origin = origin;
-        this.destination = destination;
-        this.waterTank1 = waterTank1;
-        this.waterTank2 = waterTank2;
-        this.rpm = rpm;
-        this.kw = kw;
+        this.tank1 = tank1;
+        this.tank2 = tank2;
     }
 }
