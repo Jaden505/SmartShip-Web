@@ -42,8 +42,12 @@ export default {
 
 .map {
   position: absolute;
-  width: 64.5%;
+  width: 90%;
   height: 90%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 </style>

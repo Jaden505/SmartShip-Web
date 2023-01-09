@@ -6,12 +6,14 @@
        class="mt-4 p-4 relative">
     <div>
       <div class="px-4 flex right-0">
-        <img alt="Bordered avatar" class="h-40 w-40 rounded-full ring-4 ring-black-basic" src="../../assets/img/example_user.jpg">
+        <AvatarInput @input="selectImage"/>
       </div>
       <div class="-mt-8">
         <div class="name-section rounded-t-md bg-blue-regular pt-12 pb-4 px-5">
-          <h1 class="text-2xl">Raihan Saboerali</h1>
-          <h2>Operator</h2>
+          <h1 class="text-2xl">{{ user.firstname + " " + user.lastname }}</h1>
+          <h2 v-if="role === 'ROLE_USER'">User</h2>
+          <h2 v-if="role === 'ROLE_MANAGER'">Manager</h2>
+          <h2 v-if="role === 'ROLE_ADMIN'">Admin</h2>
         </div>
         <div class="bar shadow-lg bg-blue-regular flex rounded-b-md">
           <div :class="{active: personalActive}" class="tab px-5 py-2 rounded-t-md text-md">
@@ -28,13 +30,24 @@
 </template>
 
 <script>
+import UploadService from "@/services/upload.service";
+import {toRaw} from "vue";
+import AvatarInput from "@/components/Profile/AvatarInput";
+import userService from "@/services/user.service";
+
 export default {
   name: "Profile",
-
+  components: {AvatarInput},
   data() {
     return {
       personalActive: false,
-      shipActive: false
+      shipActive: false,
+      currentImage: undefined,
+      role: null,
+      user: {
+        firstname: null,
+        lastname: null
+      }
     }
   },
 
@@ -47,7 +60,56 @@ export default {
     setShipActive() {
       this.shipActive = true;
       this.personalActive = false;
+    },
+
+    selectImage(file) {
+      console.log(file)
+      let user = toRaw(this.$store.state.auth.user);
+
+      UploadService.upload(file, user.email)
+          .then((response) => {
+            console.log(response);
+            location.reload();
+            }
+          )
+          .then((images) => {
+            this.imageInfos = images.data;
+          })
+          .catch((err) => {
+            this.progress = 0;
+            this.message = "Could not upload the image! " + err;
+            this.currentImage = undefined;
+          });
+    },
+
+    getRole(){
+      const id = toRaw(this.$store.state.auth.user.id)
+      userService.getUserById(id)
+          .then(response => {
+            this.role = response.data.role.name
+          })
+          .catch(e => {
+            console.log(e)
+          })
+    },
+
+    getUser(){
+      const id = toRaw(this.$store.state.auth.user.id)
+      userService.getUserById(id)
+          .then(response => {
+            this.user.firstname = response.data.firstname
+            this.user.lastname = response.data.lastname
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
+  },
+
+  mounted() {
+    this.getRole();
+    this.getUser()
   }
 }
 </script>

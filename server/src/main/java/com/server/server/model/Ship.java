@@ -29,6 +29,11 @@ public class Ship {
     @Column(name = "gps_longtitude")
     private String gpsLongtitude;
 
+    @Column(name = "tank1")
+    private Integer tank1;
+
+    @Column(name = "tank2")
+    private Integer tank2;
 
     public String getId() {
         return id;
@@ -90,5 +95,13 @@ public class Ship {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getTank1() {
+        return tank1;
+    }
+
+    public Integer getTank2() {
+        return tank2;
     }
 }

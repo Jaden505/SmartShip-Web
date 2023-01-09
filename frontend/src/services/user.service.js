@@ -10,6 +10,12 @@ class UserService {
         });
     }
 
+    getUserById(id){
+        return axios.get(API_URL + "users/" + id, {
+            headers: authHeader()
+        })
+    }
+
     getUsersByRole(role) {
         return axios.get( API_URL + 'users/role/' + role, {
             headers: authHeader()
@@ -25,6 +31,22 @@ class UserService {
         }, {
             headers: authHeader()
         });
+    }
+
+    updateProfile(user_Id, user){
+        return axios.put(API_URL + 'users/profile/' + user_Id, {
+            firstname: user.firstname,
+            lastname: user.lastname,
+            gender: user.gender,
+            email: user.email,
+            phonenumber: user.phoneNumber,
+            address: user.address,
+            postalcode: user.postalCode,
+            city: user.city,
+            country: user.country
+        }, {
+            headers: authHeader()
+        })
     }
 
     createUser(user){

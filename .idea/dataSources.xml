@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:mysql://oege.ie.hva.nl:3306/ztyniorb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="smartship_personal@localhost" uuid="0092fcc3-6459-47b2-b87d-2443a18ae519">
+    <data-source source="LOCAL" name="smartship@localhost" uuid="0092fcc3-6459-47b2-b87d-2443a18ae519">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/smartship_personal</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/smartship</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

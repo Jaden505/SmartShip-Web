@@ -22,9 +22,14 @@ public class SensorDataController {
     @Autowired
     SensorDataRepository repo;
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<SensorData>> getAll(){
         return ResponseEntity.ok(repo.findAll());
+    }
+
+    @GetMapping("/{ship_id}")
+    public ResponseEntity<List<SensorData>> getByShipId(@PathVariable String ship_id){
+        return ResponseEntity.ok(repo.findByShipId(ship_id));
     }
 
     @PostMapping("/add")

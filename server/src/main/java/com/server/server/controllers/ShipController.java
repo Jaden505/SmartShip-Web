@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,4 +108,19 @@ public class ShipController {
         }
     }
 
+    @GetMapping("/ships/{id}/watersupply")
+    public ResponseEntity<List<Integer>> getWaterSupply(@PathVariable String id) {
+        try {
+            List<Ship> ships = new ArrayList<>(shipRepo.findShipById(id));
+
+            if (ships.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            List<Integer> waterTanks = Arrays.asList(ships.get(0).getTank1(), ships.get(0).getTank2());
+            return new ResponseEntity<>(waterTanks, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

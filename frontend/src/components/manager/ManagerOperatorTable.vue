@@ -117,7 +117,7 @@ export default {
 
   methods: {
     getUsers() {
-      UserService.getUsersByRole(1) // Role operator
+      UserService.getUsersByRole("operator") // Role operator
           .then(response => {
             this.users = response.data;
             console.log(response.data);
