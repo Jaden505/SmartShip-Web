@@ -155,12 +155,6 @@ export default {
 </script>
 
 <style scoped>
-.circle {
-  width: 450px;
-  height: 450px;
-  background: linear-gradient(to bottom, #fa39ad, #fe6c4c);
-  filter: blur(120px);
-}
 #preview{
   position: absolute;
   top: 10%;

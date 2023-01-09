@@ -1,35 +1,39 @@
 <template>
+  <Teleport to="#modal">
     <div class="container bg-blue-regular dark:bg-black-light">
-      <div id="allParameters">
-        <div class="submit-form">
-        <p class="title text-black-text dark:text-white-text">Create new alarm</p>
-        <div class="Parameters form-group">
-          <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
-          <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
-        </div>
-        <div class="Parameters form-group">
-          <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
-          <input v-model="alarm.category" class="form-control" type="text" name="category"/>
-        </div>
-        <div class="Parameters form-group">
-          <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
-          <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
-        </div>
-        <div class="Parameters form-group">
-          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
-          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
-        </div>
-        <div class="Parameters form-group">
-          <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
-          <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
-        </div>
+      <div class="modal-bg">
+        <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
+          <div class="submit-form">
+            <p class="title text-black-text dark:text-white-text">Create new alarm</p>
+            <div class="Parameters form-group">
+              <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
+              <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
+            </div>
+            <div class="Parameters form-group">
+              <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
+              <input v-model="alarm.category" class="form-control" type="text" name="category"/>
+            </div>
+            <div class="Parameters form-group">
+              <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
+              <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
+            </div>
+            <div class="Parameters form-group">
+              <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
+              <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
+            </div>
+            <div class="Parameters form-group">
+              <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
+              <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
+            </div>
             <button class="button bg-blue-700 dark:bg-gray-700" @click="addAlarm">
-                      {{ update }}
+              {{ update }}
             </button>
 
+          </div>
         </div>
       </div>
-    </div>
+        </div>
+  </Teleport>
 </template>
 
 <script>
@@ -80,18 +84,26 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  position: absolute;
-  top: 10%;
-  left: 30%;
-  z-index: 99;
-  align-items: center;
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0,0,0, 0.5);
+
+  display: flex;
   justify-content: center;
-  width: auto;
-  height: auto;
-  border-radius: 20px;
-  margin: 20px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 2);
+  align-items: center;
+}
+
+.modal {
+  position: relative;
+  background: white;
+  padding: 50px 100px;
+  border-radius: 5px;
+  box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
 }
 
 .Parameters {
@@ -103,10 +115,7 @@ export default {
 input{
   border-radius: 10px;
 }
-#allParameters{
-  border-radius: 20px;
-  height: auto;
-}
+
 .button{
   width: 30%;
   height: 50px;
@@ -115,13 +124,6 @@ input{
   color: white;
   border-radius: 20px;
 }
-#cancel{
-  background-color: deeppink;
-}
-
-
-
-/*Bartek zn schuld */
 
 input{
   width: 70%;
