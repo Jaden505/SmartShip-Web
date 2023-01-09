@@ -1,11 +1,9 @@
 <template>
-  <header class="navbar">
-    <div class="navbar-wrapper">
-      <div class="header-container">
-
-        <a><router-link to="/">
-          <div class="logo-container">
-            <svg xmlns="http://www.w3.org/2000/svg" width="202.72" height="35.097" viewBox="0 0 202.72 35.097">
+    <div class="flex flex-col h-full">
+      <div class="px-5 pt-6">
+        <div class="flex items-center justify-between">
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="180" viewBox="0 0 202.72 35.097">
               <g id="Group_1" data-name="Group 1" transform="translate(-100 -69.951)">
                 <path id="Path_1" data-name="Path 1" d="M608.4,432.734c-.774,2.789-1.614,5.562-2.292,8.375a1.593,1.593,0,0,1-1.962,1.467c-2.037-.111-4.085-.07-6.127-.01-.821.024-1.126-.271-1.327-1.043-.724-2.779-1.527-5.537-2.3-8.3a1.022,1.022,0,0,0-.4-.623v9.879h-6.765V417.441c.342-.024.675-.068,1.008-.069,2.355-.005,4.71.031,7.064-.019.82-.018,1.114.278,1.316,1.056,1.4,5.392,2.865,10.768,4.309,16.149a2.49,2.49,0,0,0,.507,1.051q.985-3.784,1.968-7.568,1.263-4.875,2.52-9.751c.12-.462.175-.928.879-.92,2.8.032,5.6.013,8.49.013V443.53c-2.072-.289-4.119-.549-6.149-.9-.212-.037-.468-.608-.473-.934-.04-2.666-.026-5.332-.028-8q0-.461,0-.922Z" transform="translate(-463.647 -347.401)" fill="#e0e1dd"/>
                 <path id="Path_2" data-name="Path 2" d="M752.834,434.435h-8.523v11.718c-2.118-.171-4.17.548-5.965-.79a1.549,1.549,0,0,1-.61-1.034c-.033-7.374-.057-14.749,0-22.123.022-3.05,1.659-4.679,4.728-4.738q6.073-.116,12.151-.014c3.2.056,4.8,1.661,4.821,4.858.055,7.236.018,14.472.037,21.708,0,.574-.16.907-.745,1.037-1.578.351-3.146.75-4.728,1.087-.876.187-1.2-.178-1.184-1.118.057-3.115.021-6.232.021-9.348Zm-.008-6.222a16.272,16.272,0,0,0-.046-2.676,1.393,1.393,0,0,0-.958-.92c-2.176-.084-4.358-.074-6.535-.008a1.222,1.222,0,0,0-.912.74,23.094,23.094,0,0,0-.044,2.864Z" transform="translate(-582.855 -347.442)" fill="#e0e1dd"/>
@@ -21,13 +19,10 @@
                 <path id="Path_12" data-name="Path 12" d="M1268.069,546.149a25.772,25.772,0,0,1,2.68-.957c5.885-1.422,11.757-2.908,17.68-4.153a7.682,7.682,0,0,1,8.1,3.273,1.356,1.356,0,0,1,.274.437c.142.579.25,1.167.37,1.751a6.372,6.372,0,0,1-1.742.181c-2.553-.445-5.073-1.132-7.639-1.439-4.532-.542-9.054.085-13.567.5-2.024.187-4.036.5-6.053.756Z" transform="translate(-1003.011 -445.237)" fill="#e0e1dd"/>
               </g>
             </svg>
-          </div>
-        </router-link></a>
-        <div class="content">
+          </a>
         </div>
       </div>
     </div>
-  </header>
 </template>
 
 <script>
@@ -37,36 +32,4 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
-  top: 0;
-  left: 0;
-  position: relative;
-  color: #dddddd;
-}
-
-.navbar-wrapper .header-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-}
-
-.navbar-wrapper {
-  position: relative;
-  padding: 0 24px 0 24px;
-  top: 0;
-}
-
-.logo-container{
-  display: flex;
-  align-items: center;
-  height: 10vh;
-  padding-top: 1vh;
-}
-
-.navbar-wrapper .header-container .content {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-grow: 1;
-}
 </style>

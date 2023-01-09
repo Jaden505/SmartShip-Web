@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(manager, index) in users" :key="index" class="bg-blue-regular dark:bg-black-light">
+        <tr v-for="(manager, index) in users" :key="index" class="bg-purple-basic dark:bg-black-light">
           <td>{{ manager.id }}</td>
           <td >{{ manager.username }}</td>
           <td >{{ manager.email }}</td>

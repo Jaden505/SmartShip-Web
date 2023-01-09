@@ -22,11 +22,16 @@ module.exports = {
         },
         blue: {
           'regular': '#29acda',
-          'light': '#60EFFF'
+          'light': '#60EFFF',
+          'lavender': '#ebf2fa'
+        },
+        purple: {
+          'basic': '#D6E8FA'
         },
         white: {
           'text': '#E0E1DD',
-          'disabled': '#898A86'
+          'disabled': '#898A86',
+          'basic': '#ffffff'
         },
         red: {
           'regular': '#FF0707',

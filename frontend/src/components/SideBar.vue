@@ -1,5 +1,5 @@
 <template>
-  <aside class="flex-shrink-0 hidden w-64 md:block">
+  <aside class="flex-shrink-0 hidden w-64 md:block bg-white-basic dark:bg-black-basic">
     <div class="flex flex-col h-full">
       <div class="px-5 pt-6">
           <div class="flex items-center justify-between">
@@ -29,13 +29,13 @@
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
               <Component :is="item.icon" class="w-5 h-5"/>
             </div>
-            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-blue-regular dark:hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-blue-lavender dark:hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
           </li>
           <li v-for="item in items_optional.filter(item => item.role === userRole)" :key="item.name" class="relative text-black-basic dark:text-white-text">
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
               <Component :is="item.icon" class="w-5 h-5"/>
             </div>
-            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-blue-regular dark:hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md font-semibold rounded hover:bg-blue-lavender dark:hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
           </li>
         </ul>
       </nav>
@@ -45,13 +45,13 @@
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
               <Component :is="item.icon" class="w-5 h-5"/>
             </div>
-            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-blue-regular dark:hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-blue-lavender dark:hover:bg-gray-800" :to="item.to">{{item.name}}</router-link>
           </li>
           <li class="relative text-gray-unselected">
             <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
-
+              <Component :is="this.signOutIcon.icon" class="w-5 h-5"/>
             </div>
-            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-blue-regular dark:hover:bg-gray-800 text-black-text dark:text-white-text" @click.prevent="logout" to>Sign Out</router-link>
+            <router-link class="inline-block w-full py-2 pl-12 pr-4 text-md rounded font-semibold hover:bg-blue-lavender dark:hover:bg-gray-800 text-black-text dark:text-white-text" @click.prevent="logout" to>Sign Out</router-link>
           </li>
         </ul>
       </div>
@@ -61,8 +61,8 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faShip, faBolt, faStar, faEye, faMoon, faBell, faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons'
-library.add(faShip, faBolt, faStar, faEye, faMoon, faBell, faArrowRightFromBracket)
+import { faShip, faBolt, faStar, faToolbox, faDoorOpen, faMoon, faBell, faClock} from '@fortawesome/free-solid-svg-icons'
+library.add(faShip, faBolt, faStar, faToolbox, faMoon, faDoorOpen, faBell, faClock)
 
 export default {
   name: "SideBar",
@@ -73,21 +73,21 @@ export default {
         },
         {name: 'Ship Information', to: '/ship-overview', icon: <font-awesome-icon icon="fa-solid fa-ship" />
         },
-        // {name: 'Rating', to: '/info', icon: <font-awesome-icon icon="fa-solid fa-star" />
-        // },
       ],
       items_optional: [
-        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-eye"/>, role: 'ROLE_MANAGER'
+        {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-toolbox" />, role: 'ROLE_MANAGER'
         },
-        {name: 'Admin', to: '/admin', icon:<font-awesome-icon icon="fa-solid fa-people-roof" />, role: 'ROLE_ADMIN'
+        {name: 'Admin', to: '/admin', icon: <font-awesome-icon icon="fa-solid fa-toolbox" />, role: 'ROLE_ADMIN'
         }
       ],
       items_bottom: [
         {name: 'Notification', to: '/notification-overview', icon: <font-awesome-icon icon="fa-solid fa-bell" />
         },
-        {name: 'Alarms', to: '/alarms', icon: <font-awesome-icon icon="fa-solid fa-alarm-clock" />
+        {name: 'Alarms', to: '/alarms', icon: <font-awesome-icon icon="fa-solid fa-clock" />
         }
       ],
+      signOutIcon: {name: 'Logout', icon: <font-awesome-icon icon="fa-solid fa-door-open" />
+      },
       userRole: ''
     }
   },

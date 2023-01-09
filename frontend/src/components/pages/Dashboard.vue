@@ -1,5 +1,5 @@
 <template>
-  <div v-motion-fade class="flex h-screen">
+  <div v-motion-fade class="flex h-screen bg-blue-lavender dark:bg-black-basic">
     <!--  SIDEBAR LEFT  -->
     <SideBar/>
     <!--  CONTENT RIGHT  -->
@@ -46,11 +46,11 @@
                 <input type="text" id="simple-search" class="bg-transparent border text-black-text dark:text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
               </div>
             </form>
-            <button class="md:p-0 lg:p-2" @click="showPreview()">
+            <button class="px-1" @click="showPreview()">
               <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-black-text dark:text-white-text"/>
             </button>
-            <button class="md:p-0 lg:p-2" @click="toggleDark()">
-              <font-awesome-icon icon="fa-solid fa-sun" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
+            <button class="px-1" @click="toggleDark()">
+              <font-awesome-icon icon="fa-solid fa-circle-half-stroke" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
             </button>
             <router-link to="/profile">
@@ -88,11 +88,11 @@ import {useDark, useToggle} from '@vueuse/core'
 import SideBar from "@/components/SideBar";
 import NotificationPreview from "@/components/elements/NotificationPreview";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBars, faBell, faGear, faMoon, faSun, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faBell, faGear, faMoon, faCircleHalfStroke, faUser} from "@fortawesome/free-solid-svg-icons";
 import {computed, toRaw} from "vue";
 import uploadService from "@/services/upload.service";
 
-library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
+library.add(faMoon, faBell, faBars, faGear, faUser, faCircleHalfStroke)
 
 export default {
   name: "DashBoard",

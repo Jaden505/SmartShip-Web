@@ -1,31 +1,43 @@
 <template>
-  <div class="flex-container" v-motion
+  <div class="flex w-full p-4" v-motion
        :initial="{ opacity: 0, y: 100 }"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
 
-    <div v-for="(alarm, index) in alarms" :key="index" class="flex-box bg-blue-regular dark:bg-black-light">
-      <div class="Parameters">{{ parametertext + alarm.parameter }}</div>
-      <div class="Parameters">{{ categorytext + alarm.category }}</div>
-      <div class="Parameters">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</div>
-      <div class="Parameters">{{ settedUpValuetext+ alarm.settedUpValue }}</div>
-      <div class="flex">
-
-        <button class="flex-child bg-blue-700 dark:bg-gray-700" id="slide_stop_button" @click="deleteAlarm(alarm.id)">
-          {{ remove }}
+    <div class="flex" v-if="alarms.length !== 0">
+      <div v-for="(alarm, index) in alarms" :key="index" class="bg-purple-basic dark:bg-black-light rounded-md shadow-md w-[250px]">
+        <div class="p-4">
+          <h1 class="text-xl text-center mb-3">Alarm {{index+1}}</h1>
+          <p class="text-md">{{ parametertext + alarm.parameter }}</p>
+          <p class="text-md">{{ categorytext + alarm.category }}</p>
+          <p class="text-md">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</p>
+          <p class="text-md">{{ settedUpValuetext+ alarm.settedUpValue }}</p>
+          <button class="text-white bg-blue-regular font-medium rounded-lg my-3 text-sm px-5 py-2.5 text-center text-white-text" @click="deleteAlarm(alarm.id)">
+            {{ remove }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div v-else class="flex flex-col mx-auto">
+      <h1>There are no alarms at this moment. You can make one by clicking underneath!</h1>
+      <div class="mx-auto mt-5">
+        <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" id="slide_start_button" @click="openPop()">
+          <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
     </div>
-    <button class="flex-box bg-blue-regular dark:bg-black-light" id="slide_start_button" @click="openPop()">
-      <svg class="plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M200 344V280H136C122.7 280 112 269.3 112 256C112 242.7 122.7 232 136 232H200V168C200 154.7 210.7 144 224 144C237.3 144 248 154.7 248 168V232H312C325.3 232 336 242.7 336 256C336 269.3 325.3 280 312 280H248V344C248 357.3 237.3 368 224 368C210.7 368 200 357.3 200 344zM0 96C0 60.65 28.65 32 64 32H384C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96zM48 96V416C48 424.8 55.16 432 64 432H384C392.8 432 400 424.8 400 416V96C400 87.16 392.8 80 384 80H64C55.16 80 48 87.16 48 96z"/></svg>
-    </button>
     </div>
   <AddAlarms v-if="this.add"></AddAlarms>
 </template>
 <script>
 import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/alarm.service";
+
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPlus)
 
 export default {
   components: {AddAlarms},
@@ -75,72 +87,4 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.flex-container {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.flex-box {
-  width: 320px;
-  height: 170px;
-  color: white;
-  border-radius: 20px;
-  margin: 20px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 2);
-}
-
-.Parameters:first-child {
-  padding-top: 10px;
-}
-
-.Parameters {
-  margin-left: 15px;
-  font-weight: 900;
-}
-
-
-/*new*/
-
-.flex {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
-
-.flex-child:first-child {
-  color: white;
-  margin-left: 73%;
-}
-
-
-.flex-child {
-  border: none;
-  padding: 4px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 20px;
-  float: left;
-  width: 22%;
-  border-radius: 8px;
-  margin-left: 10px;
-}
-
-.plus{
-  width: 90px;
-  height: 90px;
-  margin-left: 117px;
-}
-
 </style>

@@ -21,7 +21,7 @@
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
-        <div class="col-span-2 shadow-md rounded-md droppable"
+        <div class="col-span-2 bg-purple-basic dark:bg-black-light shadow-md rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
           <div class="bg-blue-regular text-black-text dark:text-white-text">

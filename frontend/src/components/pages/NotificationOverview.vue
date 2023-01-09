@@ -5,32 +5,31 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
         <div class="flex w-full p-4">
-          <div class="p-4 m-2 rounded-md w-1/3 bg-blue-regular dark:bg-black-light">
+          <div class="p-4 m-2 rounded-md w-1/3 bg-purple-basic dark:bg-black-light">
             <div class="pb-4">
               <h4 class="text-xl font-semibold text-black-text dark:text-white-text">Notifications</h4>
             </div>
-            <!-- Using v-for to loop through the notifications -->
             <div v-for="(notification, index) in notifications"
-                 :key="index" class="shadow-lg text-black-text dark:text-white-text rounded-md p-4 mb-2"
-                 :class="{'active bg-blue-700 dark:bg-black-basic': selectedNotification === notification}"
+                 :key="index" class="shadow-lg relative text-black-text dark:text-white-text rounded-md p-4 mb-2"
+                 :class="{'active bg-blue-lavender dark:bg-black-basic': selectedNotification === notification}"
                  @click="setNotification(notification)">
-              <button class="delete md:p-0 lg:p-2"
+              <button class="absolute delete inset-y-0 right-0 flex items-center pr-4 pointer-events-none"
                       @click="deleteNotification(notification.id, notification.title, notification.shipId)">
-                <font-awesome-icon icon="fa-solid fa-trash" class="w-6 h-6 text-black-text dark:text-white-text"/>
+                <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5 text-black-text dark:text-white-text"/>
               </button>
-              <h2 class="text-xl">{{ notification.title }}</h2>
-
-              <!--Using the data and the Date constructor to show the date and time of the notification-->
-              <span class="text-sm">
+              <div class="inline-block">
+                <h2 class="text-xl">{{ notification.title }}</h2>
+                <span class="text-sm">
               {{ ('0' + new Date(notification.date).getDate()).slice(-2)
-                }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
-                }}-{{ new Date(notification.date).getFullYear()
-                }} {{ ('0' + new Date(notification.date).getHours()).slice(-2)
-                }}:{{ ('0' + new Date(notification.date).getMinutes()).slice(-2) }}
+                  }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
+                  }}-{{ new Date(notification.date).getFullYear()
+                  }} {{ ('0' + new Date(notification.date).getHours()).slice(-2)
+                  }}:{{ ('0' + new Date(notification.date).getMinutes()).slice(-2) }}
             </span>
+              </div>
+
             </div>
           </div>
-          <!--Notification message-->
           <div class="p-4 m-2 rounded-md text-black-text dark:text-white-text w-2/3">
             <div>
               <h2 class="text-2xl">{{selectedNotification.title}}</h2>
@@ -95,8 +94,4 @@ export default {
 </script>
 
 <style scoped>
-.delete{
-  float: right;
-  margin-right: -1rem;
-}
 </style>
