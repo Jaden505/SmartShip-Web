@@ -3,10 +3,6 @@
   <Teleport to="#modal">
     <div class="modal-bg" v-if="isModalOpen">
       <div v-click-outside="onClickOutside" class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
-<!--        <div>-->
-<!--          <h1 class="text-white-text py-2 font-bold leading-tight tracking-tight text-2xl">Please fill your email and click on the send button!</h1>-->
-<!--          <button @click="isModalOpen = false" class="close-modal-btn">x</button>-->
-<!--        </div>-->
         <div class="flex items-start justify-between rounded-t pb-4">
           <h3 class="text-xl font-semibold text-white-text">
             Please fill your email!

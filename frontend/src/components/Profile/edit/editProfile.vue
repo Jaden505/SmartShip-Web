@@ -1,156 +1,156 @@
 <template>
   <Teleport to="#modal">
-  <div class="popup">
-    <div class="popup-inner">
-      <td class="material-icons close-popup" @click="TogglePopup()">close</td>
+    <div class="popup">
+      <div class="popup-inner">
+        <td class="material-icons close-popup" @click="TogglePopup()">close</td>
 
-      <h1>Edit personal data</h1>
+        <h1>Edit personal data</h1>
 
-      <form class="w-full max-w-sm">
+        <form class="w-full max-w-sm">
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Firstname
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.firstname">
-          </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Lastname
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.lastname">
-          </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4">
-              Gender
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <div class="inline-block relative w-48">
-              <select
-                  class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="current.gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Firstname
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.firstname"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
             </div>
           </div>
-        </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Email
-            </label>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Lastname
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.lastname"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.email">
-          </div>
-        </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Phone number
-            </label>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4">
+                Gender
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <div class="inline-block relative w-48">
+                <select
+                    v-model="current.gender"
+                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
           </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.phoneNumber">
-          </div>
-        </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Address
-            </label>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Email
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.email"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.address">
-          </div>
-        </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Postal Code
-            </label>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Phone number
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.phoneNumber"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.postalCode">
-          </div>
-        </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              City
-            </label>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Address
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.address"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.city">
+
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Postal Code
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.postalCode"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-        </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
-              Country
-            </label>
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                City
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.city"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-          <div class="md:w-2/3">
-            <input
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                type="text"
-                v-model="current.country">
+
+          <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/3">
+              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+                Country
+              </label>
+            </div>
+            <div class="md:w-2/3">
+              <input
+                  v-model="current.country"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                  type="text">
+            </div>
           </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-          <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                  type="button"
-                  @click=" updateUser">
-            Update
-          </button>
-        </div>
+          <div class="md:flex md:items-center">
+            <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                    type="button"
+                    @click=" updateUser">
+              Update
+            </button>
+          </div>
 
-      </form>
+        </form>
 
+      </div>
     </div>
-  </div>
-    </Teleport>
+  </Teleport>
 </template>
 
 <script>
@@ -168,11 +168,11 @@ export default {
   },
 
   methods: {
-    updateUser(){
+    updateUser() {
       try {
         const id = toRaw(this.$store.state.auth.user.id)
         userService.updateProfile(id, this.current)
-      } catch (e){
+      } catch (e) {
         console.log(e.response.data)
       }
       this.TogglePopup()
@@ -236,7 +236,7 @@ input:focus {
   border: 2px solid black;
 }
 
-select{
+select {
   width: 100%;
   padding: 1%;
 }
@@ -248,7 +248,7 @@ button {
   transition: background-color 0.5s;
 }
 
-button:hover{
+button:hover {
   background-color: lightskyblue;
 }
 
