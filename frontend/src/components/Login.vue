@@ -39,12 +39,11 @@
           </div>
         </div>
         <div class="flex items-center w-full px-6 mx-auto lg:w-3/6">
-          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-white-light">
+          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-black-text dark:text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Sign in to your account
               </h1>
-              <!--              start form-->
               <Form class="space-y-4 md:space-y-6" @submit="handleLogin" :validation-schema="schema">
                 <div class="form-group">
                   <label for="username" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Your username</label>
@@ -56,9 +55,6 @@
                   <Field name="password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Password"/>
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
-                <!--              <div class="flex items-center justify-between">-->
-                <!--                <a href="#" class="text-sm font-medium text-white-text">Forgot password?</a>-->
-                <!--              </div>-->
                 <div class="form-group">
                   <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
                   <span

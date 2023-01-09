@@ -1,5 +1,5 @@
 <template>
-
+  <Teleport to="#modal">
   <div class="popup">
     <div class="popup-inner">
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
@@ -150,6 +150,7 @@
 
     </div>
   </div>
+    </Teleport>
 </template>
 
 <script>
