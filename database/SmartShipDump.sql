@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `smartship` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `smartship`;
--- MySQL dump 10.13  Distrib 8.0.31, for macos12 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: smartship
+-- Host: 127.0.0.1    Database: smartship
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,14 +25,14 @@ DROP TABLE IF EXISTS `alarm`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alarm` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `category` varchar(255) DEFAULT NULL,
-  `parameter` varchar(255) DEFAULT NULL,
-  `setted_up_value` double DEFAULT NULL,
-  `ship_id` varchar(255) DEFAULT NULL,
-  `value_since_last_update` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `alarm_ship_fk_idx` (`ship_id`)
+                         `id` int NOT NULL AUTO_INCREMENT,
+                         `category` varchar(255) DEFAULT NULL,
+                         `parameter` varchar(255) DEFAULT NULL,
+                         `setted_up_value` double DEFAULT NULL,
+                         `ship_id` varchar(255) DEFAULT NULL,
+                         `value_since_last_update` double DEFAULT NULL,
+                         PRIMARY KEY (`id`),
+                         KEY `alarm_ship_fk_idx` (`ship_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint DEFAULT NULL
+    `next_val` bigint DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,14 +76,14 @@ DROP TABLE IF EXISTS `image_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `image_data` (
-  `id` bigint NOT NULL,
-  `imagedata` longblob,
-  `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKi7geap9u2si719v50b85ar8y3` (`user_id`),
-  CONSTRAINT `FKi7geap9u2si719v50b85ar8y3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+                              `id` bigint NOT NULL,
+                              `imagedata` longblob,
+                              `name` varchar(255) DEFAULT NULL,
+                              `type` varchar(255) DEFAULT NULL,
+                              `user_id` int DEFAULT NULL,
+                              PRIMARY KEY (`id`),
+                              KEY `FKi7geap9u2si719v50b85ar8y3` (`user_id`),
+                              CONSTRAINT `FKi7geap9u2si719v50b85ar8y3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,10 +104,10 @@ DROP TABLE IF EXISTS `notification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notification` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `parameter` varchar(30) NOT NULL,
-  `category` varchar(30) NOT NULL,
-  `valueSinceLastUpdate` double(5,2) NOT NULL,
+                                `id` int NOT NULL AUTO_INCREMENT,
+                                `parameter` varchar(30) NOT NULL,
+                                `category` varchar(30) NOT NULL,
+                                `valueSinceLastUpdate` double(5,2) NOT NULL,
   `settedUpValue` double(5,2) NOT NULL,
   `ship_id` varchar(255) NOT NULL,
   `date` datetime DEFAULT NULL,
@@ -140,13 +140,13 @@ DROP TABLE IF EXISTS `password_reset_token`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_reset_token` (
-  `id` bigint NOT NULL,
-  `expiry_date` datetime(6) DEFAULT NULL,
-  `token` varchar(255) DEFAULT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKjthxr8d7rmlunj1uv3lt1xvl5` (`user_id`),
-  CONSTRAINT `FKjthxr8d7rmlunj1uv3lt1xvl5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+                                        `id` bigint NOT NULL,
+                                        `expiry_date` datetime(6) DEFAULT NULL,
+                                        `token` varchar(255) DEFAULT NULL,
+                                        `user_id` int NOT NULL,
+                                        PRIMARY KEY (`id`),
+                                        KEY `FKjthxr8d7rmlunj1uv3lt1xvl5` (`user_id`),
+                                        CONSTRAINT `FKjthxr8d7rmlunj1uv3lt1xvl5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -167,9 +167,9 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `name` varchar(20) DEFAULT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -191,20 +191,20 @@ DROP TABLE IF EXISTS `sensor_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sensor_data` (
-  `sensor_id` varchar(255) NOT NULL,
-  `gps_latitude` varchar(255) DEFAULT NULL,
-  `gps_longtitude` varchar(255) DEFAULT NULL,
-  `sensor_group` varchar(255) DEFAULT NULL,
-  `sensor_name` varchar(255) DEFAULT NULL,
-  `ship_id` varchar(255) NOT NULL,
-  `speed` varchar(255) DEFAULT NULL,
-  `time` datetime(6) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `unit` varchar(255) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`sensor_id`),
-  KEY `fk_sensor_ship_idx` (`ship_id`),
-  CONSTRAINT `fk_sensor_ship` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
+                               `sensor_id` varchar(255) NOT NULL,
+                               `gps_latitude` varchar(255) DEFAULT NULL,
+                               `gps_longtitude` varchar(255) DEFAULT NULL,
+                               `sensor_group` varchar(255) DEFAULT NULL,
+                               `sensor_name` varchar(255) DEFAULT NULL,
+                               `ship_id` varchar(255) NOT NULL,
+                               `speed` varchar(255) DEFAULT NULL,
+                               `time` datetime(6) DEFAULT NULL,
+                               `type` varchar(255) DEFAULT NULL,
+                               `unit` varchar(255) DEFAULT NULL,
+                               `value` varchar(255) DEFAULT NULL,
+                               PRIMARY KEY (`sensor_id`),
+                               KEY `fk_sensor_ship_idx` (`ship_id`),
+                               CONSTRAINT `fk_sensor_ship` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -226,19 +226,19 @@ DROP TABLE IF EXISTS `ship`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ship` (
-  `id` varchar(255) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `location` varchar(45) NOT NULL,
-  `status` int NOT NULL,
-  `origin` varchar(45) DEFAULT NULL,
-  `destination` varchar(45) DEFAULT NULL,
-  `gps_latitude` varchar(255) DEFAULT NULL,
-  `gps_longtitude` varchar(255) DEFAULT NULL,
-  `tank1` int DEFAULT NULL,
-  `tank2` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_status_idx` (`status`),
-  CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`id`)
+                        `id` varchar(255) NOT NULL,
+                        `name` varchar(45) DEFAULT NULL,
+                        `location` varchar(45) NOT NULL,
+                        `status` int NOT NULL,
+                        `origin` varchar(45) DEFAULT NULL,
+                        `destination` varchar(45) DEFAULT NULL,
+                        `gps_latitude` varchar(255) DEFAULT NULL,
+                        `gps_longtitude` varchar(255) DEFAULT NULL,
+                        `tank1` int DEFAULT NULL,
+                        `tank2` int DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        KEY `fk_status_idx` (`status`),
+                        CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -260,9 +260,9 @@ DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `status` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`,`status`)
+                          `id` int NOT NULL AUTO_INCREMENT,
+                          `status` varchar(45) NOT NULL,
+                          PRIMARY KEY (`id`,`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -284,33 +284,33 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `role_id` int NOT NULL,
-  `ship_id` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `dateofbirth` datetime(6) DEFAULT NULL,
-  `firstname` varchar(255) DEFAULT NULL,
-  `gender` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
-  `nationality` varchar(255) DEFAULT NULL,
-  `phonenumber` varchar(255) DEFAULT NULL,
-  `postalcode` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `username_UNIQUE` (`username`),
-  UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`),
-  UNIQUE KEY `UKob8kqyqqgmefl0aco34akdtpe` (`email`),
-  UNIQUE KEY `UKh74ord48otcajdi21yrl7k4d1` (`username`),
-  UNIQUE KEY `UKoshmjvr6wht0bg9oivn75aajr` (`email`),
-  KEY `fk_user_role` (`role_id`),
-  KEY `fk_user_ship_idx` (`ship_id`),
-  CONSTRAINT `fk_role_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT,
-  CONSTRAINT `fk_ship_user` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `email` varchar(255) NOT NULL,
+                        `password` varchar(255) NOT NULL,
+                        `username` varchar(255) NOT NULL,
+                        `role_id` int NOT NULL,
+                        `ship_id` varchar(255) DEFAULT NULL,
+                        `address` varchar(255) DEFAULT NULL,
+                        `city` varchar(255) DEFAULT NULL,
+                        `country` varchar(255) DEFAULT NULL,
+                        `dateofbirth` date DEFAULT NULL,
+                        `firstname` varchar(255) DEFAULT NULL,
+                        `gender` varchar(255) DEFAULT NULL,
+                        `lastname` varchar(255) DEFAULT NULL,
+                        `nationality` varchar(255) DEFAULT NULL,
+                        `phonenumber` varchar(255) DEFAULT NULL,
+                        `postalcode` varchar(255) DEFAULT NULL,
+                        PRIMARY KEY (`id`),
+                        UNIQUE KEY `email_UNIQUE` (`email`),
+                        UNIQUE KEY `username_UNIQUE` (`username`),
+                        UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`),
+                        UNIQUE KEY `UKob8kqyqqgmefl0aco34akdtpe` (`email`),
+                        UNIQUE KEY `UKh74ord48otcajdi21yrl7k4d1` (`username`),
+                        UNIQUE KEY `UKoshmjvr6wht0bg9oivn75aajr` (`email`),
+                        KEY `fk_user_role` (`role_id`),
+                        KEY `fk_user_ship_idx` (`ship_id`),
+                        CONSTRAINT `fk_role_user` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE RESTRICT,
+                        CONSTRAINT `fk_ship_user` FOREIGN KEY (`ship_id`) REFERENCES `ship` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,4 +341,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-09 17:00:07
+-- Dump completed on 2023-01-09 17:15:18
