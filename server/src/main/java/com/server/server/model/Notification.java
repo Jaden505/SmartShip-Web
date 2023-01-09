@@ -21,7 +21,7 @@ public class Notification {
     private double value;
 
     @Column(name = "ship_id")
-    private String ship_id;
+    private String shipId;
 
     @Column(name = "date")
     private Date date;
@@ -55,7 +55,6 @@ public class Notification {
     public Date getDate() {
         return date;
     }
-
     public void setDate(Date date) {
         this.date = date;
     }
@@ -84,8 +83,7 @@ public class Notification {
         return value;
     }
 
-    public String getShip_id() {
-        return ship_id;
+    public String getShipId() {
+        return shipId;
     }
-
 }
