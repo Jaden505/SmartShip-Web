@@ -4,8 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html.dark{
+html.dark {
     background-color: #151515;
+}
+
+html {
+    background-color: #fbfefb;
 }
 
 body{
