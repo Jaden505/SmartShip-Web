@@ -125,6 +125,16 @@ public class LoginController {
 
         User user = new User();
 
+        user.setFirstname(signUpRequest.getFirstname());
+        user.setLastname(signUpRequest.getLastname());
+        user.setGender(signUpRequest.getGender());
+        user.setNationality(signUpRequest.getNationality());
+        user.setDateofbirth(signUpRequest.getDateOfBirth());
+        user.setPhonenumber(signUpRequest.getPhoneNumber());
+        user.setAddress(signUpRequest.getAddress());
+        user.setPostalcode(signUpRequest.getPostalCode());
+        user.setCity(signUpRequest.getCity());
+        user.setCountry(signUpRequest.getCountry());
         user.setUsername(signUpRequest.getUsername());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
