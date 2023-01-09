@@ -1,8 +1,9 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup">
-    <div class="popup-inner bg-blue-regular dark:bg-black-light" v-motion-fade>
+  <Teleport to="#modal">
+  <div class="modal-bg">
+    <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
       <h1 class="font-bold text-black-text dark:text-white-text">Edit Manager</h1>
       <form class="w-full max-w-sm">
@@ -76,6 +77,7 @@
       </form>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>

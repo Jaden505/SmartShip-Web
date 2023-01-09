@@ -1,7 +1,7 @@
 <template>
   <Teleport to="#modal">
-    <div class="popup">
-      <div class="popup-inner">
+    <div class="modal-bg">
+      <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
         <td class="material-icons close-popup" @click="TogglePopup()">close</td>
 
         <h1>Edit personal data</h1>
@@ -139,15 +139,14 @@
           </div>
 
           <div class="md:flex md:items-center">
-            <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            <button class="bg-gray-700 dark:bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                     type="button"
                     @click=" updateUser">
-              Update
+              <span class="font-semibold text-white-text">Update</span>
             </button>
           </div>
 
         </form>
-
       </div>
     </div>
   </Teleport>
@@ -182,27 +181,26 @@ export default {
 </script>
 
 <style scoped>
-
-.popup {
+.modal-bg {
   position: fixed;
-  top: -20%;
+  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0,0,0, 0.5);
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.popup-inner {
-  background: #00111C;
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
+.modal {
+  position: relative;
+  background: white;
+  padding: 50px 100px;
+  border-radius: 5px;
+  box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
 }
 
 .close-popup {

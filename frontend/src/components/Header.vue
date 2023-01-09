@@ -23,7 +23,6 @@
             </svg>
           </div>
         </router-link></a>
-
         <div class="content">
         </div>
       </div>
