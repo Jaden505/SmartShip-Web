@@ -1,8 +1,9 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup">
-    <div class="popup-inner bg-blue-regular dark:bg-black-light" v-motion-fade>
+  <Teleport to="#modal">
+    <div class="modal-bg">
+    <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
       <h1 class="font-bold text-black-text dark:text-white-text">Create Manager</h1>
       <Form @submit="createOperator" :validation-schema="schema" class="w-full max-w-sm">
@@ -74,6 +75,7 @@
       </div>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>
@@ -139,25 +141,26 @@ export default {
 </script>
 
 <style scoped>
-.popup {
+.modal-bg {
   position: fixed;
-  top: -20%;
+  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0,0,0, 0.5);
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.popup-inner {
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
+.modal {
+  position: relative;
+  background: white;
+  padding: 20px 50px;
+  border-radius: 5px;
+  box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
 }
 
 .close-popup {
