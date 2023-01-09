@@ -11,8 +11,17 @@ public class Notification {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "title")
+    @Column(name = "parameter")
     private String title;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "value")
+    private double value;
+
+    @Column(name = "ship_id")
+    private String ship_id;
 
     @Column(name = "date")
     private Date date;
@@ -20,18 +29,9 @@ public class Notification {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "temperature")
-    private double temperature;
+    @Column(name = "unit ")
+    private String unit;
 
-
-    //    public Notification(Long id, String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
-//        this.id = id;
-//        this.parameter = parameter;
-//        this.category = category;
-//        this.valueSinceLastUpdate = valueSinceLastUpdate;
-//        this.settedUpValue = settedUpValue;
-//        this.ship_id = ship_id;
-//    }
     public Notification() {
 
     }
@@ -68,11 +68,25 @@ public class Notification {
         this.message = message;
     }
 
-    public double getTemperature() {
-        return temperature;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+
+    public String getShip_id() {
+        return ship_id;
+    }
+
 }

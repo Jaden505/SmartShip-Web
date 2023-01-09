@@ -1,29 +1,29 @@
 <template>
-    <div id="container">
+    <div class="container bg-blue-regular dark:bg-black-light">
       <div id="allParameters">
         <div class="submit-form">
-        <p class="title">Create new alarm</p>
+        <p class="title text-black-text dark:text-white-text">Create new alarm</p>
         <div class="Parameters form-group">
-          <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Parameter</label>
+          <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
           <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
         </div>
         <div class="Parameters form-group">
-          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
+          <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
           <input v-model="alarm.category" class="form-control" type="text" name="category"/>
         </div>
         <div class="Parameters form-group">
-          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Value</label>
+          <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
           <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
         </div>
         <div class="Parameters form-group">
-          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">setted up Value</label>
+          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
           <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
         </div>
         <div class="Parameters form-group">
-          <label for="id" class="block mb-2 text-sm font-medium text-white-text">Ship id</label>
+          <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
           <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
         </div>
-            <button class="button" id="update" @click="addAlarm">
+            <button class="button bg-blue-700 dark:bg-gray-700" @click="addAlarm">
                       {{ update }}
             </button>
 
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style scoped>
-#container {
+.container {
   position: absolute;
   top: 10%;
   left: 30%;
@@ -89,7 +89,6 @@ export default {
   justify-content: center;
   width: auto;
   height: auto;
-  background-color: #343434;
   border-radius: 20px;
   margin: 20px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 2);
@@ -115,9 +114,6 @@ input{
   margin-left: 100px;
   color: white;
   border-radius: 20px;
-}
-#update{
-  background-color: #656565;
 }
 #cancel{
   background-color: deeppink;
@@ -151,7 +147,6 @@ label{
   margin-top: 20px;
   margin-left: 130px;
   font-size: 200%;
-  color: white;
 }
 
 

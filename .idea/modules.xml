@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SmartShip - EWA.iml" filepath="$PROJECT_DIR$/.idea/SmartShip - EWA.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend/test.iml" filepath="$PROJECT_DIR$/frontend/test.iml" />
     </modules>
   </component>
 </project>

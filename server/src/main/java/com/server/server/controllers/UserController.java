@@ -66,6 +66,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable int id){
+        try {
+            Optional<User> user = userRepository.findById(id);
+
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user){
         try{
@@ -94,6 +105,34 @@ public class UserController {
             }
 
         } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/users/profile/{id}")
+    public ResponseEntity<User> updateProfile(@PathVariable int id, @RequestBody User user){
+        try {
+            Optional<User> foundUser = userRepository.findById(id);
+
+            if (foundUser.isPresent()){
+                User changeUser = foundUser.get();
+
+                changeUser.setFirstname(user.getFirstname());
+                changeUser.setLastname(user.getLastname());
+                changeUser.setGender(user.getGender());
+                changeUser.setEmail(user.getEmail());
+                changeUser.setPhonenumber(user.getPhonenumber());
+                changeUser.setAddress(user.getAddress());
+                changeUser.setPostalcode(user.getPostalcode());
+                changeUser.setCity(user.getCity());
+                changeUser.setCountry(user.getCountry());
+
+                return new ResponseEntity<>(userRepository.save(changeUser), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

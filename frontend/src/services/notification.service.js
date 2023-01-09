@@ -7,6 +7,11 @@ class Notification {
             headers: authHeader()
         });
     }
+    delete(index) {
+        return axios.delete(API_URL + "/" + index, {
+            headers: authHeader()
+        });
+    }
 }
 
 

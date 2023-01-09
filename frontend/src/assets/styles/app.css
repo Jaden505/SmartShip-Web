@@ -4,7 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+html.dark{
     background-color: #151515;
+}
+
+body{
     font-family: Arial, Helvetica, sans-serif;
 }

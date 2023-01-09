@@ -1,9 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  variants: {
+    extend: {
+      visibility: ["group-hover"],
+    }
+  },
   theme: {
     extend: {
       fontFamily: {
