@@ -84,7 +84,6 @@ public class Notification {
         return value;
     }
 
-
     public String getShip_id() {
         return ship_id;
     }

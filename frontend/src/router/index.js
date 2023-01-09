@@ -51,7 +51,7 @@ const routes = [
                 ]
             },
             {
-                path: "/notification-Overview",
+                path: "/notification-overview",
                 component: NotificationOverview,
                 props: true
             },

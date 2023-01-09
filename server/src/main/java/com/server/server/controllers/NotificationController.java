@@ -4,7 +4,6 @@ import com.server.server.model.Notification;
 import com.server.server.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +16,11 @@ public class NotificationController {
     @Autowired
     private NotificationRepository notificationRepo;
 
-    @GetMapping("/Notification-Overview")
-    public List<Notification> allNotifications(Model notification) {
-        notification.addAttribute("Alarms",notificationRepo.findAll());
+    @GetMapping("/notification-overview")
+    public List<Notification> allNotifications() {
         return notificationRepo.findAll();
     }
-    @DeleteMapping("/Notification-Overview/{index}")
+    @DeleteMapping("/notification-overview/{index}")
     public ResponseEntity<Void> delete (@PathVariable int index) {
         notificationRepo.deleteById(index);
         return ResponseEntity.noContent().build();
