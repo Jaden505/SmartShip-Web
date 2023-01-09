@@ -34,6 +34,7 @@ export default {
         return
       }
 
+      // Only get last 8 values
       this.usages = this.usages.slice(this.usages.length-8, this.usages.length);
 
       const ctx = document.getElementById('engineUsage').getContext('2d');

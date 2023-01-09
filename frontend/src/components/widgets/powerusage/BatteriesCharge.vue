@@ -35,6 +35,7 @@ export default {
         return
       }
 
+      // Only get last 2 values
       this.usages = this.batteries.slice(this.batteries.length-2, this.batteries.length);
 
       const ctx = document.getElementById('waterSupplyChart').getContext('2d');

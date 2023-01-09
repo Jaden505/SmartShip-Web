@@ -46,6 +46,7 @@
 import WaterSupply from "@/components/widgets/shipinfo/WaterSupply";
 import Map from "@/components/ship/Map";
 import SeaConditions from "@/components/widgets/shipinfo/SeaConditions";
+import EngineInformation from "@/components/widgets/shipinfo/EngineInformation";
 
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
@@ -55,7 +56,8 @@ export default {
   components: {
     Map,
     WaterSupply,
-    SeaConditions
+    SeaConditions,
+    EngineInformation
   },
 
   data() {
@@ -64,7 +66,7 @@ export default {
       sensordata: null,
       dmc: null,
       componentsList: [],
-      addableComponents: [WaterSupply, Map, SeaConditions]
+      addableComponents: [WaterSupply, Map, SeaConditions, EngineInformation]
     }
   },
 
