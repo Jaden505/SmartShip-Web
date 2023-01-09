@@ -92,7 +92,7 @@ export default {
     }
   },
   created() {
-    this.userRole = JSON.parse(localStorage.getItem('user')).role;
+    this.userRole = JSON.parse(localStorage.getItem('user')).roles[0];
   },
   methods: {
     logout() {
