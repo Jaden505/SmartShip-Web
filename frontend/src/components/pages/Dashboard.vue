@@ -37,15 +37,6 @@
             <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
           </button>
           <nav class="hidden space-x-2 md:flex md:items-center">
-            <form class="p-2">
-              <label for="simple-search" class="sr-only">Search</label>
-              <div class="relative w-full">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" class="w-5 h-5  text-black-text dark:text-white-text" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                </div>
-                <input type="text" id="simple-search" class="bg-transparent border text-black-text dark:text-white-text text-sm rounded-full w-full pl-10 p-2.5" placeholder="Search" required>
-              </div>
-            </form>
             <button class="px-1" @click="showPreview()">
               <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-black-text dark:text-white-text"/>
             </button>

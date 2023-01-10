@@ -11,7 +11,7 @@
       <div class="-mt-8">
         <div class="name-section rounded-t-md bg-purple-basic dark:bg-blue-regular pt-12 pb-4 px-5">
           <h1 class="text-2xl" v-if="user.firstname != null">{{ user.firstname + " " + user.lastname }}</h1>
-          <h1 v-else>User</h1>
+          <h1 v-else class="text-2xl">User</h1>
           <h2 v-if="role === 'ROLE_USER'">User</h2>
           <h2 v-if="role === 'ROLE_MANAGER'">Manager</h2>
           <h2 v-if="role === 'ROLE_ADMIN'">Admin</h2>
