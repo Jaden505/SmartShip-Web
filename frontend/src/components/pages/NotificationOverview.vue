@@ -10,7 +10,7 @@
               <h4 class="text-xl font-semibold text-black-text dark:text-white-text">Notifications</h4>
             </div>
             <div v-for="(notification, index) in notifications"
-                 :key="index" class="shadow-lg relative text-black-text dark:text-white-text rounded-md p-4 mb-2"
+                 :key="index" class="shadow-lg relative rounded-md p-4 mb-2"
                  :class="{'active bg-blue-lavender dark:bg-black-basic': selectedNotification === notification}"
                  @click="setNotification(notification)">
               <button class="absolute delete inset-y-0 right-0 flex items-center pr-4 pointer-events-none"
@@ -18,7 +18,7 @@
                 <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5 text-black-text dark:text-white-text"/>
               </button>
               <div class="inline-block">
-                <h2 class="text-xl">{{ notification.title }}</h2>
+                <h4 class="text-xl font-semibold">{{ notification.title }}</h4>
                 <span class="text-sm">
               {{ ('0' + new Date(notification.date).getDate()).slice(-2)
                   }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
