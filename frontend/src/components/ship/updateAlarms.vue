@@ -91,7 +91,14 @@ export default {
         gps_latitude: "",
         gps_longtitude: "",
         sensor_group: "",
-        sensor_name:"",
+        sensor_name: "",
+        ship_id: "",
+        speed: "",
+        time: "",
+        type: "",
+        unit: "",
+        value: "",
+        settedUpValue: "",
       }
     }
   },
@@ -175,10 +182,10 @@ export default {
     addAlarm() {
 
       const alarm = {
-        parameter: this.alarm.parameter,
-        category: this.alarm.category,
-        valueSinceLastUpdate: this.alarm.valueSinceLastUpdate,
-        settedUpValue: this.alarm.settedUpValue,
+        sensor_group: this.sensor_data.sensor_group,
+        sensor_name: this.sensor_data.sensor_name,
+        value: this.sensor_data.value,
+        settedUpValue: this.sensor_data.settedUpValue,
       };
 
       console.log(alarm)
