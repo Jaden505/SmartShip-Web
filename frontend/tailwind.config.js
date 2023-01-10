@@ -26,7 +26,8 @@ module.exports = {
           'lavender': '#ebf2fa'
         },
         purple: {
-          'basic': '#D6E8FA'
+          'basic': '#D6E8FA',
+          'dark': '#B9D7F6'
         },
         white: {
           'text': '#E0E1DD',

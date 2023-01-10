@@ -1,6 +1,4 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
   <div v-motion :delay="100"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :initial="{ opacity: 0, y: 100 }"
@@ -28,8 +26,8 @@
           <td >{{ manager.email }}</td>
           <td >{{ getShipName(manager.ship) }}</td>
           <td>
-            <div class="material-icons px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager">edit</div>
-            <div class="material-icons px-3 py-4 cursor-pointer" @click="deleteUser(manager.id)">delete</div>
+            <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="deleteUser(manager.id)"/>
+            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager"/>
           </td>
         </tr>
         </tbody>
@@ -57,6 +55,10 @@ import editMangerForm from "@/components/admin/forms/editMangerForm";
 import createManagerForm from "@/components/admin/forms/createManagerForm";
 import {isProxy, ref, toRaw} from 'vue';
 import ShipService from "@/services/ship.service";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+library.add(faTrash, faPenToSquare)
+
 
 export default {
   name: "ManagerTable",

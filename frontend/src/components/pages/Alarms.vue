@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full p-4" v-motion
+  <div class="flex w-full p-4 text-black-light dark:text-white-text " v-motion
        :initial="{ opacity: 0, y: 100 }"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :variants="{ custom: { scale: 2 } }"
@@ -14,13 +14,13 @@
           <p class="text-md">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</p>
           <p class="text-md">{{ settedUpValuetext+ alarm.settedUpValue }}</p>
           <button class="text-white bg-blue-regular font-medium rounded-lg my-3 text-sm px-5 py-2.5 text-center text-white-text" @click="deleteAlarm(alarm.id)">
-            {{ remove }}
+            <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5 text-black-text dark:text-white-text"/>
           </button>
         </div>
       </div>
     </div>
     <div v-else class="flex flex-col mx-auto">
-      <h1>There are no alarms at this moment. You can make one by clicking underneath!</h1>
+      <h1 class="text-2xl">There are currently no alarms. You can make one by clicking underneath!</h1>
       <div class="mx-auto mt-5">
         <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" id="slide_start_button" @click="openPop()">
           <font-awesome-icon icon="fa-solid fa-plus" />
@@ -35,9 +35,8 @@ import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/alarm.service";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
-
-library.add(faPlus)
+import {faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
+library.add(faPlus, faTrash)
 
 export default {
   components: {AddAlarms},
