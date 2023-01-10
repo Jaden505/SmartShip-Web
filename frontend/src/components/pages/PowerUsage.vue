@@ -16,24 +16,29 @@
         <a v-for="(component, index) in addableComponents" :key="index" @click="switchDisplayComponent(component)">{{component.name}}</a>
       </div>
     </div>
-    <button :class="{hidden: !isEditing}" @click="setComponents(); this.$router.go()"
+    <button :class="{hidden: !isEditing}" @click="setComponentsPosition(); this.$router.go()"
             class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
-      <div class="show-context" v-for="(component, index) in componentsList" :key="index">
+      <div class="show-context" v-for="(component_data, index) in componentsList" :key="index">
+        <!-- Allows the dragging and dropping of the component !-->
         <div class="col-span-2 shadow-md rounded-md droppable"
-             :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
-             @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
+             :draggable="isEditing" @dragstart="dmc.onDragStart($event, component_data['component'])"
+             @drop.prevent="this.componentsList = dmc.dropHandler($event, component_data['component'], componentsList)" @dragover.prevent>
           <div class="bg-blue-regular text-black-text dark:text-white-text">
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component_data['component'])">close</div>
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</div>
           </div>
           <div class="flex items-center justify-between p-4">
-            <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component.name}}</h4>
+            <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component_data['component'].name}}</h4>
           </div>
+          <!-- The component is called here !-->
           <div class="relative p-4 h-72">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
-            <component :is="component" :sensordata="JSON.stringify(sensordata)" />
+            <component
+                :is="component_data['component']" :sensor_data="JSON.stringify(sensordata)"
+                :sensor_name="component_data['sensor_name']" :sensor_group="component_data['sensor_group']"
+                :chart_name="component_data['chart_name']" />
           </div>
         </div>
       </div>
@@ -43,9 +48,9 @@
 
 <script>
 
-// Widgets imports
-import BatteryInfoLine from "@/components/widgets/powerusage/BatteriesCharge";
-import EngineUsage from "@/components/widgets/powerusage/EngineUsage";
+// Chart imports
+import BarChart from "@/components/charts/BarChart";
+import LineChart from "@/components/charts/LineChart";
 
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
@@ -53,8 +58,8 @@ import SensordataService from "@/services/sensordata.service";
 export default {
   name: "PowerUsage",
   components: {
-    BatteryInfoLine,
-    EngineUsage
+    BarChart,
+    LineChart
   },
 
   data() {
@@ -63,32 +68,18 @@ export default {
       sensordata: null,
       dmc: null,
       componentsList: [],
-      addableComponents: [BatteryInfoLine, EngineUsage]
+      addableComponents: [{"component": BarChart, "sensor_name": null, "sensor_group": "Battery", "chart_name": "Batteries charge"},
+        {"component": LineChart, "sensor_name": "Engine 1 Temperature", "sensor_group": null, "chart_name": "Engine Usage"}]
     }
   },
 
   mounted() {
     this.getSensorData();
 
-    this.dmc = new DashboardMoveComponents(null);
+    this.getComponentsPosition()
 
-    // Get components from local storage
-    if (localStorage.components) {
-      let component_names = this.addableComponents.map(component => component.name);
-
-      for (let component of JSON.parse(localStorage.components)) {
-        // Check if component was saved in local storage
-        if (component_names.includes(component)) {
-          this.switchDisplayComponent(this.addableComponents[component_names.indexOf(component)]);
-          component_names.splice(component_names.indexOf(component), 1);
-        }
-      }
-    }
-    else {
-      // Display all components by default
-      this.componentsList = this.addableComponents;
-      this.addableComponents = [];
-    }
+    // Initiate the DashboardMoveComponents class
+    this.dmc = new DashboardMoveComponents();
   },
 
   methods: {
@@ -113,9 +104,29 @@ export default {
       }
     },
 
-    setComponents() {
+    getComponentsPosition() {
+      // Get components from local storage
+      if (localStorage.components) {
+        let component_names = this.addableComponents.map(component_data => component_data.component.name)
+
+        for (let component of JSON.parse(localStorage.components)) {
+          // Check if component was saved in local storage
+          if (component_names.includes(component)) {
+            this.switchDisplayComponent(this.addableComponents[component_names.indexOf(component)]);
+            component_names.splice(component_names.indexOf(component), 1);
+          }
+        }
+      }
+      else {
+        // Display all components by default
+        this.componentsList = this.addableComponents;
+        this.addableComponents = [];
+      }
+    },
+
+    setComponentsPosition() {
       // Save components names in local storage
-      localStorage.setItem('components', JSON.stringify(this.componentsList.map(component => component.name)));
+      localStorage.setItem('components', JSON.stringify(this.componentsList.map(component_data => component_data.component.name)));
     },
 
     getSensorData() {
