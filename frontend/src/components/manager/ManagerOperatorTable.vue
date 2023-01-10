@@ -19,11 +19,11 @@
               @click="reActivate">Filter Operator
       </button>
       <br>
-      <input v-if="activeSearch" id="myInput" :placeholder="'Search for '+ searchTitle" title="Type in a name" type="text"
+      <input v-if="activeSearch" id="myInput" :placeholder="'Search for '+ searchTitle" class="bg-transparent border text-black-light dark:text-white-text text-sm rounded-full pl-10 p-2.5 " title="Type in a name" type="text"
              @keyup="search">
     </div>
     <div class="mt-4">
-      <table id="opTable" class="text-center table-auto w-full text-white-text">
+      <table id="opTable" class="text-center table-auto w-full text-black-text dark:text-white-text">
         <thead>
         <tr>
           <th class="" scope="col">Operator Id</th>
@@ -35,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(operator, index) in users" :key="index" class="bg-black-light">
+        <tr v-for="(operator, index) in users" :key="index" class="bg-purple-basic dark:bg-black-light">
           <td class="px-3 py-4">{{ operator.id }}</td>
           <td class="px-3 py-4">{{ operator.username }}</td>
           <td class="px-3 py-4">{{ operator.email }}</td>

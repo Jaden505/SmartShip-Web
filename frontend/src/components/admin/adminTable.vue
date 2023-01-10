@@ -8,7 +8,7 @@
       <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
     </div>
     <div class="mt-4">
-      <table class="text-center table-auto w-full text-black-text dark:text-white-text ">
+      <table class="text-center table-auto w-full text-black-text dark:text-white-text">
         <thead>
         <tr>
           <th scope="col" >Manager Id</th>
