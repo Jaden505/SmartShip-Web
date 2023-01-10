@@ -1,5 +1,4 @@
 export class Alarm {
-    id;
     parameter;
     category;
     valueSinceLastUpdate;
@@ -7,8 +6,7 @@ export class Alarm {
     shipId;
 
 
-    constructor(id, parameter, category, valueSinceLastUpdate, settedUpValue, shipId) {
-        this.id = id;
+    constructor(parameter, category, valueSinceLastUpdate, settedUpValue, shipId) {
         this.parameter = parameter;
         this.category = category;
         this.valueSinceLastUpdate = valueSinceLastUpdate;

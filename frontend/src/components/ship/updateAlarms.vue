@@ -60,11 +60,9 @@ export default {
   },
   methods: {
     addAlarm(alarm) {
-      const alarmObject = toRaw(alarm)
+      console.log()
 
-      console.log(alarm)
-
-      const newAlarm = new Alarm(0, alarmObject.parameter, alarmObject.category, alarmObject.valueSinceLastUpdate, alarmObject.settedUpValue, alarmObject.shipId)
+      const newAlarm = new Alarm(alarm.parameter, alarm.category, parseFloat(alarm.valueSinceLastUpdate), parseFloat(alarm.settedUpValue), alarm.shipId)
 
       console.log(newAlarm)
 

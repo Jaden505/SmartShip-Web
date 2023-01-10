@@ -31,18 +31,18 @@
           </div>
         </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">
-              Status
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <select :class="{error: isError}" v-model="newShip.status">
-              <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.status }}</option>
-            </select>
-          </div>
-        </div>
+<!--        <div class="md:flex md:items-center mb-6">-->
+<!--          <div class="md:w-1/3">-->
+<!--            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">-->
+<!--              Status-->
+<!--            </label>-->
+<!--          </div>-->
+<!--          <div class="md:w-2/3">-->
+<!--            <select :class="{error: isError}" v-model="newShip.status">-->
+<!--              <option>Active</option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="form-group md:flex md:items-center">
           <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
@@ -58,20 +58,15 @@
 
 <script>
 import ShipService from "@/services/ship.service";
-import StatusService from "@/services/status.service";
-import Ship from "@/models/ship"
+import {Ship} from "@/models/ship"
 
 export default {
   name: "createUserForm",
   props: ['TogglePopup'],
 
-  mounted() {
-    this.getStatuses();
-  },
-
   data(){
     return {
-      newShip: new Ship("","", "", "", "", 1400, 1400), // Defaults
+      newShip: new Ship("","", {id: 1, status: "ACTIVE"}, "", "", 1400, 1400),
       statuses: [],
       isError: false
     }
@@ -79,31 +74,19 @@ export default {
 
   methods: {
     checkFields() {
-      return (this.newShip.name !== "" && this.newShip.status !== "");
+      return (this.newShip.name !== "");
     },
 
     create() {
       if (this.checkFields()) {
         this.isError = false
         ShipService.create(this.newShip)
-        location.reload()
         this.TogglePopup()
       }
       else {
         this.isError = true
       }
     },
-
-    getStatuses() {
-      StatusService.get()
-          .then(response => {
-            this.statuses = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    }
   }
 }
 </script>

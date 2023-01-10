@@ -1,5 +1,7 @@
 package com.server.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,9 +12,6 @@ public class Ship {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "status")
-    private String status;
 
     @Column(name = "gps_latitude")
     private String gpsLatitude;
@@ -26,13 +25,20 @@ public class Ship {
     @Column(name = "tank2")
     private Integer tank2;
 
+    @JoinColumn(name = "status", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Status status;
+
     public String getId() {
         return id;
     }
 
-    public String getStatus() {return status;}
+    public Status getStatus() {
+        return status;
+    }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

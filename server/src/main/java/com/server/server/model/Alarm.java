@@ -25,15 +25,6 @@ public class Alarm {
     @Column(name = "ship_id")
     private String ship_id;
 
-
-//    public Notification(Long id, String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
-//        this.id = id;
-//        this.parameter = parameter;
-//        this.category = category;
-//        this.valueSinceLastUpdate = valueSinceLastUpdate;
-//        this.settedUpValue = settedUpValue;
-//        this.ship_id = ship_id;
-//    }
     public Alarm(String parameter, String category, double valueSinceLastUpdate, double settedUpValue, String ship_id) {
         this.parameter = parameter;
         this.category = category;
@@ -45,7 +36,6 @@ public class Alarm {
     public Alarm() {
 
     }
-
 
     public int getId() {
         return id;

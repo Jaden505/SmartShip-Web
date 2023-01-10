@@ -25,11 +25,11 @@
       <tr v-for="(ship, index) in ships" class="bg-purple-basic dark:bg-black-light" :key="index">
         <td class="px-3 py-4">{{ ship.id }}</td>
         <td class="px-3 py-4">{{ ship.name }}</td>
-        <td class="px-3 py-4">{{ getStatusNameById(ship.status) }}</td>
-        <td class="px-3 py-4">{{ getUsersByShipId(ship.id) }}</td>
+        <td class="px-3 py-4">{{ ship.status.status }}</td>
+        <td class="px-3 py-4">{{ getUserPerShip(ship) }}</td>
         <td>
-          <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship" />
-          <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="deleteShip(ship.id)"/>
+          <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship" />
+          <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="deleteShip(ship.id)"/>
         </td>
       </tr>
       </tbody>
@@ -62,9 +62,9 @@ import editForm from "@/components/manager/forms/editShipForm";
 import {ref, toRaw} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
 import warningShip from "@/components/manager/forms/warningShip";
-import StatusService from "@/services/status.service";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
+
 library.add(faTrash, faPenToSquare)
 
 export default {
@@ -75,10 +75,25 @@ export default {
     warningShip
   },
 
-  mounted() {
-    this.getUsers();
-    this.getShips();
-    this.getStatuses();
+  created() {
+    UserService.getUsers()
+        .then(response => {
+          this.users = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+    ShipService.getAll()
+        .then(response => {
+          this.ships = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
   },
 
   data() {
@@ -108,17 +123,6 @@ export default {
   },
 
   methods: {
-    getUsers() {
-      UserService.getUsers()
-          .then(response => {
-            this.users = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
     toggle(ship){
       this.ship = ship
     },
@@ -134,50 +138,18 @@ export default {
         }
       }
     },
-
-    getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
-    getUsersByShipId(ship) {
-      let operators = this.users.filter(user => user.ship === ship);
-
-      if (operators.length !== 0) {
-        operators.forEach((op, index) => {
-          operators[index] = op.username;
-        })
-
-        return operators.toString();
+    getUserPerShip(assignedShip){
+      let users = toRaw(this.users);
+      let filtered = users.filter(function (el) {
+        return el.ship != null;
+      });
+      let user = filtered.find(person => person.ship.id === assignedShip.id);
+      if (user === undefined){
+        return "Not assigned"
+      } else {
+        return user.username;
       }
-
-      else return "No operators";
-    },
-
-    getStatuses() {
-      StatusService.get()
-          .then(response => {
-            this.statuses = response.data;
-            console.log(this.statuses)
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
-    getStatusNameById(status_id) {
-      let status_name = toRaw(this.statuses[status_id+1]).status.toString()
-      status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
-      return status_name;
     }
-
   }
 }
 </script>
