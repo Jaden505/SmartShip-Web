@@ -1,5 +1,5 @@
 <template>
-  <div v-motion-fade class="flex h-screen">
+  <div v-motion-fade class="flex h-screen bg-blue-lavender dark:bg-black-basic">
     <!--  SIDEBAR LEFT  -->
     <SideBar/>
     <!--  CONTENT RIGHT  -->
@@ -37,20 +37,11 @@
             <img class="w-6 h-6 rounded-full ring-2 ring-blue-regular" src="../../assets/img/example_user.jpg" alt="Bordered avatar">
           </button>
           <nav class="hidden space-x-2 md:flex md:items-center">
-            <form class="p-2">
-              <label for="simple-search" class="sr-only">Search</label>
-              <div class="relative w-full">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" class="w-5 h-5  text-black-text dark:text-white-text" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                </div>
-                <input type="text" id="simple-search" class="bg-transparent border text-black-text dark:text-white-text text-sm rounded-full w-full pl-10 p-2.5 " placeholder="Search" required>
-              </div>
-            </form>
-            <button class="md:p-0 lg:p-2" @click="showPreview()">
+            <button class="px-1" @click="showPreview()">
               <font-awesome-icon icon="fa-solid fa-bell" class="w-6 h-6 text-black-text dark:text-white-text"/>
             </button>
-            <button class="md:p-0 lg:p-2" @click="toggleDark()">
-              <font-awesome-icon icon="fa-solid fa-sun" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
+            <button class="px-1" @click="toggleDark()">
+              <font-awesome-icon icon="fa-solid fa-circle-half-stroke" class="w-6 h-6 text-black-text dark:text-white-text" v-if="isDark" />
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
             </button>
             <router-link to="/profile">
@@ -73,7 +64,7 @@
       </header>
       <main>
         <div class="mt-2">
-          <NotificationPreview id="preview" v-if="preview" @close="showPreview"></NotificationPreview>
+          <NotificationPreview id="preview" v-if="preview" @close="showPreview" @onClickOutside="onClickOutside"></NotificationPreview>
           <router-view>
 
           </router-view>
@@ -88,11 +79,11 @@ import {useDark, useToggle} from '@vueuse/core'
 import SideBar from "@/components/SideBar";
 import NotificationPreview from "@/components/elements/NotificationPreview";
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {faBars, faBell, faGear, faMoon, faSun, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faBell, faGear, faMoon, faCircleHalfStroke, faUser} from "@fortawesome/free-solid-svg-icons";
 import {computed, toRaw} from "vue";
 import uploadService from "@/services/upload.service";
 
-library.add(faMoon, faBell, faBars, faGear, faUser, faSun)
+library.add(faMoon, faBell, faBars, faGear, faUser, faCircleHalfStroke)
 
 export default {
   name: "DashBoard",
@@ -143,12 +134,10 @@ export default {
       useToggle(useDark(this.isDark))
     },
     showPreview() {
-      if(this.$route.path === '/notification-overview') {
-        this.preview = false;
-      }
-      else{
         this.preview = !this.preview
-      }
+    },
+    onClickOutside(){
+      this.preview = false
     }
   }
 }

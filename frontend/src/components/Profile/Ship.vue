@@ -1,7 +1,7 @@
 <template>
 
-  <div class="content-container">
-    <div class="content">
+  <div class="content-container rounded-b-md bg-white-basic dark:bg-black-light">
+    <div class="content text-black-light dark:text-white-text">
 
       <h1>Ship information</h1>
       <hr>
@@ -89,20 +89,10 @@ export default {
 </script>
 
 <style scoped>
-.content-container {
-  background-color: rgba(32, 31, 31, 0.97);
-}
-
-.content{
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 h1{
   font-size: 32px;
   padding: 1%;
-  color: white;
 }
 
 .personal-info{
@@ -116,7 +106,6 @@ h1{
 
 .personal-record{
   display: flex;
-  color: white;
   margin-bottom: 1%;
 }
 

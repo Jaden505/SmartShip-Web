@@ -21,12 +21,12 @@
 
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
-        <div class="col-span-2 shadow-md rounded-md droppable"
+        <div class="col-span-2 relative bg-purple-basic dark:bg-black-light shadow-md rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component, componentsList)" @dragover.prevent>
-          <div class="bg-blue-regular text-black-text dark:text-white-text">
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</div>
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</div>
+          <div class="absolute right-0 text-black-text dark:text-white-text">
+            <font-awesome-icon icon="fa-solid fa-xmark" class="py-5 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component)">close</font-awesome-icon>
+            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="py-5 px-6" :class="{hidden: !isEditing}">edit</font-awesome-icon>
           </div>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component.name}}</h4>
@@ -42,17 +42,20 @@
 </template>
 
 <script>
-
-// Widgets imports
 import BatteryInfoLine from "@/components/widgets/powerusage/BatteriesCharge";
 import EngineUsage from "@/components/widgets/powerusage/EngineUsage";
-
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faXmark, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+library.add(faXmark, faPenToSquare)
+
 
 export default {
   name: "PowerUsage",
   components: {
+    FontAwesomeIcon,
     BatteryInfoLine,
     EngineUsage
   },

@@ -9,13 +9,14 @@
         <AvatarInput @input="selectImage"/>
       </div>
       <div class="-mt-8">
-        <div class="name-section rounded-t-md bg-blue-regular pt-12 pb-4 px-5">
-          <h1 class="text-2xl">{{ user.firstname + " " + user.lastname }}</h1>
+        <div class="name-section rounded-t-md bg-purple-basic dark:bg-blue-regular pt-12 pb-4 px-5">
+          <h1 class="text-2xl" v-if="user.firstname != null">{{ user.firstname + " " + user.lastname }}</h1>
+          <h1 v-else class="text-2xl">User</h1>
           <h2 v-if="role === 'ROLE_USER'">User</h2>
           <h2 v-if="role === 'ROLE_MANAGER'">Manager</h2>
           <h2 v-if="role === 'ROLE_ADMIN'">Admin</h2>
         </div>
-        <div class="bar shadow-lg bg-blue-regular flex rounded-b-md">
+        <div class="bar shadow-lg bg-purple-basic dark:bg-blue-regular flex">
           <div :class="{active: personalActive}" class="tab px-5 py-2 rounded-t-md text-md">
             <router-link to="/profile/personal" @click="setPersonalActive">Personal</router-link>
           </div>
@@ -71,11 +72,7 @@ export default {
             console.log(response);
             location.reload();
             }
-          )
-          .then((images) => {
-            this.imageInfos = images.data;
-          })
-          .catch((err) => {
+          ).catch((err) => {
             this.progress = 0;
             this.message = "Could not upload the image! " + err;
             this.currentImage = undefined;
@@ -115,10 +112,14 @@ export default {
 </script>
 
 <style scoped>
+html.dark .active {
+  background-color: #202020;
+  color: #ffffff;
+}
 
 .active {
-  background-color: #202020;
-  color: #E0E1DD;
+  background-color: #ffffff;
+  color: #202020;
   transition: background-color 0.6s;
 }
 </style>

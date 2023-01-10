@@ -1,11 +1,11 @@
 <template>
-  <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue"
+  <div class="items-center text-center p-4 shadow-md bg-white rounded-md bg-blue-card-blue "
        v-for="(condition, index) in conditions" :key="index">
     <div>
-      <h6 class="text-md font-semibold leading-none tracking-wider text-white-text pb-2">
+      <h6 class="text-md font-semibold leading-none tracking-wider text-black-light dark:text-white-text pb-2">
         {{ condition.sensorName }}
       </h6>
-      <span class="text-5xl font-semibold text-white-text">{{ condition.value }} {{ condition.unit }}</span>
+      <span class="text-5xl font-semibold text-black-light dark:text-white-text">{{ condition.value }} {{ condition.unit }}</span>
     </div>
   </div>
   <h1 v-if="lackData">Not enough data is provided to display this graph</h1>

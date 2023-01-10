@@ -1,8 +1,9 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup" >
-    <div class="popup-inner" v-motion-fade>
+  <Teleport to="#modal">
+  <div class="modal-bg" >
+    <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
       <td class="material-icons close-popup" @click="TogglePopup()">close</td>
 
       <h1 class="font-bold">Create Ship</h1>
@@ -52,6 +53,7 @@
 
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>
@@ -107,28 +109,6 @@ export default {
 </script>
 
 <style scoped>
-.popup {
-  position: fixed;
-  top: -20%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-inner {
-  background: #00111C;
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
-}
-
 .close-popup {
   padding-bottom: 20px;
   transition: color 0.5s;

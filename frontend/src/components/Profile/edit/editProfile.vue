@@ -2,15 +2,15 @@
   <Teleport to="#modal">
     <div class="modal-bg">
       <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
-        <td class="material-icons close-popup" @click="TogglePopup()">close</td>
+        <td class="material-icons close-popup text-black-text dark:text-white-text" @click="TogglePopup()">close</td>
 
-        <h1>Edit personal data</h1>
+        <h1 class="text-black-text dark:text-white-text">Edit personal data</h1>
 
         <form class="w-full max-w-sm">
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Firstname
               </label>
             </div>
@@ -24,7 +24,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Lastname
               </label>
             </div>
@@ -38,7 +38,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Gender
               </label>
             </div>
@@ -56,7 +56,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Email
               </label>
             </div>
@@ -70,7 +70,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Phone number
               </label>
             </div>
@@ -84,7 +84,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Address
               </label>
             </div>
@@ -98,7 +98,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Postal Code
               </label>
             </div>
@@ -112,7 +112,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 City
               </label>
             </div>
@@ -126,7 +126,7 @@
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-500 md:text-right mb-1 md:mb-0 pr-4">
+              <label class="block text-black-text dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">
                 Country
               </label>
             </div>
@@ -142,7 +142,7 @@
             <button class="bg-gray-700 dark:bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                     type="button"
                     @click=" updateUser">
-              <span class="font-semibold text-white-text">Update</span>
+              <span class="font-semibold text-black-text dark:text-white-text">Update</span>
             </button>
           </div>
 
@@ -197,7 +197,6 @@ export default {
 
 .modal {
   position: relative;
-  background: white;
   padding: 50px 100px;
   border-radius: 5px;
   box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
@@ -213,7 +212,6 @@ export default {
 }
 
 h1 {
-  color: white;
   text-align: center;
   font-size: 24px;
   margin-bottom: 5%;
@@ -222,7 +220,6 @@ h1 {
 label {
   width: 100%;
   text-align: center;
-  color: white;
 }
 
 input {
