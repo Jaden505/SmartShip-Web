@@ -73,7 +73,7 @@
       </header>
       <main>
         <div class="mt-2">
-          <NotificationPreview id="preview" v-if="preview" @close="showPreview"></NotificationPreview>
+          <NotificationPreview id="preview" v-if="preview" @close="showPreview" @onClickOutside="onClickOutside"></NotificationPreview>
           <router-view>
 
           </router-view>
@@ -143,12 +143,10 @@ export default {
       useToggle(useDark(this.isDark))
     },
     showPreview() {
-      if(this.$route.path === '/notification-overview') {
-        this.preview = false;
-      }
-      else{
         this.preview = !this.preview
-      }
+    },
+    onClickOutside(){
+      this.preview = false
     }
   }
 }

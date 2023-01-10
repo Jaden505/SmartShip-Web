@@ -1,7 +1,7 @@
 <!-- @author: Joli-Coeur Weibolt  Notification-Preview Component -->
 <template>
   <div id="container">
-    <div class="preview bg-blue-regular dark:bg-black-light">
+    <div v-click-outside="onClickOutside" class="preview bg-blue-regular dark:bg-gray-700">
       <h1 class="text-black-text dark:text-white-text">Notifications</h1>
       <hr size="10" width="90%" color="white">
       <!--The preview of all the notifications-->
@@ -42,6 +42,9 @@ export default {
     },
     closePreview() {
       this.$emit('close')
+    },
+    onClickOutside(event) {
+      this.$emit('onClickOutside')
     }
   }
 }

@@ -13,13 +13,13 @@
                  :key="index" class="shadow-lg relative rounded-md p-4 mb-2"
                  :class="{'active bg-blue-lavender dark:bg-black-basic': selectedNotification === notification}"
                  @click="setNotification(notification)">
-              <button class="absolute delete inset-y-0 right-0 flex items-center pr-4 pointer-events-none"
+              <button class="absolute delete inset-y-0 right-0 flex items-center pr-4"
                       @click="deleteNotification(notification.id, notification.title, notification.shipId)">
                 <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5 text-black-text dark:text-white-text"/>
               </button>
               <div class="inline-block">
-                <h4 class="text-xl font-semibold">{{ notification.title }}</h4>
-                <span class="text-sm">
+                <h4 class="text-xl text-black-text dark:text-white-text">{{ notification.title }}</h4>
+                <span class="text-sm text-black-text dark:text-white-text">
               {{ ('0' + new Date(notification.date).getDate()).slice(-2)
                   }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
                   }}-{{ new Date(notification.date).getFullYear()
