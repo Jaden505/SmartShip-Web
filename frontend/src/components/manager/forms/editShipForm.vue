@@ -1,14 +1,15 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div class="popup">
-    <div class="popup-inner" v-motion-fade>
-      <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
-      <h1 class="font-bold">Edit Ship</h1>
+  <Teleport to="#modal">
+    <div class="modal-bg">
+      <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
+        <font-awesome-icon class="close-popup text-black-light dark:text-white-text" icon="fa-solid fa-xmark" @click="TogglePopup(); update(current.id, current)"/>
+      <h1 class="font-bold text-black-text dark:text-white-text">Edit Ship</h1>
       <form class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+            <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="name">
               Ship name
             </label>
           </div>
@@ -23,7 +24,7 @@
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">
+            <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="status">
               Status
             </label>
           </div>
@@ -35,7 +36,7 @@
         </div>
 
         <div class="md:flex md:items-center">
-          <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          <button class="shadow bg-blue-regular w-full mt-2 text-black-light dark:text-white-text font-bold py-2 px-4 rounded-md"
                   type="button"
                   @click="TogglePopup(); update(current.id, current)">
             Update
@@ -44,6 +45,7 @@
       </form>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script>
@@ -85,42 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.popup {
-  position: fixed;
-  top: -20%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-inner {
-  background: #00111C;
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
-}
-
-.close-popup {
-  padding-bottom: 20px;
-  transition: color 0.5s;
-}
-
-.close-popup:hover {
-  color: lightgrey;
-  cursor: pointer;
-}
-
-/*Form*/
-
 h1 {
-  color: white;
   text-align: center;
   font-size: 24px;
   margin-bottom: 5%;
@@ -129,7 +96,6 @@ h1 {
 label {
   width: 100%;
   text-align: center;
-  color: white;
 }
 
 input {
@@ -137,24 +103,14 @@ input {
   padding: 1%;
 }
 
-input:focus{
+input:focus {
   border: 2px solid black;
 }
 
-select{
+select {
   width: 100%;
   padding: 1%;
 }
 
-button {
-  margin-top: 10%;
-  width: 100%;
-  background-color: white;
-  transition: background-color 0.5s;
-}
-
-button:hover{
-  background-color: lightskyblue;
-}
 
 </style>

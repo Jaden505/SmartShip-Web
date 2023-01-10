@@ -1,82 +1,80 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
   <Teleport to="#modal">
   <div class="modal-bg">
     <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
-      <td class="material-icons close-popup" @click="TogglePopup()">close</td>
-      <h1 class="font-bold">Create Operator</h1>
-
-      <Form @submit="createOperator" :validation-schema="schema" class="w-full max-w-sm">
+      <font-awesome-icon class="close-popup text-black-light dark:text-white-text" icon="fa-solid fa-xmark" @click="TogglePopup()"/>
+      <h1 class="font-bold text-black-text dark:text-white-text">Create Operator</h1>
+      <Form @submit="createOperator" :validation-schema="schema" class="w-full max-w-sm mt-3">
         <div class="flex" v-if="!successful">
-          <div>
-            <div class="">
-              <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
-                  Username
-                </label>
-              </div>
-              <div class="md:w-2/3">
-                <Field name="username" type="text" class="form-control" />
-                <ErrorMessage name="username" class="error-feedback" />
-              </div>
-              <div class="">
+          <div class="space-x-1">
+              <div class="md:flex md:items-center mb-6">
                 <div class="md:w-1/3">
-                  <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
+                  <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="name">
+                    Username
+                  </label>
+                </div>
+                <div class="md:w-2/3">
+                  <Field name="username" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
+                  <ErrorMessage name="username" class="error-feedback" />
+                </div>
+              </div>
+
+              <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/3">
+                  <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="email">
                     Email
                   </label>
                 </div>
                 <div class="md:w-2/3">
-                  <Field name="email" type="email" class="form-control" />
+                  <Field name="email" type="email" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                   <ErrorMessage name="email" class="error-feedback" />
                 </div>
               </div>
-              <div class="">
+              <div class="md:flex md:items-center mb-6">
                 <div class="md:w-1/3">
-                  <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+                  <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="password">
                     Password
                   </label>
                 </div>
                 <div class="md:w-2/3">
-                  <Field name="password" type="password" class="form-control" />
+                  <Field name="password" type="password" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
               </div>
-            </div>
           </div>
           <div>
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="firstname">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="firstname">
                   Firstname
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="firstname" type="text" class="form-control" />
+                <Field name="firstname" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="firstname" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="lastname">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="lastname">
                   Lastname
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="lastname" type="text" class="form-control" />
+                <Field name="lastname" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="lastname" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="gender">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="gender">
                   Gender
                 </label>
               </div>
               <div class="md:w-2/3">
-                <select name="gender" ref="gender">
+                <select name="gender" ref="gender" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white">
                   <option value=""></option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -86,12 +84,12 @@
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="nationality">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="nationality">
                   Nationality
                 </label>
               </div>
               <div class="md:w-2/3">
-                <select name="nationality" ref="nationality">
+                <select name="nationality" ref="nationality" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white">
                   <option value=""></option>
                   <option value="afghan">Afghan</option>
                   <option value="albanian">Albanian</option>
@@ -291,84 +289,84 @@
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="dateOfBirth">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="dateOfBirth">
                   Date of Birth
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="dateOfBirth" type="date" class="form-control" />
+                <Field name="dateOfBirth" type="date" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="dateOfBirth" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="phoneNumber">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="phoneNumber">
                   Phone number
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="phoneNumber" type="text" class="form-control" />
+                <Field name="phoneNumber" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="phoneNumber" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="address">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="address">
                   Address
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="address" type="text" class="form-control" />
+                <Field name="address" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="address" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="postalCode">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="postalCode">
                   PostalCode
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="postalCode" type="text" class="form-control" />
+                <Field name="postalCode" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="postalCode" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="city">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="city">
                   City
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="city" type="text" class="form-control" />
+                <Field name="city" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="city" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="country">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="country">
                   Country
                 </label>
               </div>
               <div class="md:w-2/3">
-                <Field name="country" type="text" class="form-control" />
+                <Field name="country" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
                 <ErrorMessage name="country" class="error-feedback" />
               </div>
             </div>
 
             <div class="md:flex md:items-center mb-6">
               <div class="md:w-1/3">
-                <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="ship">
+                <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="ship">
                   Ship
                 </label>
               </div>
               <div class="md:w-2/3">
-                <select name="shipID" ref="shipID">
+                <select name="shipID" ref="shipID" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white">
                   <option :value=null></option>
                   <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
                 </select>
@@ -376,8 +374,7 @@
             </div>
 
             <div class="form-group md:flex md:items-center">
-              <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" :disabled="loading">
-                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+              <button class="shadow bg-blue-regular w-full mt-2 text-black-light dark:text-white-text font-bold py-2 px-4 rounded-md">
                 Create
               </button>
             </div>
@@ -400,6 +397,11 @@
 <script>
 import ShipService from "@/services/ship.service";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
+library.add(faXmark)
 
 export default {
   name: "createManagerForm",
@@ -460,52 +462,7 @@ export default {
 </script>
 
 <style scoped>
-.popup {
-  position: fixed;
-  top: -20%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-inner {
-  background: #00111C;
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
-}
-
-.close-popup {
-  padding-bottom: 20px;
-  transition: color 0.5s;
-}
-
-.close-popup:hover {
-  color: lightgrey;
-  cursor: pointer;
-}
-
-.close-popup {
-  padding-bottom: 30px;
-  color: lightgrey;
-}
-
-.close-popup:hover {
-  color: grey;
-  cursor: pointer;
-}
-
-/*Form*/
-
 h1 {
-  color: white;
   text-align: center;
   font-size: 24px;
   margin-bottom: 5%;
@@ -514,7 +471,6 @@ h1 {
 label {
   width: 100%;
   text-align: center;
-  color: white;
 }
 
 input {
@@ -529,16 +485,5 @@ input:focus{
 select{
   width: 100%;
   padding: 1%;
-}
-
-button {
-  margin-top: 10%;
-  width: 100%;
-  background-color: white;
-  transition: background-color 0.5s;
-}
-
-button:hover{
-  background-color: lightskyblue;
 }
 </style>

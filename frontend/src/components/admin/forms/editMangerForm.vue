@@ -4,12 +4,12 @@
   <Teleport to="#modal">
   <div class="modal-bg">
     <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
-      <td class="material-icons close-popup" @click="TogglePopup(); update(current.id, current)">close</td>
+      <font-awesome-icon class="close-popup text-black-light dark:text-white-text" icon="fa-solid fa-xmark" @click="TogglePopup(); update(current.id, current)">close</font-awesome-icon>
       <h1 class="font-bold text-black-text dark:text-white-text">Edit Manager</h1>
       <form class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+            <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="name">
               Name
             </label>
           </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
+            <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="email">
               Email
             </label>
           </div>
@@ -36,7 +36,7 @@
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+            <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="password">
               Password
             </label>
           </div>
@@ -50,7 +50,7 @@
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+            <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="password">
               Ship
             </label>
           </div>
@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="md:flex md:items-center">
-            <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            <button class="shadow bg-blue-regular w-full mt-2 text-black-light dark:text-white-text font-bold py-2 px-4 rounded-md"
                     type="button"
                     @click="TogglePopup(); update(current.id, current)">
               Update
@@ -83,9 +83,15 @@
 <script>
 import UserService from "@/services/user.service";
 import ShipService from "@/services/ship.service";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
+library.add(faXmark)
 
 export default {
   name: "editManagerForm",
+  components: {FontAwesomeIcon},
   props: ['TogglePopup', 'manager'],
 
   data() {
@@ -119,39 +125,6 @@ export default {
 </script>
 
 <style scoped>
-.popup {
-  position: fixed;
-  top: -20%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-inner {
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
-}
-
-.close-popup {
-  padding-bottom: 20px;
-  transition: color 0.5s;
-}
-
-.close-popup:hover {
-  color: lightgrey;
-  cursor: pointer;
-}
-
-/*Form*/
-
 h1 {
   text-align: center;
   font-size: 24px;
@@ -175,16 +148,5 @@ input:focus{
 select{
   width: 100%;
   padding: 1%;
-}
-
-button {
-  margin-top: 10%;
-  width: 100%;
-  background-color: white;
-  transition: background-color 0.5s;
-}
-
-button:hover{
-  background-color: lightskyblue;
 }
 </style>
