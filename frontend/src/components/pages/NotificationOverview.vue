@@ -30,20 +30,19 @@
 
             </div>
           </div>
-          <div class="p-4 m-2 rounded-md text-black-text dark:text-white-text w-2/3">
-            <div>
+          <div class="p-4 m-2 rounded-md bg-purple-basic dark:bg-black-light text-black-text dark:text-white-text w-2/3">
               <h2 class="text-2xl">{{selectedNotification.title}}</h2>
+              <hr class="h-px my-2 bg-gray-700 border-0 dark:bg-gray-200">
               <section class="mt-5">
-                <h3 class="text-2xl">{{selectedNotification.category}}</h3>
-                <h3>About the ship with id: {{selectedNotification.shipId}}</h3>
-                <h3>Current value: {{selectedNotification.value}} {{selectedNotification.unit}}</h3>
-                <h2 class="text-2xl">Notification message</h2>
+                <p>Category: {{selectedNotification.category}}</p>
+                <p>Ship-id: {{selectedNotification.shipId}}</p>
+                <p class="mb-5">Exceeding value: {{selectedNotification.value}} {{selectedNotification.unit}}</p>
+                <h1 class="text-2xl">Notification message</h1>
                 <p>{{ selectedNotification.message }}</p>
               </section>
             </div>
           </div>
         </div>
-  </div>
 </template>
 
 <script>
