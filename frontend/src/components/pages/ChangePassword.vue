@@ -12,9 +12,6 @@
               </h1>
               <Form class="space-y-4 md:space-y-6" @submit="handleChangePassword()">
                 <div class="form-group">
-                  <Field name="old_password" v-model="old_password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Old Password"/>
-                </div>
-                <div class="form-group">
                   <Field name="new_password" v-model="new_password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="New Password"/>
                 </div>
                 <div class="form-group">
@@ -45,7 +42,6 @@ export default {
   },
   data() {
     return {
-      old_password: null,
       new_password: null,
       token: null
     }
@@ -59,7 +55,7 @@ export default {
   },
   methods: {
     async handleChangePassword(){
-      await authService.changePassword(this.new_password, this.old_password, this.token);
+      await authService.changePassword(this.new_password, this.token);
       this.toast.success("You have successfully changed your password! You can now close this window and go back to th login page.")
     },
   }

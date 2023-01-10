@@ -29,7 +29,7 @@
           </div>
           <div class="md:w-2/3">
             <select v-model="current.status">
-              <option v-for="(status,index) in statuses" :key="index" :value="status.id" >{{ status.status }}</option>
+              <option v-for="status in statuses" :value="status" :key="status.id">{{ status.status }}</option>
             </select>
           </div>
         </div>
@@ -48,7 +48,7 @@
 
 <script>
 import ShipService from "@/services/ship.service";
-import StatusService from "@/services/status.service";
+import { status } from "@/models/ship";
 
 export default {
   name: "editUserForm",
@@ -57,33 +57,15 @@ export default {
   data() {
     return {
       current: this.ship,
-      statuses: []
+      statuses: status
     }
   },
 
   methods: {
     update(current) {
-
-
-
       ShipService.updateShip(current.id, current)
     },
-
-    getStatuses() {
-      StatusService.get()
-          .then(response => {
-            this.statuses = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    }
-  },
-
-  mounted() {
-    this.getStatuses();
-  },
+  }
 }
 </script>
 

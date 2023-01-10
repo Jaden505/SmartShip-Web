@@ -1,5 +1,7 @@
 package com.server.server.controllers;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -194,7 +196,9 @@ public class LoginController {
 
         String token = UUID.randomUUID().toString();
 
-        userService.createPasswordResetTokenForUser(user, token);
+        LocalDate expireDate = LocalDate.now(ZoneId.systemDefault());
+
+        userService.createPasswordResetTokenForUser(user, token, expireDate);
         mailService.constructResetTokenEmail(baseUrl, token, user);
 
         return ResponseEntity.ok(new MessageResponse("Email successfully sent!"));
@@ -211,7 +215,7 @@ public class LoginController {
 
         PasswordResetToken user = passwordTokenRepository.getUserByToken(passwordResetToken.getToken());
 
-        if (user.getUser() != null && encoder.matches(changePasswordRequest.getOld_password(), user.getUser().getPassword())) {
+        if (user.getUser() != null) {
             userRepositoryJPA.changePassword(encoder.encode(changePasswordRequest.getNew_password()), user.getUser().getEmail());
         } else {
             throw new UserNotFoundException("The password or reset password token is not valid!");

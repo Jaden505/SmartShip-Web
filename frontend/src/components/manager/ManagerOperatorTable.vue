@@ -80,7 +80,7 @@ export default {
     createForm
   },
   created() {
-    UserService.getUsersByRole("operator") // Role operator
+    UserService.getUsersByRole("operator")
         .then(response => {
           this.users = response.data;
           console.log(response.data);

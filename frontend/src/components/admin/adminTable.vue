@@ -67,9 +67,24 @@ export default {
     createManagerForm
   },
 
-  mounted() {
-    this.getUsers();
-    this.getShips();
+  created() {
+    UserService.getUsersByRole("manager")
+        .then(response => {
+          this.users = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      ShipService.getAll()
+          .then(response => {
+            this.ships = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
   },
 
   data() {
@@ -97,35 +112,13 @@ export default {
   },
 
   methods: {
-    getUsers() {
-      UserService.getUsersByRole("manager")
-          .then(response => {
-            this.users = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
-    getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
     getShipName(ship) {
       if (ship == null){
         return "No ship assigned";
       }
 
       let shipFound = this.ships.filter(shipFound => shipFound.id == ship.id);
-
+      
       if (shipFound !== []) {
         isProxy(shipFound) ? ship = toRaw(shipFound[0]).name : shipFound = shipFound[0].name;
         return shipFound;

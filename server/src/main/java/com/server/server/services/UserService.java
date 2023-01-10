@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 @Transactional
 public class UserService {
@@ -14,8 +16,8 @@ public class UserService {
     @Autowired
     PasswordTokenRepository passwordTokenRepository;
 
-    public void createPasswordResetTokenForUser(User user, String token) {
-        PasswordResetToken myToken = new PasswordResetToken(token, user);
+    public void createPasswordResetTokenForUser(User user, String token, LocalDate expireDate) {
+        PasswordResetToken myToken = new PasswordResetToken(token, user, expireDate);
         passwordTokenRepository.save(myToken);
         System.out.println(myToken);
     }

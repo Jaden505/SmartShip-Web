@@ -48,10 +48,9 @@ class AuthService {
         });
     }
 
-    changePassword(new_password, old_password, token) {
+    changePassword(new_password, token) {
         return axios.post(API_URL + `changePassword?token=${token}`, {
             new_password: new_password,
-            old_password: old_password,
         });
     }
 }

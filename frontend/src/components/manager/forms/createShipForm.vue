@@ -31,19 +31,18 @@
           </div>
         </div>
 
-<!--        <div class="md:flex md:items-center mb-6">-->
-<!--          <div class="md:w-1/3">-->
-<!--            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">-->
-<!--              Status-->
-<!--            </label>-->
-<!--          </div>-->
-<!--          <div class="md:w-2/3">-->
-<!--            <select :class="{error: isError}" v-model="newShip.status">-->
-<!--              <option>Active</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--        </div>-->
-
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="status">
+              Status
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <select :class="{error: isError}" v-model="newShip.status">
+              <option v-for="status in statuses" :value="status" :key="status.id">{{ status.status }}</option>
+            </select>
+          </div>
+        </div>
         <div class="form-group md:flex md:items-center">
           <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   @click="create()">Create</button>
@@ -58,7 +57,7 @@
 
 <script>
 import ShipService from "@/services/ship.service";
-import {Ship} from "@/models/ship"
+import {Ship, status} from "@/models/ship"
 
 export default {
   name: "createUserForm",
@@ -66,9 +65,9 @@ export default {
 
   data(){
     return {
-      newShip: new Ship("","", {id: 1, status: "ACTIVE"}, "", "", 1400, 1400),
-      statuses: [],
-      isError: false
+      newShip: new Ship("","", "", "", "", 1400, 1400),
+      statuses: status,
+      isError: false,
     }
   },
 

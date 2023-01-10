@@ -383,14 +383,6 @@
           </div>
           </div>
       </Form>
-
-      <div
-          v-if="message"
-          class="alert"
-          :class="successful ? 'alert-success' : 'alert-danger'"
-      >
-        {{ message }}
-      </div>
     </div>
   </div>
   </Teleport>
@@ -431,7 +423,6 @@ export default {
             location.reload()
           },
           (error) => {
-            this.loading = false;
             this.message =
                 (error.response &&
                     error.response.data &&
@@ -458,28 +449,6 @@ export default {
 </script>
 
 <style scoped>
-.popup {
-  position: fixed;
-  top: -20%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-inner {
-  background: #00111C;
-  padding: 3%;
-  border: 2px solid black;
-  border-radius: 25px;
-  box-shadow: 5px 5px black;
-}
-
 .close-popup {
   padding-bottom: 20px;
   transition: color 0.5s;

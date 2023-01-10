@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 
 @Service
@@ -40,11 +42,9 @@ public class MailService {
     public PasswordResetToken validatePasswordResetToken(String token) {
         final PasswordResetToken passToken = passwordTokenRepository.findByToken(token);
 
-//        return !isTokenFound(passToken) ? null
-//                : isTokenExpired(passToken) ? null
-//                : passToken;
-
-        return passToken;
+        return !isTokenFound(passToken) ? null
+                : isTokenExpired(passToken) ? null
+                : passToken;
     }
 
     private boolean isTokenFound(PasswordResetToken passToken) {
@@ -52,8 +52,9 @@ public class MailService {
     }
 
     private boolean isTokenExpired(PasswordResetToken passToken) {
-        final Calendar cal = Calendar.getInstance();
-        return passToken.getExpiryDate().before(cal.getTime());
+        LocalDate expirationDate = LocalDate.now(ZoneId.systemDefault());
+
+        return passToken.getExpiryDate().isAfter(expirationDate);
     }
 
 }

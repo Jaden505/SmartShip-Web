@@ -1,3 +1,9 @@
+export const status = [
+    {id: 1, status: "ACTIVE"},
+    {id: 2, status: "IDLE"},
+    {id: 3, status: "MAINTENANCE"},
+]
+
 export class Ship {
     id;
     name;

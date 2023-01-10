@@ -91,26 +91,20 @@ export default {
       ships: []
     }
   },
-
   methods: {
     update(user_id, current) {
       UserService.updateUser(user_id, current)
     },
-
-    getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    }
   },
-
   created() {
-    this.getShips()
+    ShipService.getAll()
+        .then(response => {
+          this.ships = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
   }
 }
 </script>
