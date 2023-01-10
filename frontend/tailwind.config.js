@@ -27,7 +27,8 @@ module.exports = {
         },
         purple: {
           'basic': '#D6E8FA',
-          'dark': '#B9D7F6'
+          'dark': '#B9D7F6',
+          'light': '#D3E6F9'
         },
         white: {
           'text': '#E0E1DD',

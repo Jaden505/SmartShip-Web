@@ -5,9 +5,9 @@
     </nav>
     <div class="px-6 py-16">
         <div class="px-6">
-          <div class="w-full flex mx-auto rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
+          <div class="w-full flex mx-auto rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-purple-light dark:bg-black-light">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-white-text font-bold leading-tight tracking-tight md:text-3xl">
+              <h1 class="text-black-text dark:text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Change your password
               </h1>
               <Form class="space-y-4 md:space-y-6" @submit="handleChangePassword()">

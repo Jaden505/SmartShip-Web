@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="flex items-center w-full px-6 mx-auto lg:w-3/6">
-          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-black-light">
+          <div class="w-full rounded-md shadow-md md:mt-0 sm:max-w-md xl:p-0 bg-purple-light dark:bg-black-light">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-black-text dark:text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Sign in to your account

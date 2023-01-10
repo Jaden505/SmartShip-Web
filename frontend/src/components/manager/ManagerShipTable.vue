@@ -10,7 +10,7 @@
     <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add Ship</button>
     </div>
     <div class="mt-4">
-    <table class="text-center table-auto w-full text-white-text" id="opTable">
+    <table class="text-center table-auto w-full text-black-text dark:text-white-text">
       <thead>
       <tr>
         <th scope="col">Ship Id</th>
@@ -22,14 +22,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(ship, index) in ships" class="bg-black-light" :key="index">
+      <tr v-for="(ship, index) in ships" class="bg-purple-basic dark:bg-black-light" :key="index">
         <td class="px-3 py-4">{{ ship.id }}</td>
         <td class="px-3 py-4">{{ ship.name }}</td>
         <td class="px-3 py-4">{{ getStatusNameById(ship.status) }}</td>
         <td class="px-3 py-4">{{ getUsersByShipId(ship.id) }}</td>
         <td>
-          <div class="material-icons px-3 py-4" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship">edit</div>
-          <div class="material-icons px-3 py-4" @click="deleteShip(ship.id)">delete</div>
+          <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship" />
+          <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="deleteShip(ship.id)"/>
         </td>
       </tr>
       </tbody>
@@ -63,6 +63,9 @@ import {ref} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
 import warningShip from "@/components/manager/forms/warningShip";
 import StatusService from "@/services/status.service";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+library.add(faTrash, faPenToSquare)
 
 export default {
   name: "ManagerTable",
