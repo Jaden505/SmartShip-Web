@@ -34,7 +34,7 @@
             <p>{{ user.dateOfBirth }}</p>
           </div>
         </div>
-      </div><!--/personal-info-->
+      </div>
 
       <div class="title-section">
         <h1>Contact</h1>
@@ -55,7 +55,7 @@
             <p>{{ user.phoneNumber }}</p>
           </div>
         </div>
-      </div><!--/personal-info-->
+      </div>
 
       <div class="title-section">
         <h1>Residence</h1>
@@ -84,10 +84,10 @@
             <p>{{ user.country }}</p>
           </div>
         </div>
-      </div><!--/personal-info-->
+      </div>
       
-    </div><!--/content-->
-  </div><!--/content-container-->
+    </div>
+  </div>
 
   <edit-profile
       v-if="popupTrigger.buttonTriggerEdit"
