@@ -1,11 +1,11 @@
-<template onload="getCategories">
-  <div onload="getCategories" id="container">
+<template>
+  <div id="container">
     <div id="allParameters">
       <div class="submit-form">
         <p class="title">Create new alarm</p>
         <div class="Parameters form-group">
-          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
-          <select v-model="alarm.category" class="dropdown" type="text" name="category">
+          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Group</label>
+          <select v-model="selectedCategory" class="dropdown" type="text" name="category">
             <option v-for="(category, index) in categories"
                     :value="category"
                     :key="index">
@@ -14,18 +14,18 @@
           </select>
         </div>
         <div class="Parameters form-group">
-          <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Censor name</label>
-          <select v-model="alarm.category" class="dropdown" type="text" name="category">
-            <option v-for="(sensor, index) in sensor_names"
-                    :value="category"
+          <label class="block mb-2 text-sm font-medium text-white-text">Sensor name</label>
+          <select v-model="selectedSensor" class="dropdown" type="text" name="sensor_name">
+            <option v-for="(sensor, index) in filter()"
+                    :value="sensor"
                     :key="index">
-              {{ category }}
+              {{ sensor }}
             </option>
           </select>
         </div>
         <div class="Parameters form-group">
           <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">current Value</label>
-          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
+          <p class = "waarde">200</p>
         </div>
         <div class="Parameters form-group">
           <label for="value" class="block mb-2 text-sm font-medium text-white-text">your Value</label>
@@ -48,8 +48,15 @@ import AlarmService from "@/services/alarm.service";
 import SensordataService from "@/services/sensordata.service";
 
 export default {
-  mounted() {
+  created(){
     this.getCategories();
+    this.getSensorNameByMotor();
+    this.getSensorNameByBattery();
+    this.getSensorNameBySeaConditions();
+    this.getSensorNameByFuel();
+  },
+  mounted() {
+    // this.getCategories();
   },
   name: "AddAlarms",
   data() {
@@ -62,18 +69,47 @@ export default {
       update: "Update",
       cancel: "Cancel",
       categories: [],
+      selectedCategory: null,
+      sensor_names: [],
       sensorCat: [],
+      // sensor_groups start
+      Motors: [],
+      Seas: [],
+      Fuels: [],
+      Batteries: [],
+      // sensor_groups end
+      selectedSensor: null,
       alarm: {
         parameter: "",
         category: "",
         valueSinceLastUpdate: "",
         settedUpValue: "",
         shipId:"",
+      },
+      sensor_data: {
+        sensor_id: "",
+        gps_latitude: "",
+        gps_longtitude: "",
+        sensor_group: "",
+        sensor_name:"",
       }
     }
   },
   methods: {
-    getCategories(){
+
+    filter(){
+      if (this.selectedCategory == "Motor"){
+        return this.Motors;
+      }else if (this.selectedCategory == "Sea Conditions"){
+        return this.Seas;
+      }else if (this.selectedCategory == "Fuel"){
+        return this.Fuels;
+      }else if (this.selectedCategory == "Battery"){
+        return this.Batteries;
+      }
+    },
+
+    async getCategories(){
      SensordataService.getCategories()
          .then(response => {
            this.categories = response.data;
@@ -83,6 +119,55 @@ export default {
            console.log(e);
          })
     },
+
+    async getSensorNameByMotor(){
+      SensordataService.getSensorNameByMotor()
+          .then(response => {
+            this.Motors = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+
+    async getSensorNameBySeaConditions(){
+      SensordataService.getSensorNameBySeaConditions()
+          .then(response => {
+            this.Seas = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+
+    async getSensorNameByFuel(){
+      SensordataService.getSensorNameByFuel()
+          .then(response => {
+            this.Fuels = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+
+    async getSensorNameByBattery(){
+      SensordataService.getSensorNameByBattery()
+          .then(response => {
+            this.Batteries = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+
+    filterOnGroup(){
+      this.Batteries
+    },
+
     cancelForm(){
       window.location.reload(true);
     },
@@ -94,9 +179,9 @@ export default {
         category: this.alarm.category,
         valueSinceLastUpdate: this.alarm.valueSinceLastUpdate,
         settedUpValue: this.alarm.settedUpValue,
-        shipId: this.alarm.shipId
       };
 
+      console.log(alarm)
       AlarmService.addAlarm(alarm)
           .then(response => {
             window.location.reload(true)
@@ -204,6 +289,13 @@ label{
   margin-left: 78px;
   width: 70%;
   border-radius: 10px;
+}
+
+.waarde{
+  width: 70%;
+  height: 20%;
+  margin-left: 78px;
+  color: white;
 }
 
 </style>

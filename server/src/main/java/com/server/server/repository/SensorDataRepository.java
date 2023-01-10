@@ -12,4 +12,20 @@ public interface SensorDataRepository extends JpaRepository<SensorData, Integer>
     @Query(value = "select distinct s.group" +
             " from SensorData s")
     public List<String> getCategories();
+
+    @Query(value = "select distinct s.sensorName" +
+            " from SensorData s where s.group = 'Motor' ")
+    public List<String> getSensorNameByMotor();
+
+    @Query(value = "select distinct s.sensorName" +
+            " from SensorData s where s.group = 'Sea Conditions' ")
+    public List<String> getSensorNameBySeaConditions();
+
+    @Query(value = "select distinct s.sensorName" +
+            " from SensorData s where s.group = 'Fuel' ")
+    public List<String> getSensorNameByFuel();
+
+    @Query(value = "select distinct s.sensorName" +
+            " from SensorData s where s.group = 'Battery' ")
+    public List<String> getSensorNameByBattery();
 }

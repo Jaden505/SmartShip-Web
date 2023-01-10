@@ -32,6 +32,26 @@ public class SensorDataController {
         return repo.getCategories();
     }
 
+    @GetMapping("/Motor")
+    public List<String> getSensorNameByMotor() {
+        return repo.getSensorNameByMotor();
+    }
+
+    @GetMapping("/SeaConditions")
+    public List<String> getSensorNameBySeaConditions() {
+        return repo.getSensorNameBySeaConditions();
+    }
+
+    @GetMapping("/Fuel")
+    public List<String> getSensorNameByFuel() {
+        return repo.getSensorNameByFuel();
+    }
+
+    @GetMapping("/Battery")
+    public List<String> getSensorNameByBattery() {
+        return repo.getSensorNameByBattery();
+    }
+
     @GetMapping("/{ship_id}")
     public ResponseEntity<List<SensorData>> getByShipId(@PathVariable String ship_id){
         return ResponseEntity.ok(repo.findByShipId(ship_id));
