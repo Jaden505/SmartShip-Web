@@ -49,7 +49,7 @@ import SensordataService from "@/services/sensordata.service";
 
 export default {
   mounted() {
-    this.getAlarms();
+    this.getCategories();
   },
   name: "AddAlarms",
   data() {
@@ -74,7 +74,6 @@ export default {
   },
   methods: {
     getCategories(){
-      alert("hello")
      SensordataService.getCategories()
          .then(response => {
            this.categories = response.data;
