@@ -34,10 +34,6 @@
                 </div>
                 <div class="form-group">
                   <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
-                  <span
-                      v-show="loading"
-                      class="spinner-border spinner-border-sm"
-                  ></span>
                     <span class="font-semibold text-white-text">Sign In</span>
                   </button>
                 </div>

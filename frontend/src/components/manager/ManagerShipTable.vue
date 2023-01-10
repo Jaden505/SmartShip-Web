@@ -28,8 +28,8 @@
         <td class="px-3 py-4">{{ getStatusNameById(ship.status) }}</td>
         <td class="px-3 py-4">{{ getUsersByShipId(ship.id) }}</td>
         <td>
-          <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship" />
-          <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="deleteShip(ship.id)"/>
+          <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.ship = ship" />
+          <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="deleteShip(ship.id)"/>
         </td>
       </tr>
       </tbody>
@@ -59,7 +59,7 @@
 import UserService from "../../services/user.service";
 import ShipService from "@/services/ship.service";
 import editForm from "@/components/manager/forms/editShipForm";
-import {ref} from 'vue';
+import {ref, toRaw} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
 import warningShip from "@/components/manager/forms/warningShip";
 import StatusService from "@/services/status.service";
@@ -173,7 +173,7 @@ export default {
     },
 
     getStatusNameById(status_id) {
-      let status_name = (this.statuses[status_id-1].status).toString();
+      let status_name = toRaw(this.statuses[status_id+1]).status.toString()
       status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
       return status_name;
     }
