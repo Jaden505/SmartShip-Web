@@ -71,7 +71,7 @@ export default {
 
   data(){
     return {
-      newShip: new Ship("","", "", 1400, 1400), // Defaults
+      newShip: new Ship("","", "", "", "", 1400, 1400), // Defaults
       statuses: [],
       isError: false
     }

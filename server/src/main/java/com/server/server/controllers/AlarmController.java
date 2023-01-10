@@ -50,9 +50,12 @@ public class AlarmController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-//
+
     @PostMapping("/Alarms")
     public ResponseEntity<Alarm> addAlarms(@RequestBody Alarm alarm){
+
+        System.out.println(alarm.getParameter());
+
         try{
             Alarm _alarm = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getValueSinceLastUpdate(), alarm.getSettedUpValue(), alarm.getShip_id());
             return new ResponseEntity<>(alarmRepo.save(_alarm), HttpStatus.OK);

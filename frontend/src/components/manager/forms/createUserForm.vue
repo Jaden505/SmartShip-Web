@@ -376,8 +376,7 @@
             </div>
 
             <div class="form-group md:flex md:items-center">
-              <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" :disabled="loading">
-                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+              <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
                 Create
               </button>
             </div>
@@ -400,6 +399,7 @@
 <script>
 import ShipService from "@/services/ship.service";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import {User} from "@/models/user";
 
 export default {
   name: "createManagerForm",
@@ -410,7 +410,7 @@ export default {
     ErrorMessage,
   },
 
-  data(){
+  data() {
     return {
       ships: [],
     }
@@ -420,10 +420,13 @@ export default {
     createOperator(user) {
       user.gender = this.$refs.gender.value;
       user.nationality = this.$refs.nationality.value;
-      user.shipID = this.$refs.shipID.value; // Set ship id
-      console.log(user)
+      user.shipID = this.$refs.shipID.value;
 
-      this.$store.dispatch("auth/register", user).then(
+      let newUser = new User(user.address, user.city, user.country,
+          user.dateOfBirth, user.firstname, user.gender, user.lastname, user.nationality,
+          user.phoneNumber, user.postalCode, user.username, user.email, user.password, user.role, user.shipID)
+
+      this.$store.dispatch("auth/register", newUser).then(
           () => {
             location.reload()
           },
@@ -440,21 +443,16 @@ export default {
           }
       );
     },
-
-    getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    }
   },
-
   created() {
-    this.getShips()
+    ShipService.getAll()
+        .then(response => {
+          this.ships = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
   }
 }
 </script>

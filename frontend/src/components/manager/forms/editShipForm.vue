@@ -37,7 +37,7 @@
         <div class="md:flex md:items-center">
           <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="button"
-                  @click="TogglePopup(); update(current.id, current)">
+                  @click="TogglePopup(); update(current)">
             Update
           </button>
         </div>
@@ -62,8 +62,11 @@ export default {
   },
 
   methods: {
-    update(ship_id, current) {
-      ShipService.updateShip(ship_id, current)
+    update(current) {
+
+
+
+      ShipService.updateShip(current.id, current)
     },
 
     getStatuses() {

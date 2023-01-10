@@ -79,10 +79,23 @@ export default {
     editForm,
     createForm
   },
-
-  mounted() {
-    this.getUsers();
-    this.getShips();
+  created() {
+    UserService.getUsersByRole("operator") // Role operator
+        .then(response => {
+          this.users = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    ShipService.getAll()
+        .then(response => {
+          this.ships = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
   },
 
   data() {
@@ -116,17 +129,6 @@ export default {
   },
 
   methods: {
-    getUsers() {
-      UserService.getUsersByRole("operator") // Role operator
-          .then(response => {
-            this.users = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
     toggle(operator) {
       this.operator = operator
     },
@@ -139,18 +141,6 @@ export default {
         location.reload()
       }
     },
-
-    getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
     getShipName(ship) {
       if (ship == null) {
         return "No ship assigned";

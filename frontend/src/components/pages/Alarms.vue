@@ -40,8 +40,15 @@ library.add(faPlus, faTrash)
 
 export default {
   components: {AddAlarms},
-  mounted() {
-    this.getAlarms();
+  created() {
+    AlarmService.getAll()
+        .then(response => {
+          this.alarms = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
   },
   data() {
     return {
@@ -60,16 +67,6 @@ export default {
   methods: {
     openPop(){
       this.add = true;
-    },
-    getAlarms() {
-      AlarmService.getAll()
-          .then(response => {
-            this.alarms = response.data
-            console.log(response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          })
     },
     deleteAlarm(index){
       AlarmService.delete(index)

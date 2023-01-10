@@ -23,11 +23,7 @@ class Alarms {
 
     addAlarm(alarm) {
         return axios.post(API_URL_ALARMS, {
-            parameter: alarm.parameter,
-            category: alarm.category,
-            value_since_last_update: alarm.valueSinceLastUpdate,
-            setted_up_value: alarm.settedUpValue,
-            ship_id: alarm.ship_idtext
+            alarm
         }, {
             headers: authHeader()
         });

@@ -59,7 +59,7 @@
 import UserService from "../../services/user.service";
 import ShipService from "@/services/ship.service";
 import editForm from "@/components/manager/forms/editShipForm";
-import {ref} from 'vue';
+import {ref, toRaw} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
 import warningShip from "@/components/manager/forms/warningShip";
 import StatusService from "@/services/status.service";
@@ -173,7 +173,7 @@ export default {
     },
 
     getStatusNameById(status_id) {
-      let status_name = (this.statuses[status_id-1].status).toString();
+      let status_name = toRaw(this.statuses[status_id+1]).status.toString()
       status_name = status_name.charAt(0) + status_name.substring(1).toLowerCase(); // Make lowercase except for first letter
       return status_name;
     }
