@@ -15,8 +15,8 @@
         </div>
         <div class="Parameters form-group">
           <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Censor name</label>
-          <select @click="getCategories" v-model="alarm.category" class="dropdown" type="text" name="category">
-            <option v-for="(category, index) in categories"
+          <select v-model="alarm.category" class="dropdown" type="text" name="category">
+            <option v-for="(sensor, index) in sensor_names"
                     :value="category"
                     :key="index">
               {{ category }}
