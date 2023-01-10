@@ -5,22 +5,30 @@
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
 
-    <div v-for="(alarm, index) in alarms" :key="index" class="flex-box bg-blue-regular dark:bg-black-light">
+    <div v-for="(alarm, index) in alarms" :key="index" class="flex-box">
+      <!--      <button id="edit" @click="showModal(alarm)">Edit</button>-->
       <div class="Parameters">{{ parametertext + alarm.parameter }}</div>
       <div class="Parameters">{{ categorytext + alarm.category }}</div>
       <div class="Parameters">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</div>
-      <div class="Parameters">{{ settedUpValuetext+ alarm.settedUpValue }}</div>
+      <div class="Parameters">{{ settedUpValuetext + alarm.settedUpValue }}</div>
       <div class="flex">
+        <!--        <button class="flex-child" id="slide_start_button">-->
+        <!--          {{ star }}-->
+        <!--        </button>-->
 
-        <button class="flex-child bg-blue-700 dark:bg-gray-700" id="slide_stop_button" @click="deleteAlarm(alarm.id)">
+        <button class="flex-child" id="slide_stop_button" @click="deleteAlarm(alarm.id)">
           {{ remove }}
         </button>
+        <!--        <input type="button" class="flex-child" id="slide_start_button">-->
+        <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
       </div>
     </div>
-    <button class="flex-box bg-blue-regular dark:bg-black-light" id="slide_start_button" @click="openPop()">
+    <button class="flex-box" id="slide_start_button" @click="openPop()">
       <svg class="plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M200 344V280H136C122.7 280 112 269.3 112 256C112 242.7 122.7 232 136 232H200V168C200 154.7 210.7 144 224 144C237.3 144 248 154.7 248 168V232H312C325.3 232 336 242.7 336 256C336 269.3 325.3 280 312 280H248V344C248 357.3 237.3 368 224 368C210.7 368 200 357.3 200 344zM0 96C0 60.65 28.65 32 64 32H384C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96zM48 96V416C48 424.8 55.16 432 64 432H384C392.8 432 400 424.8 400 416V96C400 87.16 392.8 80 384 80H64C55.16 80 48 87.16 48 96z"/></svg>
     </button>
-    </div>
+    <!--        <input type="button" class="flex-child" id="slide_start_button">-->
+    <!--        <input type="button" class="flex-child" id="slide_stop_button">-->
+  </div>
   <AddAlarms v-if="this.add"></AddAlarms>
 </template>
 <script>
@@ -47,8 +55,29 @@ export default {
     }
   },
   methods: {
+    // Creating function
+    showModal(alarm){
+      this.selectedalarm = alarm;
+      this.select = true;
+    },
+    cancelModal(){
+      this.add = false;
+      this.select = false;
+      AlarmService;
+    },
     openPop(){
       this.add = true;
+
+    },
+    updateAlarms(id) {
+      AlarmService.put(id)
+          .then(response => {
+            window.location.reload(true)
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     },
     getAlarms() {
       AlarmService.getAll()
@@ -93,6 +122,7 @@ export default {
 .flex-box {
   width: 320px;
   height: 170px;
+  background-color: #343434;
   color: white;
   border-radius: 20px;
   margin: 20px;
@@ -120,7 +150,8 @@ export default {
 }
 
 .flex-child:first-child {
-  color: white;
+  background-color: #656565;
+  color: #202020;
   margin-left: 73%;
 }
 
@@ -132,6 +163,7 @@ export default {
   display: inline-block;
   margin-top: 20px;
   float: left;
+  background-color: deeppink;
   width: 22%;
   border-radius: 8px;
   margin-left: 10px;

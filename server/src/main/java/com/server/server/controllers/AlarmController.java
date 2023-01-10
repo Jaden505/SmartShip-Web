@@ -1,6 +1,7 @@
 package com.server.server.controllers;
 
 import com.server.server.model.Alarm;
+import com.server.server.model.SensorData;
 import com.server.server.repository.AlarmRepository;
 import org.apache.el.parser.AstLambdaExpression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class AlarmController {
         alarm.addAttribute("Alarms",alarmRepo.findAll());
         return alarmRepo.findAll();
     }
+
     @DeleteMapping("/Alarms/{index}")
     public ResponseEntity<Void> delete (@PathVariable int index) {
         alarmRepo.deleteById(index);

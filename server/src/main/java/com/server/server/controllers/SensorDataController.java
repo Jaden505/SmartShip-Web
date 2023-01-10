@@ -27,6 +27,11 @@ public class SensorDataController {
         return ResponseEntity.ok(repo.findAll());
     }
 
+    @GetMapping("/Categories")
+    public List<String> getCategories() {
+        return repo.getCategories();
+    }
+
     @GetMapping("/{ship_id}")
     public ResponseEntity<List<SensorData>> getByShipId(@PathVariable String ship_id){
         return ResponseEntity.ok(repo.findByShipId(ship_id));

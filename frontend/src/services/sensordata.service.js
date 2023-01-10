@@ -15,6 +15,12 @@ class SensorDataService {
             headers: authHeader()
         })
     }
+
+    getCategories(){
+        return axios.get(API_URL + "/Categories", {
+            headers: authHeader()
+        })
+    }
 }
 
 export default new SensorDataService();

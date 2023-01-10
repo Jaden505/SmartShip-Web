@@ -1,45 +1,56 @@
-<template>
-  <Teleport to="#modal">
-    <div class="container bg-blue-regular dark:bg-black-light">
-      <div class="modal-bg">
-        <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
-          <div class="submit-form">
-            <p class="title text-black-text dark:text-white-text">Create new alarm</p>
-            <div class="Parameters form-group">
-              <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
-              <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
-            </div>
-            <div class="Parameters form-group">
-              <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
-              <input v-model="alarm.category" class="form-control" type="text" name="category"/>
-            </div>
-            <div class="Parameters form-group">
-              <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
-              <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
-            </div>
-            <div class="Parameters form-group">
-              <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
-              <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
-            </div>
-            <div class="Parameters form-group">
-              <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
-              <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
-            </div>
-            <button class="button bg-blue-700 dark:bg-gray-700" @click="addAlarm">
-              {{ update }}
-            </button>
+<template onload="getCategories">
+  <div onload="getCategories" id="container">
+    <div id="allParameters">
+      <div class="submit-form">
+        <p class="title">Create new alarm</p>
+        <div class="Parameters form-group">
+          <label for="category" class="block mb-2 text-sm font-medium text-white-text">Category</label>
+          <select v-model="alarm.category" class="dropdown" type="text" name="category">
+            <option v-for="(category, index) in categories"
+                    :value="category"
+                    :key="index">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+        <div class="Parameters form-group">
+          <label for="parameter" class="block mb-2 text-sm font-medium text-white-text">Censor name</label>
+          <select @click="getCategories" v-model="alarm.category" class="dropdown" type="text" name="category">
+            <option v-for="(category, index) in categories"
+                    :value="category"
+                    :key="index">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+        <div class="Parameters form-group">
+          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">current Value</label>
+          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
+        </div>
+        <div class="Parameters form-group">
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">your Value</label>
+          <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
+        </div>
+        <button class="button" id="cancel" @click="cancelForm">
+          {{ cancel }}
+        </button>
+        <button class="button" id="update" @click="addAlarm">
+          {{ update }}
+        </button>
 
-          </div>
-        </div>
       </div>
-        </div>
-  </Teleport>
+    </div>
+  </div>
 </template>
 
 <script>
 import AlarmService from "@/services/alarm.service";
+import SensordataService from "@/services/sensordata.service";
 
 export default {
+  mounted() {
+    this.getAlarms();
+  },
   name: "AddAlarms",
   data() {
     return {
@@ -50,6 +61,8 @@ export default {
       ship_idtext: "Ship-id: ",
       update: "Update",
       cancel: "Cancel",
+      categories: [],
+      sensorCat: [],
       alarm: {
         parameter: "",
         category: "",
@@ -60,6 +73,21 @@ export default {
     }
   },
   methods: {
+    getCategories(){
+      alert("hello")
+     SensordataService.getCategories()
+         .then(response => {
+           this.categories = response.data;
+           console.log(response.data);
+         })
+         .catch(e => {
+           console.log(e);
+         })
+    },
+    cancelForm(){
+      window.location.reload(true);
+    },
+
     addAlarm() {
 
       const alarm = {
@@ -78,32 +106,35 @@ export default {
           .catch(e => {
             console.log(e)
           })
+    },
+    getAllCategories() {
+      AlarmService.getAllCategories()
+          .then(response => {
+            this.alarms = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
   }
 }
 </script>
 
 <style scoped>
-.modal-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-
-  background-color: rgba(0,0,0, 0.5);
-
-  display: flex;
-  justify-content: center;
+#container {
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  z-index: 99;
   align-items: center;
-}
-
-.modal {
-  position: relative;
-  background: white;
-  padding: 50px 100px;
-  border-radius: 5px;
-  box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
+  justify-content: center;
+  width: auto;
+  height: auto;
+  background-color: #343434;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 2);
 }
 
 .Parameters {
@@ -115,14 +146,9 @@ export default {
 input{
   border-radius: 10px;
 }
-
-.button{
-  width: 30%;
-  height: 50px;
-  margin-top: 10%;
-  margin-left: 100px;
-  color: white;
+#allParameters{
   border-radius: 20px;
+  height: auto;
 }
 
 input{
@@ -149,7 +175,36 @@ label{
   margin-top: 20px;
   margin-left: 130px;
   font-size: 200%;
+  color: white;
 }
 
+#cancel{
+  margin-left: 80px;
+  background-color: #656565;
+}
+
+#cancel , #update {
+  display:inline-block;
+  /* additional code */
+}
+
+#update{
+  background-color: #656565;
+}
+
+.button{
+  width: 35%;
+  height: 50px;
+  margin-top: 10%;
+  margin-left: 10px;
+  color: white;
+  border-radius: 20px;
+}
+
+.dropdown{
+  margin-left: 78px;
+  width: 70%;
+  border-radius: 10px;
+}
 
 </style>
