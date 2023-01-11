@@ -24,10 +24,6 @@
           </select>
         </div>
         <div class="Parameters form-group">
-          <label for="settedUpValue" class="block mb-2 text-sm font-medium text-white-text">current Value</label>
-          <p class = "waarde">200</p>
-        </div>
-        <div class="Parameters form-group">
           <label for="value" class="block mb-2 text-sm font-medium text-white-text">your Value</label>
           <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
         </div>
