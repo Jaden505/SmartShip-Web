@@ -46,6 +46,8 @@
 <script>
 import AlarmService from "@/services/alarm.service";
 import SensordataService from "@/services/sensordata.service";
+import {toRaw} from "vue";
+import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 
 export default {
   created(){
@@ -54,9 +56,6 @@ export default {
     this.getSensorNameByBattery();
     this.getSensorNameBySeaConditions();
     this.getSensorNameByFuel();
-  },
-  mounted() {
-    // this.getCategories();
   },
   name: "AddAlarms",
   data() {
@@ -78,6 +77,7 @@ export default {
       Fuels: [],
       Batteries: [],
       // sensor_groups end
+      shipId: null,
       selectedSensor: null,
       alarm: {
         parameter: "",
@@ -102,32 +102,44 @@ export default {
       }
     }
   },
+
+  watch: {
+    input: function () {
+      // eslint-disable-next-line no-undef
+      app.input = localStorage.getItem('ship');
+    }
+  },
+
   methods: {
 
-    filter(){
-      if (this.selectedCategory == "Motor"){
+    localStorage() {
+      console.log(this.shipId)
+    },
+
+    filter() {
+      if (this.selectedCategory == "Motor") {
         return this.Motors;
-      }else if (this.selectedCategory == "Sea Conditions"){
+      } else if (this.selectedCategory == "Sea Conditions") {
         return this.Seas;
-      }else if (this.selectedCategory == "Fuel"){
+      } else if (this.selectedCategory == "Fuel") {
         return this.Fuels;
-      }else if (this.selectedCategory == "Battery"){
+      } else if (this.selectedCategory == "Battery") {
         return this.Batteries;
       }
     },
 
-    async getCategories(){
-     SensordataService.getCategories()
-         .then(response => {
-           this.categories = response.data;
-           console.log(response.data);
-         })
-         .catch(e => {
-           console.log(e);
-         })
+    async getCategories() {
+      SensordataService.getCategories()
+          .then(response => {
+            this.categories = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
     },
 
-    async getSensorNameByMotor(){
+    async getSensorNameByMotor() {
       SensordataService.getSensorNameByMotor()
           .then(response => {
             this.Motors = response.data;
@@ -138,7 +150,7 @@ export default {
           })
     },
 
-    async getSensorNameBySeaConditions(){
+    async getSensorNameBySeaConditions() {
       SensordataService.getSensorNameBySeaConditions()
           .then(response => {
             this.Seas = response.data;
@@ -149,7 +161,7 @@ export default {
           })
     },
 
-    async getSensorNameByFuel(){
+    async getSensorNameByFuel() {
       SensordataService.getSensorNameByFuel()
           .then(response => {
             this.Fuels = response.data;
@@ -160,7 +172,7 @@ export default {
           })
     },
 
-    async getSensorNameByBattery(){
+    async getSensorNameByBattery() {
       SensordataService.getSensorNameByBattery()
           .then(response => {
             this.Batteries = response.data;
@@ -171,11 +183,11 @@ export default {
           })
     },
 
-    filterOnGroup(){
+    filterOnGroup() {
       this.Batteries
     },
 
-    cancelForm(){
+    cancelForm() {
       window.location.reload(true);
     },
 
