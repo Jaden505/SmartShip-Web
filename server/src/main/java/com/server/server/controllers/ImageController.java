@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -43,6 +44,12 @@ public class ImageController {
     @GetMapping("/{userId}")
     public ResponseEntity<?> downloadImage(@PathVariable int userId){
         byte[] imageData = service.downloadImage(userId);
+
+        if (imageData == null){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(null);
+        }
+
         String encImg = Base64.getEncoder().encodeToString(imageData);
 
         return ResponseEntity.status(HttpStatus.OK)

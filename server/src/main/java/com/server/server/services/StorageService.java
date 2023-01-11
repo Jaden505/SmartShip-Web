@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -39,8 +40,15 @@ public class StorageService {
         return null;
     }
 
-    public byte[] downloadImage(int user){
-        Optional<ImageData> dbImageData = Optional.ofNullable(storageRepository.findByUserId(user));
+    public byte[] downloadImage(int userId){
+        ImageData imageData = storageRepository.findByUserId(userId);
+
+        if (imageData == null) {
+            return null;
+        }
+
+        Optional<ImageData> dbImageData = Optional.of(imageData);
+
         byte[] images =ImageUtils.decompressImage(dbImageData.get().getImageData());
         return images;
     }

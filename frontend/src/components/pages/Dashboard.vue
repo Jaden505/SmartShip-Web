@@ -118,7 +118,9 @@ export default {
   },
   created() {
     uploadService.getFile(this.currentUser.id).then(response => {
-      this.userImage = "data:image/jpeg;base64," + response.data
+      if (response.data !== "") {
+        this.userImage = "data:image/jpeg;base64," + response.data
+      }
     }).catch(e => {
       console.log(e)
     });
