@@ -2,7 +2,6 @@ import {createRouter, createWebHashHistory} from "vue-router";
 
 import Login from "@/components/Login";
 import PowerUsage from "@/components/pages/PowerUsage";
-import ShipInfo from "@/components/ship/Rating";
 import ManagerDashboard from "@/components/manager/ManagerDashboard";
 import ManagerOperator from "@/components/manager/ManagerOperatorTable";
 import ManagerShips from "@/components/manager/ManagerShipTable";
@@ -36,11 +35,6 @@ const routes = [
             }, {
                 path: "/admin",
                 component: AdminTable,
-                props: true
-            },
-            {
-                path: "/info",
-                component: ShipInfo,
                 props: true
             },
             {

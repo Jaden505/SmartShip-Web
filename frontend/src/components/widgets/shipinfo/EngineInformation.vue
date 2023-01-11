@@ -1,6 +1,6 @@
 <template>
   <canvas id="engine-oil-temperature"></canvas>
-  <h1 v-if="lackData">Not enough data is provided to display this graph</h1>
+  <h1 class="text-2xl text-black-light dark:text-white-text" v-if="lackData">Not enough data is provided to display this graph</h1>
 </template>
 
 <script>

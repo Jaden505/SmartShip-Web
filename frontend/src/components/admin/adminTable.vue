@@ -1,6 +1,4 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
   <div v-motion :delay="100"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :initial="{ opacity: 0, y: 100 }"
@@ -10,7 +8,7 @@
       <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
     </div>
     <div class="mt-4">
-      <table class="text-center table-auto w-full text-black-text dark:text-white-text ">
+      <table class="text-center table-auto w-full text-black-text dark:text-white-text">
         <thead>
         <tr>
           <th scope="col" >Manager Id</th>
@@ -22,14 +20,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(manager, index) in users" :key="index" class="bg-blue-regular dark:bg-black-light">
+        <tr v-for="(manager, index) in users" :key="index" class="bg-purple-basic dark:bg-black-light">
           <td>{{ manager.id }}</td>
           <td >{{ manager.username }}</td>
           <td >{{ manager.email }}</td>
           <td >{{ getShipName(manager.ship) }}</td>
           <td>
-            <div class="material-icons px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager">edit</div>
-            <div class="material-icons px-3 py-4 cursor-pointer" @click="deleteUser(manager.id)">delete</div>
+            <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="deleteUser(manager.id)"/>
+            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager"/>
           </td>
         </tr>
         </tbody>
@@ -57,6 +55,11 @@ import editMangerForm from "@/components/admin/forms/editMangerForm";
 import createManagerForm from "@/components/admin/forms/createManagerForm";
 import {isProxy, ref, toRaw} from 'vue';
 import ShipService from "@/services/ship.service";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import {useToast} from "vue-toastification";
+library.add(faTrash, faPenToSquare)
+
 
 export default {
   name: "ManagerTable",
@@ -88,9 +91,12 @@ export default {
       popupTrigger.value[trigger] = !popupTrigger.value[trigger]
     };
 
+    const toast = useToast();
+
     return {
       popupTrigger,
-      TogglePopup
+      TogglePopup,
+      toast
     }
   },
 
@@ -137,10 +143,12 @@ export default {
 
     deleteUser(user_id){
       if (confirm("Are you sure you want to delete this manager?")) {
-        UserService.deleteUser(user_id).catch(e => {
+        UserService.deleteUser(user_id).then(response => {
+          console.log(response)
+        }).catch(e => {
+          this.toast.error("Cannot delete the manager. Disconnect all operator and try again!")
           console.log(e)
         })
-        location.reload()
       }
     },
 

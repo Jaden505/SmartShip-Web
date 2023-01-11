@@ -2,7 +2,7 @@
   <button class="text-black-text dark:text-white-text text-sm" @click="isModalOpen = true">Forgot Password?</button>
   <Teleport to="#modal">
     <div class="modal-bg" v-if="isModalOpen">
-      <div v-click-outside="onClickOutside" class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
+      <div v-click-outside="onClickOutside" class="modal p-10 rounded-md shadow-md bg-purple-basic dark:bg-black-light">
         <div class="flex items-start justify-between rounded-t pb-4">
           <h3 class="text-xl font-semibold text-white-text">
             Please fill your email!

@@ -1,12 +1,10 @@
 <template>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <div class="content-container rounded-b-md bg-white-basic dark:bg-black-light">
+    <div class="content text-black-light dark:text-white-text">
 
-  <div class="content-container">
-    <div class="content">
-
-      <div class="title-section">
+      <div class="title-section flex">
         <h1>Personal</h1>
-        <div class="material-icons px-3 py-4 edit pointer" @click="TogglePopup('buttonTriggerEdit')">edit</div>
+        <font-awesome-icon icon="fa-solid fa-pen-to-square" class="w-5 h-5 px-3 py-4 edit pointer text-black-text dark:text-white-text" @click="TogglePopup('buttonTriggerEdit')"/>
       </div>
 
       <hr class="underline">
@@ -87,7 +85,7 @@
           </div>
         </div>
       </div><!--/personal-info-->
-      
+
     </div><!--/content-->
   </div><!--/content-container-->
 
@@ -104,6 +102,9 @@
 import {ref, toRaw} from "vue";
 import userService from "@/services/user.service";
 import editProfile from "@/components/Profile/edit/editProfile";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+library.add(faPenToSquare)
 
 export default {
   name: "Personal",
@@ -173,21 +174,11 @@ export default {
 </script>
 
 <style scoped>
-.content-container {
-  background-color: rgba(32, 31, 31, 0.97);
-}
-
-.content{
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .title-section{
   display: flex;
   padding: 1%;
   font-size: 32px;
-  color: white;
 }
 
 h1{
@@ -210,7 +201,6 @@ h1{
 
 .personal-record{
   display: flex;
-  color: white;
   margin-bottom: 1%;
 }
 

@@ -3,63 +3,62 @@
 
   <Teleport to="#modal">
     <div class="modal-bg">
-    <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
-      <td class="material-icons close-popup" @click="TogglePopup()">close</td>
+    <div class="modal p-10 rounded-md shadow-md bg-purple-basic dark:bg-black-light" v-motion-fade>
+      <font-awesome-icon class="close-popup text-black-light dark:text-white-text" icon="fa-solid fa-xmark" @click="TogglePopup()"/>
       <h1 class="font-bold text-black-text dark:text-white-text">Create Manager</h1>
       <Form @submit="createOperator" :validation-schema="schema" class="w-full max-w-sm">
         <div v-if="!successful">
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="name">
+              <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="name">
                 Name
               </label>
             </div>
             <div class="md:w-2/3">
-              <Field name="username" type="text" class="form-control" />
+              <Field name="username" type="text" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
               <ErrorMessage name="username" class="error-feedback" />
             </div>
           </div>
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="email">
+              <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="email">
                 Email
               </label>
             </div>
             <div class="md:w-2/3">
-              <Field name="email" type="email" class="form-control" />
+              <Field name="email" type="email" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
               <ErrorMessage name="email" class="error-feedback" />
             </div>
           </div>
 
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="password">
+              <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="password">
                 Password
               </label>
             </div>
             <div class="md:w-2/3">
-              <Field name="password" type="password" class="form-control" />
+              <Field name="password" type="password" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
               <ErrorMessage name="password" class="error-feedback" />
             </div>
           </div>
           <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
-              <label class="block text-black-text dark:text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="ship">
+              <label class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4" for="ship">
                 Ship
               </label>
             </div>
             <div class="md:w-2/3">
-              <select name="shipID" ref="shipID">
+              <select name="shipID" ref="shipID" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                 <option :value=null></option>
                 <option v-for="(ship,index) in ships" :key="index" :value="ship.id">{{ ship.name }}</option>
               </select>
             </div>
           </div>
           <div class="form-group md:flex md:items-center">
-            <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" :disabled="loading">
-              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+            <button class="shadow bg-blue-regular w-full mt-2 text-black-light dark:text-white-text font-bold py-2 px-4 rounded-md">
               Create
             </button>
           </div>
@@ -82,6 +81,12 @@
 import ShipService from "@/services/ship.service";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
+library.add(faXmark)
+
 export default {
   name: "createManagerForm",
   props: ['TogglePopup'],
@@ -89,6 +94,7 @@ export default {
     Form,
     Field,
     ErrorMessage,
+    FontAwesomeIcon
   },
 
   data(){
@@ -141,50 +147,6 @@ export default {
 </script>
 
 <style scoped>
-.modal-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-
-  background-color: rgba(0,0,0, 0.5);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal {
-  position: relative;
-  background: white;
-  padding: 20px 50px;
-  border-radius: 5px;
-  box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
-}
-
-.close-popup {
-  padding-bottom: 20px;
-  transition: color 0.5s;
-}
-
-.close-popup:hover {
-  color: lightgrey;
-  cursor: pointer;
-}
-
-.close-popup {
-  padding-bottom: 30px;
-  color: lightgrey;
-}
-
-.close-popup:hover {
-  color: grey;
-  cursor: pointer;
-}
-
-/*Form*/
-
 h1 {
   text-align: center;
   font-size: 24px;
@@ -208,16 +170,5 @@ input:focus{
 select{
   width: 100%;
   padding: 1%;
-}
-
-button {
-  margin-top: 10%;
-  width: 100%;
-  background-color: white;
-  transition: background-color 0.5s;
-}
-
-button:hover{
-  background-color: lightskyblue;
 }
 </style>

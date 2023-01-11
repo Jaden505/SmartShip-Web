@@ -1,6 +1,7 @@
 package com.server.server.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,11 +19,12 @@ public class PasswordResetToken {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
-    private Date expiryDate;
+    private LocalDate expiryDate;
 
-    public PasswordResetToken(String token, User user) {
+    public PasswordResetToken(String token, User user, LocalDate expiryDate) {
         this.token = token;
         this.user = user;
+        this.expiryDate = expiryDate;
     }
 
     public PasswordResetToken() {
@@ -33,7 +35,7 @@ public class PasswordResetToken {
         return user;
     }
 
-    public Date getExpiryDate() {
+    public LocalDate getExpiryDate() {
         return expiryDate;
     }
 

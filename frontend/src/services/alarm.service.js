@@ -1,6 +1,7 @@
 import axios from 'axios';
 import authHeader from "@/services/auth-header";
 const API_URL_ALARMS = process.env.VUE_APP_API_URL + '/api/test/Alarms';
+let user = JSON.parse(localStorage.getItem('user'));
 
 class Alarms {
     getAll() {
@@ -22,15 +23,14 @@ class Alarms {
     }
 
     addAlarm(alarm) {
-        return axios.post(API_URL_ALARMS, {
-            parameter: alarm.parameter,
-            category: alarm.category,
-            value_since_last_update: alarm.valueSinceLastUpdate,
-            setted_up_value: alarm.settedUpValue,
-            ship_id: alarm.ship_idtext
-        }, {
-            headers: authHeader()
-        });
+        let newAlarm = JSON.stringify(alarm)
+        return axios.post(API_URL_ALARMS,
+            newAlarm, {
+                headers: {
+                    "Authorization": 'Bearer ' + user.accessToken,
+                    "Content-Type": "application/json"
+                }
+            });
     }
 }
 

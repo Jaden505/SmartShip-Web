@@ -34,13 +34,13 @@
           <div class="bg-blue-regular text-black-text dark:text-white-text">
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component_data)">close</div>
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="ischoosingChart = !ischoosingChart; selectedComponent = component_data">edit</div>
+
           </div>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component_data['chart_name']}}</h4>
           </div>
 
-          <!-- The component is called here -->
-          <div class="relative p-4 h-72">
+          <div class="relative p-4 h-72 text-black-light dark:text-white-text">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
             <component
                 :is="component_data['component']" :sensor_data="JSON.stringify(sensordata)"
@@ -54,7 +54,6 @@
 </template>
 
 <script>
-
 // Chart imports
 import BarChart from "@/components/charts/BarChart";
 import LineChart from "@/components/charts/LineChart";

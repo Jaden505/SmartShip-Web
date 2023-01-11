@@ -3,41 +3,42 @@
     <div class="container bg-blue-regular dark:bg-black-light">
       <div class="modal-bg">
         <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
-          <div class="submit-form">
-            <p class="title text-black-text dark:text-white-text">Create new alarm</p>
-            <div class="Parameters form-group">
+          <p class="title text-black-text dark:text-white-text">Create new alarm</p>
+          <Form @submit="addAlarm" class="submit-form">
+            <div class="">
               <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
-              <input  v-model="alarm.parameter" class="form-control" type="text" name="parameter"/>
+              <Field name="parameter" type="text" class="form-control" />
             </div>
-            <div class="Parameters form-group">
+            <div class="">
               <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
-              <input v-model="alarm.category" class="form-control" type="text" name="category"/>
+              <Field name="category" type="text" class="form-control" />
             </div>
-            <div class="Parameters form-group">
+            <div class="">
               <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
-              <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
+              <Field class="form-control" type="number" name="valueSinceLastUpdate"/>
             </div>
-            <div class="Parameters form-group">
+            <div class="">
               <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
-              <input v-model="alarm.settedUpValue" class="form-control" type="text" name="settedUpValue"/>
+              <Field class="form-control" type="number" name="settedUpValue"/>
             </div>
-            <div class="Parameters form-group">
+            <div class="">
               <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
-              <input v-model="alarm.shipId" class="form-control" type="text" name="shipId"/>
+              <Field class="form-control" type="text" name="shipId"/>
             </div>
-            <button class="button bg-blue-700 dark:bg-gray-700" @click="addAlarm">
+            <button class="button bg-blue-700 dark:bg-gray-700">
               {{ update }}
             </button>
-
-          </div>
+          </Form>
         </div>
       </div>
-        </div>
+    </div>
   </Teleport>
 </template>
 
 <script>
 import AlarmService from "@/services/alarm.service";
+import {Alarm} from "@/models/alarm";
+import { Form, Field } from "vee-validate";
 
 export default {
   name: "AddAlarms",
@@ -50,29 +51,18 @@ export default {
       ship_idtext: "Ship-id: ",
       update: "Update",
       cancel: "Cancel",
-      alarm: {
-        parameter: "",
-        category: "",
-        valueSinceLastUpdate: "",
-        settedUpValue: "",
-        shipId:"",
-      }
     }
   },
+  components: {
+    Form,
+    Field
+  },
   methods: {
-    addAlarm() {
+    addAlarm(alarm) {
+      const newAlarm = new Alarm(alarm.parameter, alarm.category, parseFloat(alarm.valueSinceLastUpdate), parseFloat(alarm.settedUpValue), alarm.shipId)
 
-      const alarm = {
-        parameter: this.alarm.parameter,
-        category: this.alarm.category,
-        valueSinceLastUpdate: this.alarm.valueSinceLastUpdate,
-        settedUpValue: this.alarm.settedUpValue,
-        shipId: this.alarm.shipId
-      };
-
-      AlarmService.addAlarm(alarm)
+      AlarmService.addAlarm(newAlarm)
           .then(response => {
-            window.location.reload(true)
             console.log(response.data)
           })
           .catch(e => {
