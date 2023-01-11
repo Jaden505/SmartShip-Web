@@ -6,12 +6,11 @@
        :delay="100">
 
     <div class="flex" v-if="alarms.length !== 0">
-      <div v-for="(alarm, index) in alarms" :key="index" class="bg-purple-basic dark:bg-black-light rounded-md shadow-md w-[250px]">
+      <div v-for="(alarm, index) in alarms" :key="index" class="bg-purple-basic dark:bg-black-light rounded-md shadow-md w-[250px] m-3">
         <div class="p-4">
           <h1 class="text-xl text-center mb-3">Alarm {{index+1}}</h1>
           <p class="text-md">{{ parametertext + alarm.parameter }}</p>
           <p class="text-md">{{ categorytext + alarm.category }}</p>
-          <p class="text-md">{{ realTimeValuetext + alarm.valueSinceLastUpdate }}</p>
           <p class="text-md">{{ settedUpValuetext+ alarm.settedUpValue }}</p>
           <button class="text-white bg-blue-regular font-medium rounded-lg my-3 text-sm px-5 py-2.5 text-center text-white-text" @click="deleteAlarm(alarm.id)">
             <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5 text-black-text dark:text-white-text"/>
@@ -28,7 +27,7 @@
       </div>
     </div>
     </div>
-  <AddAlarms v-if="this.add"></AddAlarms>
+  <AddAlarms v-if="this.add" @onClickOutside="onClickOutside"></AddAlarms>
 </template>
 <script>
 import AddAlarms from "@/components/modals/updateAlarms";
@@ -60,6 +59,9 @@ export default {
   methods: {
     openPop(){
       this.add = true;
+    },
+    onClickOutside(){
+      this.add = false
     },
     getAlarms() {
       AlarmService.getAll()

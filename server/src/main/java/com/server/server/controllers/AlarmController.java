@@ -32,29 +32,10 @@ public class AlarmController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/Alarms/{id}")
-    public ResponseEntity<Alarm> updateAlarm( @PathVariable int id, @RequestBody Alarm alarm){
-        Optional<Alarm> alarmData = alarmRepo.findById(id);
-
-        if(alarmData.isPresent()){
-            Alarm _alarm = alarmData.get();
-            _alarm.setParameter(alarm.getParameter());
-            _alarm.setCategory(alarm.getCategory());
-            _alarm.setValueSinceLastUpdate(alarm.getValueSinceLastUpdate());
-            _alarm.setSettedUpValue(alarm.getSettedUpValue());
-            _alarm.setShip_id(alarm.getShip_id());
-            return new ResponseEntity<>(alarmRepo.save(_alarm), HttpStatus.OK);
-
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-//
     @PostMapping("/Alarms")
     public ResponseEntity<Alarm> addAlarms(@RequestBody Alarm alarm){
         try{
-            Alarm _alarm = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getValueSinceLastUpdate(), alarm.getSettedUpValue(), alarm.getShip_id());
+            Alarm _alarm = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getSettedUpValue(), alarm.getShipId());
             return new ResponseEntity<>(alarmRepo.save(_alarm), HttpStatus.OK);
         }
         catch (Exception e) {

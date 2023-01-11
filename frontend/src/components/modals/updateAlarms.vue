@@ -2,28 +2,24 @@
   <Teleport to="#modal">
     <div class="container bg-blue-regular dark:bg-black-light">
       <div class="modal-bg">
-        <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
+        <div v-click-outside="onClickOutside" class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
           <p class="title text-black-text dark:text-white-text">Create new alarm</p>
           <Form @submit="addAlarm" class="submit-form">
             <div class="">
-              <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
-              <Field name="parameter" type="text" class="form-control w-full px-4 py-2"/>
+              <label for="parameter" class="block mb-2 text-xl font-medium text-black-text dark:text-white-text">Parameter</label>
+              <Field name="parameter" type="text" class="form-control w-full px-4 py-2 bg-gray-700"/>
             </div>
             <div class="">
-              <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
-              <Field name="category" type="text" class="form-control w-full px-4 py-2" />
+              <label for="category" class="block mb-2 text-xl font-medium text-black-text dark:text-white-text">Category</label>
+              <Field name="category" type="text" class="form-control w-full px-4 py-2 bg-gray-700" />
             </div>
             <div class="">
-              <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
-              <Field class="form-control w-full px-4 py-2" type="number" name="valueSinceLastUpdate"/>
+              <label for="settedUpValue" class="block mb-2 text-xl font-medium text-black-text dark:text-white-text">Setted up Value</label>
+              <Field class="form-control w-full px-4 py-2 bg-gray-700" type="number" name="settedUpValue"/>
             </div>
             <div class="">
-              <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
-              <Field class="form-control w-full px-4 py-2" type="number" name="settedUpValue"/>
-            </div>
-            <div class="">
-              <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
-              <Field class="form-control w-full px-4 py-2" type="text" name="shipId"/>
+              <label for="id" class="block mb-2 text-xl font-medium text-black-text dark:text-white-text">Ship id</label>
+              <Field class="form-control w-full px-4 py-2 bg-gray-700" type="text" name="shipId"/>
             </div>
             <button class="button bg-blue-700 dark:bg-gray-700">
               {{ update }}
@@ -46,7 +42,6 @@ export default {
     return {
       parametertext: "Parameter: ",
       categorytext: "Category: ",
-      realTimeValuetext: "Real time value: ",
       settedUpValuetext: "Setted up value: ",
       ship_idtext: "Ship-id: ",
       update: "Update",
@@ -58,11 +53,15 @@ export default {
     Field
   },
   methods: {
+    onClickOutside(event) {
+      this.$emit('onClickOutside')
+    },
     addAlarm(alarm) {
       const newAlarm = new Alarm(alarm.parameter, alarm.category, parseFloat(alarm.valueSinceLastUpdate), parseFloat(alarm.settedUpValue), alarm.shipId)
 
       AlarmService.addAlarm(newAlarm)
           .then(response => {
+            window.location.reload()
             console.log(response.data)
           })
           .catch(e => {

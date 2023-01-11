@@ -23,32 +23,11 @@ public class Alarm {
     @Column(name = "ship_id")
     private String shipId;
 
-    @Column(name = "date")
-    private Date date;
-
-    @Column(name = "notification_message")
-    private String message;
-
-    @Column(name = "unit")
-    private String unit;
-
-
-    //    public Notification(Long id, String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
-//        this.id = id;
-//        this.parameter = parameter;
-//        this.category = category;
-//        this.valueSinceLastUpdate = valueSinceLastUpdate;
-//        this.settedUpValue = settedUpValue;
-//        this.ship_id = ship_id;
-//    }
-    public Alarm(String parameter, String category, double settedUpValue, String shipId, Date date, String message, String unit) {
+    public Alarm(String parameter, String category, double settedUpValue, String shipId) {
         this.parameter = parameter;
         this.category = category;
         this.settedUpValue = settedUpValue;
         this.shipId = shipId;
-        this.date = date;
-        this.message = message;
-        this.unit = unit;
     }
 
     public Alarm() {
@@ -93,29 +72,5 @@ public class Alarm {
 
     public void setShipId(String shipId) {
         this.shipId = shipId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
     }
 }

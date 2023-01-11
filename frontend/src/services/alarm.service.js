@@ -16,12 +16,6 @@ class Alarms {
         });
     }
 
-    put(id) {
-        return axios.put(API_URL_ALARMS + "/" + id, {
-            headers: authHeader()
-        });
-    }
-
     addAlarm(alarm) {
         let newAlarm = JSON.stringify(alarm)
         return axios.post(API_URL_ALARMS,
