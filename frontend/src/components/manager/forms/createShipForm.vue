@@ -39,7 +39,7 @@
           </div>
           <div class="md:w-2/3">
             <select :class="{error: isError}" v-model="newShip.status">
-              <option v-for="(status,index) in statuses" :key="index" :value="status.id">{{ status.status }}</option>
+              <option v-for="status in statuses" :key="status.id" :value="status">{{ status.status }}</option>
             </select>
           </div>
         </div>
@@ -58,12 +58,10 @@
 
 <script>
 import ShipService from "@/services/ship.service";
-import StatusService from "@/services/status.service";
-import Ship from "@/models/ship"
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import { status, Ship } from "@/models/ship";
 
 library.add(faXmark)
 
@@ -71,21 +69,17 @@ export default {
   name: "createUserForm",
   props: ['TogglePopup'],
 
-  mounted() {
-    this.getStatuses();
-  },
-
   data(){
     return {
-      newShip: new Ship("","", "", 1400, 1400), // Defaults
-      statuses: [],
+      newShip: new Ship("","", "", "", "", 1400, 1400),
+      statuses: status,
       isError: false
     }
   },
 
   methods: {
     checkFields() {
-      return (this.newShip.name !== "" && this.newShip.status !== "");
+      return (this.newShip.name !== "");
     },
 
     create() {
@@ -99,17 +93,6 @@ export default {
         this.isError = true
       }
     },
-
-    getStatuses() {
-      StatusService.get()
-          .then(response => {
-            this.statuses = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    }
   }
 }
 </script>

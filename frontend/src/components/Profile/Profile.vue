@@ -80,14 +80,9 @@ export default {
     },
 
     getRole(){
-      const id = toRaw(this.$store.state.auth.user.id)
-      userService.getUserById(id)
-          .then(response => {
-            this.role = response.data.role.name
-          })
-          .catch(e => {
-            console.log(e)
-          })
+      const role = toRaw(this.$store.state.auth.user.roles[0])
+      this.role = role;
+      return role;
     },
 
     getUser(){
@@ -104,7 +99,7 @@ export default {
     }
   },
 
-  mounted() {
+  created() {
     this.getRole();
     this.getUser()
   }
