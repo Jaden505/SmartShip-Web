@@ -118,9 +118,11 @@ export default {
   },
   created() {
     uploadService.getFile(this.currentUser.id).then(response => {
-      console.log(response);
       this.userImage = "data:image/jpeg;base64," + response.data
-    })
+    }).catch(e => {
+      console.log(e)
+      this.userImage = require('@/assets/img/default_user.png')
+    });
   },
   methods: {
     capitalizeFirstLetter(string) {
