@@ -2,19 +2,19 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <div class="container shadow-md rounded-md">
-    <h1 class="font-semibold dark:text-white-text">Pick a type of chart</h1>
+    <h1 class="font-semibold text-black-text dark:text-white-text">Pick a type of chart</h1>
       <input type="radio" name="Line Chart" id="linechart" @click="this.$emit('clicked', 'LineChart')">
-      <label for="linechart">
+      <label for="linechart" class="text-black-text dark:text-white-text">
       <div class="material-icons py-4 px-6">show_chart</div>
     </label>
 
       <input type="radio" name="Bar Chart" id="barchart" @click="this.$emit('clicked', 'BarChart')">
-      <label for="barchart">
+      <label for="barchart" class="text-black-text dark:text-white-text">
       <div class="material-icons py-4 px-6">bar_chart</div>
     </label>
 
       <input type="radio" name="Pie Chart" id="piechart" @click="this.$emit('clicked', 'PieChart')">
-      <label for="piechart">
+      <label for="piechart" class="text-black-text dark:text-white-text">
         <div class="material-icons py-4 px-6">pie_chart</div>
     </label>
   </div>
@@ -49,20 +49,10 @@ h1 {
   display: none;
 }
 
-[type=radio] + label {
-  background-color: #151515;
-  color:white;
-}
-
 label:hover {
   cursor: pointer;
 }
 
-/* CHECKED STYLES */
-[type=radio]:checked + label {
-  background-color: #151515;
-  color:white;
-}
 .material-icons {
   font-size: 5rem;
 }
