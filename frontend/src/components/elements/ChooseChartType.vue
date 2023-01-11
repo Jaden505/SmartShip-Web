@@ -3,27 +3,26 @@
 
   <div class="container shadow-md rounded-md">
     <h1 class="font-semibold dark:text-white-text">Pick a type of chart</h1>
-
-    <div v-for="(type, index) in chartTypes" :key="index">
-      <input type="radio" name="type" id="type" @click="this.$emit('clicked', [type, clickedEditComponentIndex])">
-      <label for="type">
-      <div class="material-icons py-4 px-6">{{ type }}</div>
+      <input type="radio" name="Line Chart" id="linechart" @click="this.$emit('clicked', 'LineChart')">
+      <label for="linechart">
+      <div class="material-icons py-4 px-6">show_chart</div>
     </label>
-    </div>
 
+      <input type="radio" name="Bar Chart" id="barchart" @click="this.$emit('clicked', 'BarChart')">
+      <label for="barchart">
+      <div class="material-icons py-4 px-6">bar_chart</div>
+    </label>
+
+      <input type="radio" name="Pie Chart" id="piechart" @click="this.$emit('clicked', 'PieChart')">
+      <label for="piechart">
+        <div class="material-icons py-4 px-6">pie_chart</div>
+    </label>
   </div>
 </template>
 
 <script>
 export default {
   name: "ChooseChartType",
-  props: ["clickedEditComponentIndex"],
-
-  data() {
-    return {
-      chartTypes: ["show_chart", "bar_chart", "pie_chart"]
-    }
-  }
 }
 </script>
 

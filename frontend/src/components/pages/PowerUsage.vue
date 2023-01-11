@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <ChooseChartType :clickedEditComponentIndex="clickedEditComponentIndex" @clicked="changeChartType" />
+  <ChooseChartType v-if="ischoosingChart" @clicked="changeChartType" />
 
   <div v-motion
        :initial="{ opacity: 0, y: 100 }"
@@ -32,8 +32,8 @@
              @drop.prevent="this.componentsList = dmc.dropHandler($event, component_data, componentsList)" @dragover.prevent>
 
           <div class="bg-blue-regular text-black-text dark:text-white-text">
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component_data['component'])">close</div>
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="ischoosingChart = !ischoosingChart">edit</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component_data)">close</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="ischoosingChart = !ischoosingChart; selectedComponent = component_data">edit</div>
           </div>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component_data['component'].name}}</h4>
@@ -58,6 +58,7 @@
 // Chart imports
 import BarChart from "@/components/charts/BarChart";
 import LineChart from "@/components/charts/LineChart";
+import PieChart from "@/components/charts/PieChart";
 
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
@@ -68,19 +69,21 @@ export default {
   components: {
     BarChart,
     LineChart,
-    ChooseChartType
+    PieChart,
+    ChooseChartType,
   },
 
   data() {
     return {
+      selectedComponent: null,
       isEditing: false,
       ischoosingChart: false,
-      clickedEditComponentIndex: null,
       sensordata: null,
       dmc: null,
       componentsList: [],
       addableComponents: [{"component": BarChart, "sensor_name": "Percentage Left", "sensor_group": "Battery", "chart_name": "Batteries charge"},
-        {"component": LineChart, "sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage"}]
+        {"component": LineChart, "sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage"},
+        {"component": PieChart, "sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage"}]
     }
   },
 
@@ -91,6 +94,8 @@ export default {
 
     // Initiate the DashboardMoveComponents class
     this.dmc = new DashboardMoveComponents();
+
+    console.log(this.componentsList)
   },
 
   methods: {
@@ -154,17 +159,25 @@ export default {
     },
 
     changeChartType(newChartType) {
-      switch(newChartType) {
-        case "bar_chart":
-          this.componentsList[index].component = BarChart;
-          break;
-        case "line_chart":
-          this.componentsList[index].component = LineChart;
-          break;
-        // case "pie_chart":
-        //   this.componentsList[index].component = PieChart;
-        //   break;
+      if (this.selectedComponent.component.name === newChartType) {
+        alert("You already have this chart type selected");
+        return;
       }
+
+      switch(newChartType) {
+        case "BarChart":
+          this.selectedComponent.component = BarChart;
+          break;
+        case "LineChart":
+          this.selectedComponent.component = LineChart;
+          break;
+        case "PieChart":
+          this.selectedComponent.component = PieChart;
+          break;
+      }
+
+      this.setComponentsPosition();
+      this.$router.go()
     }
   }
 }
