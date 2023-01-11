@@ -182,6 +182,7 @@ export default {
 }
 </script>
 
+
 <style scoped>
 .edit-dashboard {
   margin-left: 18px;
