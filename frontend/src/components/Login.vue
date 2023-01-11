@@ -33,7 +33,7 @@
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center" :disabled="loading">
+                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <span class="font-semibold text-white-text">Sign In</span>
                   </button>
                 </div>

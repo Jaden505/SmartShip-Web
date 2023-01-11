@@ -107,7 +107,7 @@ export default {
         {name: 'Manager', to: '/manager', icon: <font-awesome-icon icon="fa-solid fa-star" />
         }
       ],
-      userImage: undefined,
+      userImage: require('@/assets/img/default_user.png'),
       isDark: useDark(),
       preview: false
     }
@@ -121,7 +121,6 @@ export default {
       this.userImage = "data:image/jpeg;base64," + response.data
     }).catch(e => {
       console.log(e)
-      this.userImage = require('@/assets/img/default_user.png')
     });
   },
   methods: {
