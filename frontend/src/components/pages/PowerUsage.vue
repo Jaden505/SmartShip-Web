@@ -1,6 +1,8 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+  <ChooseChartType :clickedEditComponentIndex="clickedEditComponentIndex" @clicked="changeChartType" />
+
   <div v-motion
        :initial="{ opacity: 0, y: 100 }"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
@@ -16,23 +18,28 @@
         <a v-for="(component, index) in addableComponents" :key="index" @click="switchDisplayComponent(component)">{{component.name}}</a>
       </div>
     </div>
+
     <button :class="{hidden: !isEditing}" @click="setComponentsPosition(); this.$router.go()"
             class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
 
+    <!-- Loop component widgets -->
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
       <div class="show-context" v-for="(component_data, index) in componentsList" :key="index">
-        <!-- Allows the dragging and dropping of the component !-->
+
+        <!-- Allows the dragging and dropping of the component -->
         <div class="col-span-2 shadow-md rounded-md droppable"
-             :draggable="isEditing" @dragstart="dmc.onDragStart($event, component_data['component'])"
-             @drop.prevent="this.componentsList = dmc.dropHandler($event, component_data['component'], componentsList)" @dragover.prevent>
+             :draggable="isEditing" @dragstart="dmc.onDragStart($event, component_data)"
+             @drop.prevent="this.componentsList = dmc.dropHandler($event, component_data, componentsList)" @dragover.prevent>
+
           <div class="bg-blue-regular text-black-text dark:text-white-text">
             <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component_data['component'])">close</div>
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}">edit</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="ischoosingChart = !ischoosingChart">edit</div>
           </div>
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component_data['component'].name}}</h4>
           </div>
-          <!-- The component is called here !-->
+
+          <!-- The component is called here -->
           <div class="relative p-4 h-72">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
             <component
@@ -54,22 +61,26 @@ import LineChart from "@/components/charts/LineChart";
 
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
+import ChooseChartType from "@/components/elements/ChooseChartType";
 
 export default {
   name: "PowerUsage",
   components: {
     BarChart,
-    LineChart
+    LineChart,
+    ChooseChartType
   },
 
   data() {
     return {
       isEditing: false,
+      ischoosingChart: false,
+      clickedEditComponentIndex: null,
       sensordata: null,
       dmc: null,
       componentsList: [],
-      addableComponents: [{"component": BarChart, "sensor_name": null, "sensor_group": "Battery", "chart_name": "Batteries charge"},
-        {"component": LineChart, "sensor_name": "Engine 1 Temperature", "sensor_group": null, "chart_name": "Engine Usage"}]
+      addableComponents: [{"component": BarChart, "sensor_name": "Percentage Left", "sensor_group": "Battery", "chart_name": "Batteries charge"},
+        {"component": LineChart, "sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage"}]
     }
   },
 
@@ -140,6 +151,20 @@ export default {
           .catch(e => {
             console.log(e);
           });
+    },
+
+    changeChartType(newChartType) {
+      switch(newChartType) {
+        case "bar_chart":
+          this.componentsList[index].component = BarChart;
+          break;
+        case "line_chart":
+          this.componentsList[index].component = LineChart;
+          break;
+        // case "pie_chart":
+        //   this.componentsList[index].component = PieChart;
+        //   break;
+      }
     }
   }
 }
