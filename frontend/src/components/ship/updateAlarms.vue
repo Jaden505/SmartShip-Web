@@ -1,46 +1,44 @@
 <template>
   <Teleport to="#modal">
+    <div class="container bg-blue-regular dark:bg-black-light">
       <div class="modal-bg">
-        <div class="modal p-10 rounded-md shadow-md bg-purple-basic dark:bg-black-light">
-          <font-awesome-icon class="close-popup text-black-light dark:text-white-text" icon="fa-solid fa-xmark" />
-          <h1 class="font-bold text-black-text dark:text-white-text">Create new alarm</h1>
-          <div class="submit-form">
-            <div class="Parameters form-group">
-              <label for="parameter" class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">Parameter</label>
-              <input  v-model="alarm.parameter" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" name="parameter"/>
+        <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
+          <p class="title text-black-text dark:text-white-text">Create new alarm</p>
+          <Form @submit="addAlarm" class="submit-form">
+            <div class="">
+              <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
+              <Field name="parameter" type="text" class="form-control" />
             </div>
-            <div class="Parameters form-group">
-              <label for="category" class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">Category</label>
-              <input v-model="alarm.category" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" name="category"/>
+            <div class="">
+              <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
+              <Field name="category" type="text" class="form-control" />
             </div>
-            <div class="Parameters form-group">
-              <label for="value" class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">Value</label>
-              <input v-model="alarm.valueSinceLastUpdate" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" name="valueSinceLastUpdate"/>
+            <div class="">
+              <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
+              <Field class="form-control" type="number" name="valueSinceLastUpdate"/>
             </div>
-            <div class="Parameters form-group">
-              <label for="settedUpValue" class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">setted up Value</label>
-              <input v-model="alarm.settedUpValue" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" name="settedUpValue"/>
+            <div class="">
+              <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
+              <Field class="form-control" type="number" name="settedUpValue"/>
             </div>
-            <div class="Parameters form-group">
-              <label for="id" class="block text-black-light dark:text-white-text md:text-right mb-1 md:mb-0 pr-4">Ship id</label>
-              <input v-model="alarm.shipId" class="form-control bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" type="text" name="shipId"/>
+            <div class="">
+              <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
+              <Field class="form-control" type="text" name="shipId"/>
             </div>
-            <button class="shadow bg-blue-regular w-full mt-2 text-black-light dark:text-white-text font-bold py-2 px-4 rounded-md" @click="addAlarm">
+            <button class="button bg-blue-700 dark:bg-gray-700">
               {{ update }}
             </button>
-
-          </div>
+          </Form>
         </div>
       </div>
+    </div>
   </Teleport>
 </template>
 
 <script>
 import AlarmService from "@/services/alarm.service";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
-
-library.add(faXmark)
+import {Alarm} from "@/models/alarm";
+import { Form, Field } from "vee-validate";
 
 export default {
   name: "AddAlarms",
@@ -53,29 +51,18 @@ export default {
       ship_idtext: "Ship-id: ",
       update: "Update",
       cancel: "Cancel",
-      alarm: {
-        parameter: "",
-        category: "",
-        valueSinceLastUpdate: "",
-        settedUpValue: "",
-        shipId:"",
-      }
     }
   },
+  components: {
+    Form,
+    Field
+  },
   methods: {
-    addAlarm() {
+    addAlarm(alarm) {
+      const newAlarm = new Alarm(alarm.parameter, alarm.category, parseFloat(alarm.valueSinceLastUpdate), parseFloat(alarm.settedUpValue), alarm.shipId)
 
-      const alarm = {
-        parameter: this.alarm.parameter,
-        category: this.alarm.category,
-        valueSinceLastUpdate: this.alarm.valueSinceLastUpdate,
-        settedUpValue: this.alarm.settedUpValue,
-        shipId: this.alarm.shipId
-      };
-
-      AlarmService.addAlarm(alarm)
+      AlarmService.addAlarm(newAlarm)
           .then(response => {
-            window.location.reload(true)
             console.log(response.data)
           })
           .catch(e => {
@@ -87,28 +74,72 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 5%;
-}
-
-label {
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  text-align: center;
+  height: 100vh;
+
+  background-color: rgba(0,0,0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-input {
-  width: 100%;
-  padding: 1%;
+.modal {
+  position: relative;
+  background: white;
+  padding: 50px 100px;
+  border-radius: 5px;
+  box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
 }
 
-input:focus {
-  border: 2px solid black;
+.Parameters {
+  margin-top: 3%;
+  display: block;
+  font-size: 30px;
 }
 
-select {
-  width: 100%;
-  padding: 1%;
+input{
+  border-radius: 10px;
 }
+
+.button{
+  width: 30%;
+  height: 50px;
+  margin-top: 10%;
+  margin-left: 100px;
+  color: white;
+  border-radius: 20px;
+}
+
+input{
+  width: 70%;
+  height: 20%;
+  margin-left: 78px;
+}
+
+div.submit-form{
+  width: 500px;
+}
+
+label{
+  margin-left: 78px;
+}
+
+.button{
+  width: 35%;
+  margin-left: 252px;
+  margin-bottom: 23px;
+}
+
+.title{
+  margin-top: 20px;
+  margin-left: 130px;
+  font-size: 200%;
+}
+
+
 </style>
