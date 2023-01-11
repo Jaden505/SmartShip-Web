@@ -1,16 +1,20 @@
 export class Alarm {
     parameter;
     category;
-    valueSinceLastUpdate;
     settedUpValue;
     shipId;
+    date;
+    message;
+    unit;
 
 
-    constructor(parameter, category, valueSinceLastUpdate, settedUpValue, shipId) {
+    constructor(parameter, category, settedUpValue, shipId, date, message, unit) {
         this.parameter = parameter;
         this.category = category;
-        this.valueSinceLastUpdate = valueSinceLastUpdate;
         this.settedUpValue = settedUpValue;
         this.shipId = shipId;
+        this.date = date;
+        this.message = message;
+        this.unit = unit;
     }
 }

@@ -6,7 +6,7 @@
        :delay="100">
 
     <div class="flex" v-if="alarms.length !== 0">
-      <div v-for="(alarm, index) in alarms" :key="index" class="bg-purple-basic dark:bg-black-light rounded-md shadow-md w-[250px] m-3">
+      <div v-for="(alarm, index) in alarms" :key="index" @click="postNotification(alarm)" class="bg-purple-basic dark:bg-black-light rounded-md shadow-md w-[250px] m-3">
         <div class="p-4">
           <h1 class="text-xl text-center mb-3">Alarm {{index+1}}</h1>
           <p class="text-md">{{ parametertext + alarm.parameter }}</p>
@@ -32,10 +32,7 @@
 <script>
 import AddAlarms from "@/components/modals/updateAlarms";
 import AlarmService from "@/services/alarm.service";
-
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
-library.add(faPlus, faTrash)
+import {Alarm} from "@/models/alarm";
 
 export default {
   components: {AddAlarms},
@@ -46,7 +43,6 @@ export default {
     return {
       parametertext: "Parameter: ",
       categorytext: "Category: ",
-      realTimeValuetext: "Real time value: ",
       settedUpValuetext: "Setted up value: ",
       star: "⭐",
       remove: "Delete",
@@ -82,10 +78,92 @@ export default {
           .catch(e => {
             console.log(e)
           })
+    },
+    postNotification(alarm1){
+      let alarm = new Alarm(alarm1.parameter, alarm1.category, alarm1.settedUpValue, alarm1.shipId, new Date(),"DIT IS EEN MESSAGE","DFGG");
+      AlarmService.post(alarm)
+          .then(response => {
+            window.location.reload(true)
+            console.log(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
     }
   }
 }
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.flex-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-box {
+  width: 320px;
+  height: 170px;
+  background-color: #343434;
+  color: white;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 2);
+}
+
+.Parameters:first-child {
+  padding-top: 10px;
+}
+
+.Parameters {
+  margin-left: 15px;
+  font-weight: 900;
+}
+
+
+/*new*/
+
+.flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-child:first-child {
+  background-color: #656565;
+  color: #202020;
+  margin-left: 73%;
+}
+
+
+.flex-child {
+  border: none;
+  padding: 4px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  float: left;
+  background-color: deeppink;
+  width: 22%;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+.plus{
+  width: 90px;
+  height: 90px;
+  margin-left: 117px;
+}
+
 </style>

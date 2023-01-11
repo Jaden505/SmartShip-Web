@@ -15,6 +15,15 @@ class Alarms {
             headers: authHeader()
         });
     }
+    post(alarm) {
+        let notification = JSON.stringify(alarm)
+        return axios.post(API_URL_ALARMS + "/send", notification, {
+            headers: {
+                "Authorization": 'Bearer ' + user.accessToken,
+                "Content-Type": "application/json"
+            }
+        });
+    }
 
     addAlarm(alarm) {
         let newAlarm = JSON.stringify(alarm)

@@ -57,11 +57,10 @@ export default {
       this.$emit('onClickOutside')
     },
     addAlarm(alarm) {
-      const newAlarm = new Alarm(alarm.parameter, alarm.category, parseFloat(alarm.valueSinceLastUpdate), parseFloat(alarm.settedUpValue), alarm.shipId)
+      const newAlarm = new Alarm(alarm.parameter, alarm.category, parseFloat(alarm.settedUpValue), alarm.shipId, alarm.date, alarm.message, alarm.unit)
 
       AlarmService.addAlarm(newAlarm)
           .then(response => {
-            window.location.reload()
             console.log(response.data)
           })
           .catch(e => {
