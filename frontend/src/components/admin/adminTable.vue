@@ -57,6 +57,7 @@ import {isProxy, ref, toRaw} from 'vue';
 import ShipService from "@/services/ship.service";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import {useToast} from "vue-toastification";
 library.add(faTrash, faPenToSquare)
 
 
@@ -90,9 +91,12 @@ export default {
       popupTrigger.value[trigger] = !popupTrigger.value[trigger]
     };
 
+    const toast = useToast();
+
     return {
       popupTrigger,
-      TogglePopup
+      TogglePopup,
+      toast
     }
   },
 
@@ -139,10 +143,12 @@ export default {
 
     deleteUser(user_id){
       if (confirm("Are you sure you want to delete this manager?")) {
-        UserService.deleteUser(user_id).catch(e => {
+        UserService.deleteUser(user_id).then(response => {
+          console.log(response)
+        }).catch(e => {
+          this.toast.error("Cannot delete the manager. Disconnect all operator and try again!")
           console.log(e)
         })
-        location.reload()
       }
     },
 

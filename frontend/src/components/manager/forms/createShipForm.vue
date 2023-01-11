@@ -3,7 +3,7 @@
 
   <Teleport to="#modal">
   <div class="modal-bg" >
-    <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light" v-motion-fade>
+    <div class="modal p-10 rounded-md shadow-md bg-purple-basic dark:bg-black-light" v-motion-fade>
       <font-awesome-icon class="close-popup text-black-light dark:text-white-text" icon="fa-solid fa-xmark" @click="TogglePopup()"/>
 
       <h1 class="font-bold text-black-text dark:text-white-text">Create Ship</h1>

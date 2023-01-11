@@ -61,7 +61,6 @@ import ShipService from "@/services/ship.service";
 import editForm from "@/components/manager/forms/editShipForm";
 import {ref, toRaw} from 'vue';
 import createForm from "@/components/manager/forms/createShipForm";
-import warningShip from "@/components/manager/forms/warningShip";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useToast} from "vue-toastification";
@@ -73,7 +72,6 @@ export default {
   components: {
     editForm,
     createForm,
-    warningShip
   },
 
   created() {

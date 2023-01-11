@@ -31,7 +31,7 @@
           <div class="flex items-center justify-between p-4">
             <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component.name}}</h4>
           </div>
-          <div class="relative p-4 h-72">
+          <div class="relative p-4 h-72 text-black-light dark:text-white-text">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
             <component :is="component" :sensordata="JSON.stringify(sensordata)" />
           </div>

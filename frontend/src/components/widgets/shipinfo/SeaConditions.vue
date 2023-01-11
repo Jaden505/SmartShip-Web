@@ -8,7 +8,7 @@
       <span class="text-5xl font-semibold text-black-light dark:text-white-text">{{ condition.value }} {{ condition.unit }}</span>
     </div>
   </div>
-  <h1 v-if="lackData">Not enough data is provided to display this graph</h1>
+  <h1 class="text-2xl text-black-light dark:text-white-text" v-if="lackData">Not enough data is provided to display this graph</h1>
 </template>
 
 <script>
