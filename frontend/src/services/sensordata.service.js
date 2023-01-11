@@ -10,8 +10,38 @@ class SensorDataService {
         });
     }
 
+    getSensorNameByMotor() {
+        return axios.get(API_URL + "/Motor", {
+            headers: authHeader()
+        });
+    }
+
+    getSensorNameBySeaConditions() {
+        return axios.get(API_URL + "/SeaConditions", {
+            headers: authHeader()
+        });
+    }
+
+    getSensorNameByFuel() {
+        return axios.get(API_URL + "/Fuel", {
+            headers: authHeader()
+        });
+    }
+
+    getSensorNameByBattery() {
+        return axios.get(API_URL + "/Battery", {
+            headers: authHeader()
+        });
+    }
+
     getByShipId(ship_id){
         return axios.get(API_URL + '/' + ship_id, {
+            headers: authHeader()
+        })
+    }
+
+    getCategories(){
+        return axios.get(API_URL + "/Categories", {
             headers: authHeader()
         })
     }
