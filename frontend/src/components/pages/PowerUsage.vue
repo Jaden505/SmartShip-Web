@@ -93,8 +93,6 @@ export default {
 
     // Initiate the DashboardMoveComponents class
     this.dmc = new DashboardMoveComponents();
-
-    console.log(this.componentsList)
   },
 
   methods: {
@@ -150,7 +148,6 @@ export default {
       SensordataService.getByShipId(shipid)
           .then(response => {
             this.sensordata = response.data;
-            console.log(response.data);
           })
           .catch(e => {
             console.log(e);
