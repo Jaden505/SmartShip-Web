@@ -5,23 +5,23 @@
         <div class="modal p-10 rounded-md shadow-md bg-blue-regular dark:bg-black-light">
           <p class="title text-black-text dark:text-white-text">Create new alarm</p>
           <Form @submit="addAlarm" class="submit-form">
-            <div class="form-group">
+            <div class="">
               <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
               <Field name="parameter" type="text" class="form-control" />
             </div>
-            <div class="form-group">
+            <div class="">
               <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
               <Field name="category" type="text" class="form-control" />
             </div>
-            <div class="form-group">
+            <div class="">
               <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
               <Field class="form-control" type="number" name="valueSinceLastUpdate"/>
             </div>
-            <div class="form-group">
+            <div class="">
               <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
               <Field class="form-control" type="number" name="settedUpValue"/>
             </div>
-            <div class="form-group">
+            <div class="">
               <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
               <Field class="form-control" type="text" name="shipId"/>
             </div>
@@ -38,8 +38,7 @@
 <script>
 import AlarmService from "@/services/alarm.service";
 import {Alarm} from "@/models/alarm";
-import { Form, Field, ErrorMessage } from "vee-validate";
-import {toRaw} from "vue";
+import { Form, Field } from "vee-validate";
 
 export default {
   name: "AddAlarms",

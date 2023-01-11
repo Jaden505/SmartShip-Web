@@ -59,7 +59,6 @@
           </div>
           <div class="form-group md:flex md:items-center">
             <button class="shadow focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" :disabled="loading">
-              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               Create
             </button>
           </div>
