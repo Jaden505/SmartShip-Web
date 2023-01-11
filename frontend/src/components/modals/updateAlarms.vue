@@ -7,23 +7,23 @@
           <Form @submit="addAlarm" class="submit-form">
             <div class="">
               <label for="parameter" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Parameter</label>
-              <Field name="parameter" type="text" class="form-control" />
+              <Field name="parameter" type="text" class="form-control w-full px-4 py-2"/>
             </div>
             <div class="">
               <label for="category" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Category</label>
-              <Field name="category" type="text" class="form-control" />
+              <Field name="category" type="text" class="form-control w-full px-4 py-2" />
             </div>
             <div class="">
               <label for="value" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Value</label>
-              <Field class="form-control" type="number" name="valueSinceLastUpdate"/>
+              <Field class="form-control w-full px-4 py-2" type="number" name="valueSinceLastUpdate"/>
             </div>
             <div class="">
               <label for="settedUpValue" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">setted up Value</label>
-              <Field class="form-control" type="number" name="settedUpValue"/>
+              <Field class="form-control w-full px-4 py-2" type="number" name="settedUpValue"/>
             </div>
             <div class="">
               <label for="id" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Ship id</label>
-              <Field class="form-control" type="text" name="shipId"/>
+              <Field class="form-control w-full px-4 py-2" type="text" name="shipId"/>
             </div>
             <button class="button bg-blue-700 dark:bg-gray-700">
               {{ update }}
@@ -91,8 +91,11 @@ export default {
 .modal {
   position: relative;
   background: white;
-  padding: 50px 100px;
+  padding: 1rem;
+  width: 500px;
+  height: 500px;
   border-radius: 5px;
+  text-align: left;
   box-shadow: 0px 10px 5px 2px rgba(0,0,0, 0.1);
 }
 

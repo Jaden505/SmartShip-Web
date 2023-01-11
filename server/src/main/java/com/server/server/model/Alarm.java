@@ -1,6 +1,7 @@
 package com.server.server.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "alarm")
@@ -16,17 +17,23 @@ public class Alarm {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "value_since_last_update")
-    private double valueSinceLastUpdate;
-
     @Column(name = "setted_up_value")
     private double settedUpValue;
 
     @Column(name = "ship_id")
-    private String ship_id;
+    private String shipId;
+
+    @Column(name = "date")
+    private Date date;
+
+    @Column(name = "notification_message")
+    private String message;
+
+    @Column(name = "unit")
+    private String unit;
 
 
-//    public Notification(Long id, String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
+    //    public Notification(Long id, String parameter, String category, double valueSinceLastUpdate, double settedUpValue, int ship_id) {
 //        this.id = id;
 //        this.parameter = parameter;
 //        this.category = category;
@@ -34,18 +41,19 @@ public class Alarm {
 //        this.settedUpValue = settedUpValue;
 //        this.ship_id = ship_id;
 //    }
-    public Alarm(String parameter, String category, double valueSinceLastUpdate, double settedUpValue, String ship_id) {
+    public Alarm(String parameter, String category, double settedUpValue, String shipId, Date date, String message, String unit) {
         this.parameter = parameter;
         this.category = category;
-        this.valueSinceLastUpdate = valueSinceLastUpdate;
         this.settedUpValue = settedUpValue;
-        this.ship_id = ship_id;
+        this.shipId = shipId;
+        this.date = date;
+        this.message = message;
+        this.unit = unit;
     }
 
     public Alarm() {
 
     }
-
 
     public int getId() {
         return id;
@@ -71,14 +79,6 @@ public class Alarm {
         this.category = category;
     }
 
-    public double getValueSinceLastUpdate() {
-        return valueSinceLastUpdate;
-    }
-
-    public void setValueSinceLastUpdate(double valueSinceLastUpdate) {
-        this.valueSinceLastUpdate = valueSinceLastUpdate;
-    }
-
     public double getSettedUpValue() {
         return settedUpValue;
     }
@@ -87,11 +87,35 @@ public class Alarm {
         this.settedUpValue = settedUpValue;
     }
 
-    public String getShip_id() {
-        return ship_id;
+    public String getShipId() {
+        return shipId;
     }
 
-    public void setShip_id(String ship_id) {
-        this.ship_id = ship_id;
+    public void setShipId(String shipId) {
+        this.shipId = shipId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }
