@@ -31,7 +31,7 @@
   <AddAlarms v-if="this.add"></AddAlarms>
 </template>
 <script>
-import AddAlarms from "@/components/ship/updateAlarms";
+import AddAlarms from "@/components/modals/updateAlarms";
 import AlarmService from "@/services/alarm.service";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
