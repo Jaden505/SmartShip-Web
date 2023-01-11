@@ -23,9 +23,9 @@ class AuthService {
     }
 
     register(user) {
-        return axios.post(API_URL + 'signup', {
+        return axios.post(API_URL + 'signup',
             user
-        });
+        );
     }
 
     resetPassword(email) {

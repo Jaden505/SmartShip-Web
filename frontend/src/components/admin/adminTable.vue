@@ -20,11 +20,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(manager, index) in users" :key="index" class="bg-purple-basic dark:bg-black-light">
+        <tr v-for="manager in users" :key="manager.id" class="bg-purple-basic dark:bg-black-light">
           <td>{{ manager.id }}</td>
           <td >{{ manager.username }}</td>
           <td >{{ manager.email }}</td>
-          <td >{{ getShipName(manager.ship) }}</td>
+          <td >{{ getShipName(manager) }}</td>
           <td>
             <font-awesome-icon icon="fa-solid fa-trash" class="px-3 py-4 cursor-pointer" @click="deleteUser(manager.id)"/>
             <font-awesome-icon icon="fa-solid fa-pen-to-square" class="px-3 py-4 cursor-pointer" @click="TogglePopup('buttonTriggerEdit'); this.manager = manager"/>
@@ -54,7 +54,6 @@ import UserService from "../../services/user.service";
 import editMangerForm from "@/components/admin/forms/editMangerForm";
 import createManagerForm from "@/components/admin/forms/createManagerForm";
 import {isProxy, ref, toRaw} from 'vue';
-import ShipService from "@/services/ship.service";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import {useToast} from "vue-toastification";
@@ -68,9 +67,15 @@ export default {
     createManagerForm
   },
 
-  mounted() {
-    this.getUsers();
-    this.getShips();
+  created() {
+    UserService.getUsersByRole("manager")
+        .then(response => {
+          this.users = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
   },
 
   data() {
@@ -101,40 +106,11 @@ export default {
   },
 
   methods: {
-    getUsers() {
-      UserService.getUsersByRole("manager")
-          .then(response => {
-            this.users = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
-    getShips() {
-      ShipService.getAll()
-          .then(response => {
-            this.ships = response.data;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    },
-
-    getShipName(ship) {
-      if (ship == null){
+    getShipName(user) {
+      if (user.ship === null || user.ship === undefined){
         return "No ship assigned";
       }
-
-      let shipFound = this.ships.filter(shipFound => shipFound.id == ship.id);
-
-      if (shipFound !== []) {
-        isProxy(shipFound) ? ship = toRaw(shipFound[0]).name : shipFound = shipFound[0].name;
-        return shipFound;
-      }
-
+      return toRaw(user.ship.name);
     },
 
     toggle(manager){
@@ -146,7 +122,6 @@ export default {
         UserService.deleteUser(user_id).then(response => {
           console.log(response)
         }).catch(e => {
-          this.toast.error("Cannot delete the manager. Disconnect all operator and try again!")
           console.log(e)
         })
       }
