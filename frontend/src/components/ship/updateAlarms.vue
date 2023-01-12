@@ -46,7 +46,7 @@ import {toRaw} from "vue";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 
 export default {
-  created(){
+  mounted(){
     this.getCategories();
     this.getSensorNameByMotor();
     this.getSensorNameByBattery();
@@ -99,19 +99,14 @@ export default {
     }
   },
 
-  watch: {
-    input: function () {
-      // eslint-disable-next-line no-undef
-      app.input = localStorage.getItem('ship');
-    }
-  },
+  // watch: {
+  //   input: function () {
+  //     // eslint-disable-next-line no-undef
+  //     app.input = localStorage.getItem('ship');
+  //   }
+  // },
 
   methods: {
-
-    localStorage() {
-      console.log(this.shipId)
-    },
-
     filter() {
       if (this.selectedCategory == "Motor") {
         return this.Motors;

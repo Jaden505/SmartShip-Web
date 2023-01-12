@@ -37,8 +37,25 @@ import AlarmService from "@/services/alarm.service";
 
 export default {
   components: {AddAlarms},
-  mounted() {
-    this.getAlarms();
+  async created() {
+    await AlarmService.getAll()
+        .then(response => {
+          this.alarms = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+
+    const userShip = JSON.parse(window.localStorage.getItem('user')).ship.toString();
+    if (userShip === null || userShip === undefined) {
+      this.currentShip = null;
+    } else {
+      this.currentShip = userShip;
+    }
+
+    console.log(this.currentShip)
+
   },
   data() {
     return {
@@ -52,6 +69,7 @@ export default {
       select: false,
       add: false,
       selectedalarm:"",
+      currentShip: null
     }
   },
   methods: {
@@ -81,16 +99,6 @@ export default {
     },
     onClickOutside(){
       this.add = false
-    },
-    getAlarms() {
-      AlarmService.getAll()
-          .then(response => {
-            this.alarms = response.data
-            console.log(response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          })
     },
     deleteAlarm(index){
       AlarmService.delete(index)
