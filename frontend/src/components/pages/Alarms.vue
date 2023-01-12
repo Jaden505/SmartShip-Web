@@ -17,6 +17,11 @@
           </button>
         </div>
       </div>
+      <div class="mx-auto mt-5">
+        <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" id="slide_start_button" @click="openPop()">
+          <font-awesome-icon icon="fa-solid fa-plus" />
+        </button>
+      </div>
     </div>
     <div v-else class="flex flex-col mx-auto">
       <h1 class="text-2xl">There are currently no alarms. You can make one by clicking underneath!</h1>
@@ -30,7 +35,7 @@
   <AddAlarms v-if="this.add" @onClickOutside="onClickOutside"></AddAlarms>
 </template>
 <script>
-import AddAlarms from "@/components/modals/updateAlarms";
+import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/alarm.service";
 import {Alarm} from "@/models/alarm";
 
@@ -79,9 +84,9 @@ export default {
             console.log(e)
           })
     },
-    postNotification(alarm1){
-      let alarm = new Alarm(alarm1.parameter, alarm1.category, alarm1.settedUpValue, alarm1.shipId, new Date(),"DIT IS EEN MESSAGE","DFGG");
-      AlarmService.post(alarm)
+    postNotification(alarm){
+      let notification = new Alarm(alarm.parameter, alarm.category, alarm.settedUpValue, alarm.shipId, new Date(), alarm.message, alarm.unit)
+      AlarmService.postNotification(notification)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)
