@@ -15,7 +15,7 @@ class Alarms {
             headers: authHeader()
         });
     }
-    post(alarm) {
+    postNotification(alarm) {
         let notification = JSON.stringify(alarm)
         return axios.post(API_URL_ALARMS + "/send", notification, {
             headers: {
