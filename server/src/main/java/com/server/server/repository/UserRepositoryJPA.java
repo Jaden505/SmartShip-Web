@@ -199,7 +199,7 @@ public class UserRepositoryJPA implements UserRepository {
         switch (role) {
             case "admin" -> namedQuery.setParameter(1, ERole.ROLE_ADMIN);
             case "manager" -> namedQuery.setParameter(1, ERole.ROLE_MANAGER);
-            case "operator" -> namedQuery.setParameter(1, ERole.ROLE_USER);
+            case "operator" -> namedQuery.setParameter(1, ERole.ROLE_OPERATOR);
         }
 
         return namedQuery.getResultList();

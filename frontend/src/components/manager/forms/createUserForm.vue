@@ -400,6 +400,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {User} from "@/models/user";
 
 library.add(faXmark)
 
@@ -425,10 +426,11 @@ export default {
       user.shipID = this.$refs.shipID.value; // Set ship id
       console.log(user)
 
-      this.$store.dispatch("auth/register", user).then(
-          () => {
-            location.reload()
-          },
+      let newUser = new User(user.address, user.city, user.country,
+          user.dateOfBirth, user.firstname, user.gender, user.lastname, user.nationality,
+          user.phoneNumber, user.postalCode, user.username, user.email, user.password, null, user.shipID)
+
+      this.$store.dispatch("auth/register", newUser).then(
           (error) => {
             this.loading = false;
             this.message =

@@ -43,9 +43,14 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service": "~5.0.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.1",
     "@vue/test-utils": "^2.0.2",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
-    "autoprefixer": "^10.4.13",
+    "jest-expect-message": "^1.1.2",
     "babel-jest": "^27.5.1",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
@@ -55,10 +60,25 @@
   },
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest",
+    "setupFilesAfterEnv": [
+      "jest-expect-message"
+    ],
     "testMatch": [
       "**/src/**/*.spec.js"
     ],
-    "verbose": true
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "/images/(.*)$": "<rootDir>/public/images/$1",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "axios": "axios/dist/node/axios.cjs"
+    },
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.vue$": "@vue/vue3-jest",
+      "^.+\\.(jpg|jpeg|png|gif|svg|mp3|mp4|mpeg)$":
+      "<rootDir>/jest-media-transformer.js"
+    },
+    "verbose": false
   },
   "eslintConfig": {
     "root": true,
@@ -66,6 +86,9 @@
       "node": true,
       "jest": true
     },
+    "plugins": [
+      "jest"
+    ],
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended"
@@ -77,11 +100,23 @@
       "vue/multi-word-component-names": "off",
       "vue/no-mutating-props": "off",
       "no-unused-vars": "off",
-      "no-unreachable": "off"
+      "no-unreachable": "off",
+      "jest/valid-expect": [ "error", { "maxArgs": 2 } ]
     },
-    "overrides": [ {
-      "files": [ "**/src/**/*.spec.js" ]
-    }]
+    "overrides": [
+      {
+        "files": [
+          "**/src/**/*.spec.js"
+        ],
+        "plugins": [
+          "jest"
+        ],
+        "extends": [
+          "plugin:jest/recommended"
+        ]
+      }
+    ]
+
   },
   "browserslist": [
     "> 1%",

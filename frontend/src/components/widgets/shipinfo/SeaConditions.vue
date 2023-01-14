@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import {toRaw} from "vue";
+
 export default {
   name: "SeaConditions",
   props: ["sensordata"],
@@ -21,7 +23,11 @@ export default {
         newVal = JSON.parse(newVal);
         this.conditions = await newVal.filter((sensor) => sensor["group"] === "Sea Conditions");
 
-        if (this.conditions.length > 2 || this.batteries.length <= 0)
+        if (toRaw(this.conditions) === []){
+          this.lackData = true;
+        }
+
+        if (toRaw(this.conditions).length > 2)
           this.lackData = true;
       }
     }

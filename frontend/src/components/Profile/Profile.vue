@@ -35,6 +35,7 @@ import UploadService from "@/services/upload.service";
 import {toRaw} from "vue";
 import AvatarInput from "@/components/Profile/AvatarInput";
 import userService from "@/services/user.service";
+import {useToast} from "vue-toastification";
 
 export default {
   name: "Profile",
@@ -50,6 +51,11 @@ export default {
         lastname: null
       }
     }
+  },
+
+  setup() {
+    const toast = useToast();
+    return { toast }
   },
 
   methods: {
@@ -69,13 +75,10 @@ export default {
 
       UploadService.upload(file, user.email)
           .then((response) => {
-            console.log(response);
             location.reload();
             }
           ).catch((err) => {
-            this.progress = 0;
-            this.message = "Could not upload the image! " + err;
-            this.currentImage = undefined;
+            this.toast.error("Could not upload the image! " + err.message);
           });
     },
 

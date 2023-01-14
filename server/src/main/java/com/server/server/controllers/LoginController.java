@@ -150,7 +150,7 @@ public class LoginController {
         String role = signUpRequest.getRole();
 
         if (role == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+            Role userRole = roleRepository.findByName(ERole.ROLE_OPERATOR)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             user.setRole(userRole);
         } else {
@@ -168,7 +168,7 @@ public class LoginController {
 
                     break;
                 default:
-                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                    Role userRole = roleRepository.findByName(ERole.ROLE_OPERATOR)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                     user.setRole(userRole);
             }
