@@ -85,8 +85,8 @@ export default {
           })
     },
     postNotification(alarm){
-      let notification = new Alarm(alarm.parameter, alarm.category, alarm.settedUpValue, alarm.shipId, new Date(), alarm.message, alarm.unit)
-      AlarmService.postNotification(notification)
+      alarm.date = new Date();
+      AlarmService.postNotification(alarm)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)
