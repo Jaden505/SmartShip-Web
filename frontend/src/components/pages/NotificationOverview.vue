@@ -9,6 +9,9 @@
             <div class="pb-4">
               <h4 class="text-xl font-semibold text-black-text dark:text-white-text">Notifications</h4>
             </div>
+            <div v-if="notifications.length === 0" class="inline w-5 h-5 text-black-text dark:text-white-text">
+              You don't have any notifications.
+            </div>
             <div v-for="(notification, index) in notifications"
                  :key="index" class="shadow-lg relative rounded-md p-4 mb-2"
                  :class="{'active bg-blue-lavender dark:bg-black-basic': selectedNotification === notification}"
@@ -18,7 +21,8 @@
                 <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5 text-black-text dark:text-white-text"/>
               </button>
               <div class="inline-block">
-                <h4 class="text-xl text-black-text dark:text-white-text">{{ notification.title }}</h4>
+                <h4 v-if="notifications.length > 0" class="text-xl text-black-text dark:text-white-text">
+                  {{ notification.title }}</h4>
                 <span class="text-sm text-black-text dark:text-white-text">
               {{ ('0' + new Date(notification.date).getDate()).slice(-2)
                   }}-{{ ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
@@ -30,7 +34,8 @@
 
             </div>
           </div>
-          <div class="p-4 m-2 rounded-md bg-purple-basic dark:bg-black-light text-black-text dark:text-white-text w-2/3">
+          <div v-if="notifications.length > 0"
+               class="p-4 m-2 rounded-md bg-purple-basic dark:bg-black-light text-black-text dark:text-white-text w-2/3">
               <h2 class="text-2xl">{{selectedNotification.title}}</h2>
               <hr class="h-px my-2 bg-gray-700 border-0 dark:bg-gray-200">
               <section class="mt-5">
@@ -81,7 +86,12 @@ export default {
       NotificationService.getAll()
           .then(response => {
             this.notifications = response.data
-            this.selectedNotification = this.notifications[0]
+            if(this.notifications.length > 0){
+              this.selectedNotification = this.notifications[0]
+            }
+            else{
+              this.selectedNotification = null
+            }
             console.log(response.data)
           })
           .catch(e => {

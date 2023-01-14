@@ -199,9 +199,8 @@ export default {
       window.location.reload(true);
     },
 
-    addAlarm() {
+    addAlarm(){
       const alarm = new Alarm(this.selectedSensor, this.selectedCategory, parseFloat(this.alarm.settedUpValue), this.shipId, this.alarm.date, this.alarm.message, this.alarm.unit)
-
       console.log(alarm)
       AlarmService.addAlarm(alarm)
           .then(response => {
