@@ -89,12 +89,6 @@ export default {
         userImage: computed(() => this.userImage)
       }
   },
-  computed: {
-    currentUser() {
-      console.log(toRaw(this.$store.state.auth.user));
-      return toRaw(this.$store.state.auth.user);
-    }
-  },
   data() {
     return {
       items: [
@@ -109,7 +103,8 @@ export default {
       ],
       userImage: require('@/assets/img/default_user.png'),
       isDark: useDark(),
-      preview: false
+      preview: false,
+      currentUser: null
     }
   },
   components: {
@@ -117,6 +112,8 @@ export default {
     NotificationPreview
   },
   created() {
+    this.currentUser = toRaw(this.$store.state.auth.user);
+
     uploadService.getFile(this.currentUser.id).then(response => {
       if (response.data !== "") {
         this.userImage = "data:image/jpeg;base64," + response.data
@@ -127,7 +124,9 @@ export default {
   },
   methods: {
     capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+      if (string !== null) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
     },
     toggleDark() {
       this.isDark = !this.isDark
