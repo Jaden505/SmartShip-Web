@@ -15,37 +15,37 @@
       <button :class="{hidden: !isEditing}"
               class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Add</button>
       <div class="dropdown-content text-black-text dark:text-white-text">
-        <a v-for="(component_data, index) in addableComponents" :key="index" @click="switchDisplayComponent(component_data)">{{component_data.component.name}}</a>
+        <a v-for="(chart_data, index) in addableCharts" :key="index" @click="switchDisplayChart(chart_data)">{{chart_data.chart_name}}</a>
       </div>
     </div>
 
-    <button :class="{hidden: !isEditing}" @click="setComponentsPosition(); this.$router.go()"
+    <button :class="{hidden: !isEditing}" @click="setChartPositions(); this.$router.go()"
             class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
 
     <!-- Loop component widgets -->
     <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
-      <div class="show-context" v-for="(component_data, index) in componentsList" :key="index">
+      <div class="show-context" v-for="(chart_data, index) in shownCharts" :key="index">
 
         <!-- Allows the dragging and dropping of the component -->
         <div class="col-span-2 shadow-md rounded-md droppable"
-             :draggable="isEditing" @dragstart="dmc.onDragStart($event, component_data)"
-             @drop.prevent="this.componentsList = dmc.dropHandler($event, component_data, componentsList)" @dragover.prevent>
+             :draggable="isEditing" @dragstart="dmc.onDragStart($event, chart_data)"
+             @drop.prevent="this.shownCharts = dmc.dropHandler($event, chart_data, shownCharts)" @dragover.prevent>
 
           <div class="bg-blue-regular text-black-text dark:text-white-text">
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayComponent(component_data)">close</div>
-            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="ischoosingChart = !ischoosingChart; selectedComponent = component_data">edit</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="switchDisplayChart(chart_data)">close</div>
+            <div class="material-icons py-4 px-6" :class="{hidden: !isEditing}" @click="ischoosingChart = !ischoosingChart; selectedChart = chart_data">edit</div>
 
           </div>
           <div class="flex items-center justify-between p-4">
-            <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{component_data['chart_name']}}</h4>
+            <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{chart_data.chart_name}}</h4>
           </div>
 
-          <div class="relative p-4 h-72 text-black-light dark:text-white-text">
+          <div class="relative p-4 h-72 text-black-light dark:text-white-text component-container">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
-            <component
-                :is="component_data['component']" :sensor_data="JSON.stringify(sensordata)"
-                :sensor_name="component_data['sensor_name']" :sensor_group="component_data['sensor_group']"
-                :chart_name="component_data['chart_name']" />
+<!--            <CreateChart-->
+<!--                :is="chart_data.chart_name" :sensor_data="JSON.stringify(sensordata)"-->
+<!--                :sensor_name="chart_data['sensor_name']" :sensor_group="chart_data['sensor_group']"-->
+<!--                :chart_type="chart_data['chart_type']" />-->
           </div>
         </div>
       </div>
@@ -54,94 +54,88 @@
 </template>
 
 <script>
-// Chart imports
-import BarChart from "@/components/charts/BarChart";
-import LineChart from "@/components/charts/LineChart";
-import PieChart from "@/components/charts/PieChart";
 
+import CreateChart from "@/components/charts/CreateChart";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
 import ChooseChartType from "@/components/elements/ChooseChartType";
+import {createApp} from "vue";
 
 export default {
   name: "PowerUsage",
   components: {
-    BarChart,
-    LineChart,
-    PieChart,
     ChooseChartType,
   },
 
   data() {
     return {
-      selectedComponent: null,
+      selectedChart: null,
       isEditing: false,
       ischoosingChart: false,
       sensordata: null,
       dmc: null,
-      componentsList: [],
-      addableComponents: [{"component": BarChart, "sensor_name": "Percentage Left", "sensor_group": "Battery", "chart_name": "Batteries charge"},
-        {"component": LineChart, "sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage"},
-        {"component": PieChart, "sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage"}]
+      shownCharts: [],
+      addableCharts: [{"sensor_name": null, "sensor_group": "Battery", "chart_name": "Batteries charge", "chart_type": "bar"},
+        {"sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage", "chart_type": "line"}]
     }
   },
 
-  mounted() {
+  async mounted() {
     this.getSensorData();
 
-    this.getComponentsPosition()
+    await this.getChartsPosition();
+    this.createComponentInstances();
+
 
     // Initiate the DashboardMoveComponents class
     this.dmc = new DashboardMoveComponents();
-
-    console.log(this.componentsList)
   },
 
   methods: {
     switchEditing() {
       this.isEditing = !this.isEditing;
 
-      document.querySelectorAll(".droppable").forEach(component => {
-        component.draggable = !component.draggable;
+      document.querySelectorAll(".droppable").forEach(chart => {
+        chart.draggable = !chart.draggable;
       })
     },
 
-    switchDisplayComponent(component) {
+    switchDisplayChart(chart) {
       // Display
-      if (this.addableComponents.includes(component)) {
-        this.componentsList.push(component);
-        this.addableComponents.splice(this.addableComponents.indexOf(component), 1);
+      if (this.addableCharts.includes(chart)) {
+        this.shownCharts.push(chart);
+        this.addableCharts.splice(this.addableCharts.indexOf(chart), 1);
       }
       // Hide
-      else if (this.componentsList.includes(component)) {
-        this.addableComponents.push(component);
-        this.componentsList.splice(this.componentsList.indexOf(component), 1);
+      else if (this.shownCharts.includes(chart)) {
+        this.addableCharts.push(chart);
+        this.shownCharts.splice(this.shownCharts.indexOf(chart), 1);
       }
     },
 
-    getComponentsPosition() {
-      // Get components from local storage
-      if (localStorage.components) {
-        let component_names = this.addableComponents.map(component_data => component_data.component.name)
+    getChartsPosition() {
+      // Get charts from local storage
+      if (localStorage.charts) {
+        let chart_names = this.addableCharts.map(chart_data => chart_data.chart_name);
 
-        for (let component of JSON.parse(localStorage.components)) {
-          // Check if component was saved in local storage
-          if (component_names.includes(component)) {
-            this.switchDisplayComponent(this.addableComponents[component_names.indexOf(component)]);
-            component_names.splice(component_names.indexOf(component), 1);
+        for (let chart of JSON.parse(localStorage.charts)) {
+          // Check if chart was saved in local storage
+          if (chart_names.includes(chart)) {
+            this.switchDisplayChart(this.addableCharts[chart_names.indexOf(chart)]);
+            chart_names.splice(chart_names.indexOf(chart), 1);
           }
         }
       }
       else {
-        // Display all components by default
-        this.componentsList = this.addableComponents;
-        this.addableComponents = [];
+        // Display all charts by default
+        this.shownCharts = this.addableCharts;
+        this.addableCharts = [];
       }
     },
 
-    setComponentsPosition() {
-      // Save components names in local storage
-      localStorage.setItem('components', JSON.stringify(this.componentsList.map(component_data => component_data.component.name)));
+    setChartPositions() {
+      // Save chart names in local storage
+      localStorage.setItem('charts', JSON.stringify(this.shownCharts.map(chart_data => chart_data.chart_name)));
     },
 
     getSensorData() {
@@ -158,25 +152,33 @@ export default {
     },
 
     changeChartType(newChartType) {
-      if (this.selectedComponent.component.name === newChartType) {
+      if (this.selectedChart.chart_type === newChartType) {
         alert("You already have this chart type selected");
         return;
       }
 
-      switch(newChartType) {
-        case "BarChart":
-          this.selectedComponent.component = BarChart;
-          break;
-        case "LineChart":
-          this.selectedComponent.component = LineChart;
-          break;
-        case "PieChart":
-          this.selectedComponent.component = PieChart;
-          break;
-      }
+      this.selectedChart = newChartType;
 
-      this.setComponentsPosition();
-      this.$router.go()
+      this.setChartPositions();
+      this.$router.go();
+    },
+
+    createComponentInstances() {
+      const component_containers = document.querySelectorAll(".component-container");
+
+      this.shownCharts.forEach((chart_data, index) => {
+        let instance = createApp(CreateChart, {
+          sensor_data: JSON.stringify(this.sensordata),
+          sensor_name: chart_data.sensor_name,
+          sensor_group: chart_data.sensor_group,
+          chart_type: chart_data.chart_type
+        })
+
+        console.log(instance._component)
+
+        instance.mount(component_containers[index]);
+        component_containers[index].appendChild(instance._component);
+      })
     }
   }
 }

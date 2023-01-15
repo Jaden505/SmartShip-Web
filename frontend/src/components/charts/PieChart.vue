@@ -8,12 +8,12 @@ import Chart from "chart.js/auto";
 
 export default {
   name: "PieChart",
-  props: ["sensor_data", "sensor_name", "chart_name"],
+  props: ["sensor_data", "sensor_group", "chart_name"],
   watch: {
     sensor_data: async function (newVal) {
       if (newVal !== null) {
         newVal = JSON.parse(newVal);
-        this.data_points = await newVal.filter((sensor) => sensor["sensorName"] === this.sensor_name);
+        this.data_points = await newVal.filter((sensor) => sensor["group"] === this.sensor_group);
 
         this.createChart();
       }

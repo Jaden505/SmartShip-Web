@@ -3,17 +3,17 @@
 
   <div class="container shadow-md rounded-md">
     <h1 class="font-semibold text-black-text dark:text-white-text">Pick a type of chart</h1>
-      <input type="radio" name="Line Chart" id="linechart" @click="this.$emit('clicked', 'LineChart')">
+      <input type="radio" name="Line Chart" id="linechart" @click="this.$emit('clicked', 'line')">
       <label for="linechart" class="text-black-text dark:text-white-text">
       <div class="material-icons py-4 px-6">show_chart</div>
     </label>
 
-      <input type="radio" name="Bar Chart" id="barchart" @click="this.$emit('clicked', 'BarChart')">
+      <input type="radio" name="Bar Chart" id="barchart" @click="this.$emit('clicked', 'bar')">
       <label for="barchart" class="text-black-text dark:text-white-text">
       <div class="material-icons py-4 px-6">bar_chart</div>
     </label>
 
-      <input type="radio" name="Pie Chart" id="piechart" @click="this.$emit('clicked', 'PieChart')">
+      <input type="radio" name="Pie Chart" id="piechart" @click="this.$emit('clicked', 'pie')">
       <label for="piechart" class="text-black-text dark:text-white-text">
         <div class="material-icons py-4 px-6">pie_chart</div>
     </label>
