@@ -27,7 +27,7 @@ export default {
 
           let shipmarker = leaflet.marker([this.ship[0].gpsLatitude, this.ship[0].gpsLongtitude], {icon: ship_icon})
           let ship_popup = shipmarker.bindPopup("<b>NAME: </b>" + this.ship[0].name+"<br>"+
-              "<b>STATUS: </b>"+this.ship[0].status+"<br>"+
+              "<b>STATUS: </b>"+this.ship[0].status.status+"<br>"+
               "<b>LATITUDE: </b>"+this.ship[0].gpsLatitude+"<br>"+
               "<b>LONGTITUDE: </b>"+this.ship[0].gpsLongtitude
           ).openPopup().addTo(map);
