@@ -32,7 +32,7 @@
   <AddAlarms v-if="this.add"></AddAlarms>
 </template>
 <script>
-import AddAlarms from "@/components/modals/updateAlarms";
+import AddAlarms from "@/components/ship/updateAlarms";
 import AlarmService from "@/services/alarm.service";
 
 export default {

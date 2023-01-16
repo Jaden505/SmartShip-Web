@@ -147,7 +147,7 @@ export default {
       });
       let user = filtered.find(person => person.ship.id === assignedShip.id);
       if (user === undefined){
-        return "No ship assigned"
+        return "No operators assigned"
       } else {
         return user.username;
       }
