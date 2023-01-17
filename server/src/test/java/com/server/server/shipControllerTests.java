@@ -47,12 +47,10 @@ public class shipControllerTests {
 
         //Assert
         if(value){
-            assertTrue(value);
-            System.out.println("All the GPS latitudes and longitudes are filled in" +
+            assertTrue(value, "All the GPS latitudes and longitudes are filled in" +
                     " and the marker popup of the map can be displayed");
         }else{
-            assertFalse(value);
-            System.out.println("Not all the GPS latitudes and longitudes are filled in and it may happen that" +
+            assertFalse(value,"Not all the GPS latitudes and longitudes are filled in and it may happen that" +
                     " the marker popup of the map cannot be properly displayed");
         }
     }
@@ -74,12 +72,10 @@ public class shipControllerTests {
 
         //Assert
         if(value){
-            assertTrue(value);
-            System.out.println("All the tank values of tank 1 and two are filled in" +
+            assertTrue(value,"All the tank values of tank 1 and two are filled in" +
                     " and the graph on ship overview can be displayed");
         }else{
-            assertFalse(value);
-            System.out.println("Not all the tank values of tank1 and tank2 are filled in and it may happen that" +
+            assertFalse(value,"Not all the tank values of tank1 and tank2 are filled in and it may happen that" +
                     " the graph on ship overview cannot be properly displayed");
         }
     }
