@@ -2,6 +2,8 @@ package com.server.server.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,7 +13,7 @@ import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Entity
-@Table(name = "user",
+@Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
@@ -66,6 +68,50 @@ public class User {
 
    public User() {
    }
+
+   public User(int id, String username, String email, String password, Role role, Ship ship, String firstname, String lastname, String gender, String nationality, Date dateofbirth, String phonenumber, String address, String postalcode, String city, String country) {
+      this.username = username;
+      this.email = email;
+      this.password = password;
+      this.role = role;
+      this.ship = ship;
+      this.firstname = firstname;
+      this.lastname = lastname;
+      this.gender = gender;
+      this.nationality = nationality;
+      this.dateofbirth = dateofbirth;
+      this.phonenumber = phonenumber;
+      this.address = address;
+      this.postalcode = postalcode;
+      this.city = city;
+      this.id = id;
+      this.country = country;
+   }
+
+//   For testing purposes we create a sample user
+public static User createSampleUser(int id, String password){
+
+   User user = new User();
+    user.setId(id);
+    user.setUsername("user" + id);
+    user.setEmail("user" + id + "@gmail.com");
+    user.setPassword(password);
+    user.setFirstname("firstname" + id);
+    user.setLastname("lastname" + id);
+    user.setCity(null);
+    user.setRole(new Role(ERole.ROLE_ADMIN));
+    user.setAddress(null);
+    user.setCountry(null);
+    user.setGender(null);
+    user.setNationality(null);
+    user.setPhonenumber(null);
+    user.setPostalcode(null);
+    user.setShip(null);
+    user.setDateofbirth(null);
+
+   return user;
+}
+
 
    public int getId() {
       return id;

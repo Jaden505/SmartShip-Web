@@ -1,5 +1,5 @@
 <template>
-  <div v-motion-fade class="flex h-screen bg-blue-lavender dark:bg-black-basic">
+  <div class="flex h-screen bg-blue-lavender dark:bg-black-basic">
     <!--  SIDEBAR LEFT  -->
     <SideBar/>
     <!--  CONTENT RIGHT  -->
@@ -31,7 +31,7 @@
             </router-link>
           </div>
           <h2 class="font-semibold inline-block hidden space-x-2 md:flex md:text-sm lg:text-base">
-            <span class="text-blue-regular">Good Morning</span>  <span class="text-black-text dark:text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span>
+            <span class="text-blue-regular">Good Morning</span>  <span id="username" class="text-black-text dark:text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span>
           </h2>
           <nav class="hidden space-x-2 md:flex md:items-center">
             <button class="px-1" @click="showPreview()">
@@ -42,7 +42,7 @@
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
             </button>
             <router-link to="/profile">
-              <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" :src="this.userImage" alt="Bordered avatar">
+              <img id="profile_image" class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" :src="this.userImage" alt="Bordered avatar">
             </router-link>
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <router-link to="/profile"><h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>

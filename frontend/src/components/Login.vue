@@ -1,5 +1,5 @@
 <template>
-  <div v-motion-fade>
+  <div>
     <nav>
       <Header/>
     </nav>
@@ -21,7 +21,7 @@
               <h1 class="text-black-text dark:text-white-text font-bold leading-tight tracking-tight md:text-3xl">
                 Sign in to your account
               </h1>
-              <Form class="space-y-4 md:space-y-6" @submit="handleLogin" :validation-schema="schema">
+              <Form class="space-y-4 md:space-y-6" @submit="handleLogin">
                 <div class="form-group">
                   <label for="username" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Your username</label>
                   <Field name="username" type="text" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Username"/>
@@ -33,7 +33,7 @@
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                  <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                  <button id="submit_button" class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <span class="font-semibold text-white-text">Sign In</span>
                   </button>
                 </div>

@@ -147,6 +147,7 @@ export default {
 
       SensordataService.getByShipId(shipid)
           .then(response => {
+            console.log(response)
             this.sensordata = response.data;
           })
           .catch(e => {

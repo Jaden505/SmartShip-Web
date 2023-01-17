@@ -3,6 +3,15 @@ package com.server.server.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
+
+    public LoginRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public LoginRequest() {
+    }
+
     @NotBlank
     private String username;
 
