@@ -3,7 +3,7 @@ import authHeader from "@/services/auth-header";
 
 const API_URL = process.env.VUE_APP_API_URL + '/api/test/';
 
-class ShipDataService {
+export class ShipDataService {
     getAll() {
         return axios.get(API_URL + "ships/all", {
             headers: authHeader()

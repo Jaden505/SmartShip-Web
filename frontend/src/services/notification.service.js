@@ -1,18 +1,17 @@
-import axios from 'axios';
-import authHeader from "@/services/auth-header";
-const API_URL = process.env.VUE_APP_API_URL + '/api/test/notification-overview';
-class Notification {
-    getAll(){
-        return axios.get(API_URL, {
-            headers: authHeader()
-        });
+const axios = require('axios');
+
+class NotificationService {
+    async getAll() {
+        return await axios.get(
+            `http://localhost:8085/api/test/notification-overview`
+        );
     }
-    delete(index) {
-        return axios.delete(API_URL + "/" + index, {
-            headers: authHeader()
-        });
+    async delete(id) {
+        return await axios.delete(
+            `http://localhost:8085/api/test/notification-overview/${id}`
+        );
     }
 }
 
 
-export default new Notification()
+module.exports = NotificationService;

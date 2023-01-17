@@ -96,4 +96,17 @@ public class Notification {
     public String getShipId() {
         return shipId;
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", value=" + value +
+                ", shipId='" + shipId + '\'' +
+                ", date=" + date +
+                ", message='" + message + '\'' +
+                ", unit='" + unit + '\'' +
+                '}';
+    }
 }
