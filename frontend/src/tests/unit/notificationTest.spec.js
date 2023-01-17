@@ -59,6 +59,6 @@ describe('test', function () {
                 }
             }
         })
-        expect(true).toBe(true);
+        expect(wrapper.find("div")).toBe(true);
     })
 });

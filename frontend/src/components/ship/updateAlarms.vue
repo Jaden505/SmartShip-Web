@@ -51,11 +51,12 @@
 </template>
 
 <script>
-import AlarmService from "@/services/alarm.service";
+import {AlarmService} from "@/services/alarm.service";
 import SensordataService from "@/services/sensordata.service";
 import {toRaw} from "vue";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import {Alarm} from "@/models/alarm";
+let alarmService = new AlarmService();
 export default {
   created(){
     this.getCategories();
@@ -202,7 +203,7 @@ export default {
     addAlarm(){
       const alarm = new Alarm(this.selectedSensor, this.selectedCategory, parseFloat(this.alarm.settedUpValue), this.shipId, this.alarm.date, this.alarm.message, this.alarm.unit)
       console.log(alarm)
-      AlarmService.addAlarm(alarm)
+      alarmService.addAlarm(alarm)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)
