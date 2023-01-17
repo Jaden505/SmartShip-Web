@@ -1,35 +1,49 @@
 const NotificationService = require('../../services/notification.service');
-import axios from "axios";
+
 
 let notificationService = new NotificationService();
 describe('NotificationService', () => {
-    it('Checks ', async () => {
-        await notificationService.getAll().then((response) => {
-            expect(response.data).toBeInstanceOf(Array);
-            console.log((response.data).length);
-        });
+    it('getAll', async () => {
+        //Arrange
+        let notifications;
+        //Act
+        notifications = await notificationService.getAll().then((response) => {
+            return response.data;
+        })
+        //Assert
+        expect(notifications).toBeInstanceOf(Array);
     });
 
-    it('should return correct todo', async () => {
-        let length = await notificationService.getAll().then((response) => {
+    it('delete', async () => {
+        //Arrange
+        let firstData;
+        let lengthBeforeDelete;
+        let lengthAfterDelete;
+
+        //Act
+        lengthBeforeDelete = await notificationService.getAll().then((response) => {
             return (response.data).length;
         })
-        let firstData = await notificationService.getAll().then((response) => {
-            return ((response.data)[0]).id;
-        })
 
-        console.log(firstData);
-        if (length > 0) {
-            console.log("There are" + length + "notifications");
-           let errase = await notificationService.delete(firstData).then((response) => {
-                return (response.data);
+        if (lengthBeforeDelete > 0) {
+            firstData = await notificationService.getAll().then((response) => {
+                return ((response.data)[0]).id;
             })
-            console.log("Notification deleted");
-            expect(errase.STATUS).toBe(204);
+
+            console.log("There are/is " + lengthBeforeDelete + " notification(s)");
+
+            await notificationService.delete(firstData)
+            lengthAfterDelete = await notificationService.getAll().then((response) => {
+                return (response.data).length;
+            })
+            //Assert
+            expect(lengthAfterDelete).toBe(lengthBeforeDelete - 1);
+            expect(lengthBeforeDelete).toBeGreaterThan(lengthAfterDelete);
         }
         else{
+            //Assert
             console.log("There are no notifications");
-            expect(length).toBe(0);
+            expect(lengthBeforeDelete).toBe(0);
         }
     });
 });
