@@ -38,7 +38,6 @@
 import AddAlarms from "@/components/ship/updateAlarms";
 import {AlarmService} from "@/services/alarm.service";
 
-let alarmService = new AlarmService();
 export default {
   components: {AddAlarms},
   mounted() {
@@ -65,7 +64,7 @@ export default {
       this.add = false
     },
     getAlarms() {
-      alarmService.getAll()
+      AlarmService.getAll()
           .then(response => {
             this.alarms = response.data
             console.log(response.data)
@@ -75,7 +74,7 @@ export default {
           })
     },
     deleteAlarm(index){
-      alarmService.delete(index)
+      AlarmService.delete(index)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)
@@ -86,7 +85,7 @@ export default {
     },
     postNotification(alarm){
       alarm.date = new Date();
-      alarmService.postNotification(alarm)
+      AlarmService.postNotification(alarm)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)

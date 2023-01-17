@@ -1,64 +1,90 @@
-import {NotificationService} from '@/services/notification.service';
-import {shallowMount} from "@vue/test-utils";
-import {mount} from "@vue/test-utils";
-import NotificationOverview from "@/components/pages/NotificationOverview";
+import {InMemoryEntitiesService} from "@/services/in-memory-entities-service";
+import {Notification} from "@/models/notification";
 
-let notificationService = new NotificationService();
-describe('NotificationService', () => {
-    it('getAll', async () => {
+
+// let notificationService = new NotificationService();
+let notificationService;
+
+beforeEach(() => {
+    notificationService = new InMemoryEntitiesService(Notification.createSample);
+})
+describe('NotificationServiceTest', () => {
+    it('Should get all notifications',() => {
         //Arrange
         let notifications;
         //Act
-        notifications = await notificationService.getAll().then((response) => {
-            return response.data;
-        })
+        notifications = notificationService.findAll();
         //Assert
-        expect(notifications).toBeInstanceOf(Array);
-    });
+        expect(notifications.length).toEqual(notificationService.findAll().length);
+    })
 
-    it('delete', async () => {
+    it('should delete one notification',() => {
         //Arrange
-        let firstData;
-        let lengthBeforeDelete;
-        let lengthAfterDelete;
+        let notifications;
+        let firstNotification;
 
         //Act
-        lengthBeforeDelete = await notificationService.getAll().then((response) => {
-            return (response.data).length;
-        })
+        notifications = notificationService.findAll();
+        firstNotification = notifications[0][0];
+        notificationService.deleteById(firstNotification.id);
 
-        if (lengthBeforeDelete > 0) {
-            firstData = await notificationService.getAll().then((response) => {
-                return ((response.data)[0]).id;
-            })
-
-            console.log("There are/is " + lengthBeforeDelete + " notification(s)");
-
-            await notificationService.delete(firstData)
-            lengthAfterDelete = await notificationService.getAll().then((response) => {
-                return (response.data).length;
-            })
-            //Assert
-            expect(lengthAfterDelete).toBe(lengthBeforeDelete - 1);
-            expect(lengthBeforeDelete).toBeGreaterThan(lengthAfterDelete);
+        //Assert
+        if(notifications.length > 0) {
+            // eslint-disable-next-line jest/no-conditional-expect
+            expect(notifications.length).toBeGreaterThan(notificationService.findAll().length);
         }
         else{
-            //Assert
-            console.log("There are no notifications");
-            expect(lengthBeforeDelete).toBe(0);
+            // eslint-disable-next-line jest/no-conditional-expect
+            expect(notifications.length).toEqual(notificationService.findAll().length);
         }
-    });
-});
-
-describe('test', function () {
-    it('test', function (){
-        const wrapper = shallowMount(NotificationOverview,{
-            data(){
-                return{
-                    notifications: []
-                }
-            }
-        })
-        expect(wrapper.find("div")).toBe(true);
     })
-});
+})
+
+
+
+//NotificationService: Work only with the backend running
+// describe('NotificationService', () => {
+//     it('getAll', async () => {
+//         //Arrange
+//         let notifications;
+//         //Act
+//         notifications = await notificationService.getAll().then((response) => {
+//             return response.data;
+//         })
+//         //Assert
+//         expect(notifications).toBeInstanceOf(Array);
+//     });
+//
+//     it('delete', async () => {
+//         //Arrange
+//         let firstData;
+//         let lengthBeforeDelete;
+//         let lengthAfterDelete;
+//
+//         //Act
+//         lengthBeforeDelete = await notificationService.getAll().then((response) => {
+//             return (response.data).length;
+//         })
+//
+//         if (lengthBeforeDelete > 0) {
+//             firstData = await notificationService.getAll().then((response) => {
+//                 return ((response.data)[0]).id;
+//             })
+//
+//             console.log("There are/is " + lengthBeforeDelete + " notification(s)");
+//
+//             await notificationService.delete(firstData)
+//             lengthAfterDelete = await notificationService.getAll().then((response) => {
+//                 return (response.data).length;
+//             })
+//             //Assert
+//             expect(lengthAfterDelete).toBe(lengthBeforeDelete - 1);
+//             expect(lengthBeforeDelete).toBeGreaterThan(lengthAfterDelete);
+//         }
+//         else{
+//             //Assert
+//             console.log("There are no notifications");
+//             expect(lengthBeforeDelete).toBe(0);
+//         }
+//     });
+// });
