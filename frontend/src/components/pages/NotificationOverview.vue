@@ -1,9 +1,5 @@
 <template>
-  <div v-motion
-       :initial="{ opacity: 0, y: 100 }"
-       :enter="{ opacity: 1, y: 0, scale: 1 }"
-       :variants="{ custom: { scale: 2 } }"
-       :delay="100">
+  <div>
         <div class="flex w-full p-4">
           <div class="p-4 m-2 rounded-md w-1/3 bg-purple-basic dark:bg-black-light">
             <div class="pb-4">
@@ -55,7 +51,6 @@ import {NotificationService} from "@/services/notification.service";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 library.add(faTrash)
-let notificationService = new NotificationService();
 export default {
   mounted() {
     this.getNotifications();
@@ -73,7 +68,7 @@ export default {
     },
     deleteNotification(id, title, shipId) {
       if (confirm("Are you sure you want to delete this notification?\n" +"Title: " + title + "\nShip-id: " + shipId)){
-        notificationService.delete(id)
+        NotificationService.delete(id)
             .then(() => {
               this.getNotifications();
             })
@@ -83,7 +78,7 @@ export default {
       }
     },
     getNotifications() {
-      notificationService.getAll()
+      NotificationService.getAll()
           .then(response => {
             this.notifications = response.data
             if(this.notifications.length > 0){
