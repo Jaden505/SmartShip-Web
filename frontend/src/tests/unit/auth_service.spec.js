@@ -1,7 +1,5 @@
 import authService from "@/services/auth.service";
-import {flushPromises, mount} from "@vue/test-utils";
 import axios from "axios";
-import {createStore} from "vuex";
 
 describe("Auth Service", () => {
 
@@ -27,6 +25,9 @@ describe("Auth Service", () => {
         },
         getItem(key) {
             return this.state[key]
+        },
+        remoteItem(key) {
+            delete this.state[key]
         },
         getAll() {
             return this.state
@@ -56,6 +57,12 @@ describe("Auth Service", () => {
         // Check if the user object is stored in the local storage
         expect(global.localStorage.getItem('user')).toEqual(JSON.stringify(signedInUser))
 
+    })
+
+    it("should sign out user", async () => {
+        authService.logout();
+
+        expect(global.localStorage.getItem('user')).toBeNull()
     })
 
 });

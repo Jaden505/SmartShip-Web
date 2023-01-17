@@ -1,41 +1,62 @@
-import sensordataService from "@/services/sensordata.service";
 import axios from "axios";
+import {InMemoryEntitiesService} from "@/tests/in-memory-entities-service";
+import {SensorData} from "@/models/sensor_data";
+
 
 describe('SensorData Service', () => {
 
-    const sensorData = {
-        "sensorId": "05VJZSGKERRMYXONKZIY",
-        "group": "Motor",
-        "sensorName": "Engine 1 Temperature",
-        "ship": {
-        id: "07202515-a483-464c-b704-5671f104044b",
-            name: "Serendipity",
-            status: {
-            id: 1,
-                status: "ACTIVE"
-        },
-        gpsLatitude: "-58.04300",
-            gpsLongtitude: "-81.54812",
-            tank1: 1200,
-            tank2: 1300
-    },
-        time: "13:25:10 15/07/2022",
-        type: "Temperature",
-        value: "67.02",
-        unit: "Celcius",
-        speed: "12.9",
-        gpsLatitude: "N52°3'53.754",
-        gpsLongtitude: "E3°40'54.03299999999982"
-    }
+    let sensorDataService;
 
+    beforeAll(() => {
+        sensorDataService = new InMemoryEntitiesService(SensorData.createSample)
+    })
 
-    it('should get all sensor data', function () {
-        jest.spyOn(axios, 'get').mockResolvedValue({
+    it('should get all sensor data', async () => {
+        // Arrange
+        let allSensorData;
 
-        })
+        // Act
+        allSensorData = await sensorDataService.findAll();
 
+        // Assert
+        expect(allSensorData.length).toEqual(7);
+        expect(allSensorData[0].ship).toEqual({"gpsLatitude": 60, "gpsLongtitude": 24, "id": 0, "name": "Ship0", "status": "ACTIVE", "tank1": 1000, "tank2": 2000});
+        expect(allSensorData[5].sensorName).toEqual("sensorName5");
 
     });
 
+    it('should get sensor data by ship id', async () => {
+        // Arrange
+        let allSensorData;
+        let sensorDataByShipId;
 
+        // Act
+        sensorDataByShipId = await sensorDataService.findById(1, true);
+        allSensorData = await sensorDataService.findAll();
+
+        console.log(sensorDataByShipId);
+
+        // Assert
+        expect(allSensorData).toContain(sensorDataByShipId);
+        expect(sensorDataByShipId.sensorName).toEqual("sensorName1");
+
+    });
+
+    it('should return sensor data for a specific group', async () => {
+        // Arrange
+        let allSensorData;
+        let sensorDataByGroup;
+        let sensorDataByGroup2;
+
+        // Act
+        sensorDataByGroup = await sensorDataService.findByGroup("Fuel");
+        sensorDataByGroup2 = await sensorDataService.findByGroup("Battery");
+        allSensorData = await sensorDataService.findAll();
+
+
+        // Assert
+        expect(allSensorData).toContain(sensorDataByGroup);
+        expect(allSensorData).toContain(sensorDataByGroup2);
+
+    });
 })

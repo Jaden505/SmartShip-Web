@@ -68,5 +68,4 @@ public class PasswordResetTokenTest {
         assertTrue(mailService.isTokenExpired(this.passwordResetToken2));
     }
 
-
 }

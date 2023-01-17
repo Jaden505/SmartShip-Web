@@ -47,13 +47,13 @@
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <router-link to="/profile"><h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
               <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
-                <span class="text-black-text dark:text-white-text font-semibold">Admin</span>
+                <span id="role" class="text-black-text dark:text-white-text font-semibold">Admin</span>
               </div>
               <div v-else-if="currentUser.roles[0] === 'ROLE_MANAGER'">
-                <span class="text-black-text dark:text-white-text font-semibold">Manager</span>
+                <span id="role" class="text-black-text dark:text-white-text font-semibold">Manager</span>
               </div>
               <div v-else>
-                <span class="text-black-text dark:text-white-text font-semibold">Operator</span>
+                <span id="role" class="text-black-text dark:text-white-text font-semibold">Operator</span>
               </div>
             </div>
           </nav>

@@ -1,4 +1,4 @@
-import {mount, RouterLinkStub, RouterViewStub} from '@vue/test-utils'
+import {mount, RouterLinkStub, RouterViewStub, shallowMount} from '@vue/test-utils'
 import {createStore} from 'vuex'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import Dashboard from "@/components/pages/Dashboard";
@@ -44,21 +44,33 @@ describe('Dashboard Page', () => {
         },
     })
 
-    global.localStorage.setItem('user', JSON.stringify(user))
+    beforeEach(() => {
+        global.localStorage.setItem('user', JSON.stringify(user))
 
-    wrapper = mount(Dashboard, {
-        global: {
-            stubs: {
-                FontAwesomeIcon,
-                RouterLink: RouterLinkStub,
-                RouterView: RouterViewStub
+        wrapper = shallowMount(Dashboard, {
+            global: {
+                stubs: {
+                    FontAwesomeIcon,
+                    RouterLink: RouterLinkStub,
+                    RouterView: RouterViewStub
+                },
+                plugins: [store]
             },
-            plugins: [store]
-        },
-    });
+        });
+    })
 
     it('should create a local storage mock', () => {
-        expect(localStorage.getItem('user')).toBe(JSON.stringify(user))
+        // Arrange
+        let userFromLocalStorage;
+        let shipFromLocalStorage;
+
+        // Act
+        userFromLocalStorage = global.localStorage.getItem('user')
+        shipFromLocalStorage = global.localStorage.getItem('ship')
+
+        // Assert
+        expect(userFromLocalStorage).toBe(JSON.stringify(user))
+        expect(shipFromLocalStorage).toBe(null)
     });
 
     it('creates a correct dashboard page structure', () => {
@@ -66,11 +78,16 @@ describe('Dashboard Page', () => {
 
         expect(wrapper.element.children.length, `dashboard page starting with ${wrapper.element.tagName} has no child elements!`).toBe(2);
 
-        expect(wrapper.element.children[0].tagName).toBe('ASIDE');
+        expect(wrapper.element.children[0].tagName).toBe('SIDE-BAR-STUB');
     });
 
     it('should display the data from local storage', () => {
-        expect(wrapper.find('#username').text()).toBe('Raihan');
+
+        const username = wrapper.find('#username').text();
+        const role = wrapper.find('#role').text();
+
+        expect(username).toBe('Raihan');
+        expect(role).toBe('Admin');
     });
 
 

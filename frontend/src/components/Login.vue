@@ -23,12 +23,12 @@
               </h1>
               <Form class="space-y-4 md:space-y-6" @submit="handleLogin">
                 <div class="form-group">
-                  <label for="username" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Your username</label>
+                  <label id="username" for="username" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Your username</label>
                   <Field name="username" type="text" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Username"/>
                   <ErrorMessage name="username" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                  <label for="password" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Password</label>
+                  <label id="password" for="password" class="block mb-2 text-sm font-medium text-black-text dark:text-white-text">Password</label>
                   <Field name="password" type="password" class="form-control bg-gray-700 text-white-text sm:text-sm rounded-lg block w-full p-2.5" placeholder="Password"/>
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
