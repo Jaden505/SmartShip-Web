@@ -55,7 +55,7 @@ import NotificationService from "@/services/notification.service";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 library.add(faTrash)
-
+let notificationService = new NotificationService();
 export default {
   mounted() {
     this.getNotifications();
@@ -73,7 +73,7 @@ export default {
     },
     deleteNotification(id, title, shipId) {
       if (confirm("Are you sure you want to delete this notification?\n" +"Title: " + title + "\nShip-id: " + shipId)){
-        NotificationService.delete(id)
+        notificationService.delete(id)
             .then(() => {
               this.getNotifications();
             })
@@ -83,7 +83,7 @@ export default {
       }
     },
     getNotifications() {
-      NotificationService.getAll()
+      notificationService.getAll()
           .then(response => {
             this.notifications = response.data
             if(this.notifications.length > 0){
@@ -97,7 +97,7 @@ export default {
           .catch(e => {
             console.log(e)
           })
-    },
+    }
   }
 }
 </script>
