@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import NotificationService from "@/services/notification.service";
-
+import {NotificationService} from "@/services/notification.service";
+let notificationService = new NotificationService();
 export default {
   name: "NotificationPreview",
   mounted() {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getNotifications() {
-      NotificationService.getAll()
+      notificationService.getAll()
           .then(response => {
             this.notifications = response.data
             console.log(response.data)

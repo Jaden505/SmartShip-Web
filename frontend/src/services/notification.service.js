@@ -1,17 +1,19 @@
 const axios = require('axios');
-
-class NotificationService {
+import authHeader from "@/services/auth-header";
+const API_URL = "http://localhost:8085/api/test/notification-overview"
+export class NotificationService {
     async getAll() {
         return await axios.get(
-            `http://localhost:8085/api/test/notification-overview`
+            API_URL,{
+                headers: authHeader()
+            }
         );
     }
     async delete(id) {
         return await axios.delete(
-            `http://localhost:8085/api/test/notification-overview/${id}`
+            API_URL + "/" + id,{
+                headers: authHeader()
+            }
         );
     }
 }
-
-
-module.exports = NotificationService;
