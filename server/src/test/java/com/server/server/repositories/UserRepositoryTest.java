@@ -49,7 +49,7 @@ public class UserRepositoryTest {
 
     @Test
     public void repoFindUserByUsername() {
-        // check all books can be found by id
+        // check all users can be found by id
         for (User value : this.users) {
             Optional<User> user = userRepository.findByUsername(value.getUsername());
             assertEquals(value.getEmail(), user.get().getEmail());

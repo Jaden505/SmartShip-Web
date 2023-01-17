@@ -51,7 +51,7 @@ public class MailService {
         return passToken != null;
     }
 
-    private boolean isTokenExpired(PasswordResetToken passToken) {
+    public boolean isTokenExpired(PasswordResetToken passToken) {
         LocalDate expirationDate = LocalDate.now(ZoneId.systemDefault());
 
         return passToken.getExpiryDate().isAfter(expirationDate);

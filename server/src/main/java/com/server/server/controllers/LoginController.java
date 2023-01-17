@@ -203,6 +203,8 @@ public class LoginController {
     @PostMapping("/changePassword")
     public ResponseEntity<?> showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
 
+        System.out.println(token);
+
         PasswordResetToken passwordResetToken = mailService.validatePasswordResetToken(token);
 
         if (passwordResetToken == null) {
