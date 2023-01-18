@@ -124,7 +124,7 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser( @RequestBody RegisterRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody RegisterRequest signUpRequest) {
         // Check if the username is already taken
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
