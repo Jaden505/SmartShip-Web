@@ -40,12 +40,8 @@
             <h4 class="text-xl font-semibold text-black-text dark:text-white-text">{{chart_data.chart_name}}</h4>
           </div>
 
-          <div class="relative p-4 h-72 text-black-light dark:text-white-text component-container">
+          <div class="relative p-4 h-72 text-black-light dark:text-white-text component-container" :id="chart_data.chart_name">
             <div class="position-number" :class="{hidden: !isEditing}"></div>
-<!--            <CreateChart-->
-<!--                :is="chart_data.chart_name" :sensor_data="JSON.stringify(sensordata)"-->
-<!--                :sensor_name="chart_data['sensor_name']" :sensor_group="chart_data['sensor_group']"-->
-<!--                :chart_type="chart_data['chart_type']" />-->
           </div>
         </div>
       </div>
@@ -55,11 +51,10 @@
 
 <script>
 
-import CreateChart from "@/components/charts/CreateChart";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
 import SensordataService from "@/services/sensordata.service";
 import ChooseChartType from "@/components/elements/ChooseChartType";
-import {createApp} from "vue";
+import SetupChart from "@/assets/js/SetupChart";
 
 export default {
   name: "PowerUsage",
@@ -75,17 +70,17 @@ export default {
       sensordata: null,
       dmc: null,
       shownCharts: [],
-      addableCharts: [{"sensor_name": null, "sensor_group": "Battery", "chart_name": "Batteries charge", "chart_type": "bar"},
-        {"sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "Engine Usage", "chart_type": "line"}]
+      addableCharts: [{"sensor_name": null, "sensor_group": "Battery", "chart_name": "BatteriesCharge", "chart_type": "bar"},
+        {"sensor_name": "Engine 1 Temperature", "sensor_group": "Motor", "chart_name": "EngineUsage", "chart_type": "line"}]
     }
   },
 
   async mounted() {
-    this.getSensorData();
+    await this.getSensorData();
 
     await this.getChartsPosition();
-    this.createComponentInstances();
 
+    this.createCharts();
 
     // Initiate the DashboardMoveComponents class
     this.dmc = new DashboardMoveComponents();
@@ -138,10 +133,10 @@ export default {
       localStorage.setItem('charts', JSON.stringify(this.shownCharts.map(chart_data => chart_data.chart_name)));
     },
 
-    getSensorData() {
+    async getSensorData() {
       const shipid = this.$store.state.auth.user.ship;
 
-      SensordataService.getByShipId(shipid)
+      await SensordataService.getByShipId(shipid)
           .then(response => {
             this.sensordata = response.data;
             console.log(response.data);
@@ -157,28 +152,19 @@ export default {
         return;
       }
 
-      this.selectedChart = newChartType;
+      this.selectedChart.chart_type = newChartType;
 
       this.setChartPositions();
       this.$router.go();
     },
 
-    createComponentInstances() {
-      const component_containers = document.querySelectorAll(".component-container");
+    createCharts() {
+      for (let chart_data of this.shownCharts) {
+        let chart = new SetupChart(JSON.stringify(this.sensordata), chart_data.sensor_name, chart_data.sensor_group, chart_data.chart_type, chart_data.chart_name);
+        let canvas = chart.createChart();
 
-      this.shownCharts.forEach((chart_data, index) => {
-        let instance = createApp(CreateChart, {
-          sensor_data: JSON.stringify(this.sensordata),
-          sensor_name: chart_data.sensor_name,
-          sensor_group: chart_data.sensor_group,
-          chart_type: chart_data.chart_type
-        })
-
-        console.log(instance._component)
-
-        instance.mount(component_containers[index]);
-        component_containers[index].appendChild(instance._component);
-      })
+        document.querySelector(`#${chart_data.chart_name}`).appendChild(canvas);
+      }
     }
   }
 }

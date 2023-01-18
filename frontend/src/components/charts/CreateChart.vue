@@ -1,5 +1,5 @@
 <template>
-  <canvas id="chart"></canvas>
+  <canvas></canvas>
   <h1 v-if="lackData">Not enough data is provided to display this graph</h1>
 </template>
 
@@ -8,7 +8,7 @@ import CreateCharts from "@/assets/js/CreateCharts.js";
 
 export default {
   name: "CreateChart",
-  props: ["sensor_data", "sensor_name", "sensor_group", "chart_type"],
+  props: ["sensor_data", "sensor_name", "sensor_group", "chart_type", "chart_name"],
   watch: {
     sensor_data: async function (newVal) {
       if (newVal !== null) {
@@ -61,7 +61,7 @@ export default {
       this.data_points = this.data_points.slice(this.data_points.length-this.max_data_points, this.data_points.length);
 
       // Setup chart
-      const ctx = document.getElementById('chart').getContext('2d');
+      const ctx = document.getElementById(this.chart_name).getContext('2d');
       const gradient = ctx.createLinearGradient(0, 0, 0, 250);
       gradient.addColorStop(0, '#29acda');
       gradient.addColorStop(1, 'rgba(0, 44, 72, 0)');

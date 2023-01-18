@@ -1,60 +1,65 @@
 import Chart from "chart.js/auto";
 
 class CreateCharts {
+    constructor() {
+        this.defaultOptions = {
+            maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            size: 17,
+                                weight: "bold"
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: 13,
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                        font: {
+                        size: 30
+                    }
+                }
+            }
+        }
+    }
+
     createBarChart(ctx, gradient, data_points) {
         const labels = data_points.map((battery) => battery["sensorName"])
         const data = data_points.map((battery) => parseInt(battery["value"]))
 
         return new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Percentage',
-                    data: data,
-                    backgroundColor: gradient,
-                    fill: true,
-                    barThickness: 40,
-                    borderWidth: 1,
-                }]
-            },
-
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 17,
-                                weight: "bold"
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            font: {
-                                size: 13,
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Percentage',
+                        data: data,
+                        backgroundColor: gradient,
+                        fill: true,
+                        barThickness: 40,
+                        borderWidth: 1,
+                    }]
                 },
-                plugins: {
-                    legend: {
-                        display: false,
-                        font: {
-                            size: 30
-                        }
-                    }
-                }
+
+                options: this.defaultOptions,
             }
-        });
+        );
     }
 
     createLineChart(ctx, gradient, data_points) {
@@ -74,41 +79,7 @@ class CreateCharts {
                     borderWidth: 2,
                 }]
             },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 17,
-                                weight: "bold"
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            font: {
-                                size: 13,
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false,
-                        font: {
-                            size: 30
-                        }
-                    }
-                }
-            }
+            options: this.defaultOptions,
         });
     }
 
@@ -129,41 +100,7 @@ class CreateCharts {
                     borderWidth: 2,
                 }]
             },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 17,
-                                weight: "bold"
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            font: {
-                                size: 13,
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false,
-                        font: {
-                            size: 30
-                        }
-                    }
-                }
-            }
+            options: this.defaultOptions,
         });
     }
 }
