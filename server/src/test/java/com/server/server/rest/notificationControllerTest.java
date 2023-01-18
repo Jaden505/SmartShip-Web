@@ -1,5 +1,6 @@
-package com.server.server;
+package com.server.server.rest;
 
+import com.server.server.ServerApplication;
 import com.server.server.model.Notification;
 import com.server.server.repository.NotificationRepository;
 import org.junit.jupiter.api.BeforeEach;

@@ -19,7 +19,7 @@ beforeEach(() => {
 })
 
 describe('Div map is rendered', () => {
-    it('checks if the div of the map is rendered', () => {
+    it('Should check if the div of the map is rendered', () => {
         const wrapper = shallowMount(Map)
         expect(wrapper.find('div').exists()).toBe(true)
         expect(wrapper.find('div').isVisible()).toBe(true)

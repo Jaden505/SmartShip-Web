@@ -9,7 +9,7 @@ import ShipService from "@/services/ship.service";
 
 export default {
   name: "Map",
-  mounted() {
+  created() {
     ShipService.get(JSON.parse(localStorage.getItem('user')).ship)
         .then(response => {
           this.ship = response.data;
