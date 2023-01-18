@@ -51,10 +51,12 @@ export default {
     return { toast }
   },
   created() {
+    // Take the token from the URL
     this.token = this.$route.query.token;
   },
   methods: {
     async handleChangePassword(){
+      // Handle change password with new password and token
       await authService.changePassword(this.new_password, this.token);
       this.toast.success("You have successfully changed your password! You can now close this window and go back to th login page.")
     },

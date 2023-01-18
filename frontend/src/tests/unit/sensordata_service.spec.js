@@ -51,7 +51,6 @@ describe('SensorData Service', () => {
         sensorDataByGroup2 = await sensorDataService.findByGroup("Battery");
         allSensorData = await sensorDataService.findAll();
 
-
         // Assert - check that we got the correct data
         expect(allSensorData).toContain(sensorDataByGroup);
         expect(allSensorData).toContain(sensorDataByGroup2);

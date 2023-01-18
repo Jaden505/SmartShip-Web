@@ -43,50 +43,67 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 public class LoginController {
+
+    // Declare the authentication manager as main strategy interface for authentication
     @Autowired
     AuthenticationManager authenticationManager;
 
+    // Declare the user service
     @Autowired
     UserService userService;
 
+    // Import PasswordTokenRepository for handling actions with password reset tokens
     @Autowired
     PasswordTokenRepository passwordTokenRepository;
 
+    // Declare the mail service
     @Autowired
     MailService mailService;
 
+    // Import UserRepository for handling actions with users
     @Autowired
     UserRepository userRepository;
 
+    // Import UserRolesRepositoryJPA for handling custom actions with user roles
     @Autowired
     UserRepositoryJPA userRepositoryJPA;
 
+    // Import RoleRepository for handling actions with roles
     @Autowired
     RoleRepository roleRepository;
 
+    // Import ShipRepository for handling actions with ships
     @Autowired
     ShipRepository shipRepository;
 
+    // Import Password Encoder for encoding passwords
     @Autowired
     PasswordEncoder encoder;
 
+    // Import JWT Utils for generating JWT tokens
     @Autowired
     JwtUtils jwtUtils;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        // Authenticate the user with usernmae and password
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
+        // Set the authentication in the security context
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Generate the JWT token
         String jwt = jwtUtils.generateJwtToken(authentication);
 
+        // Get the user details from the authentication
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        // Get the roles of the user
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
+        // Return the JWT token and the user details
         if (userDetails.getShip() == null){
             return ResponseEntity.ok(new JwtResponse(jwt,
                     userDetails.getId(),
@@ -108,12 +125,14 @@ public class LoginController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser( @RequestBody RegisterRequest signUpRequest) {
+        // Check if the username is already taken
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
+        // Check if the email is already taken
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
@@ -121,8 +140,10 @@ public class LoginController {
         }
 
 
+        // Create a new user
         User user = new User();
 
+        // Assign values from signup request payload to the new user
         user.setFirstname(signUpRequest.getFirstname());
         user.setLastname(signUpRequest.getLastname());
         user.setGender(signUpRequest.getGender());
@@ -143,6 +164,7 @@ public class LoginController {
             user.setShip(shipRepository.findShipById(signUpRequest.getShipID()).get(0));
         }
 
+        // Set the role of the user
         String role = signUpRequest.getRole();
 
         if (role == null) {
@@ -170,8 +192,10 @@ public class LoginController {
             }
         }
 
+        // Save the user in the database
         userRepository.save(user);
 
+        // Return message with successful message
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
@@ -179,11 +203,12 @@ public class LoginController {
     public ResponseEntity<?> resetPassword(HttpServletRequest request,
                                            @RequestBody ResetPasswordRequest resetPasswordRequest) {
 
+        // Find the user in the database by his email
         User user = userRepository.findUserByEmail(resetPasswordRequest.getEmail());
 
-        System.out.println(resetPasswordRequest.getEmail());
+        // Throw an exception if user not found
         if (user == null) {
-            System.out.println("No user found!");
+            throw new UserNotFoundException("User not found");
         }
 
         String baseUrl = request.getHeader(HttpHeaders.ORIGIN);
@@ -194,31 +219,37 @@ public class LoginController {
 
         LocalDate expireDate = LocalDate.now(ZoneId.systemDefault());
 
+        // Create a password reset token with the given data
         userService.createPasswordResetTokenForUser(user, token, expireDate);
+        // Create email and send it
         mailService.constructResetTokenEmail(baseUrl, token, user);
 
+        // Return a successful message as response
         return ResponseEntity.ok(new MessageResponse("Email successfully sent!"));
     }
 
     @PostMapping("/changePassword")
     public ResponseEntity<?> showChangePasswordPage(@RequestParam("token") String token, @RequestBody ChangePasswordRequest changePasswordRequest) {
 
-        System.out.println(token);
-
+        // Validate the given token
         PasswordResetToken passwordResetToken = mailService.validatePasswordResetToken(token);
 
+        // If not correct, throw an exception
         if (passwordResetToken == null) {
             throw new UserNotFoundException("The reset password token is not valid!");
         }
 
+        // Get user assigned to the token
         PasswordResetToken user = passwordTokenRepository.getUserByToken(passwordResetToken.getToken());
 
+        // If user found, change his password using encoder and new password
         if (user.getUser() != null) {
             userRepositoryJPA.changePassword(encoder.encode(changePasswordRequest.getNew_password()), user.getUser().getEmail());
         } else {
             throw new UserNotFoundException("The password or reset password token is not valid!");
         }
 
+        // Return message as response
         return ResponseEntity.ok(new MessageResponse("Users password successfully changed!"));
     }
 

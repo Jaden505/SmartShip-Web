@@ -31,9 +31,11 @@ export default {
     }
   },
   methods: {
+    // Browse image
     browse() {
       this.$refs.file.click();
     },
+    // Select image
     selectImage(e) {
       this.$emit('input', e.target.files[0]);
     }

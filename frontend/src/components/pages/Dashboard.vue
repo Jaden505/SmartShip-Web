@@ -112,8 +112,10 @@ export default {
     NotificationPreview
   },
   created() {
+    // Set current user to user from local storage
     this.currentUser = toRaw(this.$store.state.auth.user);
 
+    // Get user image
     uploadService.getFile(this.currentUser.id).then(response => {
       if (response.data !== "") {
         this.userImage = "data:image/jpeg;base64," + response.data
@@ -123,6 +125,7 @@ export default {
     });
   },
   methods: {
+    // Capitalize first letter of string
     capitalizeFirstLetter(string) {
       if (string !== null) {
         return string.charAt(0).toUpperCase() + string.slice(1);

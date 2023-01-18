@@ -1,5 +1,7 @@
 import Login from "@/components/Login";
 import {createStore} from "vuex";
+import {mount} from '@vue/test-utils'
+
 
 
 describe('Login', () => {

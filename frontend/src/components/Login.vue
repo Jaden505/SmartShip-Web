@@ -79,6 +79,7 @@ export default {
   },
   computed: {
     loggedIn() {
+      // Check the state of user - if logged in, redirect to dashboard
       return this.$store.state.auth.status.loggedIn;
     },
   },
@@ -89,12 +90,12 @@ export default {
   },
   methods: {
     handleLogin(user) {
-      this.loading = true;
-
+      // Send the user data to the backend and check if the user is valid, then log him/her in
       this.$store.dispatch("auth/login", user).then(
           () => {
             this.$router.push("/power-usage");
           },
+          // If the user is not valid, display the error message
           (error) => {
             this.loading = false;
             this.message =
