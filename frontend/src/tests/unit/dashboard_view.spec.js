@@ -5,6 +5,7 @@ import Dashboard from "@/components/pages/Dashboard";
 
 describe('Dashboard Page', () => {
 
+    // Mock the user information for the logged in user
     const user = {
         id: 2,
         username: "Raihan",
@@ -15,6 +16,7 @@ describe('Dashboard Page', () => {
         tokenType: "Bearer"
     }
 
+    // Mock the local storage for this test, with user and his/her information as the value
     global.localStorage = {
         state: {
             'user': user
@@ -29,6 +31,8 @@ describe('Dashboard Page', () => {
 
     let wrapper;
 
+    // Create a store for the component to use and mock the getters and actions,
+    // dashboard can be accessed only by logged in users and that's why we need to mock the loggedIn status
     const store = createStore({
         modules: {
             auth: {
@@ -44,6 +48,7 @@ describe('Dashboard Page', () => {
         },
     })
 
+    // Mount the component with the store and stubs and set the local storage item for the user
     beforeEach(() => {
         global.localStorage.setItem('user', JSON.stringify(user))
 
@@ -68,24 +73,28 @@ describe('Dashboard Page', () => {
         userFromLocalStorage = global.localStorage.getItem('user')
         shipFromLocalStorage = global.localStorage.getItem('ship')
 
-        // Assert
+        // Assert - ship item is not set in the local storage and it should be null
         expect(userFromLocalStorage).toBe(JSON.stringify(user))
         expect(shipFromLocalStorage).toBe(null)
     });
 
     it('creates a correct dashboard page structure', () => {
+        // Check if the component is mounted
         expect(wrapper.exists()).toBe(true);
 
+        // Check if the wrapper has the correct amount of children
         expect(wrapper.element.children.length, `dashboard page starting with ${wrapper.element.tagName} has no child elements!`).toBe(2);
 
+        // Check if the tag name of the first component is correct
         expect(wrapper.element.children[0].tagName).toBe('SIDE-BAR-STUB');
     });
 
     it('should display the data from local storage', () => {
-
+        // Arrange
         const username = wrapper.find('#username').text();
         const role = wrapper.find('#role').text();
 
+        // Check if the username and role are correct based on the user information from the local storage
         expect(username).toBe('Raihan');
         expect(role).toBe('Admin');
     });

@@ -19,3 +19,29 @@ $ cd ../frontend
 $ npm install
 $ npm run serve
 ```
+
+## Contributors
+***
+* Bartek Tynior:
+    * Backend:
+      * Authentication and authorization (login, logout, register, reset password),
+      * User profile (uploading and changing profile picture),
+      * Sensor data (viewing sensor data, adding new sensor data),
+      * Other small fixes and improvements:
+        * Responsiveness,
+        * Error handling,
+        * Working on the database,
+      * Deployment,
+    * Frontend:
+      * Login page,
+      * Dashboard,
+      * Header,
+      * Sidebar,
+      * User profile image,
+      * Other small fixes and improvements:
+        * Responsiveness,
+        * Error handling,
+      * Deployment,
+      * Helped with Power Usage and Ship Information Components
+
+For all above mentioned features, Bartek was responsible for working on frontend and backend of the feature with all utils.
