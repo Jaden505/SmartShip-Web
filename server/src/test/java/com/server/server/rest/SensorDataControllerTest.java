@@ -48,7 +48,7 @@ public class SensorDataControllerTest {
     public void getAllSensorData() {
         ResponseEntity<List> response = restTemplate.getForEntity("/api/test/sensorData/", List.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(5, response.getBody().size());
+        assertEquals(6, response.getBody().size());
     }
 
     @Test

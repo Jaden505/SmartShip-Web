@@ -5,13 +5,13 @@ import com.server.server.model.Role;
 import com.server.server.model.User;
 import com.server.server.repository.DataLoader;
 import com.server.server.repository.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,15 +30,11 @@ public class UserRepositoryTest {
 
     private List<User> users;
 
-    @BeforeAll
-    public static void classLevelSetup() {
-        System.out.println("initialise static values and expensive data structures");
-    }
-
     @BeforeEach
     public void setup() throws Exception {
         this.dataLoader.run(null);
         this.users = this.userRepository.findAll();
+        System.out.println(this.users);
     }
 
     @Test

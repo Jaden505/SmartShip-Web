@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
@@ -21,8 +22,7 @@ public class PasswordResetTokenTest {
 
     User user1, user2;
 
-    @Autowired
-    PasswordEncoder encoder;
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     MailService mailService;

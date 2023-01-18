@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -43,8 +44,7 @@ class LoginControllerTest {
         this.passwordResetTokenList = passwordTokenRepository.findAll();
     }
 
-    @Autowired
-    PasswordEncoder encoder;
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     private TestRestTemplate restTemplate;

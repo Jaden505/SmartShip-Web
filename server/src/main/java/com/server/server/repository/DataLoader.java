@@ -6,6 +6,7 @@ import com.server.server.model.Ship;
 import com.server.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +34,8 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    PasswordEncoder encoder;
+
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     private void createInitialUsers() {
         List<User> userList = this.userRepository.findAll();
@@ -91,4 +92,3 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 }
-
