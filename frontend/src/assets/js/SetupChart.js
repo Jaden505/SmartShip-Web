@@ -29,6 +29,7 @@ class SetupChart {
         this.data_points = JSON.parse(this.sensor_data);
         if (this.sensor_name == null) {
             this.data_points = await this.data_points.filter((sensor) => sensor["group"] === this.sensor_group);
+            console.log(this.data_points)
         } else {
             this.data_points = await this.data_points.filter((sensor) => sensor["sensorName"] === this.sensor_name);
         }

@@ -145,10 +145,9 @@ export default {
       }
 
       this.shownCharts[this.shownCharts.indexOf(this.selectedChart)].chart_type = newChartType;
-      console.log(this.shownCharts)
 
       this.setChartPositions();
-      // this.$router.go();
+      this.$router.go();
     },
 
     createCharts() {
