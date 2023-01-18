@@ -36,8 +36,7 @@
 </template>
 <script>
 import AddAlarms from "@/components/ship/updateAlarms";
-import {AlarmService} from "@/services/alarm.service";
-
+import AlarmService from "@/services/alarm.service";
 export default {
   components: {AddAlarms},
   mounted() {
