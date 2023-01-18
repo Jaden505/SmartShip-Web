@@ -72,7 +72,9 @@ public class DataLoader implements CommandLineRunner {
         if (sensorDataList.size() > 0 ) return;
         System.out.println("Configuring some initial books in the repository");
 
-        for (Ship ship : this.shipRepository.findAll()) {
+        List<Ship> shipList = this.shipRepository.findAll();
+
+        for (Ship ship : shipList) {
             for (int i = 0; i < 5; i++) {
                 sensorDataList.add(this.sensorDataRepository.save(SensorData.createSampleSensorData(i, ship)));
             }

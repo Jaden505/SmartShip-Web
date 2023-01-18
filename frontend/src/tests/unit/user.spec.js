@@ -6,9 +6,10 @@ describe('User', () => {
     const user1_id = 3000;
     const user1_firstname = "John";
 
-// instances for testing
+    // instances for testing
     let user1, user2;
 
+    // Define the instances before each test
     beforeEach(function() {
         user1 = new User(user1_id, "Sample Address", "Sample City", "Sample Country", "Sample Date of Birth", user1_firstname, "male", "Sample Lastname", "Sample Nationality", "Sample Phone Number", "Sample Postal Code", "Sample Username", "Sample Email", "Sample Password", "Sample Role", 0);
         user2 = User.createSample(user1_id+1);

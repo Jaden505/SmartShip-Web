@@ -50,17 +50,12 @@ public class SensorDataRepositoryTest {
 
     @Test
     public void findAllSensorDataByShipId() {
-        for (SensorData sensorData: this.sensorDataList) {
-            System.out.println(sensorData.getShip().getId());
-        }
+        List<SensorData> sensorData = this.sensorDataRepository.findByShipId("ship2");
+        List<SensorData> nonExistingSensorData = this.sensorDataRepository.findByShipId("non-existing");
 
-        for (Ship ship: shipList) {
-            List<SensorData> sensorData = this.sensorDataRepository.findByShipId(ship.getId());
-            System.out.println(sensorData);
-        }
-
-        List<SensorData> sensorData = this.sensorDataRepository.findByShipId("non-existing");
-        System.out.println(sensorData);
+        assertEquals(5, sensorData.size());
+        assertEquals("sensorId0", sensorData.get(0).getSensorId());
+        assertTrue(nonExistingSensorData.isEmpty());
     }
 
 }

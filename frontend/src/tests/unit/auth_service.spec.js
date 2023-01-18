@@ -45,13 +45,13 @@ describe("Auth Service", () => {
         })
 
         // Check if the sign in method return a user object
-        await expect(authService.login(signInCredentials)).resolves.toEqual(signedInUser)
+        await expect(authService.login(signInCredentials), 'the response is not correct').resolves.toEqual(signedInUser)
 
         // Check if the request has been made
-        expect(axios.post).toHaveBeenCalledTimes(1)
+        expect(axios.post, 'the post request havent been called').toHaveBeenCalledTimes(1)
 
         // Check if the user object is stored in the local storage
-        expect(global.localStorage.getItem('user')).toEqual(JSON.stringify(signedInUser))
+        expect(global.localStorage.getItem('user'), 'the local storage is empty').toEqual(JSON.stringify(signedInUser))
 
     })
 
@@ -60,7 +60,7 @@ describe("Auth Service", () => {
         authService.logout();
 
         // Check if the user object is removed from the local storage and the user is null
-        expect(global.localStorage.getItem('user')).toBeNull()
+        expect(global.localStorage.getItem('user'), 'the local storage hasnt been removed').toBeNull()
     })
 
 });
