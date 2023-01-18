@@ -111,15 +111,7 @@ export default {
     getChartsPosition() {
       // Get charts from local storage
       if (localStorage.charts) {
-        let chart_names = this.addableCharts.map(chart_data => chart_data.chart_name);
-
-        for (let chart of JSON.parse(localStorage.charts)) {
-          // Check if chart was saved in local storage
-          if (chart_names.includes(chart)) {
-            this.switchDisplayChart(this.addableCharts[chart_names.indexOf(chart)]);
-            chart_names.splice(chart_names.indexOf(chart), 1);
-          }
-        }
+        this.shownCharts = JSON.parse(localStorage.charts);
       }
       else {
         // Display all charts by default
@@ -130,7 +122,7 @@ export default {
 
     setChartPositions() {
       // Save chart names in local storage
-      localStorage.setItem('charts', JSON.stringify(this.shownCharts.map(chart_data => chart_data.chart_name)));
+      localStorage.setItem('charts', JSON.stringify(this.shownCharts));
     },
 
     async getSensorData() {
@@ -152,10 +144,11 @@ export default {
         return;
       }
 
-      this.selectedChart.chart_type = newChartType;
+      this.shownCharts[this.shownCharts.indexOf(this.selectedChart)].chart_type = newChartType;
+      console.log(this.shownCharts)
 
       this.setChartPositions();
-      this.$router.go();
+      // this.$router.go();
     },
 
     createCharts() {
