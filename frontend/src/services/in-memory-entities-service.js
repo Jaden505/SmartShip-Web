@@ -1,10 +1,10 @@
 export class InMemoryEntitiesService
     /* implements EntitiesServiceInterface<E> */ {
 
-    notifications;
+    list;
 
     constructor(sampleCreator = null) {
-        this.notifications = [];
+        this.list = [];
         if (sampleCreator != null) {
             for (let i = 0; i < 7; i++) {
                 this.save(sampleCreator(0));
@@ -13,17 +13,26 @@ export class InMemoryEntitiesService
     }
 
     findAll() {
-        return this.notifications;
+        return this.list;
     }
 
-    save(notification) {
-        if(notification == null) {
+    save(sampleCreator) {
+        if (sampleCreator == null) {
             return;
         }
-        this.notifications.push(notification);
+        this.list.push(sampleCreator);
     }
 
     deleteById(id) {
-        this.notifications = this.notifications.filter(e => e?.id !== id);
+        this.list = this.list.filter(e => e?.id !== id);
+    }
+
+    post(alarm) {
+        if (alarm == null) {
+            return;
+        }
+        let notification = [];
+        notification.push(alarm);
+        this.list = this.list.push(notification);
     }
 }

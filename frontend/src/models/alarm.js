@@ -17,4 +17,20 @@ export class Alarm {
         this.message = message;
         this.unit = unit;
     }
+
+    static createSample() {
+        let alarms = []
+
+        for (let i = 0; i < 8; i++) {
+            let alarm = new Alarm()
+            alarm.parameter = "parameter" + i;
+            alarm.category = "category" + i;
+            alarm.settedUpValue = "settedUpValue" + i;
+            alarm.shipId = "shipId" + i;
+            alarm.date = new Date();
+            alarm.message = "message" + i;
+            alarm.unit = "unit" + i;
+        }
+        return alarms;
+    }
 }

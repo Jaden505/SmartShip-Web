@@ -1,5 +1,6 @@
-package com.server.server;
+package com.server.server.rest;
 
+import com.server.server.ServerApplication;
 import com.server.server.model.Ship;
 import com.server.server.repository.ShipRepository;
 import org.junit.jupiter.api.BeforeEach;
