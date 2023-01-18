@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import {AlarmService} from "@/services/alarm.service";
+import AlarmService from "@/services/alarm.service";
 import SensordataService from "@/services/sensordata.service";
 import {toRaw} from "vue";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
