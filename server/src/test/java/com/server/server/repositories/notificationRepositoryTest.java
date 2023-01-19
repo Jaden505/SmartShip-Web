@@ -46,7 +46,7 @@ public class notificationRepositoryTest {
         System.out.println("the size of the notifications is " + this.notifications.size());
         //Arrange
         Notification notification = new Notification("Notification", "Notificaition", 20,
-                "0qwerty4-test-13213", new Date(), "This is a message", "The unit of the value");
+                "3002", new Date(), "This is a message", "The unit of the value");
 
         //Act
         this.notificationRepo.save(notification);
@@ -62,7 +62,7 @@ public class notificationRepositoryTest {
     public void deleteNotificationJPA() {
         if(this.notifications.size() > 0) {
             Notification notification = new Notification("TEST", "TEST", 20,
-                    "083434-test-13213", new Date(), "This is a message", "The unit of the value");
+                    "3002", new Date(), "This is a message", "The unit of the value");
 
             //Act
             this.notificationRepo.save(notification);
