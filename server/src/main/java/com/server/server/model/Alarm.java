@@ -23,17 +23,28 @@ public class Alarm {
     @Column(name = "ship_id")
     private String shipId;
 
-    public Alarm(String parameter, String category, double settedUpValue, String shipId) {
-        this.parameter = parameter;
-        this.category = category;
-        this.settedUpValue = settedUpValue;
-        this.shipId = shipId;
-    }
+    @Column(name = "date")
+    private Date date;
+
+    @Column(name = "notification_message")
+    private String message;
+
+    @Column(name = "unit ")
+    private String unit;
 
     public Alarm() {
 
     }
 
+    public Alarm(String parameter, String category, double settedUpValue, String shipId, Date date, String message, String unit) {
+        this.parameter = parameter;
+        this.category = category;
+        this.settedUpValue = settedUpValue;
+        this.shipId = shipId;
+        this.date = date;
+        this.message = message;
+        this.unit = unit;
+    }
     public int getId() {
         return id;
     }
@@ -72,5 +83,29 @@ public class Alarm {
 
     public void setShipId(String shipId) {
         this.shipId = shipId;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 }

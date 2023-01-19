@@ -24,9 +24,20 @@
           </select>
         </div>
         <div class="Parameters form-group">
-          <label for="value" class="block mb-2 text-sm font-medium text-white-text">your Value</label>
-          <input v-model="alarm.valueSinceLastUpdate" class="form-control" type="text" name="valueSinceLastUpdate"/>
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Your value</label>
+          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="valueSinceLastUpdate"/>
         </div>
+
+        <div class="Parameters form-group">
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Unit</label>
+          <input v-model="alarm.unit" class="form-control" type="text" name="valueSinceLastUpdate"/>
+        </div>
+
+        <div class="Parameters form-group">
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Notification Message</label>
+          <input v-model="alarm.message" class="form-control w-50 h-50" type="text" name="valueSinceLastUpdate"/>
+        </div>
+
         <button class="button" id="cancel" @click="cancelForm">
           {{ cancel }}
         </button>
@@ -44,7 +55,7 @@ import AlarmService from "@/services/alarm.service";
 import SensordataService from "@/services/sensordata.service";
 import {toRaw} from "vue";
 import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
-
+import {Alarm} from "@/models/alarm";
 export default {
   created(){
     this.getCategories();
@@ -73,14 +84,15 @@ export default {
       Fuels: [],
       Batteries: [],
       // sensor_groups end
-      shipId: null,
+      shipId: JSON.parse(localStorage.getItem('user')).ship,
       selectedSensor: null,
       alarm: {
         parameter: "",
         category: "",
-        valueSinceLastUpdate: "",
         settedUpValue: "",
-        shipId:"",
+        date: "",
+        message: "",
+        unit: "",
       },
       sensor_data: {
         sensor_id: "",
@@ -187,30 +199,13 @@ export default {
       window.location.reload(true);
     },
 
-    addAlarm() {
-
-      const alarm = {
-        sensor_group: this.sensor_data.sensor_group,
-        sensor_name: this.sensor_data.sensor_name,
-        value: this.sensor_data.value,
-        settedUpValue: this.sensor_data.settedUpValue,
-      };
-
+    addAlarm(){
+      const alarm = new Alarm(this.selectedSensor, this.selectedCategory, parseFloat(this.alarm.settedUpValue), this.shipId, this.alarm.date, this.alarm.message, this.alarm.unit)
       console.log(alarm)
       AlarmService.addAlarm(alarm)
           .then(response => {
             window.location.reload(true)
             console.log(response.data)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-    },
-    getAllCategories() {
-      AlarmService.getAllCategories()
-          .then(response => {
-            this.alarms = response.data;
-            console.log(response.data);
           })
           .catch(e => {
             console.log(e)
@@ -241,16 +236,13 @@ export default {
   display: block;
   font-size: 30px;
 }
-
-input{
-  border-radius: 10px;
-}
 #allParameters{
   border-radius: 20px;
   height: auto;
 }
 
 input{
+  border-radius: 10px;
   width: 70%;
   height: 20%;
   margin-left: 78px;
@@ -304,13 +296,6 @@ label{
   margin-left: 78px;
   width: 70%;
   border-radius: 10px;
-}
-
-.waarde{
-  width: 70%;
-  height: 20%;
-  margin-left: 78px;
-  color: white;
 }
 
 </style>

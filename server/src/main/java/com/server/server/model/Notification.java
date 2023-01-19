@@ -36,6 +36,16 @@ public class Notification {
 
     }
 
+    public Notification(String parameter, String category, double settedUpValue, String shipId, Date date, String message, String unit) {
+        this.title = parameter;
+        this.category = category;
+        this.value = settedUpValue;
+        this.shipId = shipId;
+        this.date = date;
+        this.message = message;
+        this.unit = unit;
+    }
+
     public int getId() {
         return id;
     }
@@ -85,5 +95,18 @@ public class Notification {
 
     public String getShipId() {
         return shipId;
+    }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", value=" + value +
+                ", shipId='" + shipId + '\'' +
+                ", date=" + date +
+                ", message='" + message + '\'' +
+                ", unit='" + unit + '\'' +
+                '}';
     }
 }
