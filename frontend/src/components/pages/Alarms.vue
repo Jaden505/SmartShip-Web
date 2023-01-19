@@ -75,7 +75,7 @@ export default {
     deleteAlarm(index){
       AlarmService.delete(index)
           .then(response => {
-            window.location.reload(true)
+            this.getAlarms()
             console.log(response.data)
           })
           .catch(e => {
@@ -86,7 +86,7 @@ export default {
       alarm.date = new Date();
       AlarmService.postNotification(alarm)
           .then(response => {
-            window.location.reload(true)
+            this.getAlarms()
             console.log(response.data)
           })
           .catch(e => {

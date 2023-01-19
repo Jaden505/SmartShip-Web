@@ -1,6 +1,10 @@
 <!-- @author: Joli-Coeur Weibolt & Milos Mihajlović   Notification Overview Component -->
 <template>
-  <div>
+  <div v-motion
+       :initial="{ opacity: 0, y: 100 }"
+       :enter="{ opacity: 1, y: 0, scale: 1 }"
+       :variants="{ custom: { scale: 2 } }"
+       :delay="100">
     <div class="flex w-full p-4 text-black-text dark:text-white-text">
       <div class="p-4 m-2 rounded-md w-1/3 bg-purple-basic dark:bg-black-light">
         <div class="pb-4">
@@ -10,31 +14,27 @@
         <div v-if="notifications.length === 0" class="inline w-5 h-5">
           You don't have any notifications.
         </div>
-
+        <!--We loop through the notifications and show them in a list with a delete button for each notification-->
         <div v-for="(notification, index) in notifications"
              :key="index" class="shadow-lg relative rounded-md p-4 mb-2"
              :class="{'active bg-blue-lavender dark:bg-black-basic': selectedNotification === notification}"
              @click="setNotification(notification)">
+          <!--The delete button-->
           <button class="absolute delete inset-y-0 right-0 flex items-center pr-4"
                   @click="deleteNotification(notification.id, notification.title, notification.shipId)">
             <font-awesome-icon icon="fa-solid fa-trash" class="w-5 h-5"/>
           </button>
           <div class="inline-block">
-            <h4 v-if="notifications.length > 0" class="text-xl">
+            <h4 class="text-xl">
               {{ notification.title }}</h4>
             <span class="text-sm">
-              {{
-                ('0' + new Date(notification.date).getDate()).slice(-2)
-              }}-{{
-                ('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
-              }}-{{
-                new Date(notification.date).getFullYear()
-              }} {{
-                ('0' + new Date(notification.date).getHours()).slice(-2)
-              }}:{{ ('0' + new Date(notification.date).getMinutes()).slice(-2) }}
+              {{('0' + new Date(notification.date).getDate()).slice(-2)
+              }}-{{('0' + (new Date(notification.date).getMonth() + 1)).slice(-2)
+              }}-{{new Date(notification.date).getFullYear()
+              }} {{('0' + new Date(notification.date).getHours()).slice(-2)
+              }}:{{('0' + new Date(notification.date).getMinutes()).slice(-2) }}
             </span>
           </div>
-
         </div>
       </div>
       <!--We show the div below only if the user has a notification-->
@@ -85,7 +85,10 @@ export default {
     },
     //This method is called when the user clicks on the delete button and deletes the notification from the backend
     deleteNotification(id, title, shipId) {
-      if (confirm("Are you sure you want to delete this notification?\n" + "Title: " + title + "\nShip-id: " + shipId)) {
+      //We confirm with an alert if the user really wants to delete the notification
+      //and show the title and shipId of the notification,
+      //if the user clicks on ok, the notification will be deleted from the backend
+      if (confirm("Are you sure you want to delete this notification?\n" + "Title: " + title + "\nShip-id: " + shipId)){
         NotificationService.delete(id)
             .then(() => {
               //After the notification is deleted from the backend, we fetch the notifications again

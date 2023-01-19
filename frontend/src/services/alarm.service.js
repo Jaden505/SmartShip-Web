@@ -15,8 +15,10 @@ class AlarmService {
             headers: authHeader()
         });
     }
+    //We need to add a method to update an alarm
     postNotification(alarm) {
         let notification = JSON.stringify(alarm)
+        //We need to change the API_URL to the correct one
         return axios.post(API_URL + "/send", notification, {
             headers: {
                 "Authorization": 'Bearer ' + user.accessToken,
