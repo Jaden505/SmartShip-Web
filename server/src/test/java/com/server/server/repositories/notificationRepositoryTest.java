@@ -45,8 +45,8 @@ public class notificationRepositoryTest {
     public void postNotificationJPA() {
         System.out.println("the size of the notifications is " + this.notifications.size());
         //Arrange
-        Notification notification = new Notification("TEST", "TEST", 20,
-                "083434-test-13213", new Date(), "This is a message", "The unit of the value");
+        Notification notification = new Notification("Notification", "Notificaition", 20,
+                "0qwerty4-test-13213", new Date(), "This is a message", "The unit of the value");
 
         //Act
         this.notificationRepo.save(notification);
