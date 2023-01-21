@@ -1,5 +1,5 @@
 <template>
-  <div v-motion-fade class="flex h-screen bg-blue-lavender dark:bg-black-basic">
+  <div class="flex h-screen bg-blue-lavender dark:bg-black-basic">
     <!--  SIDEBAR LEFT  -->
     <SideBar/>
     <!--  CONTENT RIGHT  -->
@@ -31,7 +31,7 @@
             </router-link>
           </div>
           <h2 class="font-semibold inline-block hidden space-x-2 md:flex md:text-sm lg:text-base">
-            <span class="text-blue-regular">Good Morning</span>  <span class="text-black-text dark:text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span>
+            <span class="text-blue-regular">Good Morning</span>  <span id="username" class="text-black-text dark:text-white-text">{{capitalizeFirstLetter(currentUser.username)}}</span>
           </h2>
           <nav class="hidden space-x-2 md:flex md:items-center">
             <button class="px-1" @click="showPreview()">
@@ -42,18 +42,18 @@
               <font-awesome-icon icon="fa-solid fa-moon" class="w-6 h-6 text-black-text dark:text-white-text" v-else/>
             </button>
             <router-link to="/profile">
-              <img class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" :src="this.userImage" alt="Bordered avatar">
+              <img id="profile_image" class="p-1 w-10 h-10 rounded-full ring-2 ring-blue-regular" :src="this.userImage" alt="Bordered avatar">
             </router-link>
             <div class="p-2 lg:text-base lg:inline-block md:hidden">
               <router-link to="/profile"><h3 class="text-black-text dark:text-white-text font-medium">{{capitalizeFirstLetter(currentUser.username)}}</h3></router-link>
               <div v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
-                <span class="text-black-text dark:text-white-text font-semibold">Admin</span>
+                <span id="role" class="text-black-text dark:text-white-text font-semibold">Admin</span>
               </div>
               <div v-else-if="currentUser.roles[0] === 'ROLE_MANAGER'">
-                <span class="text-black-text dark:text-white-text font-semibold">Manager</span>
+                <span id="role" class="text-black-text dark:text-white-text font-semibold">Manager</span>
               </div>
               <div v-else>
-                <span class="text-black-text dark:text-white-text font-semibold">Operator</span>
+                <span id="role" class="text-black-text dark:text-white-text font-semibold">Operator</span>
               </div>
             </div>
           </nav>
@@ -84,15 +84,9 @@ library.add(faMoon, faBell, faBars, faGear, faUser, faCircleHalfStroke)
 
 export default {
   name: "DashBoard",
-    provide() {
-      return {
-        userImage: computed(() => this.userImage)
-      }
-  },
-  computed: {
-    currentUser() {
-      console.log(toRaw(this.$store.state.auth.user));
-      return toRaw(this.$store.state.auth.user);
+  provide() {
+    return {
+      userImage: computed(() => this.userImage)
     }
   },
   data() {
@@ -109,7 +103,8 @@ export default {
       ],
       userImage: require('@/assets/img/default_user.png'),
       isDark: useDark(),
-      preview: false
+      preview: false,
+      currentUser: null
     }
   },
   components: {
@@ -117,6 +112,10 @@ export default {
     NotificationPreview
   },
   created() {
+    // Set current user to user from local storage
+    this.currentUser = toRaw(this.$store.state.auth.user);
+
+    // Get user image
     uploadService.getFile(this.currentUser.id).then(response => {
       if (response.data !== "") {
         this.userImage = "data:image/jpeg;base64," + response.data
@@ -126,15 +125,18 @@ export default {
     });
   },
   methods: {
+    // Capitalize first letter of string
     capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+      if (string !== null) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
     },
     toggleDark() {
       this.isDark = !this.isDark
       useToggle(useDark(this.isDark))
     },
     showPreview() {
-        this.preview = !this.preview
+      this.preview = !this.preview
     },
     onClickOutside(){
       this.preview = false
