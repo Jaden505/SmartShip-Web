@@ -36,7 +36,8 @@ public class Notification {
 
     }
 
-    public Notification(String parameter, String category, double settedUpValue, String shipId, Date date, String message, String unit) {
+    public Notification(String parameter, String category, double settedUpValue, String shipId,
+                        Date date, String message, String unit) {
         this.title = parameter;
         this.category = category;
         this.value = settedUpValue;

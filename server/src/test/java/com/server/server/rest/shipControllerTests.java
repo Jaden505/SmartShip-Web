@@ -48,10 +48,12 @@ public class shipControllerTests {
 
         //Assert
         if(value){
-            assertTrue(value, "All the GPS latitudes and longitudes are filled in" +
+            assertTrue(value);
+            System.out.println("All the GPS latitudes and longitudes are filled in" +
                     " and the marker popup of the map can be displayed");
         }else{
-            assertFalse(value,"Not all the GPS latitudes and longitudes are filled in and it may happen that" +
+            assertFalse(value);
+            System.out.println("Not all the GPS latitudes and longitudes are filled in and it may happen that" +
                     " the marker popup of the map cannot be properly displayed");
         }
     }

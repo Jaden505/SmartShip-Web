@@ -1,4 +1,3 @@
-// We import axios to make the HTTP requests and authHeader to get the token from the local storage.
 import axios from "axios";
 import authHeader from "@/services/auth-header";
 // We define the API_URL as the URL of the backend server.

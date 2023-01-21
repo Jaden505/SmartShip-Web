@@ -87,6 +87,7 @@ export default {
       AlarmService.postNotification(alarm)
           .then(response => {
             this.getAlarms()
+            alert("The alarm has rang and a notification has been sent.")
             console.log(response.data)
           })
           .catch(e => {

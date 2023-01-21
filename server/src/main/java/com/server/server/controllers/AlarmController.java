@@ -43,8 +43,7 @@ public class AlarmController {
     @PostMapping("/Alarms")
     public ResponseEntity<Alarm> addAlarms(@RequestBody Alarm alarm){
         try{
-            Alarm _alarm = new Alarm(alarm.getParameter(), alarm.getCategory(), alarm.getSettedUpValue(), alarm.getShipId(),alarm.getDate(),alarm.getMessage(),alarm.getUnit());
-            return new ResponseEntity<>(alarmRepo.save(_alarm), HttpStatus.OK);
+            return new ResponseEntity<>(alarmRepo.save(alarm), HttpStatus.OK);
         }
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -53,7 +52,8 @@ public class AlarmController {
     @PostMapping("/Alarms/send")
     public ResponseEntity<Notification> postNotification(@RequestBody Alarm alarm){
         try{
-            Notification notification = new Notification(alarm.getParameter(), alarm.getCategory(), alarm.getSettedUpValue(), alarm.getShipId(),alarm.getDate(),alarm.getMessage(),alarm.getUnit());
+            Notification notification = new Notification(alarm.getParameter(), alarm.getCategory(),
+                    alarm.getSettedUpValue(), alarm.getShipId(),alarm.getDate(),alarm.getMessage(),alarm.getUnit());
             return new ResponseEntity<>(notificationRepo.save(notification), HttpStatus.OK);
         }
         catch (Exception e) {
