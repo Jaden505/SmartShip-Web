@@ -1,11 +1,11 @@
 <template>
-  <div v-motion :delay="100"
+  <div :delay="100"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :initial="{ opacity: 0, y: 100 }"
        :variants="{ custom: { scale: 2 } }"
        class="mt-4 p-4">
     <div class="flex flex-row space-x-2">
-      <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
+      <button class="text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text" id="add-user-btn" @click="TogglePopup('buttonTriggerCreate')">Add user</button>
     </div>
     <div class="mt-4">
       <table class="text-center table-auto w-full text-black-text dark:text-white-text">
@@ -45,6 +45,7 @@
   <create-manager-form
       v-if="popupTrigger.buttonTriggerCreate"
       :TogglePopup="() => TogglePopup('buttonTriggerCreate')"
+      id="create-manager-form"
   />
 
 </template>
