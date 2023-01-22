@@ -16,7 +16,7 @@ public class Ship {
     @Column(name = "name")
     private String name;
 
-    //    @JoinColumn(name = "status", nullable = true)
+//    @JoinColumn(name = "status", nullable = true)
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private String status;

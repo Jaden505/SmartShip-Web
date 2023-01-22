@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Component
 @Entity
-@Table(name = "sensor_data")
+@Table(name = "sensor_data_ship")
 public class SensorData {
 
     @Id
@@ -27,28 +28,28 @@ public class SensorData {
     private Ship ship;
 
     @JsonFormat(pattern = "HH:mm:ss dd/MM/yyyy")
-    @Column(name = "time")
+    @Column(name = "ship_time")
     private LocalDateTime time;
 
-    @Column(name = "type")
+    @Column(name = "ship_type")
     private String type;
 
-    @Column(name = "value")
+    @Column(name = "ship_value")
     private String value;
 
-    @Column(name = "unit")
+    @Column(name = "ship_unit")
     private String unit;
 
-    @Column(name = "speed")
+    @Column(name = "ship_speed")
     private String speed;
 
-    @Column(name = "gps_latitude")
+    @Column(name = "ship_gps_latitude")
     private String gpsLatitude;
 
-    @Column(name = "gps_longtitude")
+    @Column(name = "ship_gps_longtitude")
     private String gpsLongtitude;
 
-    protected SensorData() {
+    public SensorData() {
     }
 
     public SensorData(String sensorId, String group, String sensorName, Ship ship, LocalDateTime time, String type, String value, String unit, String speed, String gpsLatitude, String gpsLongtitude) {
@@ -64,6 +65,30 @@ public class SensorData {
         this.speed = speed;
         this.gpsLatitude = gpsLatitude;
         this.gpsLongtitude = gpsLongtitude;
+    }
+
+    //   For testing purposes we create a sample ship
+    public static SensorData createSampleSensorData(int id, Ship ship){
+
+        String[] group = {"Fuel", "Sea Conditions", "Motor", "Battery"};
+
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(group.length);
+
+        SensorData sensorData = new SensorData();
+        sensorData.setSensorId("sensorId" + id);
+        sensorData.setGroup(group[randomIndex]);
+        sensorData.setSensorName("Sample");
+        sensorData.setShip(ship);
+        sensorData.setTime(null);
+        sensorData.setType(null);
+        sensorData.setValue(null);
+        sensorData.setUnit(null);
+        sensorData.setSpeed(null);
+        sensorData.setGpsLatitude(null);
+        sensorData.setGpsLongtitude(null);
+
+        return sensorData;
     }
 
     public String getSensorId() {
@@ -154,21 +179,20 @@ public class SensorData {
         this.gpsLongtitude = gpsLongtitude;
     }
 
-
-    @Override
-    public String toString() {
-        return "SensorData{" +
-                "sensorId='" + sensorId + '\'' +
-                ", group='" + group + '\'' +
-                ", sensorName='" + sensorName + '\'' +
-                ", ship=" + ship +
-                ", time=" + time +
-                ", type='" + type + '\'' +
-                ", value='" + value + '\'' +
-                ", unit='" + unit + '\'' +
-                ", speed='" + speed + '\'' +
-                ", gpsLatitude='" + gpsLatitude + '\'' +
-                ", gpsLongtitude='" + gpsLongtitude + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "SensorData{" +
+//                "sensorId='" + sensorId + '\'' +
+//                ", group='" + group + '\'' +
+//                ", sensorName='" + sensorName + '\'' +
+//                ", ship=" + ship +
+//                ", time=" + time +
+//                ", type='" + type + '\'' +
+//                ", value='" + value + '\'' +
+//                ", unit='" + unit + '\'' +
+//                ", speed='" + speed + '\'' +
+//                ", gpsLatitude='" + gpsLatitude + '\'' +
+//                ", gpsLongtitude='" + gpsLongtitude + '\'' +
+//                '}';
+//    }
 }

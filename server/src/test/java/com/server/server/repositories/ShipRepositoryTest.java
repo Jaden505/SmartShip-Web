@@ -1,7 +1,7 @@
 package com.server.server.repositories;
 
 import com.server.server.model.Ship;
-import com.server.server.repository.TestDataLoader;
+import com.server.server.repository.DataLoader;
 import com.server.server.repository.ShipRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@Import(TestDataLoader.class)
+@Import(DataLoader.class)
 public class ShipRepositoryTest {
 
     // Import Command Line Runner to load data into the database
@@ -40,7 +40,7 @@ public class ShipRepositoryTest {
     public void findAllShips() {
         // Assert that the list of sensor data is not empty
         assertTrue(this.shipList.size() > 0);
-        assertEquals(5, this.shipList.size());
+        assertEquals(3, this.shipList.size());
     }
 
     @Test

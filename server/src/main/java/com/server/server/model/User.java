@@ -88,29 +88,29 @@ public class User {
       this.country = country;
    }
 
-   //   For testing purposes we create a sample user
-   public static User createSampleUser(int id, String password){
+//   For testing purposes we create a sample user
+public static User createSampleUser(int id, String password){
 
-      User user = new User();
-      user.setId(id);
-      user.setUsername("user" + id);
-      user.setEmail("user" + id + "@gmail.com");
-      user.setPassword(password);
-      user.setFirstname("firstname" + id);
-      user.setLastname("lastname" + id);
-      user.setCity(null);
-      user.setRole(new Role(ERole.ROLE_ADMIN));
-      user.setAddress(null);
-      user.setCountry(null);
-      user.setGender(null);
-      user.setNationality(null);
-      user.setPhonenumber(null);
-      user.setPostalcode(null);
-      user.setShip(null);
-      user.setDateofbirth(null);
+   User user = new User();
+    user.setId(id);
+    user.setUsername("user" + id);
+    user.setEmail("user" + id + "@gmail.com");
+    user.setPassword(password);
+    user.setFirstname("firstname" + id);
+    user.setLastname("lastname" + id);
+    user.setCity(null);
+    user.setRole(new Role(ERole.ROLE_ADMIN));
+    user.setAddress(null);
+    user.setCountry(null);
+    user.setGender(null);
+    user.setNationality(null);
+    user.setPhonenumber(null);
+    user.setPostalcode(null);
+    user.setShip(null);
+    user.setDateofbirth(null);
 
-      return user;
-   }
+   return user;
+}
 
 
    public int getId() {

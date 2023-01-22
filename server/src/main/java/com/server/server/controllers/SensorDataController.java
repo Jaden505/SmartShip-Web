@@ -60,12 +60,6 @@ public class SensorDataController {
     @PostMapping("/add")
     public ResponseEntity<SensorData> addSensorData(@RequestBody SensorData body) {
 
-//        try {
-//            ObjectMapper mapper = new ObjectMapper();
-//            sensorData.setShip(mapper.writeValueAsString(body.getShip()));
-//        }catch (JsonProcessingException e){
-//            System.out.println("Json Processing");
-//        }
         sensorData.setSensorId(body.getSensorId());
         sensorData.setGroup(body.getGroup());
         sensorData.setSensorName(body.getSensorName());

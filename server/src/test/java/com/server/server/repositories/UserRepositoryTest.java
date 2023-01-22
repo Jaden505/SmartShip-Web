@@ -1,10 +1,9 @@
 package com.server.server.repositories;
 
-import com.server.server.ServerApplication;
 import com.server.server.model.ERole;
 import com.server.server.model.Role;
 import com.server.server.model.User;
-import com.server.server.repository.TestDataLoader;
+import com.server.server.repository.DataLoader;
 import com.server.server.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@Import(TestDataLoader.class)
+@Import(DataLoader.class)
 public class UserRepositoryTest {
 
     // Import the DataLoader class to load the data into the database
@@ -80,4 +79,7 @@ public class UserRepositoryTest {
         // check persistence of change
         assertEquals(updatedUser.getCity(), savedUser.getCity());
     }
+
+
+
 }
