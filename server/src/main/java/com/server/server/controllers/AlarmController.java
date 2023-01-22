@@ -2,20 +2,15 @@ package com.server.server.controllers;
 
 import com.server.server.model.Alarm;
 import com.server.server.model.Notification;
-import com.server.server.model.SensorData;
 import com.server.server.repository.AlarmRepository;
 import com.server.server.repository.NotificationRepository;
-import org.apache.el.parser.AstLambdaExpression;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -57,7 +52,7 @@ public class AlarmController {
             return new ResponseEntity<>(notificationRepo.save(notification), HttpStatus.OK);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
