@@ -7,7 +7,8 @@ import java.util.Date;
 @Table(name = "notification")
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //Indicates that the persistence provider must assign primary keys for the entity using a database identity column.
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 
