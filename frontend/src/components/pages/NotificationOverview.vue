@@ -55,10 +55,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// I imported the NotificationService from the services folder
 import NotificationService from '@/services/notification.service'
-//I imported the library for the delete button (the fontawesome trash can)
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 
@@ -67,7 +64,7 @@ export default {
   name: "NotificationOverview",
   //Used created() to fetch the notifications from the backend
   //created is a lifecycle hook that is called after the component is created and can be
-  // used to fetch data from the backend
+  //used to fetch data from the backend
   created() {
     this.getNotifications()
   },
@@ -78,16 +75,10 @@ export default {
     }
   },
   methods: {
-    //This method is called when the user clicks on a notification and sets the selectedNotification to the notification
-    //that the user clicked on.
     setNotification(notification) {
       this.selectedNotification = notification
     },
-    //This method is called when the user clicks on the delete button and deletes the notification from the backend
     deleteNotification(id, title, shipId) {
-      //We confirm with an alert if the user really wants to delete the notification
-      //and show the title and shipId of the notification,
-      //if the user clicks on ok, the notification will be deleted from the backend
       if (confirm("Are you sure you want to delete this notification?\n" + "Title: " + title + "\nShip-id: " + shipId)){
         NotificationService.delete(id)
             .then(() => {
@@ -103,10 +94,7 @@ export default {
     getNotifications() {
       NotificationService.getAll()
           .then(response => {
-            //The response is an array of notifications, so we set the notifications to the response,
-            //so we can loop over the notifications in the template
             this.notifications = response.data
-            //We set the selectedNotification to the first notification in the array
             this.selectedNotification = this.notifications[0]
             console.log(response.data)
           })
