@@ -29,4 +29,15 @@ export class Ship {
         return Object.assign(new Ship(), ship);
     }
 
+    static createSample(id) {
+        let ship = new Ship();
+        ship.id = id;
+        ship.name = "Ship" + id;
+        ship.status = "ACTIVE";
+        ship.gpsLatitude = 50 + id;
+        ship.gpsLongtitude = 30 + id;
+        ship.tank1 = id;
+        ship.tank2 = id * 2;
+        return ship;
+    }
 }

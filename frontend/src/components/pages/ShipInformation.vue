@@ -1,12 +1,11 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <div v-motion
-       :initial="{ opacity: 0, y: 100 }"
+  <div :initial="{ opacity: 0, y: 100 }"
        :enter="{ opacity: 1, y: 0, scale: 1 }"
        :variants="{ custom: { scale: 2 } }"
        :delay="100">
-    <button @click="this.switchEditing();"
+    <button @click="this.switchEditing();" id="edit-button"
             class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text">Edit dashboard</button>
 
     <div class="dropdown">
@@ -19,7 +18,7 @@
     <button :class="{hidden: !isEditing}" @click="setComponents(); this.$router.go()"
             class="edit-dashboard text-white bg-blue-regular font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white-text drop-btn">Save</button>
 
-    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper">
+    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-4 comp-wrapper" id="charts-holder">
       <div class="show-context" v-for="(component, index) in componentsList" :key="index">
         <div class="relative col-span-2 bg-purple-basic dark:bg-black-light shadow-md rounded-md droppable"
              :draggable="isEditing" @dragstart="dmc.onDragStart($event, component)"
