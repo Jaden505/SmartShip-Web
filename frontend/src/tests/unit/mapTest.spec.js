@@ -1,5 +1,5 @@
 import Map from '@/components/ship/Map.vue'
-import {shallowMount} from "@vue/test-utils";
+import {mount} from "@vue/test-utils";
 import {ShipDataService} from "@/services/ship.service";
 
 let ShipService;
@@ -20,7 +20,7 @@ beforeEach(() => {
 
 describe('Div map is rendered', () => {
     it('Should check if the div of the map is rendered', () => {
-        const wrapper = shallowMount(Map)
+        const wrapper = mount(Map)
         expect(wrapper.find('div').exists()).toBe(true)
         expect(wrapper.find('div').isVisible()).toBe(true)
         expect(wrapper.find('div').attributes('id')).toBe('map')

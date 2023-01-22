@@ -27,12 +27,10 @@ public class notificationControllerTest {
     @Autowired
     private NotificationRepository notificationRepo;
 
-    private List<Notification> notifications;
-
     @BeforeEach
     public void setup(){
-        this.notifications = this.notificationRepo.findAll();
-        assertNotNull(this.notifications);
+        List<Notification> notifications = this.notificationRepo.findAll();
+        assertNotNull(notifications);
     }
 
     @Test

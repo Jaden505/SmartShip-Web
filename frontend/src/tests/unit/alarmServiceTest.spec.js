@@ -18,7 +18,8 @@ describe('AlarmServiceTest', () => {
         //Arrange
         let lengthBeforePost = alarms.length;
         console.log("The amount of alarms is: "+alarms.length)
-        let alarm = new Alarm("Windy","Wind Speed",112,3001,new Date(),
+        let alarm = new Alarm("Windy","Wind Speed",112,
+            "07202515-a483-464c-b704-5671f104044b",new Date(),
             "This is a message", "m/s");
         //Act
         alarmService.post(alarm);

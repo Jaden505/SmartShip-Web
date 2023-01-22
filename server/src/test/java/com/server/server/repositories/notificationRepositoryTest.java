@@ -51,7 +51,7 @@ public class notificationRepositoryTest {
         //Act
         this.notificationRepo.save(notification);
         System.out.println("the size of the notifications is " + this.notificationRepo.findAll().size());
-        System.out.println("the size of the notifications is " + this.notificationRepo.findAll());
+        System.out.println("All the notifications: " + this.notificationRepo.findAll());
 
         //Assert
         assertTrue(this.notificationRepo.findAll().size() > this.notifications.size());

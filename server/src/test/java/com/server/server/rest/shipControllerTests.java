@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = ServerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = ServerApplication.class)
 public class shipControllerTests {
 
     @Autowired
@@ -38,21 +38,16 @@ public class shipControllerTests {
 
         //Act
         for (Ship ship : ships) {
-            if (ship.getGpsLatitude() != null && ship.getGpsLongtitude() != null) {
-                value = true;
-            }
-            else{
-                value = false;
-            }
+            value = ship.getGpsLatitude() != null && ship.getGpsLongtitude() != null;
         }
 
         //Assert
         if(value){
-            assertTrue(value);
+            assertTrue(true);
             System.out.println("All the GPS latitudes and longitudes are filled in" +
                     " and the marker popup of the map can be displayed");
         }else{
-            assertFalse(value);
+            assertFalse(false);
             System.out.println("Not all the GPS latitudes and longitudes are filled in and it may happen that" +
                     " the marker popup of the map cannot be properly displayed");
         }
@@ -65,20 +60,17 @@ public class shipControllerTests {
 
         //Act
         for (Ship ship : ships) {
-            if (ship.getTank1() != null && ship.getTank2() != null) {
-                value = true;
-            }
-            else{
-                value = false;
-            }
+            value = ship.getTank1() != null && ship.getTank2() != null;
         }
 
         //Assert
         if(value){
-            assertTrue(value,"All the tank values of tank 1 and two are filled in" +
+            assertTrue(true);
+            System.out.println("All the tank values of tank 1 and two are filled in" +
                     " and the graph on ship overview can be displayed");
         }else{
-            assertFalse(value,"Not all the tank values of tank1 and tank2 are filled in and it may happen that" +
+            assertFalse(false);
+            System.out.println("Not all the tank values of tank1 and tank2 are filled in and it may happen that" +
                     " the graph on ship overview cannot be properly displayed");
         }
     }
