@@ -110,4 +110,16 @@ public class Ship {
     public void setTank2(Integer tank2) {
         this.tank2 = tank2;
     }
+
+    @Override
+    public String toString() {
+        return "[id=" + id +
+                ", name=" + name +
+                ", status=" + status +
+                ", gpsLatitude=" + gpsLatitude +
+                ", gpsLongtitude=" + gpsLongtitude +
+                ", tank1=" + tank1 +
+                ", tank2=" + tank2 +
+                ']';
+    }
 }

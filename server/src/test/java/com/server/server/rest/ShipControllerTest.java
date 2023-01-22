@@ -1,8 +1,6 @@
 package com.server.server.rest;
 
-import com.server.server.model.SensorData;
 import com.server.server.model.Ship;
-import com.server.server.repository.SensorDataRepository;
 import com.server.server.repository.ShipRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,25 +10,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithUserDetails;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SensorDataControllerTest {
+public class ShipControllerTest {
 
     // Import TestRestTemplate class for testing the REST API
     @Autowired
     private TestRestTemplate restTemplate;
-
-    // Import SensorData Repository class for handling all sensor data related database operations
-    @Autowired
-    SensorDataRepository sensorDataRepository;
 
     // Import Ship Repository class for handling all ship related database operations
     @Autowired
@@ -47,57 +39,53 @@ public class SensorDataControllerTest {
     @BeforeEach
     public void setup() throws Exception {
         this.dataLoader.run(null);
-        this.ships = this.shipRepository.findAll();
     }
 
     @Test
-    public void getAllSensorData() {
+    public void getAllShips() {
         // Send a GET request to the REST API
-        ResponseEntity<List> response = restTemplate.getForEntity("/api/test/sensorData/", List.class);
+        ResponseEntity<List> response = restTemplate.getForEntity("/api/test/ships/all", List.class);
+
         // Check if the response status is OK
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        System.out.println(response);
+
         // Check if the response body is not null
-        assertEquals(6, response.getBody().size());
+        assertNotNull(response.getBody());
     }
 
     @Test
-    public void getSensorDataForSpecificShip() {
+    public void getShipById() {
         // Send a GET request to the REST API
-        ResponseEntity<List> response = restTemplate.getForEntity("/api/test/sensorData/ship2", List.class);
+        ResponseEntity<List> response = restTemplate.getForEntity("/api/test/ships/ship0", List.class);
+
         // Check if the response status is OK
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
         // Check if the response body is not null
-        assertEquals(5, response.getBody().size());
+        assertNotNull(response.getBody());
     }
 
     @Test
-    public void addNewSensorData() {
-        // Declare new ship and assign it to the first ship from ships list
-        Ship ship = this.ships.get(0);
-
+    public void addNewShip() {
         // Declare new sensor data and assign it to a new sensor data object
-        SensorData sensorData = new SensorData();
-        sensorData.setSensorId("sensor1");
-        sensorData.setGroup("Motor");
-        sensorData.setType("Temperature");
-        sensorData.setValue("1.0");
-        sensorData.setUnit("kW");
-        sensorData.setShip(ship);
-        sensorData.setSensorName("Motor 1");
-        sensorData.setTime(LocalDateTime.now());
-        sensorData.setSpeed("99");
-        sensorData.setGpsLatitude("99");
-        sensorData.setGpsLongtitude("99");
+        Ship shipData = new Ship();
+        shipData.setId("12");
+        shipData.setStatus("ACTIVE");
+        shipData.setGpsLatitude("24.123");
+        shipData.setGpsLongtitude("24.123");
+        shipData.setName("Maria");
+        shipData.setTank1(100);
+        shipData.setTank2(100);
 
         // Send a POST request to the REST API with  sensor data object as the request body
-        ResponseEntity<SensorData> response = restTemplate.postForEntity("/api/test/sensorData/add", sensorData, SensorData.class);
+        ResponseEntity<Ship> response = restTemplate.postForEntity("/api/test/ships/create", shipData, Ship.class);
 
         // Check if the response status is OK
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
         // Check if the response body is not null
-        assertEquals(sensorData.getSensorId(), Objects.requireNonNull(response.getBody()).getSensorId());
-
+        assertEquals(shipData.getId(), Objects.requireNonNull(response.getBody()).getId());
     }
-
-
 }
