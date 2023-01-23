@@ -10,4 +10,6 @@ import java.util.List;
 public interface ShipRepository extends JpaRepository<Ship, String> {
 
     List<Ship> findShipById(String shipId);
+
+    Ship getById(String shipId);
 }

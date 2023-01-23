@@ -45,6 +45,18 @@ class SensorDataService {
             headers: authHeader()
         })
     }
+
+    getSensorValue(group, name, ship){
+        return axios.get(API_URL + "/Value/" + group + "/" + name + "/" + ship, {
+            headers: authHeader()
+        })
+    }
+
+    getSensorName(group){
+        return axios.get(API_URL + "/Value/" + group,{
+            headers: authHeader()
+        })
+    }
 }
 
 export default new SensorDataService();

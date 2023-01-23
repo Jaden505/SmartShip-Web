@@ -2,10 +2,11 @@
   <div id="container">
     <div id="allParameters">
       <div class="submit-form">
+        <form>
         <p class="title">Create new alarm</p>
         <div class="Parameters form-group">
           <label for="category" class="block mb-2 text-sm font-medium text-white-text">Group</label>
-          <select v-model="selectedCategory" class="dropdown" type="text" name="category">
+          <select v-model="selectedCategory" class="dropdown" type="text" name="category" required>
             <option v-for="(category, index) in categories"
                     :value="category"
                     :key="index">
@@ -15,27 +16,28 @@
         </div>
         <div class="Parameters form-group">
           <label class="block mb-2 text-sm font-medium text-white-text">Sensor name</label>
-          <select v-model="selectedSensor" class="dropdown" type="text" name="sensor_name">
-            <option v-for="(sensor, index) in filter()"
-                    :value="sensor"
+          <select v-model="selectedSensor" class="dropdown" type="text" name="sensor_name" required>
+            <option v-for="(name, index) in allNames"
+                    :value="name"
                     :key="index">
-              {{ sensor }}
+              {{ name }}
             </option>
           </select>
         </div>
+
         <div class="Parameters form-group">
-          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Your value</label>
-          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="valueSinceLastUpdate"/>
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">current value</label>
+          <input v-model="value" class="form-control" type="text" name="valueSinceLastUpdate" required>
         </div>
 
         <div class="Parameters form-group">
-          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Unit</label>
-          <input v-model="alarm.unit" class="form-control" type="text" name="valueSinceLastUpdate"/>
+          <label for="value" class="block mb-2 text-sm font-medium text-white-text">Your value</label>
+          <input v-model="alarm.settedUpValue" class="form-control" type="text" name="valueSinceLastUpdate">
         </div>
 
         <div class="Parameters form-group">
           <label for="value" class="block mb-2 text-sm font-medium text-white-text">Notification Message</label>
-          <input v-model="alarm.message" class="form-control w-50 h-50" type="text" name="valueSinceLastUpdate"/>
+          <input v-model="alarm.message" class="form-control w-50 h-50" type="text" name="valueSinceLastUpdate">
         </div>
 
         <button class="button" id="cancel" @click="cancelForm">
@@ -44,7 +46,7 @@
         <button class="button" id="update" @click="addAlarm">
           {{ update }}
         </button>
-
+      </form>
       </div>
     </div>
   </div>
@@ -53,8 +55,7 @@
 <script>
 import AlarmService from "@/services/alarm.service";
 import SensordataService from "@/services/sensordata.service";
-import {toRaw} from "vue";
-import {DashboardMoveComponents} from "@/assets/js/DashboardMoveComponents";
+
 import {Alarm} from "@/models/alarm";
 export default {
   created(){
@@ -63,10 +64,12 @@ export default {
     this.getSensorNameByBattery();
     this.getSensorNameBySeaConditions();
     this.getSensorNameByFuel();
+    this.getSensorName();
   },
   name: "AddAlarms",
   data() {
     return {
+      value: null,
       parametertext: "Parameter: ",
       categorytext: "Category: ",
       realTimeValuetext: "Real time value: ",
@@ -75,7 +78,7 @@ export default {
       update: "Update",
       cancel: "Cancel",
       categories: [],
-      selectedCategory: null,
+      allNames: [],
       sensor_names: [],
       sensorCat: [],
       // sensor_groups start
@@ -84,8 +87,11 @@ export default {
       Fuels: [],
       Batteries: [],
       // sensor_groups end
+      /* istanbul ignore next */
       shipId: JSON.parse(localStorage.getItem('user')).ship,
+
       selectedSensor: null,
+      selectedCategory: null,
       alarm: {
         parameter: "",
         category: "",
@@ -115,6 +121,18 @@ export default {
     input: function () {
       // eslint-disable-next-line no-undef
       app.input = localStorage.getItem('ship');
+    },
+    selectedSensor(sensor){
+      if (sensor !== null){
+        this.value = this.getSensorValue(this.selectedCategory.replace(" ", "_"), sensor.replace(" ", "_"), this.shipId);
+      }
+    },
+    selectedCategory(category){
+      if (category !== null){
+        this.allNames = this.getSensorName(category.replace(" ", "_"))
+        console.log(this.allNames)
+        console.log("hello")
+      }
     }
   },
 
@@ -124,22 +142,44 @@ export default {
       console.log(this.shipId)
     },
 
-    filter() {
-      if (this.selectedCategory == "Motor") {
-        return this.Motors;
-      } else if (this.selectedCategory == "Sea Conditions") {
-        return this.Seas;
-      } else if (this.selectedCategory == "Fuel") {
-        return this.Fuels;
-      } else if (this.selectedCategory == "Battery") {
-        return this.Batteries;
-      }
-    },
+    // filter() {
+    //   if (this.selectedCategory == "Motor") {
+    //     return this.Motors;
+    //   } else if (this.selectedCategory == "Sea Conditions") {
+    //     return this.Seas;
+    //   } else if (this.selectedCategory == "Fuel") {
+    //     return this.Fuels;
+    //   } else if (this.selectedCategory == "Battery") {
+    //     return this.Batteries;
+    //   }
+    // },
 
     async getCategories() {
       SensordataService.getCategories()
           .then(response => {
             this.categories = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+
+    async getSensorName(group) {
+      SensordataService.getSensorName(group)
+          .then(response => {
+            this.allNames = response.data;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    },
+
+    async getSensorValue(group, name, ship){
+      SensordataService.getSensorValue(group, name, ship)
+          .then(response => {
+            this.value = response.data;
             console.log(response.data);
           })
           .catch(e => {

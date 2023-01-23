@@ -1,8 +1,11 @@
 package com.server.server.repository;
 
 import com.server.server.model.SensorData;
+import com.server.server.model.Ship;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -28,4 +31,12 @@ public interface SensorDataRepository extends JpaRepository<SensorData, Integer>
     @Query(value = "select distinct s.sensorName" +
             " from SensorData s where s.group = 'Battery' ")
     public List<String> getSensorNameByBattery();
+
+    @Query(value = "select distinct s.value" +
+            " from SensorData s where s.group = :group and s.sensorName = :sensorName and s.ship = :ship")
+    public List<String> getSensorValue(@Param("group") String group, @Param("sensorName")String sensorName, @Param("ship") Ship ship);
+
+    @Query(value = "select distinct s.sensorName" +
+            " from SensorData s where s.group = :group")
+    public List<String> getSensorName(@Param("group") String group);
 }

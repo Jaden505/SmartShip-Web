@@ -3,13 +3,17 @@ package com.server.server.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.server.server.model.SensorData;
+import com.server.server.model.Ship;
 import com.server.server.repository.SensorDataRepository;
+import com.server.server.repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -22,6 +26,9 @@ public class SensorDataController {
     @Autowired
     SensorDataRepository repo;
 
+    @Autowired
+    ShipRepository shipRepo;
+
     @GetMapping("/")
     public ResponseEntity<List<SensorData>> getAll(){
         return ResponseEntity.ok(repo.findAll());
@@ -32,29 +39,50 @@ public class SensorDataController {
         return repo.getCategories();
     }
 
-    @GetMapping("/Motor")
-    public List<String> getSensorNameByMotor() {
-        return repo.getSensorNameByMotor();
-    }
-
-    @GetMapping("/SeaConditions")
-    public List<String> getSensorNameBySeaConditions() {
-        return repo.getSensorNameBySeaConditions();
-    }
-
-    @GetMapping("/Fuel")
-    public List<String> getSensorNameByFuel() {
-        return repo.getSensorNameByFuel();
-    }
-
-    @GetMapping("/Battery")
-    public List<String> getSensorNameByBattery() {
-        return repo.getSensorNameByBattery();
-    }
+//    @GetMapping("/Motor")
+//    public List<String> getSensorNameByMotor() {
+//        return repo.getSensorNameByMotor();
+//    }
+//
+//    @GetMapping("/SeaConditions")
+//    public List<String> getSensorNameBySeaConditions() {
+//        return repo.getSensorNameBySeaConditions();
+//    }
+//
+//    @GetMapping("/Fuel")
+//    public List<String> getSensorNameByFuel() {
+//        return repo.getSensorNameByFuel();
+//    }
+//
+//    @GetMapping("/Battery")
+//    public List<String> getSensorNameByBattery() {
+//        return repo.getSensorNameByBattery();
+//    }
 
     @GetMapping("/{ship_id}")
     public ResponseEntity<List<SensorData>> getByShipId(@PathVariable String ship_id){
         return ResponseEntity.ok(repo.findByShipId(ship_id));
+    }
+
+    @GetMapping("/Value/{group}/{sensorName}/{ship}")
+    public List<String> getSensorValue(@PathVariable("group") String group, @PathVariable("sensorName")String sensorName, @PathVariable("ship")String ship){
+        Ship foundship = shipRepo.getById(ship);
+        System.out.println(sensorName);
+        System.out.println(group);
+        sensorName = sensorName.replaceAll("_", "\\ ");
+        group = group.replaceAll("_", "\\ ");
+        System.out.println(sensorName);
+        System.out.println(group);
+        return repo.getSensorValue(group, sensorName, foundship);
+    }
+
+    //new replacement for finding sensorname from group
+    @GetMapping("/Value/{group}")
+    public List<String> getSensorName(@PathVariable("group") String group){
+        System.out.println(group);
+        group = group.replaceAll("_", "\\ ");
+        System.out.println(group);
+        return repo.getSensorName(group);
     }
 
     @PostMapping("/add")
