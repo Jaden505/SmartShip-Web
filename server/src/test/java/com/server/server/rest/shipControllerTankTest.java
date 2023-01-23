@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = ServerApplication.class)
-public class shipControllerTests {
+public class shipControllerTankTest {
 
     @Autowired
     ServerApplication serverApplication = null;
@@ -30,28 +30,6 @@ public class shipControllerTests {
         System.out.println("Application auto-configuration has succeeded");
     }
 
-    @Test
-    public void checkGPSLatAndLong(){
-        //Arrange
-        List<Ship> ships = this.shipRepo.findAll();
-        boolean value = false;
-
-        //Act
-        for (Ship ship : ships) {
-            value = ship.getGpsLatitude() != null && ship.getGpsLongtitude() != null;
-        }
-
-        //Assert
-        if(value){
-            assertTrue(true);
-            System.out.println("All the GPS latitudes and longitudes are filled in" +
-                    " and the marker popup of the map can be displayed");
-        }else{
-            assertFalse(false);
-            System.out.println("Not all the GPS latitudes and longitudes are filled in and it may happen that" +
-                    " the marker popup of the map cannot be properly displayed");
-        }
-    }
     @Test
     public void checkTank1AndTank2(){
         //Arrange

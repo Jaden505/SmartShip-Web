@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = ServerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class notificationRepositoryTest {
+public class notificationRepositoryPostNotificationTest {
 
     @Autowired
     ServerApplication serverApplication = null;
@@ -33,14 +33,6 @@ public class notificationRepositoryTest {
         this.notifications = this.notificationRepo.findAll();
         assertNotNull(this.notifications);
     }
-
-    @Test
-    void contextLoads() {
-        assertNotNull(serverApplication);
-        System.out.println("The Application in running");
-    }
-
-    //Test a JPA Repository post method
     @Test
     public void postNotificationJPA() {
         System.out.println("the size of the notifications is " + this.notifications.size());
@@ -55,29 +47,5 @@ public class notificationRepositoryTest {
 
         //Assert
         assertTrue(this.notificationRepo.findAll().size() > this.notifications.size());
-    }
-
-    //Test a JPA Repository method
-    @Test
-    public void deleteNotificationJPA() {
-        if(this.notifications.size() > 0) {
-            Notification notification = new Notification("TEST", "TEST", 20,
-                    "3002", new Date(), "This is a message", "The unit of the value");
-
-            //Act
-            this.notificationRepo.save(notification);
-            //Arrange
-            notification = this.notifications.get(0);
-
-            //Act
-            this.notificationRepo.delete(notification);
-
-            //Assert
-            assertTrue(this.notificationRepo.findAll().size() <= this.notifications.size());
-        }
-        else {
-            //Assert
-            assertEquals(0, this.notificationRepo.findAll().size());
-        }
     }
 }
