@@ -27,7 +27,7 @@ public class HotelRepository extends EntityRepository<Hotel> {
     @Override
     public Hotel findById(long id) {
         TypedQuery<Hotel> query =
-                this    .entityManager.createQuery(
+                this.entityManager.createQuery(
                         "SELECT h FROM Hotel h WHERE h.id = ?1", Hotel.class
                 );
         return query.setParameter(1, id).getSingleResult();

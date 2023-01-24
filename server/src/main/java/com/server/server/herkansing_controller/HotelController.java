@@ -3,10 +3,12 @@ package com.server.server.herkansing_controller;
 import com.server.server.herkansing_model.Hotel;
 import com.server.server.herkansing_repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ejb.access.EjbAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,16 +26,17 @@ public class HotelController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Hotel> findById(@PathVariable long id) {
-        Hotel hotel = hotelRepository.findById(id);
-        if (hotel != null) {
+
+        try {
+            Hotel hotel = hotelRepository.findById(id);
             return ResponseEntity.ok(hotel);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("")
-    public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel){
+    public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
         Hotel savedHotel = hotelRepository.save(hotel);
 
         return ResponseEntity.ok(savedHotel);

@@ -1,6 +1,5 @@
 package com.server.server.herkansing_model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;

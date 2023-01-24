@@ -19,7 +19,7 @@ public class RoomRepository extends EntityRepository<Room> {
     public List<Room> findAll() {
         TypedQuery<Room> query =
                 this.entityManager.createQuery(
-                        "SELECT t FROM Room t", Room.class
+                        "SELECT r FROM Room r", Room.class
                 );
         return query.getResultList();
     }
@@ -27,8 +27,8 @@ public class RoomRepository extends EntityRepository<Room> {
     @Override
     public Room findById(long id) {
         TypedQuery<Room> query =
-                this    .entityManager.createQuery(
-                        "SELECT h FROM Room h WHERE h.id = ?1", Room.class
+                this.entityManager.createQuery(
+                        "SELECT r FROM Room r WHERE r.id = ?1", Room.class
                 );
         return query.setParameter(1, id).getSingleResult();
     }

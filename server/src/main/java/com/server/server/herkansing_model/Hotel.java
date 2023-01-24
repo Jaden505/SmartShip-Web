@@ -43,6 +43,7 @@ public class Hotel implements Identifiable {
         this.rooms = rooms;
     }
 
+    @Override
     public long getId() {
         return id;
     }
