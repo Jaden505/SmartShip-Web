@@ -50,7 +50,7 @@ public class Hotel implements Identifiable {
 
     @Override
     public void setId(long id) {
-
+        this.id = id;
     }
 
 }

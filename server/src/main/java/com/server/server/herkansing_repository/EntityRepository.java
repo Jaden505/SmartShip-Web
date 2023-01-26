@@ -9,6 +9,7 @@ public abstract class EntityRepository<E extends Identifiable> implements IEntit
 
     @PersistenceContext
     EntityManager entityManager;
+
     private Class<E> entityClass;
 
     public EntityRepository(Class<E> entityClass){

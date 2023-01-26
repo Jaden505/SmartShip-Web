@@ -32,10 +32,10 @@ public class SensorDataModelTest {
     @Test
     @DisplayName("SensorData value Test")
     public void valueSensorData(){
-        assertNotEquals(sensorData1.getValue(), sensorData2.getValue());
-
         double value1 = Double.parseDouble(sensorData1.getValue());
         double value2 = Double.parseDouble(sensorData2.getValue());
+
+        assertNotEquals(value1, value2);
 
         assertEquals(value1, value2, 5);
 

@@ -34,6 +34,11 @@ public class RoomController {
 
     @PostMapping("")
     public ResponseEntity<Room> createRoom(@RequestBody Room room){
+
+        if(room.getRoomName() == null || room.getRoomName().isEmpty()){
+            room.setRoomName("No name");
+        }
+
         Room savedRoom = roomRepository.save(room);
 
         return ResponseEntity.ok(savedRoom);

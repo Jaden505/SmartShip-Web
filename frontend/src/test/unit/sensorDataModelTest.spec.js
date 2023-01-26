@@ -27,13 +27,13 @@ describe('sensorDataModel', () => {
             .toStrictEqual(sensorData2);
     })
 
-    it('constructs a proper author', function () {
+    it('constructs a proper sensorData group', function () {
         expect(sensorData.group,
-            'sensorData lastName was not set properly')
+            'sensorData group was not set properly')
             .toBeUndefined();
         sensorData.group = "Motor"
         expect(sensorData.group,
-            'sensorData lastName was not set properly')
+            'sensorData group was not set properly')
             .toBe(GROUP_MOTOR);
     })
 

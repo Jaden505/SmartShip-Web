@@ -9,7 +9,7 @@ describe('SensorDataService', () => {
         sensorService = new InMemoryEntitiesService(SensorData.createSample);
     })
 
-    it('constructs a proper authors-service and books-service', function() {
+    it('constructs a proper sensorService', function() {
         expect(sensorService.entities.length,
             'sensorService was not set up properly')
             .toBeGreaterThan(0);
@@ -18,7 +18,7 @@ describe('SensorDataService', () => {
     it('findAll returns all', function() {
         let books = sensorService.findAll();
         expect(books,
-            'sensorService.findAll does not return all books')
+            'sensorService.findAll does not return all')
             .toStrictEqual(sensorService.entities);
     })
 
@@ -26,7 +26,7 @@ describe('SensorDataService', () => {
         const sensor = sensorService.entities[0];
 
         expect(sensorService.findById(sensor.sensorId),
-            `sensorService.findById cannot find book-${sensor.sensorId}`)
+            `sensorService.findById cannot find -${sensor.sensorId}`)
             .toStrictEqual(sensor);
     })
 
