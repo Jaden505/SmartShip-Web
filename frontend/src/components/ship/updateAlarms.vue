@@ -88,7 +88,7 @@ export default {
       Batteries: [],
       // sensor_groups end
       /* istanbul ignore next */
-      shipId: JSON.parse(localStorage.getItem('user')).ship,
+      // shipId: JSON.parse(localStorage.getItem('user')).ship,
 
       selectedSensor: null,
       selectedCategory: null,

@@ -5,7 +5,6 @@ import com.server.server.model.Ship;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface SensorDataRepository extends JpaRepository<SensorData, Integer>
 
     @Query(value = "select distinct s.sensorName" +
             " from SensorData s where s.group = 'Motor' ")
-    public List<String> getSensorNameByMotor();
+    public List<String> getSensorNameByMotor(String categoryType);
 
     @Query(value = "select distinct s.sensorName" +
             " from SensorData s where s.group = 'Sea Conditions' ")

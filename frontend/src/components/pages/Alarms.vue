@@ -29,7 +29,7 @@
       </div>
     </div>
     </div>
-  <AddAlarms v-if="this.add" @onClickOutside="onClickOutside"></AddAlarms>
+  <AddAlarms v-if="this.add"></AddAlarms>
 </template>
 <script>
 import AddAlarms from "@/components/ship/updateAlarms";
@@ -55,9 +55,6 @@ export default {
   methods: {
     openPop(){
       this.add = true;
-    },
-    onClickOutside(){
-      this.add = false
     },
     getAlarms() {
       AlarmService.getAll()
